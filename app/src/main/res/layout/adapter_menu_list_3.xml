@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/selector_list"
+        android:id="@+id/ll_list_customer"
+        android:weightSum="2"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1.8"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_list_double_menu">
+
+            <TextView
+                android:text="TextView"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/tv_subtitle_1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:text="TextView"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textStyle="bold|italic"
+                android:id="@+id/tv_subtitle_2" />
+
+            <TextView
+                android:text="TextView"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textStyle="bold|italic"
+                android:id="@+id/tv_subtitle_3" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_next"
+            android:id="@+id/imageView3"
+            android:layout_weight="0.2" />
+
+    </LinearLayout>
+</LinearLayout>

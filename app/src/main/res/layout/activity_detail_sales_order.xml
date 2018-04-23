@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_sales_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_main_container"
+        android:orientation="vertical"
+        android:layout_above="@+id/tlb_detail_sales_order"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:id="@+id/ll_header"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <AutoCompleteTextView
+                    android:hint="Nama Barang"
+                    android:id="@+id/actv_list_nama_barang"
+                    style="@style/CustomAutoComplete1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/white_transparent"
+                    android:elevation="1dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.65"
+            android:layout_marginLeft="@dimen/default_small_padding"
+            android:layout_marginRight="@dimen/default_small_padding"
+            android:id="@+id/ll_barang_container"
+            android:layout_below="@+id/actv_list_nama_barang"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/ll_load"
+                android:visibility="gone">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pb_load" />
+
+                <Button
+                    android:text="Data not load, tap to refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_refresh"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="?attr/colorPrimary" />
+
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lv_barang_order"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.35"
+            android:paddingTop="@dimen/default_small_padding"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:layout_below="@+id/ll_barang_container"
+            android:orientation="vertical"
+            android:background="@color/color_grey3"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:text="Total"
+                android:layout_marginLeft="@dimen/default_small_padding"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:id="@+id/tv_total_so"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical|right"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/tlb_detail_sales_order"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        android:padding="3dp"
+        android:gravity="center"
+        android:layout_below="@+id/ll_main_container"
+        android:layout_alignParentEnd="true">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:background="@drawable/ripple_red_reserve"
+            android:id="@+id/ll_add_order"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_add_order"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:text="Tambah Order"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/ll_hapus_so"
+            android:background="@drawable/ripple_red_reserve"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_delete"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:text="Hapus Sales Order"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

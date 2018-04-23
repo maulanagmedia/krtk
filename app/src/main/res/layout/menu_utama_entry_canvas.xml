@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_container">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:id="@+id/ll_header"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/actv_no_nota"
+                    android:hint="Nama Pelanggan / No Nota"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/white_transparent"
+                    style="@style/CustomAutoComplete1"
+                    android:elevation="1dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/default_small_padding"
+                android:orientation="horizontal"
+                android:weightSum="3">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_header"
+            android:orientation="vertical"
+
+            android:gravity="center"
+            android:id="@+id/ll_load_customer"
+            android:visibility="gone">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pb_load_customer" />
+
+            <Button
+                android:text="Data not load, tap to refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_refresh"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textColor="?attr/colorPrimary" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_load_customer"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/lv_list_canvas"
+            android:clickable="true" />
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        android:visibility="gone"
+        app:backgroundTint="?attr/colorPrimary"
+        app:elevation="@dimen/floating_button_border"
+        app:borderWidth="@dimen/floating_button_border"
+        android:src="@android:drawable/ic_menu_add"
+        android:id="@+id/fab_add_order"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="@dimen/big_padding"/>
+</RelativeLayout>

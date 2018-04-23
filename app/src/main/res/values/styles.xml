@@ -1,0 +1,163 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionOverflowButtonStyle">@style/IconOptionActionBar</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionOverflowButtonStyle">@style/IconOptionActionBar</item>
+    </style>
+
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/iron</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBarDashboard">
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:actionOverflowButtonStyle">@style/IconOptionActionBar</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <item name="android:windowBackground">@color/primary</item>
+
+        <item name="colorControlNormal">@color/iron</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/iron</item>
+
+        <item name="colorButtonNormal">@color/primary_darker</item>
+        <item name="android:colorButtonNormal">@color/primary_darker</item>
+
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/primary_darker</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+
+
+    </style>
+
+    <!--Custom style-->
+    <style name="CustomAutoComplete">
+        <item name="android:imeOptions">flagNoExtractUi</item> <!--Hide autocomplete in front of another element when landscape-->
+        <item name="android:drawableLeft">@mipmap/ic_search_1</item>
+    </style>
+
+    <style name="CustomAutoComplete1">
+        <item name="android:imeOptions">actionSearch</item> <!--Search icon on soft keyboard-->
+        <item name="android:singleLine">true</item>
+        <item name="android:drawableLeft">@mipmap/ic_search_1</item>
+    </style>
+
+    <style name="CustomDate">
+        <item name="android:inputType">date</item>
+        <item name="android:drawableRight">@mipmap/ic_insert_date</item>
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:maxLength">10</item>
+    </style>
+
+    <style name="CustomDateWhite">
+        <item name="android:inputType">date</item>
+        <item name="android:drawableRight">@mipmap/ic_date_white</item>
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:maxLength">10</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="CustomSpinner">
+        <item name="android:inputType">none</item>
+        <item name="android:drawableRight">@mipmap/ic_down</item>
+        <item name="android:maxHeight">50dp</item>
+    </style>
+
+    <style name="DisableEditText">
+        <item name="android:inputType">none</item>
+        <item name="android:editable">false</item>
+    </style>
+
+    <style name="DisableWindowPreview">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme.Retro.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/iron</item>
+        <item name="android:background">@color/color_app_bar</item>
+    </style>
+
+    <style name="AppTheme.Login.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/iron</item>
+        <item name="android:background">#e12929</item>
+    </style>
+
+    <style name="IconOptionActionBar" parent="android:Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_option_1</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
+        <item name="android:contentDescription">"Option"</item>
+    </style>
+
+    <style name="IconOptionActionBar1" parent="android:Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@mipmap/ic_option</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
+        <item name="android:contentDescription">"Option"</item>
+    </style>
+
+    <!--LoginTheme-->
+    <style name="LoginBackground" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#E43F3F</item>
+        <item name="colorPrimaryDark">#cc1d1d</item>
+        <item name="colorAccent">#e12929</item>
+    </style>
+
+    <style name="AlertDialog1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--item RadioButton or CheckBox color-->
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <!--item text color-->
+        <item name="textColorAlertDialogListItem">@android:color/white</item>
+        <!--buttons color-->
+        <item name="colorAccent">@color/white</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+</resources>

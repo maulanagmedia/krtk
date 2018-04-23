@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_bonus"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.kartikaelektrik.activityBonus.DetailBonus">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:id="@+id/ll_header"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_merk"
+                android:hint="Merk"
+                style="@style/CustomAutoComplete1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/white_transparent"
+                android:elevation="1dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_header"
+        android:id="@+id/lv_list_bonus"/>
+
+</RelativeLayout>

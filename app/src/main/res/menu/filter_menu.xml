@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Jumlah Barang"
+        android:icon="@mipmap/ic_box"
+        android:id="@+id/option_jumlah_barang"/>
+    <item android:title="Rupiah"
+        android:id="@+id/option_rupiah"
+        android:icon="@mipmap/ic_money_menu"/>
+</menu>

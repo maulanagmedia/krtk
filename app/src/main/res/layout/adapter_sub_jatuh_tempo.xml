@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_small_padding1"
+        android:background="@color/color_grey"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/ll_item_container">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_grey1"
+            android:padding="@dimen/default_small_padding1"
+            android:id="@+id/tv_item_1"
+            android:textSize="@dimen/default_text_title_size_big"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/color_grey3"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Jumlah"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:id="@+id/tv_item_2"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/default_line"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:background="@color/color_grey"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Diskon"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_item_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="none"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:scrollHorizontally="false"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/default_line"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:background="@color/color_grey"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Harga Diskon"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:id="@+id/tv_item_4"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="@dimen/default_small_padding1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_item_5"
+                android:gravity="center_vertical|right"
+                android:textSize="@dimen/default_text_title_size_big"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_small_padding1"
+            android:background="@color/color_grey"
+            android:orientation="vertical"></LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

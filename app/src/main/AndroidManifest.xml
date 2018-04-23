@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="gmedia.net.id.kartikaelektrik">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyCcCPKo0cIsyM_YOsTZIv8ZMsuzDrnrAAM" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/logo_kartika"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Service -->
+        <service android:name=".notificationService.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".notificationService.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notif" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/color_notif" />
+
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".activityCustomerOrder.ListMenuCategoryBarang" />
+        <activity android:name=".activityCustomerOrder.ListMenuCategoryBarangDetailPotrait" />
+        <activity android:name=".activityCustomerOrder.OrderDetail" />
+        <activity android:name=".activitySalesOrderDetail.DetailSalesOrder" />
+
+        <service android:name=".services.BackgroundLocationService" />
+
+        <activity android:name=".activityPiutang.ListPiutang" />
+        <activity android:name=".activityCustomer.CustomerDetail" />
+        <activity android:name=".LoginScreen" />
+        <activity
+            android:name=".Dashboard"
+            android:theme="@style/AppTheme.NoActionBarDashboard" />
+        <activity android:name=".DashboardContainer" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".activityKomisi.KomisiPembayaran" />
+        <activity android:name=".activityKomisi.DetailKomisiDendaPembayaran" />
+        <activity android:name=".activityKomisi.SubDetailKomisiDendaPembayaran" />
+        <activity android:name=".activityDenda.DendaPembayaran" />
+        <activity android:name=".activityBonus.Bonus" />
+        <activity android:name=".activityBonus.DetailBonus" />
+        <activity android:name=".activityBonus.SubDetailBonus" />
+        <activity android:name=".activityPermintaanHargaOrder.DetailPermintaanHargaOrder" />
+        <activity android:name=".activityPermintaanHargaOrder.SubDetailPermintaanHargaOrder" />
+        <activity android:name=".activityPiutang.DetailPiutang" />
+        <activity android:name=".activityInfoStok.InfoStokBarang" />
+        <activity android:name=".activityInfoStok.InfoStokCanvas" />
+        <activity android:name=".activityKomisi.DetailKomisiDenda" />
+        <activity android:name=".activityPiutang.ListPiutangPerCustomer" />
+        <activity android:name=".activityPiutang.DetailListPiutangCustomer" />
+        <activity android:name=".activityPiutang.DetailPiutangJatuhTempo" />
+        <activity android:name=".activityPiutang.DetailPiutangPerNota" />
+        <activity android:name=".ActivityRetur.ReturCustomer" />
+        <activity android:name=".ActivityRetur.ReturTelahDiproses" />
+        <activity android:name=".ActivityRetur.ReturSelisihNota" />
+        <activity android:name=".activityOmsetPenjualan.DetailOmsetCustomer" />
+        <activity android:name=".activityOmsetPenjualan.DetailOmsetPerNota" />
+        <activity android:name=".activityEntryPenjulanCanvas.DetailEntryBarangCanvas" />
+        <activity android:name=".activityEntryPenjulanCanvas.DetailOrderEntryCanvas" />
+        <activity android:name=".activityEntryPenjulanCanvas.DetailCheckOutCanvas" />
+        <activity android:name=".activityCustomerOrder.ListBarangSalesOrder" />
+        <activity android:name=".activityOmsetPenjualan.ListOmsetCustomer" />
+        <activity android:name=".activityOmsetPenjualan.ListOmsetBarang" />
+        <activity android:name=".activityOmsetPenjualan.DetailOmsetPerBarang" />
+        <activity android:name=".activityEntryPenjulanCanvas.AddNewCanvasOrder" />
+        <activity android:name=".activityPiutang.SubDetailPiutangJatuhTempo" />
+        <activity android:name=".activityEntryPenjulanCanvas.DetailBarangCanvas" />
+        <activity android:name=".activityEntryPaket.DetailBarangPaket" />
+        <activity android:name=".activityEntryPaket.OrderDetailPaket" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="KARTIKA_HOME" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ActivityRetur.DetailBarangRetur" />
+        <activity android:name=".ActivityRetur.ReturDatePicker" />
+        <activity android:name=".activityOmsetPenjualan.DatePickerOmset" />
+        <activity android:name=".activityOrderCustom.OrderCustomDetail" />
+        <activity android:name=".activityOrderCustom.DetailOrderCustom" />
+        <activity android:name=".activityOrderCustom.AddNewCustomOrder" />
+        <activity android:name=".activityOrderCustom.ListBarangCustom"></activity>
+    </application>
+
+</manifest>

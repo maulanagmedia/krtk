@@ -1,0 +1,133 @@
+<resources>
+    <string name="app_name">KARTIKA ELEKTRIK</string>
+
+    !--Global-->
+    <string name="rows_per_page_autocomplete">30</string>
+    <string name="rows_per_page_table">80</string>
+    <integer name="max_table">80</integer>
+    <string name="runtime_permissions_txt">Akses sangat dibutuhkan untuk berjalannya aplikasi</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_menu_utama">MenuUtama</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="format_date">yyyy-MM-dd</string>
+    <string name="format_date1">yyyy-MM-dd HH:mm:ss</string>
+    <string name="format_date_display">dd/MM/yyyy</string>
+    <string name="format_date_display1">dd/MM/yyyy</string>
+    <string name="format_date_display2">dd-MM-yyyy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Menu Utama Order Pelanggan-->
+    <string name="menu_utama_pelanggan">Pelanggan</string>
+    <string name="sub_menu_kategori_barang">Kategori Barang</string>
+    <string name="order_detail"><u>Order Detail</u></string>
+    <string name="sales_order"><u>Sales Order %1$s</u></string>
+    <string name="update_sales_order"><u>Update Sales Order</u></string>
+    <string name="customer_detail_title"><u>Customer Detail</u></string>
+
+    <!--Test Array-->
+    <array name="test_array">
+        <item>list 1</item>
+        <item>list 2</item>
+        <item>list 3</item>
+        <item>list 4</item>
+        <item>list 5</item>
+        <item>list 6</item>
+        <item>list 7</item>
+        <item>list 8</item>
+        <item>list 9</item>
+        <item>list 10</item>
+    </array>
+
+    <!--Jenis Tanggal-->
+    <array name="jenis_tanggal_array">
+        <item>Tanggal Masukan</item>
+        <item>Tanggal Pembayaran</item>
+    </array>
+
+    <!--API List-->
+    <string name="url_login">http://kartika.gmedia.bz/api/auth/login/</string>
+    <string name="url_change_password">http://kartika.gmedia.bz/api/auth/change_password/</string>
+
+    <string name="url_get_so">http://kartika.gmedia.bz/api/</string>
+    <string name="url_get_so_detail_by_id">http://kartika.gmedia.bz/api/barang/detail/</string>
+    <string name="url_insert_so">http://kartika.gmedia.bz/api/barang/create/</string>
+    <string name="url_insert_so_detail">http://kartika.gmedia.bz/api/barang/create/</string>
+    <string name="url_update_so_header">http://kartika.gmedia.bz/api/barang/update/</string>
+    <string name="url_update_so_detail">http://kartika.gmedia.bz/api/barang/update_detail/</string>
+    <string name="url_get_harga_so_detail">http://kartika.gmedia.bz/api/barang/get_harga/</string>
+    <string name="url_delete_so_by_id">http://kartika.gmedia.bz/api/barang/delete/</string>
+    <string name="url_delete_so_detail_by_id">http://kartika.gmedia.bz/api/barang/delete_detail/</string>
+    <string name="url_delete_so_paket_by_id">http://kartika.gmedia.bz/api/paket/delete_detail/</string>
+    <string name="url_get_gudang_so_detail_by_id">http://kartika.gmedia.bz/api/barang/kode_gudang/</string>
+    <string name="url_get_so_permintaan_harga">http://kartika.gmedia.bz/api/barang/so_approve/</string>
+    <string name="url_update_status_so">http://kartika.gmedia.bz/api/barang/update_status/</string>
+
+    <string name="url_get_all_kategori_barang">http://kartika.gmedia.bz/api/barang/all_kategori/</string>
+    <string name="url_get_all_barang">http://kartika.gmedia.bz/api/barang/all_barang/</string>
+    <string name="url_get_barang_by_id">http://kartika.gmedia.bz/api/barang/get_barang/</string>
+    <string name="url_get_all_barang_by_kategori">http://kartika.gmedia.bz/api/barang/all_barang/kategori/</string>
+    <string name="url_get_filter_barang">http://kartika.gmedia.bz/api/barang/filter_barang/</string>
+    <string name="url_get_filter_canvas">http://kartika.gmedia.bz/api/barang/stok_canvas/</string>
+
+    <string name="url_get_all_customer">http://kartika.gmedia.bz/api/barang/customer/</string>
+    <string name="url_get_customer_by_id">http://gmedia.bz/kartika/api/barang/customer/</string>
+    <string name="url_insert_customer">http://kartika.gmedia.bz/api/barang/create_customer/</string>
+    <string name="url_update_customer">http://kartika.gmedia.bz/api/barang/update_customer/</string>
+    <string name="url_delete_customer_by_id">http://kartika.gmedia.bz/api/barang/delete_customer/</string>
+
+
+    <string name="url_get_all_rayon">http://kartika.gmedia.bz/api/barang/kode_rayon/</string>
+    <string name="url_get_list_barang_by_id">http://kartika.gmedia.bz/api/barang/all_barang/id_barang/</string>
+
+    <string name="url_get_piutang_by_range">http://kartika.gmedia.bz/api/piutang/data_piutang/</string>
+    <string name="url_get_detail_piutang_by_id">http://kartika.gmedia.bz/api/piutang/piutang_detail/</string>
+
+    <string name="url_get_komisi_by_range">http://kartika.gmedia.bz/api/komisi/data_komisi/</string>
+    <string name="url_get_denda_by_range">http://kartika.gmedia.bz/api/komisi/data_denda/</string>
+    <string name="url_post_komisi_denda_by_range">http://kartika.gmedia.bz/api/komisi/data_denda_komisi/</string>
+    <string name="url_get_bonus_header">http://kartika.gmedia.bz/api/komisi/data_bonus_h/</string>
+    <string name="url_get_bonus_detail">http://kartika.gmedia.bz/api/komisi/data_bonus_d/</string>
+
+    <string name="url_insert_location">http://kartika.gmedia.bz/api/barang/add_location/</string>
+
+    <!--Menu Baru-->
+    <string name="url_get_all_piutang">http://kartika.gmedia.bz/api/piutang/piutang_customer/</string>
+    <string name="url_get_all_omset">http://kartika.gmedia.bz/api/komisi/omset_customer/</string>
+    <string name="url_get_retur">http://kartika.gmedia.bz/api/barang/retur_penjualan/</string>
+    <string name="url_get_omset">http://kartika.gmedia.bz/api/komisi/omset_customer/</string>
+
+    <!--Entry Penjualan Canvas-->
+    <string name="url_insert_canvas_order">http://kartika.gmedia.bz/api/canvas/insert_canvas/</string>
+    <string name="url_get_canvas_header">http://kartika.gmedia.bz/api/canvas/get_header/</string>
+    <string name="url_get_canvas_detail">http://kartika.gmedia.bz/api/canvas/get_detail/</string>
+    <string name="url_generate_no_gc">http://kartika.gmedia.bz/api/canvas/generate_no_gc/</string>
+
+    <!--Entry Paket-->
+    <string name="url_get_paket">http://kartika.gmedia.bz/api/paket/get_paket/</string>
+    <string name="url_get_barang_paket">http://kartika.gmedia.bz/api/paket/get_barang/</string>
+    <string name="url_save_so_paket">http://kartika.gmedia.bz/api/paket/save/</string>
+    <string name="url_get_detail_retur">http://kartika.gmedia.bz/api/barang/detail_retur/</string>
+
+    <!--Get Latest Version-->
+    <string name="url_get_latest_version">http://kartika.gmedia.bz/api/auth/get_latest_version/</string>
+
+    <!--Get Latest Version-->
+    <string name="url_save_custom_order">http://kartika.gmedia.bz/api/custom/save/</string>
+    <string name="url_save_custom_detail">http://kartika.gmedia.bz/api/custom/save_detail/</string>
+    <string name="url_get_custom_detail">http://kartika.gmedia.bz/api/custom/get_detail/</string>
+    <string name="url_get_custom_header">http://kartika.gmedia.bz/api/custom/get_header/</string>
+    <string name="url_delete_oc">http://kartika.gmedia.bz/api/custom/delete/</string>
+    <string name="url_delete_oc_detail">http://kartika.gmedia.bz/api/custom/delete_detail/</string>
+
+    <!--Status-->
+    <string name="url_get_status">http://kartika.gmedia.bz/api/auth/get_mobile_status/</string>
+    <string name="url_update_status">http://kartika.gmedia.bz/api/auth/update_mobile_status/</string>
+
+</resources>

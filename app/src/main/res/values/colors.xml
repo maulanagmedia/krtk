@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff3737</color>
+    <color name="colorPrimaryDark">#e61515</color>
+    <!--<color name="colorAccent">#ff4081</color>-->
+    <color name="colorAccent">#ff6767</color>
+<!--biru-->
+    <!--<color name="colorPrimary">#1E90FF</color>
+    <color name="colorPrimaryDark">#1464F4</color>
+    <color name="colorAccent">#1C86EE</color>-->
+
+<!--merah-->
+    <!--<color name="colorPrimary">#E43F3F</color>
+    <color name="colorPrimaryDark">#cc1d1d</color>
+    <color name="colorAccent">#e12929</color>-->
+
+    <!--<color name="primary">#E43F3F</color>
+    <color name="primary_dark">#e12929</color>
+    <color name="primary_darker">#cc1d1d</color>
+    <color name="accent">#FFFFFF</color>-->
+
+
+    <color name="primary">#6b7dff</color>
+    <color name="primary_dark">#6375ff</color>
+    <color name="primary_darker">#6c55ff</color>
+    <color name="accent">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#aaaaaa</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_transparent">#98ffffff</color>
+    <color name="white_transparent_1">#6bffffff</color>
+
+    <!--Custom Color-->
+    <color name="color_font_light">#6d6d6f</color>
+    <color name="color_background">#e2e5e7</color>
+    <color name="color_background_strip">#e2e5e7</color>
+    <!--<color name="color_app_bar">#2c3e50</color>
+    <color name="color_background_icon">#4f5d73</color>
+    <color name="color_middle_bar">#34495e</color>-->
+    <!--biru-->
+    <!--<color name="color_app_bar">#4285F4</color>
+    <color name="color_background_icon">#1464F4</color>
+    <color name="color_middle_bar">#1464F4</color>-->
+    <!--merah-->
+    <color name="color_app_bar">#ff3737</color>
+    <color name="color_background_icon">#d44747</color>
+    <color name="color_middle_bar">#fc5959</color>
+    <color name="color_main_menu_1">#f1f1f2</color>
+    <color name="color_main_menu_2">#d2d3d5</color>
+    <color name="color_toolbar">#ecf0f1</color>
+    <color name="color_notification">#58b953</color>
+
+    <color name="bg_login">#26ae90</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="btn_login_bg">#eceef1</color>
+    <color name="btn_on_active">#ff7f7f</color>
+
+    <!--For SO Approval Status-->
+    <color name="status_1">#f96355</color> <!--pending-->
+    <color name="status_2">#fce749</color> <!--pending-->
+    <color name="status_3">#dd8aec</color> <!--Verified-->
+    <color name="status_4">#f2ad75</color> <!--Need Approval 1-->
+    <color name="status_5">#ccefa3</color> <!--Need Approval 2-->
+    <color name="status_7">#84cdfd</color> <!--Posting-->
+    <color name="status_9">#c6c4c3</color> <!--Ditolak-->
+
+    <!--Login-->
+    <color name="login_background">#ec5151</color>
+    <color name="btn_login_onclick">#e43e3e</color>
+    <color name="color_sub_menu">#7be93434</color>
+    <color name="color_sub_menu_active">#b3e93434</color>
+
+    <color name="color_grey">#9b9b9b</color>
+    <color name="color_grey1">#bebcbc</color>
+    <color name="color_grey2">#dcdcdc</color>
+    <color name="color_grey3">#e4e4e4</color>
+    <color name="color_red">#f56c6c</color>
+    <color name="color_red1">#e43e3e</color>
+    <color name="color_btn_white_1">#ffd5d5</color>
+    <color name="color_btn_white_2">#ff9494</color>
+</resources>

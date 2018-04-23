@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
+    <dimen name="margin_top_big">40dp</dimen>
+    <dimen name="margin_top_xbig">80dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="big_padding">50dp</dimen>
+
+    <!--Custom-->
+    <dimen name="rounded_corner">3dp</dimen>
+    <dimen name="floating_button_border">4dp</dimen>
+    <dimen name="text_button_login">16dp</dimen>
+    <dimen name="padding_main_menu">4dp</dimen>
+    <dimen name="default_big_padding">16dp</dimen>
+    <dimen name="default_small_padding">8dp</dimen>
+    <dimen name="default_small_padding1">4dp</dimen>
+    <dimen name="default_small_padding2">2dp</dimen>
+    <dimen name="width_main_menu">98dp</dimen>
+
+    <!--Adapter-->
+    <dimen name="container_padding_horizontal">10dp</dimen>
+    <dimen name="container_padding_vertical">5dp</dimen>
+
+    <!--Text Input Layout-->
+    <dimen name="icon_size">20dp</dimen>
+    <dimen name="til_height">55dp</dimen>
+    <dimen name="padding_right_text">16dp</dimen>
+
+    <!--Button-->
+    <dimen name="image_button">60dp</dimen>
+
+    <dimen name="default_text_subtitle_size">13sp</dimen>
+    <dimen name="default_text_title_size_small">13sp</dimen>
+    <dimen name="default_text_title_size">16sp</dimen>
+    <dimen name="default_text_title_size_big">19sp</dimen>
+
+    <dimen name="default_line">0.75dp</dimen>
+    <dimen name="spinner_min_height">30dp</dimen>
+
+    <dimen name="text_menu_size">14sp</dimen>
+
+</resources>

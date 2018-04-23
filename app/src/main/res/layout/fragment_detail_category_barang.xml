@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="2">
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomAutoComplete"
+        android:id="@+id/actv_list_nama_barang"
+        android:hint="Nama Barang"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_pgb_container"
+        android:gravity="center"
+        android:weightSum="1"
+        android:visibility="gone">
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pgb_nama_barang" />
+        <Button
+            android:text="Data not load, tap to refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="?attr/colorPrimary" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_fragment_detail_category_barang" />
+</LinearLayout>

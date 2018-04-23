@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_grey2"
+    tools:context="gmedia.net.id.kartikaelektrik.MainActivity"
+    android:layout_margin="@dimen/default_small_padding1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--Pertama-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_1"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_tambah_pelanggan"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.1"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_customer"
+                        android:id="@+id/ibt_menu_tambah_pelanggan"
+                        android:scaleType="fitCenter"/>
+
+                    <TextView
+                        android:text="Entry Pelanggan"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:id="@+id/textView11"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_tagihan_piutang"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_currency"
+                        android:id="@+id/ibt_menu_tagihan_piutang"/>
+
+                    <TextView
+                        android:text="Tagihan / Piutang"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_tagihan_piutang"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_info_stok"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_stock"
+                        android:id="@+id/ibt_menu_info_stok"/>
+
+                    <TextView
+                        android:text="Informasi Stok"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_info_stok"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Kedua-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_2"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_tambah_so"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/ibt_menu_tambah_so"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_add_order" />
+
+                    <TextView
+                        android:text="Tambah Order Sales"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:id="@+id/textView12"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_entry_order_paket"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_shop"
+                        android:id="@+id/ibt_menu_entry_order_paket"/>
+
+                    <TextView
+                        android:text="Tambah Order Paket"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_tambah_canvas"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_pencil"
+                        android:id="@+id/ibt_menu_tambah_canvas"/>
+
+                    <TextView
+                        android:text="Tambah Order Canvas"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_tambah_canvas"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Ketiga-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_3"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_custom_order"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_custom_order"
+                        android:id="@+id/ibt_menu_custom_order"/>
+
+                    <TextView
+                        android:text="Tambah Order Custom"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_custom_order"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_daftar_so"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_order"
+                        android:id="@+id/ibt_menu_daftar_so"/>
+
+                    <TextView
+                        android:text="Daftar Order Sales"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/textView13"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_entry_canvas"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_document"
+                        android:id="@+id/ibt_menu_entry_canvas"/>
+
+                    <TextView
+                        android:text="Daftar Penjualan Canvas"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_entry_canvas"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Keempat-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_4"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_komisi"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/ibt_menu_komisi"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_booklet" />
+
+                    <TextView
+                        android:text="Komisi"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_komisi"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_denda"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_caution"
+                        android:id="@+id/ibt_menu_denda"/>
+
+                    <TextView
+                        android:text="Denda"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_denda"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_bonus"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_briefcast"
+                        android:id="@+id/ibt_menu_bonus"/>
+
+                    <TextView
+                        android:text="Bonus"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_bonus"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Kelima-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_5"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_omset_penjualan"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/ibt_menu_omset_penjualan"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_omset_penjualan" />
+
+                    <TextView
+                        android:text="Omset Penjualan"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_omset_penjualan"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_retur"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_retur"
+                        android:id="@+id/ibt_menu_retur"/>
+
+                    <TextView
+                        android:text="Retur"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_retur"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_update_master"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_download"
+                        android:id="@+id/ibt_menu_update_master"/>
+
+                    <TextView
+                        android:text="Update Master Data"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_update_master"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/default_small_padding"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:visibility="gone"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_logo"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/kartika_logo"
+                        android:scaleType="fitCenter"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Keenam-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_6"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_permintaan_harga_order"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
+                        android:paddingTop="@dimen/default_small_padding"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#00000000"
+                            android:src="@mipmap/ic_check"
+                            android:scaleType="fitCenter"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:weightSum="1"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="0.17"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.8"
+                                    android:orientation="horizontal"
+                                    android:gravity="right">
+
+                                    <Button
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:id="@+id/btn_status_permohonan"
+                                        android:text="0"
+                                        android:textSize="8sp"
+                                        android:textColor="@color/white"
+                                        android:focusableInTouchMode="false"
+                                        android:layout_alignParentRight="true"
+                                        android:background="@drawable/background_round"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="Permintaan Harga Order"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.5"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

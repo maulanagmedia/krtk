@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_grey1"
+            android:padding="@dimen/default_small_padding1"
+            android:id="@+id/tv_nama_barang"
+            android:textSize="@dimen/default_text_title_size_big"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Stok"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/default_small_padding1"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:id="@+id/tv_stok"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/default_line"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:background="@color/color_grey"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Harga"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/default_small_padding1"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:id="@+id/tv_harga"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_line"
+            android:layout_marginLeft="@dimen/default_small_padding"
+            android:layout_marginRight="@dimen/default_small_padding"
+            android:background="@color/color_grey"></LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/default_small_padding1"
+            android:text="Sisa"
+            android:visibility="gone"
+            android:textSize="@dimen/default_text_subtitle_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/default_small_padding1"
+            android:paddingLeft="@dimen/default_small_padding1"
+            android:paddingRight="@dimen/default_small_padding1"
+            android:visibility="gone"
+            android:id="@+id/tv_sisa"
+            android:gravity="center"
+            android:textSize="@dimen/default_text_title_size"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:id="@+id/ll_header"
+            android:weightSum="1">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_small_padding1"
+            android:background="@color/white_transparent"
+            android:id="@+id/til_tanggal_awal">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tanggal Mulai"
+                android:editable="false"
+                android:inputType="none"
+                android:id="@+id/edt_tanggal_awal"
+                style="@style/CustomDate"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_transparent"
+            android:paddingTop="@dimen/default_small_padding1"
+            android:id="@+id/til_tanggal_akhir">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tanggal Akhir"
+                android:editable="false"
+                android:inputType="none"
+                android:id="@+id/edt_tanggal_akhir"
+                style="@style/CustomDate"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/default_small_padding1"
+            android:paddingBottom="@dimen/default_small_padding1"
+            android:paddingLeft="@dimen/default_small_padding"
+            android:paddingRight="@dimen/default_small_padding"
+            android:gravity="center_vertical|right">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tampilkan Data Retur"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/default_small_padding1"
+                android:background="@drawable/btn_white"
+                android:drawableRight="@mipmap/ic_next_black"
+                android:id="@+id/btn_tampilkan"/>
+        </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/default_small_padding"
+        android:id="@+id/ll_item_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/color_grey1"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="01"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_small_padding1"
+                android:id="@+id/tv_item_1"
+                android:textSize="@dimen/default_text_title_size_big"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Jumlah"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:id="@+id/edt_item_1"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:inputType="numberDecimal"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:id="@+id/tv_item_2"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:inputType="numberDecimal"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_line"
+            android:layout_marginLeft="@dimen/default_small_padding"
+            android:layout_marginRight="@dimen/default_small_padding"
+            android:background="@color/color_grey"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Harga Satuan"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:inputType="none"
+                    android:editable="false"
+                    android:id="@+id/edt_item_2"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Total"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:inputType="none"
+                    android:editable="false"
+                    android:id="@+id/edt_item_3"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

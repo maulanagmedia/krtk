@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_dashboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="gmedia.net.id.kartikaelektrik.Dashboard">
+
+    <include
+        layout="@layout/main_action_bar"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_bar"
+        android:id="@+id/middleSection"
+        android:background="@color/color_middle_bar"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:text="Menu Utama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:paddingBottom="@dimen/appbar_padding_top" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:scrollbarSize="1dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/iconSet">
+
+                <LinearLayout
+                    android:layout_width="@dimen/width_main_menu"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_tambah_pelanggan"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_customer"
+                        android:id="@+id/ibt_menu_tambah_pelanggan"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Entry Pelanggan"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/textView11"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/width_main_menu"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_permintaan_harga_order"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@mipmap/ic_check"
+                        android:gravity="right"
+                        android:layout_marginBottom="5dp">
+
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/btn_status_permohonan"
+                            android:text="0"
+                            android:textSize="8sp"
+                            android:textColor="@color/white"
+                            android:focusableInTouchMode="false"
+                            android:background="@drawable/background_round"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="Permintaan Harga Order"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_tambah_so"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_add_order"
+                        android:id="@+id/ibt_menu_tambah_so"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Entry Sales Order"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/textView12"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_entry_order_paket"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_shop"
+                        android:id="@+id/ibt_menu_entry_order_paket"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Entry Order Paket"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_daftar_so"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_order"
+                        android:id="@+id/ibt_menu_daftar_so"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Daftar Sales Order"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/textView13"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_tagihan_piutang"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_currency"
+                        android:id="@+id/ibt_menu_tagihan_piutang"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Tagihan / Piutang"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_tagihan_piutang"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_info_stok"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_stock"
+                        android:id="@+id/ibt_menu_info_stok"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Informasi Stok"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_info_stok"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_entry_canvas"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_document"
+                        android:id="@+id/ibt_menu_entry_canvas"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Penjualan Canvas"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_entry_canvas"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_komisi"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_booklet"
+                        android:id="@+id/ibt_menu_komisi"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Komisi"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_komisi"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_denda"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_caution"
+                        android:id="@+id/ibt_menu_denda"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Denda"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_denda"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_bonus"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_briefcast"
+                        android:id="@+id/ibt_menu_bonus"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Bonus"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_bonus"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_retur"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_retur"
+                        android:id="@+id/ibt_menu_retur"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Retur"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_retur"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:visibility="gone"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_omset_sales"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_omset"
+                        android:id="@+id/ibt_menu_omset_sales"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Omset Sales"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_omset_sales"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_omset_penjualan"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_omset_penjualan"
+                        android:id="@+id/ibt_menu_omset_penjualan"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:text="Omset Penjualan"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_omset_penjualan"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/width_main_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:id="@+id/v_menu_update_master"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#00000000"
+                        android:src="@mipmap/ic_download"
+                        android:id="@+id/ibt_menu_update_master"
+                        android:scaleType="fitXY"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:text="Update Master Data"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/tv_update_master"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/middleSection"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lv_dashboard"></ListView>
+    </LinearLayout>
+</RelativeLayout>
