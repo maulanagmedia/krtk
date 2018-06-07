@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_refresh"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 

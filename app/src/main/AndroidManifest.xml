@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="gmedia.net.id.kartikaelektrik">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -123,7 +126,10 @@
         <activity android:name=".activityOrderCustom.OrderCustomDetail" />
         <activity android:name=".activityOrderCustom.DetailOrderCustom" />
         <activity android:name=".activityOrderCustom.AddNewCustomOrder" />
-        <activity android:name=".activityOrderCustom.ListBarangCustom"></activity>
+        <activity android:name=".activityOrderCustom.ListBarangCustom" />
+        <activity android:name=".activitySetoran.DetailFormSetoran" />
+        <activity android:name=".activitySetoran.CustomerSetoran" />
+        <activity android:name=".activitySetoran.RincianSetoran"></activity>
     </application>
 
 </manifest>

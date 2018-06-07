@@ -29,6 +29,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderCustom;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPermintaanHargaOrder;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaRetur;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaSalesOrder;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaSetoran;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaTagihanPiutang;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaTambahCanvas;
 
@@ -186,6 +187,14 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaOrderCustom.setView(DashboardContainer.this, childLayoutOrderCustom);
                     toolbar.setTitle("Daftar Order Custom");
                     setTitle("Daftar Order Custom");
+                    break;
+                case "setoran":
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaSetoran menuUtamaSetoran = new MenuUtamaSetoran();
+                    View childLayoutSetoran = inflater.inflate(R.layout.menu_utama_setoran, flContainer);
+                    menuUtamaSetoran.setView(DashboardContainer.this, childLayoutSetoran);
+                    toolbar.setTitle("Setoran");
+                    setTitle("Setoran");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

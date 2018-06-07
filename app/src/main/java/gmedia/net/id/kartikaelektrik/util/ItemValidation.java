@@ -515,6 +515,32 @@ public class ItemValidation {
     }
     //endregion
 
+    public String ChangeToCurrencyFormat(String number){
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        DecimalFormatSymbols symbols = ((DecimalFormat) format).getDecimalFormatSymbols();
+
+        symbols.setCurrencySymbol("");
+        ((DecimalFormat) format).setDecimalFormatSymbols(symbols);
+        format.setMaximumFractionDigits(0);
+
+        String hasil = String.valueOf(format.format(parseNullDouble(number)));
+
+        /*String stringConvert = "0";
+        try {
+            stringConvert = format.format(1000);
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+
+
+        if(!stringConvert.contains(",")){
+            hasil += ",00";
+        }*/
+
+        return hasil;
+    }
+
     //region Nullable value
     public int parseNullInteger(String s){
         int result = 0;

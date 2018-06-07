@@ -48,6 +48,7 @@ public class MenuUtamaCustomer extends Fragment {
     private FloatingActionButton fbAddPelanggan;
     private ItemValidation iv = new ItemValidation();
     private String urlGetAllCustomer;
+    private TextView tvTotal;
     private LinearLayout llLoadCusxtomer;
     private ProgressBar pbLoadCustomer;
     private Button btnRefresh;
@@ -81,6 +82,7 @@ public class MenuUtamaCustomer extends Fragment {
         llLoadCusxtomer = (LinearLayout) layout.findViewById(R.id.ll_load_customer);
         pbLoadCustomer = (ProgressBar) layout.findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) layout.findViewById(R.id.tv_total);
 
         setListCustomerAutocomplete();
 
@@ -107,7 +109,7 @@ public class MenuUtamaCustomer extends Fragment {
         // Get All Customer
         iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"SHOW");
 
-        JSONObject jsonBody = new JSONObject();
+        final JSONObject jsonBody = new JSONObject();
         ApiVolley restService = new ApiVolley(layout.getContext(), jsonBody, "GET", urlGetAllCustomer, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
@@ -121,11 +123,16 @@ public class MenuUtamaCustomer extends Fragment {
                             masterListCustomer = new ArrayList<Customer>();
 
                             if(iv.parseNullInteger(status) == 200){
+
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
                                     masterListCustomer.add(new Customer(jo.getString("kdcus"),jo.getString("nama"),jo.getString("alamat"),jo.getString("kota"),iv.parseNullString(jo.getString("total_piutang")),jo.getString("max_piutang")));
                                 }
+
+                                int total = masterListCustomer.size();
+
+                                tvTotal.setText(String.valueOf(total));
                             }
 
                             listCustomerAutocomplete = new ArrayList<Customer>(masterListCustomer);

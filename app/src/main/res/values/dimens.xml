@@ -45,5 +45,6 @@
     <dimen name="spinner_min_height">30dp</dimen>
 
     <dimen name="text_menu_size">14sp</dimen>
+    <dimen name="text_date_small">12sp</dimen>
 
 </resources>
