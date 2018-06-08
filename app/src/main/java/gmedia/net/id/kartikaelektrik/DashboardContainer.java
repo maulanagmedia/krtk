@@ -40,6 +40,7 @@ public class DashboardContainer extends AppCompatActivity {
     Fragment fragment = null;
     Toolbar toolbar;
     private TextView tvTittleBar;
+    private static int state = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class DashboardContainer extends AppCompatActivity {
 
             switch (kodeMenu){
                 case "tambahpelanggan":
+                    state = 0;
                     MenuUtamaCustomer menuUtamaCustomer = new MenuUtamaCustomer();
                     View childLayoutCustomer = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_customer, flContainer);
                     menuUtamaCustomer.setView(DashboardContainer.this, childLayoutCustomer);
@@ -79,6 +81,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Tambah Pelanggan");
                     break;
                 case "permintaanhargaorder":
+                    state = 1;
                     MenuUtamaPermintaanHargaOrder menuUtamaPermintaan = new MenuUtamaPermintaanHargaOrder();
                     View childLayoutPermintaan = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_permohonan_harga_order, flContainer);
                     menuUtamaPermintaan.setView(DashboardContainer.this, childLayoutPermintaan);
@@ -86,6 +89,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Permintaan Persetujuan Harga");
                     break;
                 case "tambahso":
+                    state = 2;
                     MenuUtamaCustomerOrder menuUtamaCustomerOrder = new MenuUtamaCustomerOrder();
                     View childLayoutCustomerOrder = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_customer_order, flContainer);
                     menuUtamaCustomerOrder.setView(DashboardContainer.this, childLayoutCustomerOrder);
@@ -93,6 +97,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Pilih Nama Pelanggan");
                     break;
                 case "entrypaket":
+                    state = 3;
                     MenuUtamaEntryPaket menuUtamaEntryPaket = new MenuUtamaEntryPaket();
                     View childLayoutEntryPaket = inflater.inflate(R.layout.menu_utama_entry_paket, flContainer);
                     menuUtamaEntryPaket.setView(DashboardContainer.this, childLayoutEntryPaket);
@@ -100,6 +105,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Pilih Nama Pelanggan");
                     break;
                 case "daftarso":
+                    state = 4;
                     MenuUtamaSalesOrder menuUtamaSalesOrder = new MenuUtamaSalesOrder();
                     View childLayoutSO = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_sales_order, flContainer);
                     menuUtamaSalesOrder.setView(DashboardContainer.this, childLayoutSO);
@@ -107,6 +113,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Daftar Order");
                     break;
                 case "tagihanpiutang":
+                    state = 5;
                     MenuUtamaTagihanPiutang menuUtamaPiutang = new MenuUtamaTagihanPiutang();
                     View childLayoutPiutang = inflater.inflate(R.layout.menu_utama_tagihan_piutang, flContainer);
                     menuUtamaPiutang.setView(DashboardContainer.this, childLayoutPiutang);
@@ -114,6 +121,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Tagihan / Piutang");
                     break;
                 case "infostok":
+                    state = 6;
                     MenuUtamaInformasiStok menuUtamaInfoStok = new MenuUtamaInformasiStok();
                     View childLayoutStok = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_informasi_stok, flContainer);
                     menuUtamaInfoStok.setView(DashboardContainer.this, childLayoutStok);
@@ -121,6 +129,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Informasi Stok");
                     break;
                 case "tambahcanvas":
+                    state = 7;
                     MenuUtamaTambahCanvas menuUtamaTambahCanvas = new MenuUtamaTambahCanvas();
                     View childLayoutTambahCanvas = inflater.inflate(R.layout.menu_utama_tambah_canvas, flContainer);
                     menuUtamaTambahCanvas.setView(DashboardContainer.this, childLayoutTambahCanvas);
@@ -128,6 +137,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Pilih Customer");
                     break;
                 case "entrycanvas":
+                    state = 8;
                     MenuUtamaEntryCanvas menuUtamaEntryCanvas = new MenuUtamaEntryCanvas();
                     View childLayoutCanvas = inflater.inflate(R.layout.menu_utama_entry_canvas, flContainer);
                     menuUtamaEntryCanvas.setView(DashboardContainer.this, childLayoutCanvas);
@@ -135,6 +145,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Penjualan Canvas");
                     break;
                 case "komisi":
+                    state = 9;
                     MenuUtamaKomisi menuUtamaKomisi = new MenuUtamaKomisi();
                     View childLayoutKomisi = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_komisi, flContainer);
                     menuUtamaKomisi.setView(DashboardContainer.this, childLayoutKomisi);
@@ -142,6 +153,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Komisi");
                     break;
                 case "denda":
+                    state = 10;
                     MenuUtamaDenda menuUtamaDenda = new MenuUtamaDenda();
                     View childLayoutDenda = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_denda, flContainer);
                     menuUtamaDenda.setView(DashboardContainer.this, childLayoutDenda);
@@ -149,6 +161,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Denda");
                     break;
                 case "bonus":
+                    state = 11;
                     //fragment = new MenuUtamaBonus();
                     MenuUtamaBonus menuUtamaBonus = new MenuUtamaBonus();
                     View childLayoutBonus = inflater.inflate(gmedia.net.id.kartikaelektrik.R.layout.menu_utama_bonus, flContainer);
@@ -157,6 +170,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Bonus");
                     break;
                 case "retur":
+                    state = 12;
                     //fragment = new MenuUtamaRetur();
                     MenuUtamaRetur menuUtamaRetur = new MenuUtamaRetur();
                     View childLayoutRetur = inflater.inflate(R.layout.menu_utama_retur, flContainer);
@@ -165,6 +179,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Retur");
                     break;
                 case "omsetsales":
+                    state = 13;
                     //fragment = new MenuUtamaOmsetSales();
                     MenuUtamaOmsetSales menuUtamaOmsetSales = new MenuUtamaOmsetSales();
                     View childLayoutOmsetSales = inflater.inflate(R.layout.menu_utama_omset_sales, flContainer);
@@ -173,6 +188,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Omset Sales");
                     break;
                 case "omsetpenjualan":
+                    state = 14;
                     //fragment = new MenuUtamaOmsetPenjualan();
                     MenuUtamaOmsetPenjualan menuUtamaOmsetPenjualan = new MenuUtamaOmsetPenjualan();
                     View childLayoutOmsetPenjualan = inflater.inflate(R.layout.menu_utama_omset_penjualan, flContainer);
@@ -181,6 +197,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Omset Sales");
                     break;
                 case "ordercustom":
+                    state = 15;
                     //fragment = new MenuUtamaOmsetPenjualan();
                     MenuUtamaOrderCustom menuUtamaOrderCustom = new MenuUtamaOrderCustom();
                     View childLayoutOrderCustom = inflater.inflate(R.layout.menu_utama_order_custom, flContainer);
@@ -189,6 +206,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Daftar Order Custom");
                     break;
                 case "setoran":
+                    state = 16;
                     //fragment = new MenuUtamaOmsetPenjualan();
                     MenuUtamaSetoran menuUtamaSetoran = new MenuUtamaSetoran();
                     View childLayoutSetoran = inflater.inflate(R.layout.menu_utama_setoran, flContainer);
@@ -203,6 +221,16 @@ public class DashboardContainer extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(state == 16){
+
+            MenuUtamaSetoran.getDataSetoran();
+        }
     }
 
     private void callFragment(Fragment fragment) {

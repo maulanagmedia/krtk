@@ -7,7 +7,8 @@
     tools:context=".activitySetoran.RincianSetoran">
 
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="2">
 
@@ -41,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ll_pgb_container"
+            android:id="@+id/ll_container"
             android:gravity="center"
             android:weightSum="1"
             android:visibility="gone">
@@ -49,8 +50,7 @@
             <ProgressBar
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pgb_nama_barang" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:text="Data not load, tap to refresh"
@@ -64,8 +64,14 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/default_small_padding"
             android:id="@+id/lv_rincian_setoran" />
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/pb_loading"
+        android:visibility="gone"/>
 
 </RelativeLayout>

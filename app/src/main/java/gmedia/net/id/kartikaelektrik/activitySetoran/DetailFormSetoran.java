@@ -52,6 +52,8 @@ public class DetailFormSetoran extends AppCompatActivity {
     private ProgressBar pbLoading;
     private List<OptionItem> listBank;
     private String currentString = "";
+    private String idSetoran = "";
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,16 +90,83 @@ public class DetailFormSetoran extends AppCompatActivity {
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Simpan Setoran");
 
+        isEdit = false;
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
-            kdcus = bundle.getString("kdcus", "");
-            namaCus = bundle.getString("namacus", "");
-            edtSales.setText(session.getUser());
-            edtCustomer.setText(namaCus);
+            idSetoran = bundle.getString("id", "");
+            if(!idSetoran.equals("")){
 
+                //llSaveContainer.setEnabled(false);
+                isEdit = true;
+                tvSave.setText("Hapus Setoran");
+            }else{
+                kdcus = bundle.getString("kdcus", "");
+                namaCus = bundle.getString("namacus", "");
+                edtCustomer.setText(namaCus);
+            }
+            edtSales.setText(session.getUser());
             initEvent();
         }
+    }
+
+    private void getDetailSetoran() {
+
+        pbLoading.setVisibility(View.VISIBLE);
+
+        ApiVolley request = new ApiVolley(context, new JSONObject(), "GET", ServerURL.getDetailSetoran+idSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+
+                    if(status.equals("200")){
+
+                        JSONObject jo = response.getJSONObject("response");
+                        edtCustomer.setText(jo.getString("nama_customer"));
+                        crBayar = jo.getString("crbayar");
+
+                        if(crBayar.equals("T")){
+                            rbTunai.setChecked(true);
+                        }else if(crBayar.equals("B")){
+                            rbBank.setChecked(true);
+                        }else{
+                            rbGiro.setChecked(true);
+                        }
+
+                        int position = 0;
+                        for(int i = 0; i < listBank.size();i++){
+                            if(listBank.get(i).getValue().equals(jo.getString("kode_bank"))){
+                                position = i;
+                                break;
+                            }
+                        }
+
+                        spBank.setSelection(position);
+                        edtTanggal.setText(iv.ChangeFormatDateString(jo.getString("tanggal"), formatDate, formatDateDisplay));
+                        edtTotal.setText(jo.getString("total"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void initEvent() {
@@ -149,7 +218,31 @@ public class DetailFormSetoran extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                validateBeforeSave();
+                if(isEdit){
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setIcon(R.mipmap.kartika_logo)
+                            .setTitle("Konfirmasi")
+                            .setMessage("Apakah anda yaking ingin menghapus data?")
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    deleteData();
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+                }else{
+
+                    validateBeforeSave();
+                }
+
             }
         });
 
@@ -210,6 +303,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                     setBankAdapter(null);
                 }
 
+                if(!idSetoran.equals("")) getDetailSetoran();
             }
 
             @Override
@@ -217,6 +311,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                 pbLoading.setVisibility(View.GONE);
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
                 setBankAdapter(null);
+                if(!idSetoran.equals("")) getDetailSetoran();
             }
         });
     }
@@ -240,7 +335,7 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle("Konfirmasi")
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.mipmap.kartika_logo)
                 .setMessage("Apakah anda yakin ingin menyimpan setoran?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
@@ -257,6 +352,50 @@ public class DetailFormSetoran extends AppCompatActivity {
                 })
                 .show();
 
+    }
+
+    public void deleteData() {
+
+        llSaveContainer.setEnabled(false);
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        ApiVolley apiVolley = new ApiVolley(getApplicationContext(), new JSONObject(), "GET", ServerURL.deleteSetoran+idSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                progressDialog.dismiss();
+                JSONObject responseAPI = new JSONObject();
+                try {
+
+                    responseAPI = new JSONObject(result);
+                    String status = responseAPI.getJSONObject("metadata").getString("status");
+                    String message = responseAPI.getJSONObject("metadata").getString("message");
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    if(Integer.parseInt(status) == 200){
+
+                        onBackPressed();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void saveData() {

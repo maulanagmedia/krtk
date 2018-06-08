@@ -10,6 +10,7 @@ import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,6 +30,7 @@ import gmedia.net.id.kartikaelektrik.activityBonus.Bonus;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.activitySetoran.CustomerSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.DetailFormSetoran;
+import gmedia.net.id.kartikaelektrik.activitySetoran.RincianSetoran;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
@@ -41,9 +43,9 @@ import gmedia.net.id.kartikaelektrik.util.ServerURL;
 public class MenuUtamaSetoran extends Fragment {
 
     private View layout;
-    private Context context;
-    private ListView lvSetoran;
-    private ProgressBar pbLoading;
+    private static Context context;
+    private static ListView lvSetoran;
+    private static ProgressBar pbLoading;
     private FloatingActionButton fabAdd;
 
     public MenuUtamaSetoran(){}
@@ -54,9 +56,10 @@ public class MenuUtamaSetoran extends Fragment {
     private LinearLayout llSave;
     private TextView tvSave;
     private ItemValidation iv = new ItemValidation();
-    private String tanggalAwal, tanggalAkhir;
+    private static String tanggalAwal;
+    private static String tanggalAkhir;
     private String formatDate = "", formatDateDisplay = "";
-    private List<CustomListItem> listSetoran;
+    private static List<CustomListItem> listSetoran;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,12 +82,15 @@ public class MenuUtamaSetoran extends Fragment {
         formatDate = context.getResources().getString(R.string.format_date);
         formatDateDisplay = context.getResources().getString(R.string.format_date_display);
 
+        tanggalAwal = iv.sumDate(iv.getCurrentDate(formatDate), -7, formatDate);
+        tanggalAkhir = iv.getCurrentDate(formatDate);
+
         tilTanggalAwal = (TextInputLayout) layout.findViewById(R.id.til_tanggal_awal);
         tilTanggalAkhir = (TextInputLayout) layout.findViewById(R.id.til_tanggal_akhir);
         edTanggalAwal = (EditText) layout.findViewById(R.id.edt_tanggal_awal);
-        edTanggalAwal.setText(iv.getToday(formatDateDisplay));
+        edTanggalAwal.setText(iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
         edtTanggalAkhir = (EditText) layout.findViewById(R.id.edt_tanggal_akhir);
-        edtTanggalAkhir.setText(iv.getToday(formatDateDisplay));
+        edtTanggalAkhir.setText(iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
         lvSetoran = (ListView) layout.findViewById(R.id.lv_setoran);
         pbLoading = (ProgressBar) layout.findViewById(R.id.pb_loading);
         fabAdd = (FloatingActionButton) layout.findViewById(R.id.fab_add);
@@ -143,14 +149,11 @@ public class MenuUtamaSetoran extends Fragment {
 
     private void initValidation() {
 
-        tanggalAwal = iv.sumDate(iv.getCurrentDate(formatDate), -7, formatDate);
-        tanggalAkhir = iv.getCurrentDate(formatDate);
-
         iv.datePickerEvent(context, edTanggalAwal, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
         iv.datePickerEvent(context, edtTanggalAkhir, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
     }
 
-    private void getDataSetoran() {
+    public static void getDataSetoran() {
 
         pbLoading.setVisibility(View.VISIBLE);
 
@@ -181,9 +184,12 @@ public class MenuUtamaSetoran extends Fragment {
                         for(int i = 0; i < jsonArray.length(); i++){
 
                             JSONObject jo = jsonArray.getJSONObject(i);
-                            listSetoran.add(new CustomListItem(jo.getString("kode_bank"),
+                            listSetoran.add(new CustomListItem(
+                                    jo.getString("kode_bank"),
                                     jo.getString("bank"),
-                                    jo.getString("total")));
+                                    jo.getString("total"),
+                                    tanggalAwal,
+                                    tanggalAkhir));
                         }
 
                     }
@@ -208,7 +214,7 @@ public class MenuUtamaSetoran extends Fragment {
         });
     }
 
-    private void setAdapter(List<CustomListItem> listItem) {
+    private static void setAdapter(List<CustomListItem> listItem) {
 
         lvSetoran.setAdapter(null);
 
@@ -217,6 +223,21 @@ public class MenuUtamaSetoran extends Fragment {
             HeaderSetoranAdapter adapter = new HeaderSetoranAdapter((Activity) context, listItem);
 
             lvSetoran.setAdapter(adapter);
+
+            lvSetoran.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
+
+                    Intent intent = new Intent(context, RincianSetoran.class);
+                    intent.putExtra("kode_bank", item.getListItem1());
+                    intent.putExtra("tgl_awal", item.getListItem4());
+                    intent.putExtra("tgl_akhir", item.getListItem5());
+                    ((Activity) context).startActivity(intent);
+
+                }
+            });
         }
     }
 
