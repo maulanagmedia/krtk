@@ -50,6 +50,7 @@ public class DetailPiutangJatuhTempo extends AppCompatActivity {
     private String tanggalAwal = "", tanggalAkhir = "";
     private String urlGetPiutang = "";
     private String formatDate = "", formatDateDisplay = "";
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class DetailPiutangJatuhTempo extends AppCompatActivity {
         llLoad = (LinearLayout) findViewById(R.id.ll_load);
         pbLoad = (ProgressBar) findViewById(R.id.pb_load);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
@@ -162,6 +164,7 @@ public class DetailPiutangJatuhTempo extends AppCompatActivity {
                             autocompleteList = new ArrayList<CustomListItem>();
                             String namaCustomer = "";
                             long totalPerCustomer = 0;
+                            double total = 0;
 
                             if(iv.parseNullInteger(status) == 200){
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
@@ -176,6 +179,7 @@ public class DetailPiutangJatuhTempo extends AppCompatActivity {
 
                                     masterList.add(new CustomListItem(jo.getString("nonota"), jo.getString("customer"), jo.getString("alamat") +", "+jo.getString("kota"),iv.ChangeToRupiahFormat(Float.parseFloat(jo.getString("piutang"))),iv.ChangeFormatDateString(jo.getString("tgltempo"), formatDate, formatDateDisplay),jo.getString("tempo"),jo.getString("selisih")));
                                     totalPerCustomer += Float.parseFloat(jo.getString("piutang"));
+                                    total += Double.parseDouble(jo.getString("piutang"));
 
                                     if(i+1 < arrayJSON.length()){
 
@@ -191,6 +195,7 @@ public class DetailPiutangJatuhTempo extends AppCompatActivity {
                                 }
                             }
 
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             tableList= new ArrayList<CustomListItem>(masterList);
                             getListAutocomplete(autocompleteList);
                             getListTable(tableList);

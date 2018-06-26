@@ -70,8 +70,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private String latestVersion = "";
     private String link = "";
     private boolean updateRequired = false;
-    private LinearLayout llCustomOrder, llSetoran;
-    private ImageButton ibtCustomOrder, ibtSetoran;
+    private LinearLayout llCustomOrder, llSetoran, llBarangTidakLaku;
+    private ImageButton ibtCustomOrder, ibtSetoran, ibtBarangTidakLaku;
     private String updateStatus = "";
 
     // untuk dialog status
@@ -136,6 +136,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llBonus = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_bonus);
         llRetur = (LinearLayout) findViewById(R.id.v_menu_retur);
         llCustomOrder = (LinearLayout) findViewById(R.id.v_menu_custom_order);
+        llBarangTidakLaku = (LinearLayout) findViewById(R.id.v_menu_barang_tidak_laku);
         llSetoran = (LinearLayout) findViewById(R.id.v_menu_setoran);
         llOmsetPenjualan = (LinearLayout) findViewById(R.id.v_menu_omset_penjualan);
         llUpdateMaster = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master);
@@ -155,6 +156,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtBonus = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_bonus);
         ibtRetur = (ImageButton) findViewById(R.id.ibt_menu_retur);
         ibtCustomOrder = (ImageButton) findViewById(R.id.ibt_menu_custom_order);
+        ibtBarangTidakLaku = (ImageButton) findViewById(R.id.ibt_menu_barang_tidak_laku);
         ibtSetoran = (ImageButton) findViewById(R.id.ibt_menu_setoran);
         ibtOmsetPenjualan = (ImageButton) findViewById(R.id.ibt_menu_omset_penjualan);
         ibtUpdateMaster = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master);
@@ -208,6 +210,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llCustomOrder, ibtCustomOrder);
         setOnClickMenu(llOmsetPenjualan, ibtOmsetPenjualan);
         setOnClickMenu(llUpdateMaster,ibtUpdateMaster);
+        setOnClickMenu(llBarangTidakLaku, ibtBarangTidakLaku);
         setOnClickMenu(llSetoran, ibtSetoran);
 
         CheckUserLevel();
@@ -440,6 +443,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                 }else if(ll.getId() == gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master){
                     MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
                     mdh.updateMasterData();
+                }else if(ll.getId() == R.id.v_menu_barang_tidak_laku){
+                    intent.putExtra("kodemenu","barangtaklaku");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else if(ll.getId() == R.id.v_menu_setoran){
                     intent.putExtra("kodemenu","setoran");
                     startActivity(intent);
@@ -519,6 +526,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     }else if(ib.getId() == gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master){
                         MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
                         mdh.updateMasterData();
+                    }else if(ib.getId() == R.id.ibt_menu_barang_tidak_laku){
+                        intent.putExtra("kodemenu","barangtaklaku");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_menu_setoran){
                         intent.putExtra("kodemenu","setoran");
                         startActivity(intent);

@@ -2,6 +2,7 @@ package gmedia.net.id.kartikaelektrik.activityInfoStok;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -149,7 +150,12 @@ public class InfoStokBarang extends AppCompatActivity {
 
                             for(int i = 0; i < arrayJSON.length();i++){
                                 JSONObject jo = arrayJSON.getJSONObject(i);
-                                listMasterBarang.add(new Barang(jo.getString("kdbrg"),jo.getString("namabrg"),jo.getString("stok") + " "+ iv.parseNullString(jo.getString("satuan")),jo.getString("hargajual"),jo.getString("kdkat")));
+                                listMasterBarang.add(new Barang(
+                                        jo.getString("kdbrg"),
+                                        jo.getString("namabrg"),
+                                        jo.getString("stok") + " "+ iv.parseNullString(jo.getString("satuan")),
+                                        jo.getString("hargajual"),
+                                        jo.getString("kdkat")));
                             }
 
                             listBarangAutocomplete = new ArrayList<Barang>(listMasterBarang);
@@ -361,6 +367,19 @@ public class InfoStokBarang extends AppCompatActivity {
                         thread.start();
                     }
 
+                }
+            });
+
+            lvListStok.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Barang selectedItem = (Barang) parent.getItemAtPosition(position);
+
+                    Intent intent = new Intent(InfoStokBarang.this, DetailStokBarang.class);
+                    intent.putExtra("id", selectedItem.getKodeBarang());
+                    intent.putExtra("nama", selectedItem.getNamaBarang());
+                    startActivity(intent);
                 }
             });
         }

@@ -129,7 +129,8 @@
         <activity android:name=".activityOrderCustom.ListBarangCustom" />
         <activity android:name=".activitySetoran.DetailFormSetoran" />
         <activity android:name=".activitySetoran.CustomerSetoran" />
-        <activity android:name=".activitySetoran.RincianSetoran"></activity>
+        <activity android:name=".activitySetoran.RincianSetoran" />
+        <activity android:name=".activityInfoStok.DetailStokBarang"></activity>
     </application>
 
 </manifest>

@@ -28,7 +28,7 @@ public class InfoStokAdapter extends ArrayAdapter {
     private String jenis = "";
 
     public InfoStokAdapter(Activity context, int resource, List items, String jenis) {
-        super(context, resource);
+        super(context, resource, items);
         this.context = context;
         this.resource = resource;
         this.items = items;
