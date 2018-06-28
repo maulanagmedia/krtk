@@ -14,4 +14,5 @@ public class ServerURL {
     public static final String saveSetoran = baseURL + "Setoran/process/";
     public static final String deleteSetoran = baseURL + "Setoran/hapus/";
     public static final String getMasterBayar = baseURL + "Barang/master_bayar/";
+    public static final String getBarangTakLaku = baseURL + "Barangtaklaku/get_data/";
 }
