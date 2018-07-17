@@ -394,6 +394,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/edt_total"
                         android:hint="Total"
+                        android:editable="false"
                         android:inputType="none"/>
                 </android.support.design.widget.TextInputLayout>
 

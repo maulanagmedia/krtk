@@ -479,20 +479,22 @@ public class DetailFormSetoran extends AppCompatActivity {
             return;
         }
 
-        if(edtTotal.getText().toString().isEmpty()){
+        if(edtTotal.getText().toString().isEmpty() || edtTotal.getText().toString().equals("0")){
 
-            edtTotal.setError("Total harap diisi");
-            edtTotal.requestFocus();
+            /*edtTotal.setError("Total harap diisi");
+            edtTotal.requestFocus();*/
+
+            Toast.makeText(context, "Total masih kosong, periksa data anda", Toast.LENGTH_LONG).show();
             return;
         }else{
-            edtTotal.setError(null);
+            //edtTotal.setError(null);
         }
 
-        if(sisaPiutang != 0){
+        /*if(sisaPiutang != 0){
 
             Toast.makeText(context, "Sisa harus habis atau Rp 0", Toast.LENGTH_LONG).show();
             return;
-        }
+        }*/
 
         AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle("Konfirmasi")
