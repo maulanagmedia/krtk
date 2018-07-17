@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitySetoran.TambahSetoran">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:id="@+id/ll_footer"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_grey3"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/default_small_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/default_small_padding1"
+            android:text="0"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_above="@id/ll_footer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/ll_header"
+            android:weightSum="1">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:id="@+id/til_tanggal_awal">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Dari"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:id="@+id/edt_tanggal_awal"
+                    style="@style/CustomDate"
+                    android:textSize="@dimen/text_date_small"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:id="@+id/til_tanggal_akhir">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sampai"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:id="@+id/edt_tanggal_akhir"
+                    style="@style/CustomDate"
+                    android:textSize="@dimen/text_date_small"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:id="@+id/ll_save_container"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:padding="@dimen/default_small_padding"
+                android:background="@drawable/background_custom_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tampil"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:id="@+id/tv_save"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_header"
+            android:id="@+id/lv_setoran"></ListView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/pb_loading"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/floating_button_border"
+        app:borderWidth="@dimen/floating_button_border"
+        android:src="@android:drawable/ic_menu_add"
+        android:id="@+id/fab_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"/>
+
+</RelativeLayout>

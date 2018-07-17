@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -41,6 +42,7 @@ public class RincianSetoran extends AppCompatActivity {
     private String kodeBank = "", tanggalAwal ="" , tanggalAkhir = "";
     private ProgressBar pbLoading;
     private List<CustomListItem> listSetoran;
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class RincianSetoran extends AppCompatActivity {
         llContainer = (LinearLayout) findViewById(R.id.ll_container);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -120,6 +123,7 @@ public class RincianSetoran extends AppCompatActivity {
                     String status = response.getJSONObject("metadata").getString("status");
                     String message = response.getJSONObject("metadata").getString("message");
                     listSetoran = new ArrayList<>();
+                    double total = 0;
 
                     if(status.equals("200")){
 
@@ -133,9 +137,15 @@ public class RincianSetoran extends AppCompatActivity {
                                     jo.getString("bank"),
                                     jo.getString("total"),
                                     jo.getString("tanggal")));
+
+                            total += iv.parseNullDouble(jo.getString("total"));
                         }
 
+                    }else{
+                        onBackPressed();
                     }
+
+                    tvTotal.setText(iv.ChangeToRupiahFormat(total));
                     setAdapter(listSetoran);
 
                 } catch (JSONException e) {
@@ -171,10 +181,17 @@ public class RincianSetoran extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
                     CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(context, DetailFormSetoran.class);
-                    intent.putExtra("id", item.getListItem1());
-                    startActivity(intent);
+                    if(!item.getListItem1().isEmpty()){
+
+                        Intent intent = new Intent(context, DetailFormSetoran.class);
+                        intent.putExtra("id", item.getListItem1());
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(context, "Data merupakan mutasi", Toast.LENGTH_LONG).show();
+                    }
+
                 }
             });
         }

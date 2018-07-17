@@ -600,6 +600,10 @@ public class ItemValidation {
         return String.format("%.1f", number).replace(",",".");
     }
 
+    public String doubleToStringFull(Double number){
+        return String.format("%s", number).replace(",",".");
+    }
+
     public String parseNullString(String s){
         String result = "";
         if(s != null){

@@ -117,6 +117,10 @@ public class SessionManager {
 		return pref.getString(TAG_NAMA, "");
 	}
 
+	public String getNik(){
+		return pref.getString(TAG_NIK, "");
+	}
+
 	public String getLevel(){
 		return pref.getString(TAG_LEVEL, "");
 	}

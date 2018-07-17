@@ -46,6 +46,7 @@ public class CustomerSetoran extends AppCompatActivity {
     private Button btnRefresh;
     private List<Customer> masterListCustomer , listCustomerAutocomplete, listCustomerTable;
     private boolean firstLoad = true;
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class CustomerSetoran extends AppCompatActivity {
         llLoadCusxtomer = (LinearLayout) findViewById(R.id.ll_load_customer);
         pbLoadCustomer = (ProgressBar) findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         setListCustomerAutocomplete();
 
@@ -110,19 +112,28 @@ public class CustomerSetoran extends AppCompatActivity {
                             responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
                             masterListCustomer = new ArrayList<Customer>();
+                            double total = 0;
 
                             if(iv.parseNullInteger(status) == 200){
 
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    masterListCustomer.add(new Customer(jo.getString("kdcus"),jo.getString("nama"),jo.getString("alamat"),jo.getString("kota"),iv.parseNullString(jo.getString("total_piutang")),jo.getString("max_piutang")));
+                                    masterListCustomer.add(new Customer(jo.getString("kdcus"),
+                                            jo.getString("nama"),
+                                            jo.getString("alamat"),
+                                            jo.getString("kota"),
+                                            iv.parseNullString(jo.getString("total_piutang")),
+                                            jo.getString("max_piutang")));
+
+                                    total += iv.parseNullDouble(iv.parseNullString(jo.getString("total_piutang")));
                                 }
 
                                 //int total = masterListCustomer.size();
 
                             }
 
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             listCustomerAutocomplete = new ArrayList<Customer>(masterListCustomer);
                             listCustomerTable = new ArrayList<Customer>(masterListCustomer);
                             getListCustomerAutocomplete(listCustomerAutocomplete);

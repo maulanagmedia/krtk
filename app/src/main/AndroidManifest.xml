@@ -127,10 +127,15 @@
         <activity android:name=".activityOrderCustom.DetailOrderCustom" />
         <activity android:name=".activityOrderCustom.AddNewCustomOrder" />
         <activity android:name=".activityOrderCustom.ListBarangCustom" />
-        <activity android:name=".activitySetoran.DetailFormSetoran" />
+        <activity
+            android:name=".activitySetoran.DetailFormSetoran"
+            android:screenOrientation="portrait" />
         <activity android:name=".activitySetoran.CustomerSetoran" />
         <activity android:name=".activitySetoran.RincianSetoran" />
-        <activity android:name=".activityInfoStok.DetailStokBarang"></activity>
+        <activity android:name=".activityInfoStok.DetailStokBarang" />
+        <activity android:name=".activitySetoran.TambahSetoran" />
+        <activity android:name=".activitySetoran.MutasiSetoran" />
+        <activity android:name=".activitySetoran.DetailMutasiSetoran"></activity>
     </application>
 
 </manifest>

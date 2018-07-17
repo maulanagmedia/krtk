@@ -156,7 +156,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                             level = obj.getJSONObject("response").getString("level");
 //                        nik = obj.getJSONObject("response").getString("nik");
                             nama = username;// obj.getJSONObject("response").getString("nama");
-                            nik= "nik dummy";
+                            nik= uid;
 
                             if (token.isEmpty()) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();

@@ -239,7 +239,7 @@ public class DashboardContainer extends AppCompatActivity {
 
         if(state == 16){
 
-            MenuUtamaSetoran.getDataSetoran();
+            //MenuUtamaSetoran.getDataSetoran();
         }
     }
 

@@ -80,7 +80,7 @@ public class MenuUtamaBarangTakLaku extends Fragment {
 
     private void getDataBarangTakLaku() {
 
-// Get All Customer
+        // Get All Customer
         iv.ProgressbarEvent(llLoad,pbLoad, btnRefresh,"SHOW");
 
         String formatDate = context.getResources().getString(R.string.format_date);
