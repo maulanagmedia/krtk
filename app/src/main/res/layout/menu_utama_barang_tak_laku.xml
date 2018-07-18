@@ -69,7 +69,6 @@
             android:layout_marginLeft="@dimen/default_small_padding1"
             android:layout_marginRight="@dimen/default_small_padding1"
             android:layout_marginBottom="1dp"
-            android:id="@+id/lv_barang"
-            android:clickable="true" />
+            android:id="@+id/lv_barang" />
     </RelativeLayout>
 </RelativeLayout>

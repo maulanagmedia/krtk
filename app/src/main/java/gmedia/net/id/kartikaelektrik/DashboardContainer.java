@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaAdmin;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBarangTakLaku;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBonus;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomer;
@@ -223,6 +224,15 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaBarangTakLaku.setView(DashboardContainer.this, childLayoutBarangTakLaku);
                     toolbar.setTitle("Barang Tidak Laku");
                     setTitle("Barang Tidak Laku");
+                    break;
+                case "menuadmin":
+                    state = 18;
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaAdmin menuUtamaAdmin = new MenuUtamaAdmin();
+                    View childLayoutMenuAdmin = inflater.inflate(R.layout.menu_utama_admin, flContainer);
+                    menuUtamaAdmin.setView(DashboardContainer.this, childLayoutMenuAdmin);
+                    toolbar.setTitle("Menu Admin");
+                    setTitle("Menu Admin");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

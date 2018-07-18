@@ -51,6 +51,7 @@ public class ReturSelisihNota extends AppCompatActivity {
     private String urlGetRetur = "";
     private ListView lvListRetur;
     private String formatDate = "", formatDateDisplay = "";
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class ReturSelisihNota extends AppCompatActivity {
         llLoad = (LinearLayout) findViewById(R.id.ll_load);
         pbLoad = (ProgressBar) findViewById(R.id.pb_load);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         edTanggalAwal.setText(iv.getToday(formatDateDisplay));
         edtTanggalAkhir.setText(iv.getToday(formatDateDisplay));
@@ -178,6 +180,7 @@ public class ReturSelisihNota extends AppCompatActivity {
                             autocompleteList = new ArrayList<CustomListItem>();
 
                             String namaCustomer = "";
+                            double total = 0;
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -191,12 +194,19 @@ public class ReturSelisihNota extends AppCompatActivity {
                                         namaCustomer = jo.getString("customer");
                                     }
 
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"), jo.getString("customer"), iv.ChangeFormatDateString(jo.getString("tgl_retur"), formatDate, formatDateDisplay), iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("selisih"))), iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("total_jual"))), iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("total_retur")))));
+                                    masterList.add(new CustomListItem(jo.getString("nobukti"),
+                                            jo.getString("customer"),
+                                            iv.ChangeFormatDateString(jo.getString("tgl_retur"), formatDate, formatDateDisplay),
+                                            iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("selisih"))),
+                                            iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("total_jual"))),
+                                            iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("total_retur")))));
 
+                                    total += iv.parseNullDouble(jo.getString("total_retur"));
 
                                 }
                             }
 
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             tableList= new ArrayList<CustomListItem>(masterList);
                             getListAutocomplete(autocompleteList);
                             getListTable(tableList);

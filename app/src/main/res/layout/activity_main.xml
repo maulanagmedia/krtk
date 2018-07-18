@@ -752,8 +752,47 @@
                 android:weightSum="3">
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_weight="3"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_admin"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/ibt_menu_admin"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_admin" />
+
+                    <TextView
+                        android:text="Menu Admin"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_admin"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
@@ -769,8 +808,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:paddingTop="@dimen/default_small_padding"
+                        android:layout_weight="1.1"
                         android:layout_marginTop="@dimen/padding_main_menu"
                         android:layout_marginBottom="@dimen/padding_main_menu"
                         android:gravity="right">
@@ -778,22 +816,24 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
                             android:background="#00000000"
-                            android:src="@mipmap/ic_check"
-                            android:scaleType="fitCenter"/>
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_check" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:weightSum="1"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentStart="true">
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="0.17"
+                                android:layout_weight="0.2"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
@@ -804,7 +844,7 @@
                                     android:layout_height="0dp"
                                     android:layout_weight="0.8"
                                     android:orientation="horizontal"
-                                    android:gravity="right">
+                                    android:gravity="center_horizontal">
 
                                     <Button
                                         android:layout_width="20dp"
@@ -820,19 +860,39 @@
 
                             </LinearLayout>
 
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="0.22"
+                                android:layout_height="wrap_content" />
+
                         </LinearLayout>
 
                     </RelativeLayout>
 
                     <TextView
-                        android:text="Permintaan Harga Order"
+                        android:text="Permintaan Harga"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.9"
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/color_font_light"
                         android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
                 </LinearLayout>
 
             </LinearLayout>

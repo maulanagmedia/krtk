@@ -50,6 +50,7 @@ public class ListOmsetBarang extends AppCompatActivity {
     private List<CustomListItem> masterList, autocompleteList, tableList;
     private ListView lvListOmset;
     private String formatDate = "", formatDateDisplay = "";
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class ListOmsetBarang extends AppCompatActivity {
         llLoad = (LinearLayout) findViewById(R.id.ll_load);
         pbLoad = (ProgressBar) findViewById(R.id.pb_load);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
@@ -177,6 +179,7 @@ public class ListOmsetBarang extends AppCompatActivity {
                             responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
                             masterList = new ArrayList<CustomListItem>();
+                            double total = 0;
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -184,10 +187,15 @@ public class ListOmsetBarang extends AppCompatActivity {
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
 
-                                    masterList.add(new CustomListItem(jo.getString("kdbrg"), jo.getString("namabrg") , iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total")))));
+                                    masterList.add(new CustomListItem(jo.getString("kdbrg"),
+                                            jo.getString("namabrg"),
+                                            iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total")))));
 
+                                    total += Double.parseDouble(jo.getString("total"));
                                 }
                             }
+
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
 
                             autocompleteList= new ArrayList<CustomListItem>(masterList);
                             tableList= new ArrayList<CustomListItem>(masterList);

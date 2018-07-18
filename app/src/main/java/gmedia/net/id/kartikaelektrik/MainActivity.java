@@ -48,13 +48,11 @@ public class MainActivity extends RuntimePermissionsActivity {
 
     private final String TAG = "MainAct";
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
-    private LinearLayout llUpdateMaster;
-    private ImageButton ibtUpdateMaster;
     private SessionManager sessionManager;
     private ItemValidation iv = new ItemValidation();
     private Button btnJumlahSOPermintaanHarga;
@@ -140,6 +138,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llSetoran = (LinearLayout) findViewById(R.id.v_menu_setoran);
         llOmsetPenjualan = (LinearLayout) findViewById(R.id.v_menu_omset_penjualan);
         llUpdateMaster = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master);
+        llMenuAdmin = (LinearLayout) findViewById(R.id.v_menu_admin);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -160,6 +159,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtSetoran = (ImageButton) findViewById(R.id.ibt_menu_setoran);
         ibtOmsetPenjualan = (ImageButton) findViewById(R.id.ibt_menu_omset_penjualan);
         ibtUpdateMaster = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master);
+        ibtMenuAdmin = (ImageButton) findViewById(R.id.ibt_menu_admin);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llLine1 = (LinearLayout) findViewById(R.id.ll_line_1);
@@ -212,6 +212,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llUpdateMaster,ibtUpdateMaster);
         setOnClickMenu(llBarangTidakLaku, ibtBarangTidakLaku);
         setOnClickMenu(llSetoran, ibtSetoran);
+        setOnClickMenu(llMenuAdmin, ibtMenuAdmin);
 
         CheckUserLevel();
 
@@ -229,6 +230,15 @@ public class MainActivity extends RuntimePermissionsActivity {
             /*llPermintaanHarga.setVisibility(View.GONE);
             llLogo.setVisibility(View.VISIBLE);*/
             llLine6.setVisibility(View.GONE);
+        }
+
+        if(sessionManager.getLaba().equals("1")){
+
+            llMenuAdmin.setVisibility(View.VISIBLE);
+            llLine6.setVisibility(View.VISIBLE);
+        }else{
+
+            llMenuAdmin.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -451,6 +461,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","setoran");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_admin){
+                    intent.putExtra("kodemenu","menuadmin");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -532,6 +546,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_menu_setoran){
                         intent.putExtra("kodemenu","setoran");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_admin){
+                        intent.putExtra("kodemenu","menuadmin");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }

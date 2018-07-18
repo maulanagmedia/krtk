@@ -3,6 +3,7 @@ package gmedia.net.id.kartikaelektrik.navMenuUtama;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activityInfoStok.DetailStokBarang;
 import gmedia.net.id.kartikaelektrik.adapter.BarangTakLaku.ListBarangTakLakuAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -151,6 +153,19 @@ public class MenuUtamaBarangTakLaku extends Fragment {
 
             //set adapter to autocomplete
             lvBarang.setAdapter(arrayAdapterString);
+
+            lvBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    CustomListItem selectedItem = (CustomListItem) adapterView.getItemAtPosition(i);
+
+                    Intent intent = new Intent(context, DetailStokBarang.class);
+                    intent.putExtra("id", selectedItem.getListItem1());
+                    intent.putExtra("nama", selectedItem.getListItem2());
+                    ((Activity) context).startActivity(intent);
+                }
+            });
         }
     }
 

@@ -44,9 +44,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="F:\ic_barang_taklaku.png" />
-                                      <entry key="outputName" value="ic_clear" />
+                                      <entry key="imageAsset" value="F:\ic_admin_menu.png" />
+                                      <entry key="outputName" value="ic_admin" />
                                     </map>
                                   </option>
                                 </PersistentState>

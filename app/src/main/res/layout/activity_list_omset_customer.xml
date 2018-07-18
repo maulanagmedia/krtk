@@ -6,9 +6,41 @@
     android:layout_height="match_parent"
     tools:context="gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.ListOmsetCustomer">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:id="@+id/ll_footer"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_grey3"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/default_small_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/default_small_padding1"
+            android:text="0"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:gravity="center"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/ll_footer"
         android:orientation="vertical">
 
         <LinearLayout

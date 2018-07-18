@@ -35,6 +35,7 @@ public class SessionManager {
 	public static final String TAG_TOKEN = "token";
 	public static final String TAG_EXP = "expired_at";
 	public static final String TAG_LEVEL = "level";
+	public static final String TAG_LABA = "laba";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -46,7 +47,7 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String uid,String nik, String nama, String password, String token, String exp, String level){
+	public void createLoginSession(String uid,String nik, String nama, String password, String token, String exp, String level, String laba){
 
 		editor.putBoolean(IS_LOGIN, true);
 		
@@ -63,6 +64,8 @@ public class SessionManager {
 		editor.putString(TAG_EXP, exp);
 
 		editor.putString(TAG_LEVEL, level);
+
+		editor.putString(TAG_LABA, laba);
 		// commit changes
 		editor.commit();
 	}	
@@ -109,6 +112,8 @@ public class SessionManager {
 		user.put(TAG_EXP, pref.getString(TAG_EXP, ""));
 
 		user.put(TAG_LEVEL, pref.getString(TAG_LEVEL, ""));
+
+		user.put(TAG_LABA, pref.getString(TAG_LABA, ""));
 		// return user
 		return user;
 	}
@@ -123,6 +128,10 @@ public class SessionManager {
 
 	public String getLevel(){
 		return pref.getString(TAG_LEVEL, "");
+	}
+
+	public String getLaba(){
+		return pref.getString(TAG_LABA, "");
 	}
 
 	/**

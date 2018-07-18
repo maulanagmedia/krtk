@@ -52,6 +52,7 @@ public class ReturCustomer extends AppCompatActivity {
     private String urlGetRetur = "";
     private ListView lvListRetur;
     private String formatDate = "", formatDateDisplay = "";
+    private TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class ReturCustomer extends AppCompatActivity {
         llLoad = (LinearLayout) findViewById(R.id.ll_load);
         pbLoad = (ProgressBar) findViewById(R.id.pb_load);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) findViewById(R.id.tv_total);
 
         edTanggalAwal.setText(iv.getToday(formatDateDisplay));
         //tanggalTempo = iv.sumDate(iv.getToday(formatDate),37,formatDate);
@@ -179,6 +181,7 @@ public class ReturCustomer extends AppCompatActivity {
                             autocompleteList = new ArrayList<CustomListItem>();
 
                             String namaCustomer = "";
+                            double total = 0;
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -192,11 +195,20 @@ public class ReturCustomer extends AppCompatActivity {
                                         namaCustomer = jo.getString("customer");
                                     }
 
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"), jo.getString("customer"), iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay), jo.getString("ppn"), jo.getString("diskon"), iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))), jo.getString("keterangan")));
+                                    masterList.add(new CustomListItem(jo.getString("nobukti"),
+                                            jo.getString("customer"),
+                                            iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay),
+                                            jo.getString("ppn"),
+                                            jo.getString("diskon"),
+                                            iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))),
+                                            jo.getString("keterangan")));
+
+                                    total += Double.parseDouble(jo.getString("total"));
 
                                 }
                             }
 
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             tableList= new ArrayList<CustomListItem>(masterList);
                             getListAutocomplete(autocompleteList);
                             getListTable(tableList);
