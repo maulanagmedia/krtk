@@ -2,32 +2,29 @@ package gmedia.net.id.kartikaelektrik.navMenuUtama;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker;
 import gmedia.net.id.kartikaelektrik.R;
 
 /**
  * Created by Shin on 2/1/2017.
  */
 
-public class MenuUtamaAdmin extends Fragment {
+public class MenuUtamaCustomerLimit extends Fragment {
 
     private View layout;
     private Context context;
-    private LinearLayout llLabaRugi;
 
-    public MenuUtamaAdmin(){}
+    public MenuUtamaCustomerLimit(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.menu_utama_admin, container, false);
+        layout = inflater.inflate(R.layout.menu_utama_customer_limit, container, false);
         getActivity().setTitle("Menu Admin");
         context = getActivity();
         initUI();
@@ -42,15 +39,5 @@ public class MenuUtamaAdmin extends Fragment {
 
     private void initUI() {
 
-        llLabaRugi = (LinearLayout) layout.findViewById(R.id.ll_laba_rugi);
-
-        llLabaRugi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Intent intent = new Intent(context, ReturDatePicker.class);
-                intent.putExtra("jenis", returCustomer);
-                context.startActivity(intent);*/
-            }
-        });
     }
 }

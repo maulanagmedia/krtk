@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class ListBarangCustom extends AppCompatActivity {
@@ -51,13 +54,17 @@ public class ListBarangCustom extends AppCompatActivity {
     private LinearLayout llProgressBarContainer;
     private Button btnRefreshBarang;
     private boolean firstLoadBarang = true;
-    private List<Barang> masterBarang, masterBarang1, masterBarang2;
-    private SharedPreferenceHandler cfs = new SharedPreferenceHandler();
+    private List<Barang> masterBarang, moreList;
     private String kodeKategoriBarang = "0"; // Default all category
     private RadioGroup rgJenis;
     private String jenisBarang;
     private String status = "", tgl = "", tglTempo = "", flag = "";
     private RadioButton rbK, rbR;
+    private int start = 0, count = 10;
+    private String keyword = "";
+    private View footerList;
+    private boolean isLoading = false;
+    private ListBarangCustomAdapter arrayAdapterString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +83,7 @@ public class ListBarangCustom extends AppCompatActivity {
     private void initUI() {
 
         kodeKategoriBarang = "0"; // ALL Kategory
-        urlGetAllBarangByKategori = getResources().getString(R.string.url_get_all_barang_by_kategori);
+        urlGetAllBarangByKategori = ServerURL.getBarangPerKategori;
         urlGetDetailBarang = getResources().getString(R.string.url_get_barang_by_id);
         actvListBarang = (AutoCompleteTextView) findViewById(R.id.actv_list_nama_barang);
         rgJenis = (RadioGroup) findViewById(R.id.rg_jenis);
@@ -121,69 +128,61 @@ public class ListBarangCustom extends AppCompatActivity {
 
     public void setDetailBarangAutocomplete(){
 
-        masterBarang = new ArrayList<Barang>();
-        masterBarang = cfs.getListBarangByCategoryFromLocal(ListBarangCustom.this, kodeKategoriBarang);
-
         iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"SHOW");
+        isLoading = true;
+        start = 0;
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("keyword", keyword);
+            jBody.put("start", String.valueOf(start));
+            jBody.put("count", String.valueOf(count));
+            jBody.put("id", kodeKategoriBarang);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ApiVolley restService = new ApiVolley(ListBarangCustom.this, jBody, "POST", urlGetAllBarangByKategori, "", "", 0,
+                new ApiVolley.VolleyCallback(){
 
-        if(masterBarang != null && masterBarang.size() > 0){
+                    @Override
+                    public void onSuccess(String result){
 
-            masterBarang1 = new ArrayList<Barang>(masterBarang);
-            masterBarang2 = new ArrayList<Barang>(masterBarang);
+                        isLoading = false;
+                        iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
+                        JSONObject responseAPI = new JSONObject();
+                        try {
 
-            getListBarangAutocomplete(masterBarang1);
-            getListBarangTable(masterBarang2);
-            iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            masterBarang = new ArrayList<Barang>();
 
-        }else{
+                            if(iv.parseNullInteger(status) == 200){
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
 
-// Get All Barang by Kategori
-            ApiVolley restService = new ApiVolley(ListBarangCustom.this, new JSONObject(), "GET", urlGetAllBarangByKategori + kodeKategoriBarang, "", "", 0,
-                    new ApiVolley.VolleyCallback(){
-
-                        @Override
-                        public void onSuccess(String result){
-
-                            JSONObject responseAPI = new JSONObject();
-                            try {
-
-                                responseAPI = new JSONObject(result);
-                                String status = responseAPI.getJSONObject("metadata").getString("status");
-                                masterBarang1 = new ArrayList<>();
-                                masterBarang2 = new ArrayList<>();
-                                if(iv.parseNullInteger(status) == 200){
-                                    JSONArray arrayJSON = responseAPI.getJSONArray("response");
-
-                                    for(int i = 0; i < arrayJSON.length();i++){
-                                        JSONObject jo = arrayJSON.getJSONObject(i);
-                                        masterBarang.add(new Barang(jo.getString("kdbrg"), jo.getString("namabrg")));
-                                    }
-                                    cfs.saveListBarangToLocalByKategori(ListBarangCustom.this,new ArrayList<Barang>(masterBarang),kodeKategoriBarang);
-
-                                    masterBarang1 = new ArrayList<Barang>(masterBarang);
-                                    masterBarang2 = new ArrayList<Barang>(masterBarang);
-
+                                for(int i = 0; i < arrayJSON.length();i++){
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    masterBarang.add(new Barang(jo.getString("kdbrg"),
+                                            jo.getString("namabrg")));
                                 }
-                                iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
-                                getListBarangAutocomplete(masterBarang1);
-                                getListBarangTable(masterBarang2);
-
-                            }catch (Exception e){
-                                e.printStackTrace();
-                                iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
-                                getListBarangAutocomplete(null);
-                                getListBarangTable(null);
                             }
-                        }
 
-                        @Override
-                        public void onError(String result) {
-                            iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"ERROR");
+                            getListBarangAutocomplete(masterBarang);
+                            getListBarangTable(masterBarang);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
                             getListBarangAutocomplete(null);
                             getListBarangTable(null);
                         }
-                    });
-        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"ERROR");
+                        isLoading = false;
+                        getListBarangAutocomplete(null);
+                        getListBarangTable(null);
+                    }
+                });
     }
 
     private void getListBarangAutocomplete(final List<Barang> listItems){
@@ -205,16 +204,8 @@ public class ListBarangCustom extends AppCompatActivity {
 
                     if(actionId == EditorInfo.IME_ACTION_SEARCH){
 
-                        List<Barang> itemToAdd = new ArrayList<Barang>();
                         String keyword = actvListBarang.getText().toString();
-
-                        for(Barang item : listItems){
-                            if(item.getNamaBarang().toUpperCase().contains(keyword.trim().toUpperCase())){
-                                itemToAdd.add(item);
-                            }
-                        }
-
-                        getListBarangTable(itemToAdd);
+                        setDetailBarangAutocomplete();
                         iv.hideSoftKey(ListBarangCustom.this);
                         return true;
                     }
@@ -237,7 +228,11 @@ public class ListBarangCustom extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable editable) {
-                        if(editable.toString().length() <= 0) getListBarangTable(masterBarang);
+                        if(editable.toString().length() <= 0) {
+
+                            keyword = "";
+                            setDetailBarangAutocomplete();
+                        }
                     }
                 });
             }
@@ -249,13 +244,37 @@ public class ListBarangCustom extends AppCompatActivity {
         lvListBarang.setAdapter(null);
 
         if (listItems != null && listItems.size() > 0){
-            ListBarangCustomAdapter arrayAdapterString;
 
             //set adapter for autocomplete
             arrayAdapterString = new ListBarangCustomAdapter(ListBarangCustom.this, R.layout.adapter_single_menu, listItems);
 
             //set adapter to autocomplete
             lvListBarang.setAdapter(arrayAdapterString);
+
+            lvListBarang.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView absListView, int i) {
+
+                    int threshold = 1;
+                    int countMerchant = lvListBarang.getCount();
+
+                    if (i == SCROLL_STATE_IDLE) {
+                        if (lvListBarang.getLastVisiblePosition() >= countMerchant - threshold && !isLoading) {
+
+                            isLoading = true;
+                            lvListBarang.addFooterView(footerList);
+                            start += count;
+                            getMoreData();
+                            //Log.i(TAG, "onScroll: last ");
+                        }
+                    }
+                }
+
+                @Override
+                public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+                }
+            });
 
             lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -267,6 +286,58 @@ public class ListBarangCustom extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void getMoreData(){
+
+        isLoading = true;
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("keyword", keyword);
+            jBody.put("start", String.valueOf(start));
+            jBody.put("count", String.valueOf(count));
+            jBody.put("id", kodeKategoriBarang);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ApiVolley restService = new ApiVolley(ListBarangCustom.this, jBody, "POST", urlGetAllBarangByKategori, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+
+                    @Override
+                    public void onSuccess(String result){
+
+                        lvListBarang.removeFooterView(footerList);
+                        isLoading = false;
+
+                        try {
+
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            moreList = new ArrayList<Barang>();
+
+                            if(iv.parseNullInteger(status) == 200){
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
+
+                                for(int i = 0; i < arrayJSON.length();i++){
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    moreList.add(new Barang(jo.getString("kdbrg"),
+                                            jo.getString("namabrg")));
+                                }
+                            }
+
+                            if(arrayAdapterString != null) arrayAdapterString.addMoreData(moreList);
+                        }catch (Exception e){
+                            e.printStackTrace();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        lvListBarang.removeFooterView(footerList);
+                        isLoading = false;
+                    }
+                });
     }
 
     private void GetBarangDetail(final String kdBarang, final String namaBarang){

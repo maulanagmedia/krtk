@@ -41,7 +41,7 @@ import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class InfoStokCanvas extends AppCompatActivity {
 
-    private String urlGetAllBarang, urlInfoStok;
+    private String urlInfoStok;
     private AutoCompleteTextView actvNamaBarang;
     private ListView lvListStok;
     private ItemValidation iv = new ItemValidation();
@@ -78,7 +78,6 @@ public class InfoStokCanvas extends AppCompatActivity {
 
         keyword = "";
         urlInfoStok = getResources().getString(R.string.url_get_filter_canvas);
-        urlGetAllBarang = getResources().getString(R.string.url_get_all_barang);
 
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);
         lvListStok = (ListView) findViewById(R.id.lv_list_info_stok);

@@ -19,6 +19,147 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_small_padding2"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/default_small_padding1"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/ll_data_piutang"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data Piutang"
+                            android:padding="@dimen/default_small_padding2"
+                            android:background="@color/color_grey"
+                            android:textColor="@color/white"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:text="Rp 0"
+                            android:padding="@dimen/default_small_padding2"
+                            android:textSize="@dimen/text_dashboard"
+                            android:id="@+id/tv_data_piutang"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/default_small_padding1"
+                        android:id="@+id/ll_piutang_telat"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Piutang Telat"
+                            android:background="@color/color_grey"
+                            android:textColor="@color/white"
+                            android:padding="@dimen/default_small_padding2"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:text="Rp 0"
+                            android:padding="@dimen/default_small_padding2"
+                            android:textSize="@dimen/text_dashboard"
+                            android:id="@+id/tv_piutang_telat"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/default_small_padding1"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/ll_data_retur"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data Retur"
+                            android:background="@color/color_grey"
+                            android:textColor="@color/white"
+                            android:padding="@dimen/default_small_padding2"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:text="Rp 0"
+                            android:padding="@dimen/default_small_padding2"
+                            android:textSize="@dimen/text_dashboard"
+                            android:id="@+id/tv_data_retur"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/default_small_padding1"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/ll_denda_pelanggan"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Denda Pelanggan"
+                            android:background="@color/color_grey"
+                            android:textColor="@color/white"
+                            android:padding="@dimen/default_small_padding2"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:text="Rp 0"
+                            android:padding="@dimen/default_small_padding2"
+                            android:textSize="@dimen/text_dashboard"
+                            android:id="@+id/tv_denda_pelanggan"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <!--Pertama-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -218,7 +359,7 @@
                         android:id="@+id/ibt_menu_barang_tidak_laku"/>
 
                     <TextView
-                        android:text="Barang Tidak Laku"
+                        android:text="History Penjualan Barang"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.9"
@@ -691,6 +832,136 @@
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_customer_limit"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_customer_limit"
+                        android:id="@+id/ibt_menu_customer_limit"/>
+
+                    <TextView
+                        android:text="Customer Limit"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_customer_limit"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:visibility="gone"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_permintaan_harga_order"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.1"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_check" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="right"
+                            android:weightSum="1"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="0.8"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_horizontal">
+
+                                    <Button
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:id="@+id/btn_status_permohonan"
+                                        android:text="0"
+                                        android:textSize="8sp"
+                                        android:textColor="@color/white"
+                                        android:focusableInTouchMode="false"
+                                        android:layout_alignParentRight="true"
+                                        android:background="@drawable/background_round"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="0.22"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:text="Permintaan Harga"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:visibility="gone"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
                     android:id="@+id/v_menu_update_master"
                     android:layout_height="match_parent"
                     android:weightSum="2">
@@ -798,86 +1069,11 @@
                     android:gravity="center_horizontal"
                     android:paddingRight="@dimen/padding_main_menu"
                     android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_permintaan_harga_order"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.1"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:gravity="right">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:background="#00000000"
-                            android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_check" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:gravity="right"
-                            android:weightSum="1"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="0.2"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:weightSum="1">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="0.8"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_horizontal">
-
-                                    <Button
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:id="@+id/btn_status_permohonan"
-                                        android:text="0"
-                                        android:textSize="8sp"
-                                        android:textColor="@color/white"
-                                        android:focusableInTouchMode="false"
-                                        android:layout_alignParentRight="true"
-                                        android:background="@drawable/background_round"/>
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="0.22"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:text="Permintaan Harga"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:gravity="center" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -40,6 +40,11 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".util.LocationUpdater"
+            android:enabled="true"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notif" />
@@ -135,7 +140,9 @@
         <activity android:name=".activityInfoStok.DetailStokBarang" />
         <activity android:name=".activitySetoran.TambahSetoran" />
         <activity android:name=".activitySetoran.MutasiSetoran" />
-        <activity android:name=".activitySetoran.DetailMutasiSetoran"></activity>
+        <activity android:name=".activitySetoran.DetailMutasiSetoran" />
+        <activity android:name=".activityHistoryPenjualanBarang.BarangTidakLaku" />
+        <activity android:name=".activityHistoryPenjualanBarang.BarangPalingLaku"></activity>
     </application>
 
 </manifest>

@@ -20,4 +20,6 @@ public class ServerURL {
     public static final String getMasterBayar = baseURL + "Barang/master_bayar/";
     public static final String getDetailStokBarang = baseURL + "Barang/get_stok_detail/";
     public static final String getBarangTakLaku = baseURL + "Barangtaklaku/get_data/";
+    public static final String getBarangPerKategori = baseURL + "Barang/barang_perkategori/";
+    public static final String getDashboard = baseURL + "Dashboard/get_dashboard/";
 }

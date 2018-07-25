@@ -106,6 +106,9 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
+
+                        iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"GONE");
+
                         JSONObject responseAPI = new JSONObject();
 
                         String status = "0";
@@ -125,7 +128,15 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                                     JSONObject jo = arrayJSON.getJSONObject(i);
                                     itemString[i] = jo.getString("nobukti");
 
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"),jo.getString("nama"),jo.getString("alamat"), jo.getString("tgl"),jo.getString("total"),jo.getString("status"), jo.getString("kiriman_text"), jo.getString("nama_sales")));
+                                    masterList.add(new CustomListItem(
+                                            jo.getString("nobukti"),
+                                            jo.getString("nama"),
+                                            jo.getString("alamat"),
+                                            jo.getString("tgl"),
+                                            jo.getString("total"),
+                                            jo.getString("status"),
+                                            jo.getString("kiriman_text"),
+                                            jo.getString("nama_sales")));
                                 }
                                 getAutocomplete(itemString);
                             }else{
@@ -133,16 +144,12 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                                 getAutocomplete(null);
                             }
 
-                            iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"GONE");
-
                         }catch (Exception e){
                             e.printStackTrace();
 
                             showJSON(null);
                             if(Integer.parseInt(status) != 404){
                                 iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"ERROR");
-                            }else{
-                                iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"GONE");
                             }
                         }
                     }

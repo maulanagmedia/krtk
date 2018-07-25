@@ -35,11 +35,13 @@ public class ListBarangCustomAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(items.size() < rowPerTableItem){
-            return items.size();
-        }else{
-            return rowPerTableItem;
-        }
+        return items.size();
+    }
+
+    public void addMoreData(List<Barang> addItems){
+
+        items.addAll(addItems);
+        notifyDataSetChanged();
     }
 
     private static class ViewHolder {

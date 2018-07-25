@@ -79,8 +79,8 @@ public class Dashboard extends RuntimePermissionsActivity {
                     , REQUEST_PERMISSIONS);
         }
 
-        MasterDataHandler mdh = new MasterDataHandler(Dashboard.this);
-        mdh.checkWeeklyUpdate();
+        /*MasterDataHandler mdh = new MasterDataHandler(Dashboard.this);
+        mdh.checkWeeklyUpdate();*/
 
         initUI();
     }
@@ -273,8 +273,7 @@ public class Dashboard extends RuntimePermissionsActivity {
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else if(ll.getId() == gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master){
-                    MasterDataHandler mdh = new MasterDataHandler(Dashboard.this);
-                    mdh.updateMasterData();
+
                 }
 
             }
@@ -340,8 +339,8 @@ public class Dashboard extends RuntimePermissionsActivity {
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master){
-                        MasterDataHandler mdh = new MasterDataHandler(Dashboard.this);
-                        mdh.updateMasterData();
+                        /*MasterDataHandler mdh = new MasterDataHandler(Dashboard.this);
+                        mdh.updateMasterData();*/
                     }
 
                 }

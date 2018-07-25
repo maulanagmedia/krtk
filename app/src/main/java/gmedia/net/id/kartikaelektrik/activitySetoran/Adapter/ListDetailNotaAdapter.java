@@ -107,11 +107,11 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                items.get(position).setSelected(b);
+                //items.get(position).setSelected(b);
 
                 if(b){ // ditambahkan ke list
 
-                    /*if(DetailFormSetoran.sisaPiutang > 0){
+                    if(DetailFormSetoran.sisaPiutang > 0){
 
                         if(DetailFormSetoran.sisaPiutang - iv.parseNullDouble(itemSelected.getAtt1()) >= 0){
 
@@ -125,20 +125,22 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
                             DetailFormSetoran.sisaPiutang = 0;
                         }
 
+                        items.get(position).setSelected(true);
+
                     }else{
 
                         holder.cbItem.setChecked(false);
                         items.get(position).setSelected(false);
-                    }*/
+                    }
 
-                    items.get(position).setAtt2(itemSelected.getAtt1());
+                    //items.get(position).setAtt2(itemSelected.getAtt1());
 
 
                 }else{ // dikurangi dari list
 
-                    //DetailFormSetoran.sisaPiutang += (iv.parseNullDouble(itemSelected.getAtt2()));
-
+                    DetailFormSetoran.sisaPiutang += (iv.parseNullDouble(itemSelected.getAtt2()));
                     items.get(position).setAtt2("0");
+                    items.get(position).setSelected(false);
                 }
 
                 DetailFormSetoran.updateSisa();

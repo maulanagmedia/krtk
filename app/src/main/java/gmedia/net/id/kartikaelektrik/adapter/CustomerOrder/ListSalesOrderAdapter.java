@@ -113,7 +113,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
         }
         holder.item4.setText(stringTotal);
         String stringFlag = "Baru";
-        Global global = new Global();
+        final Global global = new Global();
         CustomListItem statusItem = global.getStatus(status[position]);
         holder.colorContainer.setBackgroundColor(context.getResources().getColor(statusItem.getListItemNumber1()));
         holder.item5.setText(statusItem.getListItem1());
@@ -131,23 +131,26 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
         holder.deleteContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                CustomListItem statusItem = global.getStatus(status[position]);
+                String peringatan = "Tidak Dapat Menghapus Order";
+
+                if(iv.parseNullInteger(status[position]) != 2){
+                    peringatan = "Tidak dapat menghapus Order berstatus " + statusItem.getListItem1();
+                    Toast.makeText(context, peringatan, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 new AlertDialog.Builder(context).setTitle("Peringatan").setMessage("Apakah anda yakin ingin menghapus " + nobukti[position] +" ?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        if(iv.parseNullInteger(status[position]) == 3 || iv.parseNullInteger(status[position]) == 7 || iv.parseNullInteger(status[position]) == 9){
-                            String peringatan = "Tidak Dapat Menghapus Order";
-                            switch (iv.parseNullInteger(status[position])){
-                                case 3:
-                                    peringatan = "Tidak dapat menghapus Order yang telah disetujui";
-                                    break;
-                                case 7:
-                                    peringatan = "Tidak dapat menghapus Order yang telah di Posting";
-                                    break;
-                                case 9:
-                                    peringatan = "Tidak dapat menghapus Order yang ditolak";
-                                    break;
-                            }
+                        CustomListItem statusItem = global.getStatus(status[position]);
+                        String peringatan = "Tidak Dapat Menghapus Order";
+
+                        if(iv.parseNullInteger(status[position]) != 2){
+
+                            peringatan = "Tidak dapat menghapus Order berstatus " + statusItem.getListItem1();
                             Toast.makeText(context, peringatan, Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -185,6 +188,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
+
                         JSONObject responseAPI = new JSONObject();
 
                         try {

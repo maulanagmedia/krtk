@@ -35,7 +35,7 @@ public class SharedPreferenceHandler {
         Gson gson = new Gson();
 
         SharedPreferences prefs = context.getSharedPreferences("Barang", MODE_PRIVATE);
-        String rawListBarang = prefs.getString("listBarang", null);
+        String rawListBarang = prefs.getString("listBarang", "");
         if(rawListBarang != null){
             items = gson.fromJson(rawListBarang,tipeBarang);
         }
@@ -87,7 +87,7 @@ public class SharedPreferenceHandler {
         Gson gson = new Gson();
 
         SharedPreferences prefs = context.getSharedPreferences("ListSelectedCustomer", MODE_PRIVATE);
-        String customerString = prefs.getString("customer", null);
+        String customerString = prefs.getString("customer", "");
         if(customerString != null){
             customer = gson.fromJson(customerString,customerType);
         }
@@ -105,7 +105,7 @@ public class SharedPreferenceHandler {
     public String getLastMasterDataUpdate(Context context){
 
         SharedPreferences prefs = context.getSharedPreferences("MasterData", MODE_PRIVATE);
-        String lastDate = prefs.getString("date", null);
+        String lastDate = prefs.getString("date", "");
         return lastDate;
     }
 
@@ -119,7 +119,7 @@ public class SharedPreferenceHandler {
     public String getLastUpdatedLocationDate(Context context){
 
         SharedPreferences prefs = context.getSharedPreferences("Location", MODE_PRIVATE);
-        String lastDate = prefs.getString("date", null);
+        String lastDate = prefs.getString("date", "");
         return lastDate;
     }
 }

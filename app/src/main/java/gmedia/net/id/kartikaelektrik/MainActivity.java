@@ -1,14 +1,18 @@
 package gmedia.net.id.kartikaelektrik;
 
 import android.*;
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,20 +41,23 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import gmedia.net.id.kartikaelektrik.activityPiutang.DetailPiutangJatuhTempo;
 import gmedia.net.id.kartikaelektrik.adapter.DashboardAdapter;
 import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.MasterDataHandler;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class MainActivity extends RuntimePermissionsActivity {
 
     private final String TAG = "MainAct";
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -78,6 +86,9 @@ public class MainActivity extends RuntimePermissionsActivity {
     private View dialogView;
     private Switch swStatus;
     private EditText edUsername, edPassword;
+    private boolean dialogActive = false;
+    private LinearLayout llDataPiutang, llPiutangTelat, llDataRetur, llDendaPelanggan;
+    private TextView tvDataPiutang, tvPiutangTelat, tvDataRetur, tvDendaPelanggan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,17 +112,23 @@ public class MainActivity extends RuntimePermissionsActivity {
         if (ContextCompat.checkSelfPermission(
                 MainActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
 
             MainActivity.super.requestAppPermissions(new
-                            String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.WAKE_LOCK, android.Manifest.permission.READ_EXTERNAL_STORAGE}, gmedia.net.id.kartikaelektrik.R.string
+                            String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            android.Manifest.permission.WAKE_LOCK,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, gmedia.net.id.kartikaelektrik.R.string
                             .runtime_permissions_txt
                     , REQUEST_PERMISSIONS);
         }
 
-        MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
-        mdh.checkWeeklyUpdate();
+        /*MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
+        mdh.checkWeeklyUpdate();*/
+        dialogActive = false;
 
         initUI();
     }
@@ -139,6 +156,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llOmsetPenjualan = (LinearLayout) findViewById(R.id.v_menu_omset_penjualan);
         llUpdateMaster = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master);
         llMenuAdmin = (LinearLayout) findViewById(R.id.v_menu_admin);
+        llCustomerLimit = (LinearLayout) findViewById(R.id.v_menu_customer_limit);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -160,6 +178,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtOmsetPenjualan = (ImageButton) findViewById(R.id.ibt_menu_omset_penjualan);
         ibtUpdateMaster = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master);
         ibtMenuAdmin = (ImageButton) findViewById(R.id.ibt_menu_admin);
+        ibtCustomerLimit = (ImageButton) findViewById(R.id.ibt_menu_customer_limit);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llLine1 = (LinearLayout) findViewById(R.id.ll_line_1);
@@ -168,6 +187,16 @@ public class MainActivity extends RuntimePermissionsActivity {
         llLine4 = (LinearLayout) findViewById(R.id.ll_line_4);
         llLine5 = (LinearLayout) findViewById(R.id.ll_line_5);
         llLine6 = (LinearLayout) findViewById(R.id.ll_line_6);
+
+        llDataPiutang = (LinearLayout) findViewById(R.id.ll_data_piutang);
+        llPiutangTelat = (LinearLayout) findViewById(R.id.ll_piutang_telat);
+        llDataRetur = (LinearLayout) findViewById(R.id.ll_data_retur);
+        llDendaPelanggan = (LinearLayout) findViewById(R.id.ll_denda_pelanggan);
+
+        tvDataPiutang = (TextView) findViewById(R.id.tv_data_piutang);
+        tvPiutangTelat = (TextView) findViewById(R.id.tv_piutang_telat);
+        tvDataRetur = (TextView) findViewById(R.id.tv_data_retur);
+        tvDendaPelanggan = (TextView) findViewById(R.id.tv_denda_pelanggan);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -217,6 +246,106 @@ public class MainActivity extends RuntimePermissionsActivity {
         CheckUserLevel();
 
         menuAnimation = AnimationUtils.loadAnimation(this, gmedia.net.id.kartikaelektrik.R.anim.menu_item_open);
+
+        initEvent();
+    }
+
+    private void initEvent() {
+
+        llDataPiutang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, DashboardContainer.class);
+                intent.putExtra("kodemenu","tagihanpiutang");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        llPiutangTelat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, DetailPiutangJatuhTempo.class);
+                intent.putExtra("kode", "JT");
+                startActivity(intent);
+            }
+        });
+
+        llDataRetur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, DashboardContainer.class);
+                intent.putExtra("kodemenu","retur");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        llDendaPelanggan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, DashboardContainer.class);
+                intent.putExtra("kodemenu","denda");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        getDashboard();
+    }
+
+    private void getDashboard() {
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("nik", sessionManager.getNik());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ApiVolley restService = new ApiVolley(MainActivity.this, jsonBody, "POST", ServerURL.getDashboard, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        try {
+
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(iv.parseNullInteger(status) == 200){
+
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < arrayJSON.length(); i++){
+
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    String nomor = jo.getString("nomor");
+
+                                    if(nomor.equals("1")){
+
+                                        tvDataPiutang.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("sisa"))));
+                                    }else if(nomor.equals("2")){
+                                        tvPiutangTelat.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("sisa"))));
+                                    }else if(nomor.equals("3")){
+                                        tvDataRetur.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("sisa"))));
+                                    }else if(nomor.equals("4")){
+                                        tvDendaPelanggan.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(jo.getString("sisa"))));
+                                    }
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                    }
+                });
     }
 
     private void CheckUserLevel(){
@@ -225,11 +354,11 @@ public class MainActivity extends RuntimePermissionsActivity {
             getJumlahSOPermintaanHarga();
             /*llPermintaanHarga.setVisibility(View.VISIBLE);
             llLogo.setVisibility(View.GONE);*/
-            llLine6.setVisibility(View.VISIBLE);
+            llPermintaanHarga.setVisibility(View.VISIBLE);
         }else{
             /*llPermintaanHarga.setVisibility(View.GONE);
             llLogo.setVisibility(View.VISIBLE);*/
-            llLine6.setVisibility(View.GONE);
+            llPermintaanHarga.setVisibility(View.INVISIBLE);
         }
 
         if(sessionManager.getLaba().equals("1")){
@@ -239,6 +368,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         }else{
 
             llMenuAdmin.setVisibility(View.INVISIBLE);
+            llLine6.setVisibility(View.GONE);
         }
     }
 
@@ -256,6 +386,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         version = pInfo.versionName;
         latestVersion = "";
         link = "";
+        getSupportActionBar().setSubtitle(" Version "+ version);
 
         urlGetLatestVersion = getResources().getString(R.string.url_get_latest_version);
 
@@ -326,12 +457,67 @@ public class MainActivity extends RuntimePermissionsActivity {
         });
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
 
         checkVersion();
         CheckUserLevel();
+
+        statusCheck();
+    }
+
+    public void statusCheck() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            buildAlertMessageNoGps();
+        }else{
+
+            try {
+                new CountDownTimer(4000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        //here you can have your logic to set text to edittext
+                    }
+
+                    public void onFinish() {
+                        if(!iv.isServiceRunning(MainActivity.this, LocationUpdater.class)){
+                            startService(new Intent(getApplicationContext(), LocationUpdater.class));
+                        }
+                    }
+
+                }.start();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void buildAlertMessageNoGps() {
+        if(!dialogActive){
+            dialogActive = true;
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Mohon Hidupkan Akses Lokasi (GPS) Anda.")
+                    .setCancelable(false)
+                    .setPositiveButton("Hidupkan", new DialogInterface.OnClickListener() {
+                        public void onClick(final DialogInterface dialog, final int id) {
+                            startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    });
+            final AlertDialog alert = builder.create();
+            alert.show();
+
+            alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    dialogActive = false;
+                }
+            });
+        }
+
     }
 
     @Override
@@ -451,8 +637,8 @@ public class MainActivity extends RuntimePermissionsActivity {
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else if(ll.getId() == gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master){
-                    MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
-                    mdh.updateMasterData();
+                    /*MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
+                    mdh.updateMasterData();*/
                 }else if(ll.getId() == R.id.v_menu_barang_tidak_laku){
                     intent.putExtra("kodemenu","barangtaklaku");
                     startActivity(intent);
@@ -463,6 +649,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else if(ll.getId() == R.id.v_menu_admin){
                     intent.putExtra("kodemenu","menuadmin");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_customer_limit){
+                    intent.putExtra("kodemenu","menucustomerlimit");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
@@ -538,8 +728,8 @@ public class MainActivity extends RuntimePermissionsActivity {
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master){
-                        MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
-                        mdh.updateMasterData();
+                        /*MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
+                        mdh.updateMasterData();*/
                     }else if(ib.getId() == R.id.ibt_menu_barang_tidak_laku){
                         intent.putExtra("kodemenu","barangtaklaku");
                         startActivity(intent);
@@ -552,6 +742,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         intent.putExtra("kodemenu","menuadmin");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_customer_limit){
+                        intent.putExtra("kodemenu","menucustomerlimit");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 }
             });
@@ -561,10 +755,15 @@ public class MainActivity extends RuntimePermissionsActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            stopService(new Intent(MainActivity.this, BackgroundLocationService.class));
+            /*stopService(new Intent(MainActivity.this, BackgroundLocationService.class));
             finish();
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-            System.exit(0);
+            System.exit(0);*/
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         }
 
         this.doubleBackToExitPressedOnce = true;

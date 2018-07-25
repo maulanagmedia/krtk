@@ -46,8 +46,8 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="F:\ic_admin_menu.png" />
-                                      <entry key="outputName" value="ic_admin" />
+                                      <entry key="imageAsset" value="F:\costumer limit1.png" />
+                                      <entry key="outputName" value="ic_customer_limit" />
                                     </map>
                                   </option>
                                 </PersistentState>

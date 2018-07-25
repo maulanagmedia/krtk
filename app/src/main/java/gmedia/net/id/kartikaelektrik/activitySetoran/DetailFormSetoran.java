@@ -302,7 +302,7 @@ public class DetailFormSetoran extends AppCompatActivity {
             }
         });
 
-        /*edtTotal.addTextChangedListener(new TextWatcher() {
+        edtTotal.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -345,7 +345,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                     edtTotal.addTextChangedListener(this);
                 }
             }
-        });*/
+        });
 
         llSaveContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,9 +384,9 @@ public class DetailFormSetoran extends AppCompatActivity {
 
     public static void updateSisa(){
 
-        //edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
+        edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
 
-        double total = 0;
+        /*double total = 0;
         if(adapterPiutangSales != null){
             for(OptionItem item: adapterPiutangSales.getItems()){
 
@@ -397,7 +397,7 @@ public class DetailFormSetoran extends AppCompatActivity {
             }
         }
 
-        edtTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToStringFull(total)));
+        edtTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToStringFull(total)));*/
     }
 
     private void getDataBank() {
@@ -481,20 +481,20 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         if(edtTotal.getText().toString().isEmpty() || edtTotal.getText().toString().equals("0")){
 
-            /*edtTotal.setError("Total harap diisi");
-            edtTotal.requestFocus();*/
+            edtTotal.setError("Total harap diisi");
+            edtTotal.requestFocus();
 
-            Toast.makeText(context, "Total masih kosong, periksa data anda", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Total masih kosong, periksa data anda", Toast.LENGTH_LONG).show();
             return;
         }else{
-            //edtTotal.setError(null);
+            edtTotal.setError(null);
         }
 
-        /*if(sisaPiutang != 0){
+        if(sisaPiutang != 0){
 
             Toast.makeText(context, "Sisa harus habis atau Rp 0", Toast.LENGTH_LONG).show();
             return;
-        }*/
+        }
 
         AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle("Konfirmasi")

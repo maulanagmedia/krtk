@@ -104,6 +104,7 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
             Geocoder geocoder = new Geocoder(context, Locale.getDefault());
             List<Address> addresses = null;
             String subKeterangan = "";
+
             try {
                 addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
                 String cityName = iv.parseNullString(addresses.get(0).getAddressLine(0));

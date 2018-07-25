@@ -15,10 +15,12 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuHistoryPenjualanBarang;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaAdmin;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBarangTakLaku;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBonus;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomer;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerLimit;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerOrder;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryCanvas;
@@ -219,11 +221,11 @@ public class DashboardContainer extends AppCompatActivity {
                 case "barangtaklaku":
                     state = 17;
                     //fragment = new MenuUtamaOmsetPenjualan();
-                    MenuUtamaBarangTakLaku menuUtamaBarangTakLaku = new MenuUtamaBarangTakLaku();
-                    View childLayoutBarangTakLaku = inflater.inflate(R.layout.menu_utama_barang_tak_laku, flContainer);
+                    MenuHistoryPenjualanBarang menuUtamaBarangTakLaku = new MenuHistoryPenjualanBarang();
+                    View childLayoutBarangTakLaku = inflater.inflate(R.layout.menu_utama_history_penjualan_barang, flContainer);
                     menuUtamaBarangTakLaku.setView(DashboardContainer.this, childLayoutBarangTakLaku);
-                    toolbar.setTitle("Barang Tidak Laku");
-                    setTitle("Barang Tidak Laku");
+                    toolbar.setTitle("History Penjualan Barang");
+                    setTitle("History Penjualan Barang");
                     break;
                 case "menuadmin":
                     state = 18;
@@ -233,6 +235,15 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaAdmin.setView(DashboardContainer.this, childLayoutMenuAdmin);
                     toolbar.setTitle("Menu Admin");
                     setTitle("Menu Admin");
+                    break;
+                case "menucustomerlimit":
+                    state = 19;
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaCustomerLimit menuUtamaCustomerLimit = new MenuUtamaCustomerLimit();
+                    View childLayoutMenuCustomerLimit = inflater.inflate(R.layout.menu_utama_customer_limit, flContainer);
+                    menuUtamaCustomerLimit.setView(DashboardContainer.this, childLayoutMenuCustomerLimit);
+                    toolbar.setTitle("Customer Limit");
+                    setTitle("Customer Limit");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

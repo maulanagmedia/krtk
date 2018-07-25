@@ -1,16 +1,16 @@
-package gmedia.net.id.kartikaelektrik.navMenuUtama;
+package gmedia.net.id.kartikaelektrik.activityHistoryPenjualanBarang;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -35,13 +35,8 @@ import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
-/**
- * Created by Shin on 2/1/2017.
- */
+public class BarangTidakLaku extends AppCompatActivity {
 
-public class MenuUtamaBarangTakLaku extends Fragment {
-
-    private View layout;
     private static Context context;
     private ItemValidation iv = new ItemValidation();
     private AutoCompleteTextView actvNamaBarang;
@@ -53,28 +48,27 @@ public class MenuUtamaBarangTakLaku extends Fragment {
     private boolean firstLoad = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        layout = inflater.inflate(R.layout.menu_utama_barang_tak_laku, container, false);
-        getActivity().setTitle("History Penjualan Barang");
-        context = getActivity();
-        initUI();
-        return layout;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_barang_tidak_laku);
 
-    public void setView(Context context, View layout){
-        this.context = context;
-        this.layout = layout;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+        setTitle("Barang Kurang Laku");
+
+        context = this;
         initUI();
     }
 
     private void initUI() {
 
-        actvNamaBarang = (AutoCompleteTextView) layout.findViewById(R.id.actv_nama_barang);
-        lvBarang = (ListView) layout.findViewById(R.id.lv_barang);
-        llLoad = (LinearLayout) layout.findViewById(R.id.ll_load);
-        pbLoad = (ProgressBar) layout.findViewById(R.id.pb_load);
-        btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
+        actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);
+        lvBarang = (ListView) findViewById(R.id.lv_barang);
+        llLoad = (LinearLayout) findViewById(R.id.ll_load);
+        pbLoad = (ProgressBar) findViewById(R.id.pb_load);
+        btnRefresh = (Button) findViewById(R.id.btn_refresh);
 
         firstLoad = true;
         getDataBarangTakLaku();
@@ -146,10 +140,9 @@ public class MenuUtamaBarangTakLaku extends Fragment {
         lvBarang.setAdapter(null);
 
         if (listItems != null && listItems.size() > 0){
-            ListBarangTakLakuAdapter arrayAdapterString;
 
             //set adapter for autocomplete
-            arrayAdapterString = new ListBarangTakLakuAdapter((Activity) context, listItems);
+            ListBarangTakLakuAdapter arrayAdapterString = new ListBarangTakLakuAdapter((Activity) context, listItems);
 
             //set adapter to autocomplete
             lvBarang.setAdapter(arrayAdapterString);
@@ -239,5 +232,23 @@ public class MenuUtamaBarangTakLaku extends Fragment {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 }

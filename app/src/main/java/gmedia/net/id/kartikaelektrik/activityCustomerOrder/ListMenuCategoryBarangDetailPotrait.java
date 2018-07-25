@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.Barang;
@@ -25,6 +29,7 @@ import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListBarangTableA
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -45,12 +50,17 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
 
     //Fragment Detail Barang
     private final String urlGetAllBarangByKategori = "http://kartika.gmedia.bz/api/barang/all_barang/kategori/";
-    private List<Barang> listMasterBarang, listBarang, listBarangTable;
+    private List<Barang> listMasterBarang, moreList;
     private SharedPreferenceHandler cfs = new SharedPreferenceHandler();
     private ProgressBar pgbLoadBarang;
     private LinearLayout llProgressBarContainer;
     private Button btnRefreshBarang;
     private boolean firstLoadBarang = true;
+    private int start = 0, count = 10;
+    private String keyword = "";
+    private View footerList;
+    private boolean isLoading = false;
+    private ListBarangTableAdapter arrayAdapterString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,65 +112,49 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
 
     public void setDetailBarangAutocomplete(){
 
-        listMasterBarang = new ArrayList<Barang>();
-        listMasterBarang = cfs.getListBarangByCategoryFromLocal(layout.getContext(),kodeKategoriBarang);
+        start = 0;
+        iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"SHOW");
+        isLoading = true;
 
         iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"SHOW");
-        if(listMasterBarang != null && listMasterBarang.size() > 0){
+        // Get All Barang by Kategori
+        ApiVolley restService = new ApiVolley(layout.getContext(), new JSONObject(), "GET", urlGetAllBarangByKategori+kodeKategoriBarang, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
 
-            listBarang = new ArrayList<Barang>(listMasterBarang);
-            listBarangTable = new ArrayList<Barang>(listMasterBarang);
+                        iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
+                        isLoading = false;
+                        try {
 
-            getListBarangAutocomplete(listBarang);
-            getListBarangTable(listBarangTable);
-            iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            listMasterBarang = new ArrayList<>();
+                            if(iv.parseNullInteger(status) == 200){
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
 
-        }else{
-
-            // Get All Barang by Kategori
-            ApiVolley restService = new ApiVolley(layout.getContext(), new JSONObject(), "GET", urlGetAllBarangByKategori+kodeKategoriBarang, "", "", 0,
-                    new ApiVolley.VolleyCallback(){
-                        @Override
-                        public void onSuccess(String result){
-                            JSONObject responseAPI = new JSONObject();
-
-                            try {
-
-                                responseAPI = new JSONObject(result);
-                                String status = responseAPI.getJSONObject("metadata").getString("status");
-                                listBarang = new ArrayList<>();
-                                listBarangTable = new ArrayList<>();
-                                if(iv.parseNullInteger(status) == 200){
-                                    JSONArray arrayJSON = responseAPI.getJSONArray("response");
-
-                                    for(int i = 0; i < arrayJSON.length();i++){
-                                        JSONObject jo = arrayJSON.getJSONObject(i);
-                                        listMasterBarang.add(new Barang(jo.getString("kdbrg"),jo.getString("namabrg")));
-                                    }
-                                    ArrayList<Barang> barangMasterData = new ArrayList<>(listMasterBarang);
-                                    cfs.saveListBarangToLocalByKategori(layout.getContext(),barangMasterData,kodeKategoriBarang);
+                                for(int i = 0; i < arrayJSON.length();i++){
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    listMasterBarang.add(new Barang(jo.getString("kdbrg"),jo.getString("namabrg")));
                                 }
-                                listBarang = new ArrayList<Barang>(listMasterBarang);
-                                listBarangTable = new ArrayList<Barang>(listMasterBarang);
-
-                                iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
-                                getListBarangAutocomplete(listBarang);
-                                getListBarangTable(listBarangTable);
-
-                            }catch (Exception e){
-                                e.printStackTrace();
-                                iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
-                                getListBarangAutocomplete(null);
-                                getListBarangTable(null);
                             }
-                        }
 
-                        @Override
-                        public void onError(String result) {
-                            iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"ERROR");
+                            getListBarangAutocomplete(listMasterBarang);
+                            getListBarangTable(listMasterBarang);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"GONE");
+                            getListBarangAutocomplete(null);
+                            getListBarangTable(null);
                         }
-                    });
-        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"ERROR");
+                    }
+                });
     }
 
     private void getListBarangAutocomplete(List<Barang> listItems){
@@ -168,13 +162,13 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
         actvListBarang.setAdapter(null);
 
         if (listItems != null && listItems.size() > 0){
-            BarangAdapter arrayAdapterString;
+            /*BarangAdapter arrayAdapterString;
 
             //set adapter for autocomplete//set adapter for autocomplete
             arrayAdapterString = new BarangAdapter(layout.getContext(),listItems.size(),listItems);
 
             //set adapter to autocomplete
-            actvListBarang.setAdapter(arrayAdapterString);
+            actvListBarang.setAdapter(arrayAdapterString);*/
 
             barangAutocompleteEvent();
         }
@@ -182,16 +176,18 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
 
     private void barangAutocompleteEvent(){
 
-        actvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        actvListBarang.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Barang barang = (Barang) adapterView.getItemAtPosition(i);
-                kodeBarang = barang.getKodeBarang();
-                namaBarang = barang.getNamaBarang();
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                List<Barang> itemlistBarang = new ArrayList<Barang>();
-                itemlistBarang.add(barang);
-                getListBarangTable(itemlistBarang);
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                    keyword = actvListBarang.getText().toString();
+                    setDetailBarangAutocomplete();
+                    iv.hideSoftKey(ListMenuCategoryBarangDetailPotrait.this);
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -210,7 +206,11 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    if(editable.toString().length() <= 0) getListBarangTable(listBarangTable);
+                    if(editable.toString().length() <= 0) {
+
+                        keyword = "";
+                        setDetailBarangAutocomplete();
+                    }
                 }
             });
         }
@@ -221,13 +221,37 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
         lvListBarang.setAdapter(null);
 
         if (listItems != null && listItems.size() > 0){
-            ListBarangTableAdapter arrayAdapterString;
 
             //set adapter for autocomplete
             arrayAdapterString = new ListBarangTableAdapter((Activity) layout.getContext(),listItems.size(), listItems);
 
             //set adapter to autocomplete
             lvListBarang.setAdapter(arrayAdapterString);
+
+            lvListBarang.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView absListView, int i) {
+
+                    int threshold = 1;
+                    int countMerchant = lvListBarang.getCount();
+
+                    if (i == SCROLL_STATE_IDLE) {
+                        if (lvListBarang.getLastVisiblePosition() >= countMerchant - threshold && !isLoading) {
+
+                            isLoading = true;
+                            lvListBarang.addFooterView(footerList);
+                            start += count;
+                            getMoreData();
+                            //Log.i(TAG, "onScroll: last ");
+                        }
+                    }
+                }
+
+                @Override
+                public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+                }
+            });
 
             lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -249,6 +273,60 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void getMoreData(){
+
+        isLoading = true;
+        // Get All Barang by Kategori
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("keyword", keyword);
+            jBody.put("start", String.valueOf(start));
+            jBody.put("count", String.valueOf(count));
+            jBody.put("id", kodeKategoriBarang);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley restService = new ApiVolley(ListMenuCategoryBarangDetailPotrait.this, jBody, "POST", urlGetAllBarangByKategori, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+
+                    @Override
+                    public void onSuccess(String result){
+
+                        lvListBarang.removeFooterView(footerList);
+                        isLoading = false;
+
+                        try {
+
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            moreList = new ArrayList<>();
+
+                            if(iv.parseNullInteger(status) == 200){
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < arrayJSON.length();i++){
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    moreList.add(new Barang(jo.getString("kdbrg"),
+                                            jo.getString("namabrg")));
+                                }
+                            }
+
+                            if(arrayAdapterString != null) arrayAdapterString.addMoreData(moreList);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        lvListBarang.removeFooterView(footerList);
+                        isLoading = false;
+                    }
+                });
     }
 
     @Override
