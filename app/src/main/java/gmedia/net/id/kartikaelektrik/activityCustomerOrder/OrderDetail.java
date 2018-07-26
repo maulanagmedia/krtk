@@ -29,6 +29,7 @@ import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
 import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +75,8 @@ public class OrderDetail extends AppCompatActivity {
     private EditText edtKetarangan;
     private RadioGroup rgPilihanPPN, rgJenisPPN;
     private RadioButton rbNonPPN, rbPPN, rbEFaktur, rbCast, rbOperan;
+    private TextView tvGudangBesar, tvGudangKecil;
+    private String currentString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +141,8 @@ public class OrderDetail extends AppCompatActivity {
             edHargaTotal = (EditText) findViewById(R.id.edt_harga_total);
             llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
             tvSave = (TextView) findViewById(R.id.tv_save);
+            tvGudangBesar = (TextView) findViewById(R.id.tv_gudang_besar);
+            tvGudangKecil = (TextView) findViewById(R.id.tv_gudang_kecil);
 
             edtKetarangan = (EditText) findViewById(R.id.edt_keterangan);
             rgPilihanPPN = (RadioGroup) findViewById(R.id.rg_pilihan_ppn);
@@ -352,6 +357,7 @@ public class OrderDetail extends AppCompatActivity {
                                 preValidateElement();
                             }
 
+                            getDetailStokBarang();
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -360,6 +366,43 @@ public class OrderDetail extends AppCompatActivity {
                     @Override
                     public void onError(String result) {
 
+                    }
+                });
+    }
+
+    private void getDetailStokBarang() {
+
+        pbLoading.setVisibility(View.VISIBLE);
+        ApiVolley restService = new ApiVolley(OrderDetail.this, new JSONObject(), "GET", ServerURL.getDetailStokBarang+kodeBarang, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        pbLoading.setVisibility(View.GONE);
+                        JSONObject responseAPI = new JSONObject();
+
+                        try {
+
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(iv.parseNullInteger(status) == 200){
+
+                                JSONObject jo = responseAPI.getJSONObject("response");
+                                tvGudangBesar.setText("Gudang Besar : \n"+jo.getString("gudangbesar"));
+                                tvGudangKecil.setText("Gudang Kecil : \n"+jo.getString("gudangkecil"));
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(OrderDetail.this, "Terjadi kesalahan saat memuat data", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        pbLoading.setVisibility(View.GONE);
+                        Toast.makeText(OrderDetail.this, "Terjadi kesalahan saat memuat data", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -399,7 +442,7 @@ public class OrderDetail extends AppCompatActivity {
                 hargaPcs = extras.getString("hargapcs");
 
                 if(flagHarga.trim().equals("2")){ //diskon
-                    edHarga.setText(extras.getString("harga"));
+                    edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
                     edDiskon.setText(extras.getString("diskon"));
 
                     /*if(extras.getString("status").trim().equals("4") || extras.getString("status").trim().equals("5")){
@@ -426,19 +469,19 @@ public class OrderDetail extends AppCompatActivity {
                     if(iv.parseNullDouble(extras.getString("harganetto")) > 0){ // Custom Harga netto
                         statusChangeHarga = 2;
                         afterChangeFlag = true;
-                        edHargaWithDiskon.setText(extras.getString("harganetto"));
+                        edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
                     }else{
                         statusChangeHarga = 1;
                     }
 
                     CalculateHargaByDiskon();
                 }else{
-                    edHarga.setText(extras.getString("harga"));
+                    edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
                     edDiskon.setText(extras.getString("diskon"));
                     edDiskon.setKeyListener(null);
                     edHargaWithDiskon.setKeyListener(null);
-                    edHargaWithDiskon.setText(extras.getString("harganetto"));
-                    edHargaTotal.setText(extras.getString("total"));
+                    edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(extras.getString("total")));
                 }
 
                 /*if(edHarga.getText().length() > 0 || edHarga.getText().equals("0")){
@@ -594,46 +637,37 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                edHarga.removeTextChangedListener(this);
+                if(!editable.toString().equals(currentString)){
 
-                /*String originalString = editable.toString();
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edHarga.removeTextChangedListener(this);
 
-                *//*if(originalString.contains(",")){
-                    originalString = originalString.replaceAll(",", "");
-                }
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
 
-                if(originalString.contains(".")){
-                    originalString = originalString.replaceAll("\\.", "");
-                }*//*
-                originalString = originalString.replace(",", "").replace(".","");
+                    currentString = formatted;
+                    edHarga.setText(formatted);
+                    edHarga.setSelection(formatted.length());
 
-                DecimalFormat formatter = new DecimalFormat();
-                String stringConvert = "0";
-                try {
-                    stringConvert = formatter.format(Double.parseDouble(originalString));
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
-                }
+                    if(flagHarga.equals("2")){
 
-                edHarga.setText(stringConvert);
-                edHarga.setSelection(edHarga.getText().length());*/
-                edHarga.addTextChangedListener(this);
-
-                if(flagHarga.equals("2")){
-
-                    if(afterChangeFlag && statusChangeHarga == 2){
-                        afterChangeFlag = false;
-                        statusChangeHarga = 2;
+                        if(afterChangeFlag && statusChangeHarga == 2){
+                            afterChangeFlag = false;
+                            statusChangeHarga = 2;
+                        }else{
+                            statusChangeHarga = 1;
+                        }
+                        CalculateHargaByDiskon();
                     }else{
-                        statusChangeHarga = 1;
+
+                        //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
+                        double hargaDouble = iv.parseNullDouble(cleanString);
+                        edHargaWithDiskon.setText(formatted);
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
                     }
-                    CalculateHargaByDiskon();
-                }else{
-                    //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
-                    double hargaDouble = iv.parseNullDouble(edHarga.getText().toString());
-                    edHargaWithDiskon.setText(edHarga.getText().toString());
-                    edHargaTotal.setText(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah)));
+
+                    edHarga.addTextChangedListener(this);
                 }
+
             }
         });
 
@@ -681,8 +715,8 @@ public class OrderDetail extends AppCompatActivity {
                     CalculateHargaByDiskon();
                 }else{
                     //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
-                    double hargaDouble = iv.parseNullDouble(edHargaWithDiskon.getText().toString());
-                    edHargaTotal.setText(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah)));
+                    double hargaDouble = iv.parseNullDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
                 }
             }
         });
@@ -692,7 +726,7 @@ public class OrderDetail extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras != null){
                 hargaPcs = extras.getString("hargapcs");
-                edHarga.setText(extras.getString("harga"));
+                edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
             }
         }
         //endregion
@@ -743,7 +777,8 @@ public class OrderDetail extends AppCompatActivity {
             if(diskonListDouble.size()>0 && edHarga.getText().length() > 0){
 
                 //long hargaAwal = iv.parseNullLong(edHarga.getText().toString().replace(".", "").replace(",", "")) / iv.parseNullInteger(selectedIsiSatuan);
-                double hargaAwal = iv.parseNullDouble(edHarga.getText().toString()) / iv.parseNullDouble(selectedIsiSatuan);
+                String hargaClean = edHarga.getText().toString().replaceAll("[,.]", "");
+                double hargaAwal = iv.parseNullDouble(hargaClean) / iv.parseNullDouble(selectedIsiSatuan);
                 //long newHargaNetto = 0;
                 double newHargaNetto = 0;
                 Integer index = 1;
@@ -760,14 +795,14 @@ public class OrderDetail extends AppCompatActivity {
 
                 if(statusChangeHarga != 2){
 
-                    edHargaWithDiskon.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan)));
-                    edHargaTotal.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah)));
+                    edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan))));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
                 }else{
 
-                    if(Double.parseDouble(edHargaWithDiskon.getText().toString()) > 0){
-                        newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString());
+                    if(Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")) > 0){
+                        newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
                     }
-                    edHargaTotal.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah)));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah))));
                 }
                 //Log.d(TAG, "CalculateHargaByDiskon: "+ String.valueOf(newHargaNetto * iv.parseNullInteger(selectedIsiSatuan) * iv.parseNullInteger(jumlah)));
             }else{
@@ -957,17 +992,17 @@ public class OrderDetail extends AppCompatActivity {
                         String hargaText = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
                         String totalHarga = iv.doubleToString(jumlahHarga * iv.parseNullDouble(selectedIsiSatuan));
 
-                        edHarga.setText(hargaText);
+                        edHarga.setText(iv.ChangeToCurrencyFormat(hargaText));
 
                         //hargaToSave = edHarga.getText().toString().replace(",", "").replace(".", "");
-                        hargaToSave = edHarga.getText().toString();
+                        hargaToSave = edHarga.getText().toString().replaceAll("[,.]", "");
                         edDiskon.setText(diskon);
                         if(flagHarga.equals("2")){
-                            edHargaWithDiskon.setText(hargaNetto);
+                            edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaNetto));
                         }else{
-                            edHargaWithDiskon.setText(hargaText);
+                            edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaText));
                         }
-                        edHargaTotal.setText(totalHarga);
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));
                     }else{
                         edHarga.setText("0");
                         edDiskon.setText("0");
@@ -1093,7 +1128,7 @@ public class OrderDetail extends AppCompatActivity {
 
         String method = "POST";
         //String hargaInput = edHarga.getText().toString().replace(",", "").replace(".", "");
-        String hargaInput = edHarga.getText().toString();
+        String hargaInput = edHarga.getText().toString().replaceAll("[,.]", "");
 
         jumlahpcs = String.valueOf(Long.parseLong(edJumlah.getText().toString()) * Integer.parseInt(selectedIsiSatuan));
         hargaToSave = hargaInput;
@@ -1108,9 +1143,9 @@ public class OrderDetail extends AppCompatActivity {
             jsonBody.put("harga", hargaToSave);
             jsonBody.put("jumlahpcs", jumlahpcs); // jumlah pcs
             jsonBody.put("hargapcs", hargaPcs); // harga asli
-            jsonBody.put("total", edHargaTotal.getText().toString()/*.replace(",", "").replace(".", "")*/); // harga * jumlahpcs
+            jsonBody.put("total", edHargaTotal.getText().toString().replaceAll("[,.]", "")); // harga * jumlahpcs
             jsonBody.put("diskon", edDiskon.getText().toString()); // default 0
-            jsonBody.put("hargadiskon", edHargaWithDiskon.getText().toString()/*.replace(",", "").replace(".", "")*/); // default 0
+            jsonBody.put("hargadiskon", edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")); // default 0
             jsonBody.put("keterangan", edtKetarangan.getText().toString());
             String ppn = "N";
             String jenisPpn = "";
@@ -1146,9 +1181,9 @@ public class OrderDetail extends AppCompatActivity {
             jsonBody.put("harga", hargaToSave);
             jsonBody.put("jumlahpcs", jumlahpcs); // jumlah pcs
             jsonBody.put("hargapcs", hargaPcs); // harga asli
-            jsonBody.put("total", edHargaTotal.getText().toString()/*.replace(",", "").replace(".", "")*/); // harga * jumlahpcs
+            jsonBody.put("total", edHargaTotal.getText().toString().replaceAll("[,.]", "")); // harga * jumlahpcs
             jsonBody.put("diskon", edDiskon.getText().toString()); // default 0
-            jsonBody.put("hargadiskon", edHargaWithDiskon.getText().toString()/*.replace(",", "").replace(".", "")*/); // default 0
+            jsonBody.put("hargadiskon", edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")); // default 0
 
             jsonBody.put("keterangan", edtKetarangan.getText().toString());
             String ppn = "N";

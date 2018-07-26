@@ -134,7 +134,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Bank Sumber / Tunai" />
+                        android:text="Cara Bayar" />
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/edt_dari_bank"
-                        android:hint="Bank Sumber"
+                        android:hint="Pembayaran"
                         android:inputType="textPersonName"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -177,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:background="@color/white"
                 android:weightSum="1">
 
@@ -268,6 +269,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@color/white"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <ImageView

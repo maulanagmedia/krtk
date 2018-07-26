@@ -22,4 +22,5 @@ public class ServerURL {
     public static final String getBarangTakLaku = baseURL + "Barangtaklaku/get_data/";
     public static final String getBarangPerKategori = baseURL + "Barang/barang_perkategori/";
     public static final String getDashboard = baseURL + "Dashboard/get_dashboard/";
+    public static final String getLimitOrder = baseURL + "Canvas/limit_order/";
 }

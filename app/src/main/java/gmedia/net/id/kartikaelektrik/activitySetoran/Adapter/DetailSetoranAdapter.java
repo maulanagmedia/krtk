@@ -69,6 +69,16 @@ public class DetailSetoranAdapter extends ArrayAdapter {
         }
 
         final CustomListItem item = items.get(position);
+
+        /*if(item.getListItem1().isEmpty()){
+
+            holder.item1.setBackgroundColor(context.getResources().getColor(R.color.color_blue_bg));
+            holder.item2.setBackgroundColor(context.getResources().getColor(R.color.color_blue_bg));
+        }else{
+            holder.item1.setBackgroundColor(context.getResources().getColor(R.color.color_red_bg));
+            holder.item2.setBackgroundColor(context.getResources().getColor(R.color.color_red_bg));
+        }*/
+
         holder.item1.setText(item.getListItem2());
         holder.item2.setText(item.getListItem3());
         holder.item3.setText(item.getListItem5());

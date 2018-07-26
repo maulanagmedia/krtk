@@ -160,6 +160,46 @@
                     android:id="@+id/lv_nota">
                 </gmedia.net.id.kartikaelektrik.CustomView.NestedListView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="52dp"
+                    android:layout_marginTop="@dimen/default_small_padding"
+                    android:paddingRight="@dimen/margin_top_big"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@color/color_red_bg"
+                        android:layout_marginLeft="@dimen/default_small_padding"
+                        android:layout_marginRight="@dimen/default_small_padding"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Piutang"
+                        android:textColor="@color/color_red_bg"
+                        android:layout_marginRight="@dimen/default_small_padding"/>
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@color/color_blue_bg"
+                        android:layout_marginLeft="@dimen/default_small_padding"
+                        android:layout_marginRight="@dimen/default_small_padding"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Retur"
+                        android:textColor="@color/color_blue_bg"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -329,6 +369,37 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/til_nama_pemilik"
+                    android:paddingRight="@dimen/padding_right_text">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_nama_pemilik"
+                        android:hint="Nama Pemilik"
+                        android:inputType="textPhonetic"/>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_margin="@dimen/icon_size"
+                    android:src="@mipmap/ic_contact"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
 
                     <EditText
@@ -397,7 +468,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/edt_ke_bank"
                         android:hint="Nama Bank Tujuan"
-                        android:inputType="textPersonName"/>
+                        android:inputType="textPersonName"
+                        android:imeOptions="actionDone"/>
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -408,6 +480,39 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@color/white"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_margin="@dimen/icon_size"
+                    android:src="@mipmap/ic_pin"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/padding_right_text"
+                    android:id="@+id/til_tanggal_transfer">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tanggal Transfer"
+                        android:maxLength="10"
+                        android:id="@+id/edt_tanggal_transfer"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:drawableEnd="@mipmap/ic_insert_date" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/white"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <ImageView

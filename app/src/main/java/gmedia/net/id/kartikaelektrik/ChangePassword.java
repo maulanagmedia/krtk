@@ -117,7 +117,15 @@ public class ChangePassword extends AppCompatActivity {
                             String status = responseAPI.getJSONObject("metadata").getString("status");
                             String message = responseAPI.getJSONObject("metadata").getString("message");
                             if(iv.parseNullInteger(status) == 200){
-                                session.createLoginSession(user.get(session.TAG_UID),user.get(session.TAG_NIK),user.get(session.TAG_NAMA),edtPasswordBaru.getText().toString(),user.get(session.TAG_TOKEN),user.get(session.TAG_EXP), user.get(session.TAG_LEVEL), user.get(SessionManager.TAG_LABA));
+                                session.createLoginSession(user.get(session.TAG_UID),
+                                        user.get(session.TAG_NIK),
+                                        user.get(session.TAG_NAMA),
+                                        edtPasswordBaru.getText().toString(),
+                                        user.get(session.TAG_TOKEN),
+                                        user.get(session.TAG_EXP),
+                                        user.get(session.TAG_LEVEL),
+                                        user.get(SessionManager.TAG_LABA),
+                                        user.get(SessionManager.TAG_NAMA_FULL));
                                 finish();
                             }
                             Toast.makeText(ChangePassword.this, message,Toast.LENGTH_LONG).show();

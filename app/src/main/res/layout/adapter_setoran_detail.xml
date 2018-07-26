@@ -26,7 +26,7 @@
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"/>
+                android:background="@color/color_red_bg"/>
 
             <TextView
                 android:id="@+id/tv_item_2"
@@ -36,7 +36,7 @@
                 android:paddingBottom="@dimen/default_small_padding"
                 android:text=""
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"
+                android:background="@color/color_red_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

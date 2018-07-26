@@ -39,6 +39,7 @@ import gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 public class DetailOrderEntryCanvas extends AppCompatActivity {
 
@@ -76,6 +77,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
     private EditText edTanggalTempo;
     private String tanggalTempo;
     private String satuanAsli = "";
+    private EditText edtLimitOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +143,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             edHargaTotal = (EditText) findViewById(R.id.edt_harga_total);
             llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
             tvSave = (TextView) findViewById(R.id.tv_save);
+            edtLimitOrder = (EditText) findViewById(R.id.edt_limit_order);
 
             edNamaPelanggan.setText(namaPelanggan);
             edNamaBarang.setText(namaBarang);
@@ -180,9 +183,40 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 rbQuantity2.setChecked(true);
             }
 
+            getLimitOrder();
         }else{
             finish();
         }
+    }
+
+    private void getLimitOrder() {
+
+        JSONObject jsonBody = new JSONObject();
+        ApiVolley restService = new ApiVolley(this, jsonBody, "GET", ServerURL.getLimitOrder + kdCus, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        try {
+
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(status.equals("200")){
+
+                                String sisaLimit = responseAPI.getJSONObject("response").getString("sisa_limit");
+                                edtLimitOrder.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(sisaLimit)));
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                    }
+                });
     }
 
     private void initEventAddOrder(){

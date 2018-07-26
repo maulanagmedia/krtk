@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,10 @@ public class DetailFormSetoran extends AppCompatActivity {
     private Context context;
     private static ItemValidation iv = new ItemValidation();
     private String formatDate = "", formatDateDisplay = "";
-    private EditText edtSales; private EditText edtCustomer; private EditText edtTanggal; private static EditText edtTotal;
+    private EditText edtSales;
+    private EditText edtCustomer;
+    private EditText edtTanggal, edtTanggalTransfer;
+    private static EditText edtTotal;
     private RadioGroup rgCaraBayar;
     private RadioButton rbTunai, rbBank, rbGiro;
     private Spinner spBank;
@@ -59,12 +63,13 @@ public class DetailFormSetoran extends AppCompatActivity {
     private String currentString = "";
     private String idSetoran = "";
     private boolean isEdit = false;
-    private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek;
+    private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek, edtNamaPemilik;
     private ListView lvNota;
     private List<OptionItem> listNota;
     private static EditText edtSisa;
     public static double sisaPiutang = 0;
     private static ListDetailNotaAdapter adapterPiutangSales;
+    private TextInputLayout tilNamaPemilik, tilTanggalTransfer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +92,20 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
+
+        tilNamaPemilik = (TextInputLayout) findViewById(R.id.til_nama_pemilik);
+        tilTanggalTransfer = (TextInputLayout) findViewById(R.id.til_tanggal_transfer);
         edtSales = (EditText) findViewById(R.id.edt_sales);
         edtCustomer = (EditText) findViewById(R.id.edt_customer);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
+        edtTanggalTransfer = (EditText) findViewById(R.id.edt_tanggal_transfer);
         rgCaraBayar = (RadioGroup) findViewById(R.id.rg_crbayar);
         rbTunai = (RadioButton) findViewById(R.id.rb_tunai);
         rbBank = (RadioButton) findViewById(R.id.rb_bank);
         rbGiro = (RadioButton) findViewById(R.id.rb_giro);
         spBank = (Spinner) findViewById(R.id.sp_bank);
         edtDariBank = (EditText) findViewById(R.id.edt_dari_bank);
+        edtNamaPemilik = (EditText) findViewById(R.id.edt_nama_pemilik);
         edtDariNorek = (EditText) findViewById(R.id.edt_dari_norek);
         edtKeBank = (EditText) findViewById(R.id.edt_ke_bank);
         edtKeNorek = (EditText) findViewById(R.id.edt_ke_norek);
@@ -126,7 +136,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                 getPiutangSales();
             }
 
-            edtSales.setText(session.getUser());
+            edtSales.setText(session.getFullName());
             initEvent();
         }
     }
@@ -167,6 +177,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                                     jo.getString("tgl"),
                                     jo.getString("sisa"),
                                     "0", // terbayar
+                                    jo.getString("tanda"),
                                     false // checked
                             ));
                         }
@@ -184,7 +195,6 @@ public class DetailFormSetoran extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -252,9 +262,11 @@ public class DetailFormSetoran extends AppCompatActivity {
 
                         edtDariBank.setText(jo.getString("dari_bank"));
                         edtDariNorek.setText(jo.getString("dari_rekening"));
+                        edtNamaPemilik.setText(jo.getString("daripemilik"));
 
                         edtKeBank.setText(jo.getString("bank"));
                         edtKeNorek.setText(jo.getString("norekening"));
+                        edtTanggalTransfer.setText(iv.ChangeFormatDateString(jo.getString("tgltransfer"), formatDate, formatDateDisplay));
 
                         JSONArray jPiutang = jo.getJSONArray("piutang");
                         listNota = new ArrayList<>();
@@ -266,6 +278,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                                     jdp.getString("tanggal"),
                                     jdp.getString("sisa"),
                                     jdp.getString("jumlah"),
+                                    jdp.getString("tanda"),
                                     true));
                         }
 
@@ -292,7 +305,10 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         edtTanggal.setText(iv.getCurrentDate(formatDateDisplay));
         edtTanggal.setKeyListener(null);
-        //iv.datePickerEvent(context,edtTanggal,"RIGHT",formatDateDisplay, iv.getCurrentDate(formatDateDisplay));
+
+        edtTanggalTransfer.setText(iv.getCurrentDate(formatDateDisplay));
+        edtTanggalTransfer.setKeyListener(null);
+        iv.datePickerEvent(context,edtTanggalTransfer,"RIGHT",formatDateDisplay, iv.getCurrentDate(formatDateDisplay));
 
         rgCaraBayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -404,12 +420,22 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         pbLoading.setVisibility(View.VISIBLE);
 
+        tilNamaPemilik.setHint("Nama Sumber (Pemilik)");
+        //edtNamaPemilik.setHint("Nama Pemilik");
+        tilTanggalTransfer.setHint("Tanggal Transfer");
+        //edtTanggalTransfer.setHint("Tanggal Transfer");
+
         if(rbTunai.isChecked()){
             crBayar = "T";
         }else if(rbBank.isChecked()){
             crBayar = "B";
         }else{
             crBayar = "G";
+
+            tilNamaPemilik.setHint("Nomor Giro");
+            tilTanggalTransfer.setHint("Tanggal Giro Jatuh Tempo");
+            //edtNamaPemilik.setHint("Nomor Giro");
+            //edtTanggalTransfer.setHint("Tanggal Giro");
         }
 
         JSONObject jBody = new JSONObject();
@@ -602,8 +628,10 @@ public class DetailFormSetoran extends AppCompatActivity {
             jsonBody.put("kdcus", kdcus);
             jsonBody.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
             jsonBody.put("dari_bank", edtDariBank.getText().toString());
+            jsonBody.put("dari_pemilik", edtNamaPemilik.getText().toString());
             jsonBody.put("dari_rekening", edtDariNorek.getText().toString());
             jsonBody.put("norekening", edtDariNorek.getText().toString());
+            jsonBody.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
             jsonBody.put("piutang", jData);
         } catch (JSONException e) {
             e.printStackTrace();

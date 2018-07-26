@@ -153,7 +153,8 @@ public class ItemValidation {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return sdfCustom.format(date1);
+
+        return date1 != null ? sdfCustom.format(date1) : "";
     }
 
     public int dpToPx(Context context, int dp) {
@@ -598,7 +599,7 @@ public class ItemValidation {
     }
 
     public String doubleToString(Double number){
-        return String.format("%.1f", number).replace(",",".");
+        return String.format("%.0f", number).replace(",",".");
     }
 
     public String doubleToStringFull(Double number){

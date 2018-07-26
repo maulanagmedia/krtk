@@ -90,7 +90,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Simpan Mutasi");
 
-        edtSales.setText(session.getUser());
+        edtSales.setText(session.getFullName());
         initEvent();
     }
 
@@ -141,13 +141,13 @@ public class DetailMutasiSetoran extends AppCompatActivity {
             }
         });
 
-        getDataBank();
+        getDataBankTunai();
     }
 
-    private void getDataBank() {
+    private void getDataBankTunai() {
 
         pbLoading.setVisibility(View.VISIBLE);
-        crBayar = "B";
+        crBayar = "T";
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("cara_bayar", crBayar);
@@ -185,7 +185,65 @@ public class DetailMutasiSetoran extends AppCompatActivity {
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     }
 
-                    listBankTujuan = new ArrayList<>(listBankSumber);
+                    getDataBank();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                    getDataBank();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+                pbLoading.setVisibility(View.GONE);
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                getDataBank();
+            }
+        });
+    }
+
+    private void getDataBank() {
+
+        pbLoading.setVisibility(View.VISIBLE);
+        crBayar = "B";
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("cara_bayar", crBayar);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getMasterBayar, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+                    listBankTujuan = new ArrayList<>();
+
+                    if(status.equals("200")){
+
+                        JSONArray jsonArray = response.getJSONArray("response");
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+
+                            JSONObject jo = jsonArray.getJSONObject(i);
+                            listBankTujuan.add(new OptionItem(
+                                    jo.getString("kode"),
+                                    jo.getString("nama"),
+                                    jo.getString("norekening")));
+                        }
+                    }else{
+
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    }
+
                     setBankAdapter(listBankSumber, listBankTujuan);
 
                 } catch (JSONException e) {
@@ -232,7 +290,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
 
         if(listItem2 != null && listItem2.size() > 0){
 
-            ArrayAdapter adapter2 = new ArrayAdapter(context, R.layout.normal_spinner, listItem1);
+            ArrayAdapter adapter2 = new ArrayAdapter(context, R.layout.normal_spinner, listItem2);
             spBankTujuan.setAdapter(adapter2);
 
             spBankTujuan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

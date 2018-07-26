@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
     private static class ViewHolder {
         private CheckBox cbItem;
         private TextView tvItem1, tvItem2;
+        private LinearLayout llContainer;
     }
 
     @Override
@@ -81,6 +84,7 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
         if(convertView == null){
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.cv_list_nota_with_cb, null);
+            holder.llContainer = (LinearLayout) convertView.findViewById(R.id.ll_container);
             holder.cbItem = (CheckBox) convertView.findViewById(R.id.cb_item);
             holder.tvItem1 = (TextView) convertView.findViewById(R.id.tv_item1);
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item2);
@@ -88,6 +92,7 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
         }else{
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.cv_list_nota_with_cb, null);
+            holder.llContainer = (LinearLayout) convertView.findViewById(R.id.ll_container);
             holder.cbItem = (CheckBox) convertView.findViewById(R.id.cb_item);
             holder.tvItem1 = (TextView) convertView.findViewById(R.id.tv_item1);
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item2);
@@ -101,6 +106,14 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
             holder.cbItem.setChecked(true);
         }else{
             holder.cbItem.setChecked(false);
+        }
+
+        if(itemSelected.getAtt3().toUpperCase().equals("P")){
+
+            holder.llContainer.setBackgroundColor(context.getResources().getColor(R.color.color_red_bg));
+        }else{
+
+            holder.llContainer.setBackgroundColor(context.getResources().getColor(R.color.color_blue_bg));
         }
 
         holder.cbItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -131,6 +144,7 @@ public class ListDetailNotaAdapter extends ArrayAdapter {
 
                         holder.cbItem.setChecked(false);
                         items.get(position).setSelected(false);
+                        Toast.makeText(context, "Total masih kosong ataus sisa pembayaran sudah habis", Toast.LENGTH_LONG).show();
                     }
 
                     //items.get(position).setAtt2(itemSelected.getAtt1());

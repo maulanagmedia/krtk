@@ -36,6 +36,7 @@ public class SessionManager {
 	public static final String TAG_EXP = "expired_at";
 	public static final String TAG_LEVEL = "level";
 	public static final String TAG_LABA = "laba";
+	public static final String TAG_NAMA_FULL = "nama_lengkap";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -47,7 +48,7 @@ public class SessionManager {
 	/**
 	 * Create login session
 	 * */
-	public void createLoginSession(String uid,String nik, String nama, String password, String token, String exp, String level, String laba){
+	public void createLoginSession(String uid,String nik, String nama, String password, String token, String exp, String level, String laba, String fullName){
 
 		editor.putBoolean(IS_LOGIN, true);
 		
@@ -66,6 +67,8 @@ public class SessionManager {
 		editor.putString(TAG_LEVEL, level);
 
 		editor.putString(TAG_LABA, laba);
+
+		editor.putString(TAG_NAMA_FULL, fullName);
 		// commit changes
 		editor.commit();
 	}	
@@ -132,6 +135,10 @@ public class SessionManager {
 
 	public String getLaba(){
 		return pref.getString(TAG_LABA, "");
+	}
+
+	public String getFullName(){
+		return pref.getString(TAG_NAMA_FULL, "");
 	}
 
 	/**

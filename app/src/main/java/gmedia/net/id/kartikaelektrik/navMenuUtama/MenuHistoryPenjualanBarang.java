@@ -52,7 +52,6 @@ public class MenuHistoryPenjualanBarang extends Fragment {
 
     private void initEvent() {
 
-
         llBarangTidakLaku.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

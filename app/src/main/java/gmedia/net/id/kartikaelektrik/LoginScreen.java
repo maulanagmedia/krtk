@@ -45,7 +45,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private String JSON_URL = "";
-    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "";
+    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "", fullName = "";
     SessionManager session;
     private Button btnLogin;
     private static final int REQUEST_PERMISSIONS = 20;
@@ -155,6 +155,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                             exp = obj.getJSONObject("response").getString("expired_at");
                             level = obj.getJSONObject("response").getString("level");
                             laba = obj.getJSONObject("response").getString("laba");
+                            fullName = obj.getJSONObject("response").getString("nama");
 //                        nik = obj.getJSONObject("response").getString("nik");
                             nama = username;// obj.getJSONObject("response").getString("nama");
                             nik= uid;
@@ -167,7 +168,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                                 return;
                             } else {
 
-                                session.createLoginSession(uid, nik, nama, password, token, exp, level, laba);
+                                session.createLoginSession(uid, nik, nama, password, token, exp, level, laba, fullName);
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                                 btnLogin.setEnabled(true);
