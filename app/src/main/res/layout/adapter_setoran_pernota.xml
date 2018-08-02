@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_small_padding2"
+        android:layout_marginBottom="@dimen/default_small_padding2"
+        android:weightSum="1"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/tv_item_1"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textColor="@android:color/white"
+                    android:paddingLeft="@dimen/default_small_padding"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:paddingTop="@dimen/default_small_padding1"
+                    android:paddingBottom="@dimen/default_small_padding1"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:id="@+id/iv_state"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_next_white"
+                    android:scaleType="fitCenter"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/default_small_padding2"
+                android:paddingBottom="@dimen/default_small_padding2"
+                android:paddingLeft="@dimen/default_small_padding"
+                android:paddingRight="@dimen/default_small_padding"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_text_title_size_small"
+                    android:textColor="@color/white"
+                    android:text="Nama Pelanggan"/>
+
+                <TextView
+                    android:id="@+id/tv_item_2"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/white"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text_title_size_small"
+                        android:textColor="@color/white"
+                        android:text="Tanggal"/>
+
+                    <TextView
+                        android:id="@+id/tv_item_3"
+                        android:textSize="@dimen/default_text_title_size"
+                        android:textColor="@android:color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="@dimen/default_line"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text_title_size_small"
+                        android:textColor="@color/white"
+                        android:text="Total"/>
+
+                    <TextView
+                        android:id="@+id/tv_item_4"
+                        android:textSize="@dimen/default_text_title_size"
+                        android:textColor="@android:color/white"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/default_line"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:id="@+id/iv_delete"
+            android:background="?attr/selectableItemBackground"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_clear"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+</LinearLayout>

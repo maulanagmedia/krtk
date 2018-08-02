@@ -39,7 +39,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".util.LocationUpdater"
             android:enabled="true"
@@ -142,7 +141,15 @@
         <activity android:name=".activitySetoran.MutasiSetoran" />
         <activity android:name=".activitySetoran.DetailMutasiSetoran" />
         <activity android:name=".activityHistoryPenjualanBarang.BarangTidakLaku" />
-        <activity android:name=".activityHistoryPenjualanBarang.BarangPalingLaku"></activity>
+        <activity android:name=".activityHistoryPenjualanBarang.BarangPalingLaku" />
+        <activity android:name=".activityOmsetPenjualan.ListSalesActivity" />
+        <activity
+            android:name=".activitySetoran.ListNotaPiutang"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activitySetoran.DetailCheckoutSetoran" />
+        <activity android:name=".activitySetoran.RekapMutasi" />
+        <activity android:name=".activitySetoran.DetailSetoranPerNota" />
+        <activity android:name=".ActivityMenuAdmin.ApprovalHargaSO"></activity>
     </application>
 
 </manifest>

@@ -169,9 +169,7 @@ public class DetailKomisiDenda extends AppCompatActivity {
                                     }
                                     komisiDenda.setPembayaran(jo.getString("pembayaran"));
                                     masterList.add(komisiDenda);
-
                                 }
-
 
                                 tvTotal.setText(iv.ChangeToRupiahFormat(total));
 
@@ -189,7 +187,10 @@ public class DetailKomisiDenda extends AppCompatActivity {
                                     }
 
                                     //Mid value
-                                    CustomListItem item = new CustomListItem(komisiDenda.getNoNota(),komisiDenda.getNamaPelanggan(), iv.ChangeToRupiahFormat(Float.parseFloat(komisiDenda.getNilaiKomisiDenda())), komisiDenda.getPembayaran());
+                                    CustomListItem item = new CustomListItem(komisiDenda.getNoNota(),
+                                            komisiDenda.getNamaPelanggan(),
+                                            iv.ChangeToRupiahFormat(Float.parseFloat(komisiDenda.getNilaiKomisiDenda())),
+                                            komisiDenda.getPembayaran());
                                     tableList.add(item);
                                     lastTotalPembayaran += iv.parseNullDouble(komisiDenda.getNilaiKomisiDenda());
 
@@ -318,9 +319,10 @@ public class DetailKomisiDenda extends AppCompatActivity {
 
                     for (CustomListItem item: tableList){
 
+                        String pelanggan = item.getListItem2().toUpperCase();
                         String jenisBayar = item.getListItem4().toUpperCase();
 
-                        // Header
+                        /*// Header
                         if(item.getListItem1().equals("HEADER") && item.getListItem2().toUpperCase().contains(keyword)){
                             items.add(item);
                         }
@@ -332,6 +334,11 @@ public class DetailKomisiDenda extends AppCompatActivity {
 
                         // footer
                         if(item.getListItem1().trim().equals("FOOTER") && (item.getListItem3().toUpperCase().contains(keyword))){
+                            items.add(item);
+                        }*/
+
+                        if(!item.getListItem1().equals("HEADER") && !item.getListItem1().trim().equals("FOOTER") && pelanggan.contains(keyword)){
+
                             items.add(item);
                         }
                     }
@@ -362,11 +369,12 @@ public class DetailKomisiDenda extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     CustomListItem cli = (CustomListItem) adapterView.getItemAtPosition(i);
                     String key = cli.getListItem1();
+                    String nilaikomden = cli.getListItem3();
 
                     if(!key.equals("HEADER") && !key.equals("FOOTER")){
                         KomisiDenda selectedKomisiDenda = new KomisiDenda();
                         for(KomisiDenda komisiDenda: masterList){
-                            if(komisiDenda.getNoNota().equals(key)){
+                            if(komisiDenda.getNoNota().equals(key) && iv.ChangeToRupiahFormat(iv.parseNullDouble(komisiDenda.getNilaiKomisiDenda())).equals(nilaikomden)){
                                 selectedKomisiDenda = komisiDenda;
                             }
                         }

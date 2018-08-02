@@ -30,6 +30,7 @@ import gmedia.net.id.kartikaelektrik.adapter.OmsetPenjualan.OmsetPerCustomerTabl
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class DetailOmsetPerNota extends AppCompatActivity {
 
@@ -46,6 +47,8 @@ public class DetailOmsetPerNota extends AppCompatActivity {
     private String urlGetOmset = "", noNota = "";
     private TextView tvNoNota;
     private String flag = "DB";
+    private SessionManager session;
+    private String nik = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class DetailOmsetPerNota extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        session = new SessionManager(this);
         initUI();
     }
 
@@ -75,6 +79,7 @@ public class DetailOmsetPerNota extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            nik = bundle.getString("nik", session.getNik());
             tvNamaCustomer.setText(bundle.getString("nama"));
             noNota = bundle.getString("nonota");
             tvNoNota.setText(noNota);
@@ -102,6 +107,7 @@ public class DetailOmsetPerNota extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
+            jsonBody.put("nik", nik);
             jsonBody.put("flag",flag);
             jsonBody.put("kdcus",kdCus);
             jsonBody.put("tgl",tanggalAwal);

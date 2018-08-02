@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rounded_corner"
+        android:layout_margin="@dimen/default_small_padding"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_margin="@dimen/icon_size"
+                android:src="@mipmap/ic_customer"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/padding_right_text">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama Pelanggan"
+                    android:id="@+id/edt_nama"
+                    style="@style/DisableEditText" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_margin="@dimen/icon_size"
+                android:src="@mipmap/ic_dolly"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/padding_right_text">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Limit Order"
+                    android:id="@+id/edt_limit"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"/>
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_small_padding"
+            android:paddingLeft="@dimen/default_small_padding"
+            android:paddingRight="@dimen/default_small_padding"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_tolak"
+                android:layout_margin="@dimen/default_small_padding2"
+                android:gravity="center"
+                android:background="@drawable/bg_btn_dialog">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Tolak"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/default_small_padding"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/default_small_padding2"
+                android:gravity="center"
+                android:id="@+id/ll_setujui"
+                android:background="@drawable/bg_btn_dialog_blue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Setujui"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/default_small_padding"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

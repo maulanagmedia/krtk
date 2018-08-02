@@ -43,7 +43,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
     private Context context;
     private static ItemValidation iv = new ItemValidation();
     private String formatDate = "", formatDateDisplay = "";
-    private EditText edtSales, edtTanggal, edtTotal;
+    private EditText edtSales, edtTanggal, edtTotal, edtTanggalTransfer;
     private Spinner spBankTujuan, spBankSumber;
     private LinearLayout llSaveContainer;
     private TextView tvSave;
@@ -78,6 +78,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
         formatDateDisplay = getResources().getString(R.string.format_date_display);
         edtSales = (EditText) findViewById(R.id.edt_sales);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
+        edtTanggalTransfer = (EditText) findViewById(R.id.edt_tanggal_transfer);
         spBankSumber = (Spinner) findViewById(R.id.sp_dari_bank);
         edtDariBank = (EditText) findViewById(R.id.edt_dari_bank);
         edtDariNorek = (EditText) findViewById(R.id.edt_dari_norek);
@@ -99,6 +100,10 @@ public class DetailMutasiSetoran extends AppCompatActivity {
         edtTanggal.setText(iv.getCurrentDate(formatDateDisplay));
         edtTanggal.setKeyListener(null);
         //iv.datePickerEvent(context,edtTanggal,"RIGHT",formatDateDisplay, iv.getCurrentDate(formatDateDisplay));
+
+        edtTanggalTransfer.setText(iv.getCurrentDate(formatDateDisplay));
+        edtTanggalTransfer.setKeyListener(null);
+        iv.datePickerEvent(context,edtTanggalTransfer,"RIGHT",formatDateDisplay, iv.getCurrentDate(formatDateDisplay));
 
         edtTotal.addTextChangedListener(new TextWatcher() {
 
@@ -372,6 +377,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
             jsonBody.put("ke_kode_bank", kodeBankTujuan);
             jsonBody.put("ke_nama_bank", edtKeBank.getText().toString());
             jsonBody.put("ke_rekening_bank", edtKeNorek.getText().toString());
+            jsonBody.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
             jsonBody.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
         } catch (JSONException e) {
             e.printStackTrace();

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white_transparent"
                 android:id="@+id/actv_pelanggan"
-                android:hint="Jenis Pembayaran"
+                android:hint="Nama Pelanggan"
                 style="@style/CustomAutoComplete1"/>
 
             <LinearLayout

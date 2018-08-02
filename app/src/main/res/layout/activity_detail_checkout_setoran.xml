@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitySetoran.DetailCheckoutSetoran">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_main_container"
+        android:orientation="vertical"
+        android:layout_above="@+id/tlb_footer"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.7"
+            android:layout_marginLeft="@dimen/default_small_padding"
+            android:layout_marginRight="@dimen/default_small_padding"
+            android:id="@+id/ll_container"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/ll_load"
+                android:visibility="gone">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pb_load" />
+
+                <Button
+                    android:text="Data not load, tap to refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_refresh"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="?attr/colorPrimary" />
+
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_small_padding"
+                android:id="@+id/lv_setoran"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_below="@+id/ll_container"
+            android:paddingTop="@dimen/default_small_padding"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:orientation="vertical"
+            android:background="@color/color_grey3"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:text="Total Setoran"
+                android:layout_marginLeft="@dimen/default_small_padding"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:id="@+id/tv_total"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical|right"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/tlb_footer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        android:padding="3dp"
+        android:gravity="center"
+        android:layout_below="@+id/ll_main_container"
+        android:layout_alignParentEnd="true">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:background="@drawable/ripple_red_reserve"
+            android:id="@+id/ll_add"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_add_order"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:text="Tambah Setoran"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/ll_process"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_check"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:text="Proses"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

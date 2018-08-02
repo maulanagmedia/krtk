@@ -31,6 +31,7 @@ import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapte
 import gmedia.net.id.kartikaelektrik.activitySetoran.CustomerSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.DetailFormSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.MutasiSetoran;
+import gmedia.net.id.kartikaelektrik.activitySetoran.RekapMutasi;
 import gmedia.net.id.kartikaelektrik.activitySetoran.RincianSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.TambahSetoran;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
@@ -45,8 +46,8 @@ import gmedia.net.id.kartikaelektrik.util.ServerURL;
 public class MenuUtamaSetoran extends Fragment {
 
     private View layout;
-    private Context context;
-    private LinearLayout llTambahSetoran, llMutasiSetoran;
+    private static Context context;
+    private LinearLayout llTambahSetoran, llMutasiSetoran, llRekapSetoran;
 
     public MenuUtamaSetoran(){}
 
@@ -71,7 +72,7 @@ public class MenuUtamaSetoran extends Fragment {
 
         llTambahSetoran = (LinearLayout) layout.findViewById(R.id.ll_tambah_setoran);
         llMutasiSetoran = (LinearLayout) layout.findViewById(R.id.ll_mutasi_setoran);
-
+        llRekapSetoran = (LinearLayout) layout.findViewById(R.id.ll_rekap_setoran);
         initEvent();
     }
 
@@ -91,6 +92,15 @@ public class MenuUtamaSetoran extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, MutasiSetoran.class);
+                ((Activity)context).startActivity(intent);
+            }
+        });
+
+        llRekapSetoran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, RekapMutasi.class);
                 ((Activity)context).startActivity(intent);
             }
         });

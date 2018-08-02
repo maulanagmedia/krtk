@@ -152,7 +152,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Detail Nota" />
+                    android:text="List Nota Piutang" />
 
                 <gmedia.net.id.kartikaelektrik.CustomView.NestedListView
                     android:layout_width="match_parent"
@@ -160,12 +160,20 @@
                     android:id="@+id/lv_nota">
                 </gmedia.net.id.kartikaelektrik.CustomView.NestedListView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_small_padding1"
+                    android:text="Total Piutang : 0"
+                    android:id="@+id/tv_total_piutang"
+                    android:textStyle="bold"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:paddingLeft="52dp"
-                    android:layout_marginTop="@dimen/default_small_padding"
+                    android:layout_marginTop="@dimen/default_small_padding1"
                     android:paddingRight="@dimen/margin_top_big"
                     android:orientation="horizontal">
 

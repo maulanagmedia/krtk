@@ -17,6 +17,7 @@ import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturTelahDiproses;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaRetur;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class DatePickerOmset extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class DatePickerOmset extends AppCompatActivity {
     private ItemValidation iv = new ItemValidation();
     private String tanggalAwal = "", tanggalAkhir ="";
     private String tanggalAwalH = "";
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class DatePickerOmset extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        session = new SessionManager(this);
         initUI();
     }
 
@@ -107,23 +110,32 @@ public class DatePickerOmset extends AppCompatActivity {
 
         Intent intent = new Intent();
 
-        switch(flag){
-            case "cus":
-                intent = new Intent(DatePickerOmset.this, ListOmsetCustomer.class);
-                intent.putExtra("tanggalawal", tanggalAwal);
-                intent.putExtra("tanggalakhir", tanggalAkhir);
-                break;
-            case "brg":
-                intent = new Intent(DatePickerOmset.this, ListOmsetBarang.class);
-                intent.putExtra("tanggalawal", tanggalAwal);
-                intent.putExtra("tanggalakhir", tanggalAkhir);
-                break;
-            default:
-                intent = new Intent(DatePickerOmset.this, ListOmsetCustomer.class);
-                intent.putExtra("tanggalawal", tanggalAwal);
-                intent.putExtra("tanggalakhir", tanggalAkhir);
-                break;
+        if(!session.getLaba().equals("1")){
+            switch(flag){
+                case "cus":
+                    intent = new Intent(DatePickerOmset.this, ListOmsetCustomer.class);
+                    intent.putExtra("tanggalawal", tanggalAwal);
+                    intent.putExtra("tanggalakhir", tanggalAkhir);
+                    break;
+                case "brg":
+                    intent = new Intent(DatePickerOmset.this, ListOmsetBarang.class);
+                    intent.putExtra("tanggalawal", tanggalAwal);
+                    intent.putExtra("tanggalakhir", tanggalAkhir);
+                    break;
+                default:
+                    intent = new Intent(DatePickerOmset.this, ListOmsetCustomer.class);
+                    intent.putExtra("tanggalawal", tanggalAwal);
+                    intent.putExtra("tanggalakhir", tanggalAkhir);
+                    break;
+            }
+        }else {
+
+            intent = new Intent(DatePickerOmset.this, ListSalesActivity.class);
+            intent.putExtra("kode", flag);
+            intent.putExtra("tanggalawal", tanggalAwal);
+            intent.putExtra("tanggalakhir", tanggalAkhir);
         }
+
 
         startActivity(intent);
 

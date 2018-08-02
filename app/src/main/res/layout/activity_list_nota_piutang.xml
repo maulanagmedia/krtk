@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitySetoran.ListNotaPiutang">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:id="@+id/ll_footer"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_grey3"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/default_small_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/default_small_padding1"
+            android:text="0"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_btn"
+        android:layout_above="@id/ll_footer"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="52dp"
+            android:layout_marginTop="@dimen/default_small_padding"
+            android:paddingRight="@dimen/margin_top_big"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/color_red_bg"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Piutang"
+                android:textColor="@color/color_red_bg"
+                android:layout_marginRight="@dimen/default_small_padding"/>
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/color_blue_bg"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retur"
+                android:textColor="@color/color_blue_bg"/>
+
+        </LinearLayout>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/btn_save"></include>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_btn"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/default_small_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_margin="@dimen/icon_size"
+                    android:src="@mipmap/ic_people"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/padding_right_text">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_customer"
+                        android:hint="Customer"
+                        android:inputType="none"
+                        android:editable="false"/>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="List Nota Piutang"
+                android:layout_marginTop="@dimen/default_small_padding2"/>
+
+            <gmedia.net.id.kartikaelektrik.CustomView.NestedListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lv_nota">
+            </gmedia.net.id.kartikaelektrik.CustomView.NestedListView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/ll_load"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb_load" />
+
+        <Button
+            android:text="Data not load, tap to refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="?attr/colorPrimary" />
+
+    </LinearLayout>
+
+</RelativeLayout>

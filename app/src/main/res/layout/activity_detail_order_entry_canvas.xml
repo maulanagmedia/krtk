@@ -191,7 +191,8 @@
                         android:hint="Jumlah"
                         android:id="@+id/edt_quantity"
                         android:digits="0123456789"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number|numberDecimal"
+                        android:imeOptions="actionDone"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -305,7 +306,8 @@
                         android:hint="Harga (Rp)"
                         android:gravity="right"
                         android:id="@+id/edt_harga"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal"
+                        android:imeOptions="actionNext"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -336,7 +338,9 @@
                         android:hint="Diskon"
                         android:gravity="right"
                         android:id="@+id/edt_diskon"
-                        style="@style/DisableEditText"/>
+                        style="@style/DisableEditText"
+                        android:inputType="textPhonetic"
+                        android:imeOptions="actionDone"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

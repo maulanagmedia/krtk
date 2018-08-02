@@ -49,7 +49,6 @@ public class DetailSetoranAdapter extends ArrayAdapter {
         return items.size();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 

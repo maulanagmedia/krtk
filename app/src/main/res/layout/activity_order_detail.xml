@@ -188,7 +188,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Ketarangan"
+                        android:hint="Keterangan"
                         android:id="@+id/edt_keterangan"
                         android:inputType="textPersonName"
                         android:imeOptions="actionDone"/>

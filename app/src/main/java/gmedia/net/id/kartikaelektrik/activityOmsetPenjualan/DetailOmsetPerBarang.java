@@ -32,6 +32,7 @@ import gmedia.net.id.kartikaelektrik.adapter.OmsetPenjualan.OmsetPerCustomerTabl
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class DetailOmsetPerBarang extends AppCompatActivity {
 
@@ -48,6 +49,8 @@ public class DetailOmsetPerBarang extends AppCompatActivity {
     private String urlGetOmset = "";
     private TextView tvTotal;
     private String formatDate = "", formatDateDisplay = "";
+    private SessionManager session;
+    private String nik = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class DetailOmsetPerBarang extends AppCompatActivity {
         );
         setTitle("Detail Omset Per Barang");
 
+        session = new SessionManager(this);
         initUI();
     }
 
@@ -80,6 +84,7 @@ public class DetailOmsetPerBarang extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            nik = bundle.getString("nik", session.getNik());
             tvNamaBarang.setText(bundle.getString("namabarang"));
             tvTotal.setText(bundle.getString("total"));
             kdBrg = bundle.getString("kdbarang");
@@ -103,6 +108,7 @@ public class DetailOmsetPerBarang extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
+            jsonBody.put("nik", nik);
             jsonBody.put("flag","LB");
             jsonBody.put("kdcus", "");
             jsonBody.put("tgl",tanggalAwal);
@@ -249,6 +255,7 @@ public class DetailOmsetPerBarang extends AppCompatActivity {
                     CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
 
                     Intent intent = new Intent(DetailOmsetPerBarang.this, DetailOmsetPerNota.class);
+                    intent.putExtra("nik", nik);
                     intent.putExtra("nonota", item.getListItem2());
                     intent.putExtra("nama", item.getListItem3());
                     intent.putExtra("kdcus", item.getListItem8());

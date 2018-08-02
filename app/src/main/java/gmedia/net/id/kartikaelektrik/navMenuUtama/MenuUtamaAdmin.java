@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.ApprovalHargaSO;
 import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker;
 import gmedia.net.id.kartikaelektrik.R;
 
@@ -20,7 +21,7 @@ public class MenuUtamaAdmin extends Fragment {
 
     private View layout;
     private Context context;
-    private LinearLayout llLabaRugi;
+    private LinearLayout llLabaRugi, llApproveHargaSO;
 
     public MenuUtamaAdmin(){}
 
@@ -43,6 +44,12 @@ public class MenuUtamaAdmin extends Fragment {
     private void initUI() {
 
         llLabaRugi = (LinearLayout) layout.findViewById(R.id.ll_laba_rugi);
+        llApproveHargaSO = (LinearLayout) layout.findViewById(R.id.ll_approve_harga_so);
+
+        initEvent();
+    }
+
+    private void initEvent() {
 
         llLabaRugi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +57,15 @@ public class MenuUtamaAdmin extends Fragment {
                 /*Intent intent = new Intent(context, ReturDatePicker.class);
                 intent.putExtra("jenis", returCustomer);
                 context.startActivity(intent);*/
+            }
+        });
+
+        llApproveHargaSO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ApprovalHargaSO.class);
+                context.startActivity(intent);
             }
         });
     }

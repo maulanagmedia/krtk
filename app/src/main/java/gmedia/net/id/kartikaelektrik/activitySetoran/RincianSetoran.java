@@ -182,7 +182,7 @@ public class RincianSetoran extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                    CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
+                    /*CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
                     if(!item.getListItem1().isEmpty()){
 
                         Intent intent = new Intent(context, DetailFormSetoran.class);
@@ -190,7 +190,7 @@ public class RincianSetoran extends AppCompatActivity {
                         startActivity(intent);
                     }else{
                         Toast.makeText(context, "Data merupakan mutasi", Toast.LENGTH_LONG).show();
-                    }
+                    }*/
 
                 }
             });

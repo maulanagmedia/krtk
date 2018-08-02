@@ -87,7 +87,7 @@ public class BarangPalingLaku extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ApiVolley restService = new ApiVolley(context, jsonBody, "POST", ServerURL.getBarangTakLaku, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jsonBody, "POST", ServerURL.getBarangPalingLaku, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){

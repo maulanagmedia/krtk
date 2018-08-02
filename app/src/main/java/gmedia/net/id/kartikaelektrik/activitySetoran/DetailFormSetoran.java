@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -70,6 +71,8 @@ public class DetailFormSetoran extends AppCompatActivity {
     public static double sisaPiutang = 0;
     private static ListDetailNotaAdapter adapterPiutangSales;
     private TextInputLayout tilNamaPemilik, tilTanggalTransfer;
+    private boolean isConfirm = true;
+    private TextView tvTotalPiutang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +119,9 @@ public class DetailFormSetoran extends AppCompatActivity {
         llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Simpan Setoran");
+        tvTotalPiutang = (TextView) findViewById(R.id.tv_total_piutang);
 
+        isConfirm = true;
         sisaPiutang = 0;
         isEdit = false;
         Bundle bundle = getIntent().getExtras();
@@ -143,7 +148,7 @@ public class DetailFormSetoran extends AppCompatActivity {
 
     private void getPiutangSales() {
 
-        pbLoading.setVisibility(View.VISIBLE);
+        /*pbLoading.setVisibility(View.VISIBLE);
         JSONObject jBody = new JSONObject();
 
         try {
@@ -204,7 +209,16 @@ public class DetailFormSetoran extends AppCompatActivity {
                 pbLoading.setVisibility(View.GONE);
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
+
+        double total = 0;
+        for(OptionItem item : ListNotaPiutang.listNota){
+
+            total += iv.parseNullDouble(item.getAtt1());
+        }
+
+        tvTotalPiutang.setText("Total Piutang : "+ iv.ChangeToCurrencyFormat(iv.doubleToStringFull(total)));
+        setSalesPiutang(ListNotaPiutang.listNota);
     }
 
     private void setSalesPiutang(List<OptionItem> listItems){
@@ -525,7 +539,7 @@ public class DetailFormSetoran extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle("Konfirmasi")
                 .setIcon(R.mipmap.kartika_logo)
-                .setMessage("Apakah anda yakin ingin menyimpan setoran?")
+                .setMessage("Apakah anda yakin ingin menambahkan ke daftar setoran?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -536,6 +550,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                 .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
 
                     }
                 })
@@ -591,19 +606,22 @@ public class DetailFormSetoran extends AppCompatActivity {
 
     public void saveData() {
 
-        llSaveContainer.setEnabled(false);
+        /*llSaveContainer.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(context,
                 gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        progressDialog.show();*/
 
         String namaBank = ((OptionItem) spBank.getSelectedItem()).getText();
         String kodeBank = ((OptionItem) spBank.getSelectedItem()).getValue();
 
-        JSONArray jData = new JSONArray();
+        List<OptionItem> bufferItems = new ArrayList<>();
+
         if(adapterPiutangSales != null){
+
+            int i = 0;
             for(OptionItem item: adapterPiutangSales.getItems()){
 
                 if(item.isSelected()){
@@ -612,32 +630,55 @@ public class DetailFormSetoran extends AppCompatActivity {
                     try {
                         jOrder.put("nonota", item.getValue());
                         jOrder.put("jumlah", item.getAtt2());
-                        jData.put(jOrder);
+                        jOrder.put("crbayar", crBayar);
+                        jOrder.put("kode_bank", kodeBank);
+                        jOrder.put("bank", namaBank);
+                        jOrder.put("kdcus", kdcus);
+                        jOrder.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
+                        jOrder.put("dari_bank", edtDariBank.getText().toString());
+                        jOrder.put("dari_pemilik", edtNamaPemilik.getText().toString());
+                        jOrder.put("dari_rekening", edtDariNorek.getText().toString());
+                        jOrder.put("norekening", edtDariNorek.getText().toString());
+                        jOrder.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
+                        ListNotaPiutang.jaSetoran.put(jOrder);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    if(item.getAtt1().equals(item.getAtt2())){
+
+                        //ListNotaPiutang.listNota.remove(i);
+                    }else{
+
+                        OptionItem newItem = new OptionItem(
+                                item.getValue(),
+                                item.getText(),
+                                iv.doubleToStringFull(iv.parseNullDouble(item.getAtt1()) - iv.parseNullDouble(item.getAtt2())),
+                                "0",
+                                item.getAtt3(),
+                                false
+                        );
+
+                        bufferItems.add(newItem);
+                    }
+                }else{
+
+                    bufferItems.add(item);
                 }
+
+                i++;
             }
+
+            ListNotaPiutang.listNota = new ArrayList<>(bufferItems);
         }
 
-        final JSONObject jsonBody = new JSONObject();
-        try {
-            jsonBody.put("crbayar", crBayar);
-            jsonBody.put("kode_bank", kodeBank);
-            jsonBody.put("bank", namaBank);
-            jsonBody.put("kdcus", kdcus);
-            jsonBody.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
-            jsonBody.put("dari_bank", edtDariBank.getText().toString());
-            jsonBody.put("dari_pemilik", edtNamaPemilik.getText().toString());
-            jsonBody.put("dari_rekening", edtDariNorek.getText().toString());
-            jsonBody.put("norekening", edtDariNorek.getText().toString());
-            jsonBody.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
-            jsonBody.put("piutang", jData);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Intent intent = new Intent(context, DetailCheckoutSetoran.class);
+        intent.putExtra("kdcus", kdcus);
+        intent.putExtra("namacus", namaCus);
+        startActivity(intent);
+        finish();
 
-        ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jsonBody, "POST", ServerURL.saveSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+        /*ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jsonBody, "POST", ServerURL.saveSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -670,7 +711,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     private void setBankAdapter(List<OptionItem> listItem) {
@@ -713,7 +754,29 @@ public class DetailFormSetoran extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        super.onBackPressed();
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        if(isConfirm){
+
+            AlertDialog dialog = new AlertDialog.Builder(context)
+                    .setTitle("Pembatalan")
+                    .setMessage("Setoran belum terproses, anda yakin membatalkan proses setoran?")
+                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            isConfirm = false;
+                            onBackPressed();
+                        }
+                    }).setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            isConfirm = true;
+                        }
+                    }).show();
+        }else{
+
+            super.onBackPressed();
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        }
     }
 }

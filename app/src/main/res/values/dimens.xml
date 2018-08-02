@@ -47,6 +47,8 @@
     <dimen name="text_menu_size">14sp</dimen>
     <dimen name="text_date_small">12sp</dimen>
     <dimen name="text_nota">16sp</dimen>
+    <dimen name="text_total">18sp</dimen>
     <dimen name="text_dashboard">18sp</dimen>
+    <dimen name="text_menu">12sp</dimen>
 
 </resources>

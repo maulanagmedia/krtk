@@ -205,13 +205,18 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
             try {
 
                 lastUpdatedLocationdate = sph.getLastUpdatedLocationDate(getApplicationContext());
-                if(lastUpdatedLocationdate == null){
+                if(lastUpdatedLocationdate == null
+                        || lastUpdatedLocationdate.equals("")
+                        || lastUpdatedLocationdate.equals(null)
+                        || lastUpdatedLocationdate.equals("null")){
                     lastUpdatedLocationdate = iv.getCurrentDate(dateFormat);
                 }
 
                 String currentDateTime = iv.getCurrentDate(dateFormat);
+
                 Date currentDate = null;
                 Date lastDate = null;
+
                 try {
                     currentDate = defaultFormat.parse(currentDateTime);
                     lastDate = defaultFormat.parse(lastUpdatedLocationdate);

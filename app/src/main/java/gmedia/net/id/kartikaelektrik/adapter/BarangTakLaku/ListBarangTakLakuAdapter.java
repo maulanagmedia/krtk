@@ -57,11 +57,7 @@ public class ListBarangTakLakuAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(items.size() < rowPerTableItem){
-            return items.size();
-        }else{
-            return rowPerTableItem;
-        }
+        return items.size();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

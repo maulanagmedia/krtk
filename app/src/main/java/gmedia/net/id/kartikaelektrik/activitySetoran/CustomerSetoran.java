@@ -47,6 +47,7 @@ public class CustomerSetoran extends AppCompatActivity {
     private List<Customer> masterListCustomer , listCustomerAutocomplete, listCustomerTable;
     private boolean firstLoad = true;
     private TextView tvTotal;
+    public static boolean isSaved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,16 @@ public class CustomerSetoran extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(isSaved){
+            isSaved = false;
+            onBackPressed();
+        }
+    }
+
     // method to show autocomplete item
     private void getListCustomerAutocomplete(final List<Customer> listItemCustomer){
 
@@ -262,11 +273,11 @@ public class CustomerSetoran extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Customer item = (Customer) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(context, DetailFormSetoran.class);
+                    Intent intent = new Intent(context, ListNotaPiutang.class);
                     intent.putExtra("kdcus", item.getKodeCustomer());
                     intent.putExtra("namacus", item.getNamaCustomer());
                     startActivity(intent);
-                    finish();
+                    //finish();
                 }
             });
         }

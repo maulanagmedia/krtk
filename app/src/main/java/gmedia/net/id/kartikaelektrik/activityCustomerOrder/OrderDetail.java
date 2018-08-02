@@ -76,7 +76,7 @@ public class OrderDetail extends AppCompatActivity {
     private RadioGroup rgPilihanPPN, rgJenisPPN;
     private RadioButton rbNonPPN, rbPPN, rbEFaktur, rbCast, rbOperan;
     private TextView tvGudangBesar, tvGudangKecil;
-    private String currentString = "";
+    private String currentString = "", currentString1 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -667,7 +667,6 @@ public class OrderDetail extends AppCompatActivity {
 
                     edHarga.addTextChangedListener(this);
                 }
-
             }
         });
 
@@ -685,38 +684,27 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                edHargaWithDiskon.removeTextChangedListener(this);
+                if(!editable.toString().equals(currentString1)){
 
-                /*String originalString = editable.toString();
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edHargaWithDiskon.removeTextChangedListener(this);
 
-                *//*if(originalString.contains(",")){
-                    originalString = originalString.replaceAll(",", "");
-                }
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
 
-                if(originalString.contains(".")){
-                    originalString = originalString.replaceAll("\\.", "");
-                }*//*
-                originalString = originalString.replace(",", "").replace(".","");
+                    currentString1 = formatted;
+                    edHargaWithDiskon.setText(formatted);
+                    edHargaWithDiskon.setSelection(formatted.length());
 
-                DecimalFormat formatter = new DecimalFormat();
-                String stringConvert = "0";
-                try {
-                    stringConvert = formatter.format(Double.parseDouble(originalString));
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
-                }
+                    if(flagHarga.equals("2")){
+                        statusChangeHarga = 2;
+                        CalculateHargaByDiskon();
+                    }else{
+                        //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
+                        double hargaDouble = iv.parseNullDouble(cleanString);
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
+                    }
 
-                edHarga.setText(stringConvert);
-                edHarga.setSelection(edHarga.getText().length());*/
-                edHargaWithDiskon.addTextChangedListener(this);
-
-                if(flagHarga.equals("2")){
-                    statusChangeHarga = 2;
-                    CalculateHargaByDiskon();
-                }else{
-                    //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
-                    double hargaDouble = iv.parseNullDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
-                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
+                    edHargaWithDiskon.addTextChangedListener(this);
                 }
             }
         });
@@ -952,7 +940,7 @@ public class OrderDetail extends AppCompatActivity {
                         harga = responseAPI.getJSONObject("response").getString("harga");
                         hargaPcs = responseAPI.getJSONObject("response").getString("harga");
                         crBayar = responseAPI.getJSONObject("response").getString("crbayar");
-                        String diskonString = "0";
+                        String diskonString = "";
                         if(responseAPI.getJSONObject("response").getString("diskon").length() > 0){
                             diskonString = responseAPI.getJSONObject("response").getString("diskon");
                         }
@@ -1005,7 +993,7 @@ public class OrderDetail extends AppCompatActivity {
                         edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));
                     }else{
                         edHarga.setText("0");
-                        edDiskon.setText("0");
+                        edDiskon.setText("");
                         edHargaWithDiskon.setText("0");
                         edHargaTotal.setText("0");
                     }
@@ -1036,7 +1024,7 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void onError(String result) {
                 edHarga.setText("0");
-                edDiskon.setText("0");
+                edDiskon.setText("");
                 edHargaWithDiskon.setText("0");
                 edHargaTotal.setText("0");
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show(); // show message response
@@ -1060,7 +1048,7 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void run() {
                 edHarga.setText("0");
-                edDiskon.setText("0");
+                edDiskon.setText("");
                 edHargaWithDiskon.setText("0");
                 edHargaTotal.setText("0");
             }

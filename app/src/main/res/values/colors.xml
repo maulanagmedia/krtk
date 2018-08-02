@@ -87,5 +87,6 @@
     <color name="color_btn_white_2">#ff9494</color>
     <color name="color_red_bg">#ff3737</color>
     <color name="color_blue_bg">#4932de</color>
+    <color name="color_blue">#3826ae</color>
 
 </resources>

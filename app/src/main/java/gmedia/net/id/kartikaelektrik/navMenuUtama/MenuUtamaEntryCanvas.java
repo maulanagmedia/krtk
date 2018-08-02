@@ -20,12 +20,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -58,6 +60,10 @@ public class MenuUtamaEntryCanvas extends Fragment {
     private List<CustomListItem> masterList, autocompleteList, tableList;
     private boolean firstLoad = true;
     private FloatingActionButton fabAddOrder;
+    private EditText edtAwal, edtAkhir;
+    private LinearLayout llShow;
+    private String formatDate = "", formatDateDisplay = "", tanggalAwal = "", tanggalAkhir = "";
+    private String keyword = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +92,23 @@ public class MenuUtamaEntryCanvas extends Fragment {
         pbLoadCustomer = (ProgressBar) layout.findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
 
+        formatDate = context.getResources().getString(R.string.format_date);
+        formatDateDisplay = context.getResources().getString(R.string.format_date_display);
+
+        tanggalAwal = iv.sumDate(iv.getCurrentDate(formatDate), -7, formatDate);
+        tanggalAkhir = iv.getCurrentDate(formatDate);
+
+        edtAwal = (EditText) layout.findViewById(R.id.edt_awal);
+        edtAkhir = (EditText) layout.findViewById(R.id.edt_akhir);
+        llShow = (LinearLayout) layout.findViewById(R.id.ll_show);
+
+        edtAwal.setText(iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
+        edtAkhir.setText(iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
+
+        keyword = "";
+
+        initValidation();
+
         setListCustomerAutocomplete();
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +127,21 @@ public class MenuUtamaEntryCanvas extends Fragment {
                 context.startActivity(intent);
             }
         });
+
+        llShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                keyword = actvNoNota.getText().toString();
+                setListCustomerAutocomplete();
+            }
+        });
+    }
+
+    private void initValidation() {
+
+        iv.datePickerEvent(context, edtAwal, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
+        iv.datePickerEvent(context, edtAkhir, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
     }
 
     public void setListCustomerAutocomplete(){
@@ -113,21 +151,15 @@ public class MenuUtamaEntryCanvas extends Fragment {
         final String formatDate = context.getResources().getString(R.string.format_date);
         final String formatDateDisplay = context.getResources().getString(R.string.format_date_display1);
 
-        /*//TODO: Dummy Data
-        masterList = new ArrayList<>();
-        for(int i = 1; i < 6;i++){
-
-            masterList.add(new CustomListItem("nonota"+i,iv.ChangeFormatDateString("2017-01-0"+i, formatDate, formatDateDisplay), iv.ChangeToRupiahFormat(Double.parseDouble(String.valueOf(2*i)+"0000"))));
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("tgl_awal", iv.ChangeFormatDateString(edtAwal.getText().toString(), formatDateDisplay, formatDate));
+            jsonBody.put("tgl_akhir",iv.ChangeFormatDateString(edtAkhir.getText().toString(), formatDateDisplay, formatDate));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        autocompleteList = new ArrayList<CustomListItem>(masterList);
-        tableList = new ArrayList<CustomListItem>(masterList);
-        getListCustomerAutocomplete(autocompleteList);
-        getListCustomerTable(tableList);
-        iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"GONE");*/
-
-        JSONObject jsonBody = new JSONObject();
-        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", urlGetCanvasOrder, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jsonBody, "POST", urlGetCanvasOrder, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
@@ -143,7 +175,14 @@ public class MenuUtamaEntryCanvas extends Fragment {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"),iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay), iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))), jo.getString("customer")));
+
+                                    if(jo.getString("customer").toLowerCase().contains(keyword.toLowerCase())){
+
+                                        masterList.add(new CustomListItem(jo.getString("nobukti"),
+                                                iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay),
+                                                iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))),
+                                                jo.getString("customer")));
+                                    }
                                 }
                             }
 
@@ -201,7 +240,9 @@ public class MenuUtamaEntryCanvas extends Fragment {
                     @Override
                     public void afterTextChanged(Editable editable) {
                         if(actvNoNota.length() <= 0){
-                            getListCustomerTable(tableList);
+                            //getListCustomerTable(tableList);
+                            keyword = "";
+                            setListCustomerAutocomplete();
                         }
                     }
                 });
@@ -219,7 +260,7 @@ public class MenuUtamaEntryCanvas extends Fragment {
                 }
             });
 
-            actvNoNota.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            /*actvNoNota.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
@@ -241,7 +282,7 @@ public class MenuUtamaEntryCanvas extends Fragment {
                     }
                     return false;
                 }
-            });
+            });*/
         }
 
     }

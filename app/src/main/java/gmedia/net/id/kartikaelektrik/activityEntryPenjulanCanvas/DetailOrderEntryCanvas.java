@@ -78,6 +78,8 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
     private String tanggalTempo;
     private String satuanAsli = "";
     private EditText edtLimitOrder;
+    private String currentString = "", currentString1 = "";
+    private String limitOrder = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             namaPelanggan = extras.getString("nama");
             jumlah = extras.getString("jumlah");
             stok = extras.getString("stok");
+
             selectedSatuan = extras.getString("satuan");
             satuanAsli = extras.getString("satuan");
             kodeBarang = extras.getString("kodebarang");
@@ -165,6 +168,18 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 Gson gson = new Gson();
                 selectedBarangList = gson.fromJson(selectedBarangString, tipeBarangList);
 
+                if(selectedBarangList != null && selectedBarangList.size() > 0){
+
+                    long currentSisa = 0;
+                    for(CustomListItem item : selectedBarangList){
+
+                        if(kodeBarang.equals(item.getListItem1())) currentSisa += iv.parseNullLong(item.getListItem3());
+                    }
+
+                    /*stok = String.valueOf(iv.parseNullLong(stok) - currentSisa);
+                    edJumlah.setError("Sisa stok "+ stok);*/
+                }
+
                 if(idOrderDetail != null && !idOrderDetail.toLowerCase().equals("null") && idOrderDetail.length() > 0){
 
                     tvSave.setText("Ubah Penjualan Canvas");
@@ -202,11 +217,25 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                             JSONObject responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
 
+                            limitOrder = "0";
+                            long total = 0;
+                            String sisaLimit = "0";
+
                             if(status.equals("200")){
 
-                                String sisaLimit = responseAPI.getJSONObject("response").getString("sisa_limit");
-                                edtLimitOrder.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(sisaLimit)));
+                                sisaLimit = responseAPI.getJSONObject("response").getString("sisa_limit");
+                                if(selectedBarangList != null && selectedBarangList.size() > 0){
+
+                                    for(CustomListItem item : selectedBarangList){
+
+                                        total += iv.parseNullLong(item.getListItem12());
+                                    }
+                                }
                             }
+
+                            limitOrder = String.valueOf(iv.parseNullLong(sisaLimit) - total);
+                            edtLimitOrder.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(limitOrder)));
+
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -331,7 +360,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 hargaPcs = extras.getString("hargapcs");
 
                 if(flagHarga.trim().equals("2")){ //diskon
-                    edHarga.setText(extras.getString("harga"));
+                    edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
                     edDiskon.setText(extras.getString("diskon"));
 
                     edDiskon.setFocusable(true);
@@ -345,19 +374,19 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                     if(iv.parseNullDouble(extras.getString("harganetto")) > 0){ // Custom Harga netto
                         statusChangeHarga = 2;
                         afterChangeFlag = true;
-                        edHargaWithDiskon.setText(extras.getString("harganetto"));
+                        edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
                     }else{
                         statusChangeHarga = 1;
                     }
 
                     CalculateHargaByDiskon();
                 }else{
-                    edHarga.setText(extras.getString("harga"));
+                    edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
                     edDiskon.setText(extras.getString("diskon"));
                     edDiskon.setKeyListener(null);
                     edHargaWithDiskon.setKeyListener(null);
-                    edHargaWithDiskon.setText(extras.getString("harganetto"));
-                    edHargaTotal.setText(extras.getString("total"));
+                    edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(extras.getString("total")));
                 }
             }
 
@@ -473,42 +502,31 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                edHarga.removeTextChangedListener(this);
+                if(!editable.toString().equals(currentString)){
 
-                /*String originalString = editable.toString();
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edHarga.removeTextChangedListener(this);
 
-                *//*if(originalString.contains(",")){
-                    originalString = originalString.replaceAll(",", "");
-                }
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
 
-                if(originalString.contains(".")){
-                    originalString = originalString.replaceAll("\\.", "");
-                }*//*
-                originalString = originalString.replace(",", "").replace(".","");
+                    currentString = formatted;
+                    edHarga.setText(formatted);
+                    edHarga.setSelection(formatted.length());
 
-                DecimalFormat formatter = new DecimalFormat();
-                String stringConvert = "0";
-                try {
-                    stringConvert = formatter.format(Double.parseDouble(originalString));
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
-                }
-
-                edHarga.setText(stringConvert);
-                edHarga.setSelection(edHarga.getText().length());*/
-                edHarga.addTextChangedListener(this);
-
-                if(flagHarga.equals("2")){
-                    if(afterChangeFlag && statusChangeHarga == 2){
-                        afterChangeFlag = false;
-                        statusChangeHarga = 2;
+                    if(flagHarga.equals("2")){
+                        if(afterChangeFlag && statusChangeHarga == 2){
+                            afterChangeFlag = false;
+                            statusChangeHarga = 2;
+                        }else{
+                            statusChangeHarga = 1;
+                        }
+                        CalculateHargaByDiskon();
                     }else{
-                        statusChangeHarga = 1;
+                        double hargaDouble = iv.parseNullDouble(cleanString);
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
                     }
-                    CalculateHargaByDiskon();
-                }else{
-                    double hargaDouble = iv.parseNullDouble(edHarga.getText().toString());
-                    edHargaTotal.setText(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah)));
+
+                    edHarga.addTextChangedListener(this);
                 }
             }
         });
@@ -527,38 +545,27 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                edHargaWithDiskon.removeTextChangedListener(this);
+                if(!editable.toString().equals(currentString1)){
 
-                /*String originalString = editable.toString();
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edHargaWithDiskon.removeTextChangedListener(this);
 
-                *//*if(originalString.contains(",")){
-                    originalString = originalString.replaceAll(",", "");
-                }
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
 
-                if(originalString.contains(".")){
-                    originalString = originalString.replaceAll("\\.", "");
-                }*//*
-                originalString = originalString.replace(",", "").replace(".","");
+                    currentString1 = formatted;
+                    edHargaWithDiskon.setText(formatted);
+                    edHargaWithDiskon.setSelection(formatted.length());
 
-                DecimalFormat formatter = new DecimalFormat();
-                String stringConvert = "0";
-                try {
-                    stringConvert = formatter.format(Double.parseDouble(originalString));
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
-                }
+                    if(flagHarga.equals("2")){
+                        statusChangeHarga = 2;
+                        CalculateHargaByDiskon();
+                    }else{
+                        //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
+                        double hargaDouble = iv.parseNullDouble(cleanString);
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah))));
+                    }
 
-                edHarga.setText(stringConvert);
-                edHarga.setSelection(edHarga.getText().length());*/
-                edHargaWithDiskon.addTextChangedListener(this);
-
-                if(flagHarga.equals("2")){
-                    statusChangeHarga = 2;
-                    CalculateHargaByDiskon();
-                }else{
-                    //double hargaDouble = iv.parseNullDouble(edHarga.getText().toString().replace(".", "").replace(",", ""));
-                    double hargaDouble = iv.parseNullDouble(edHargaWithDiskon.getText().toString());
-                    edHargaTotal.setText(iv.doubleToString(iv.parseNullDouble(selectedIsiSatuan) * hargaDouble * iv.parseNullDouble(jumlah)));
+                    edHargaWithDiskon.addTextChangedListener(this);
                 }
             }
         });
@@ -568,7 +575,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             if(extras != null){
                 hargaPcs = extras.getString("hargapcs");
-                edHarga.setText(extras.getString("harga"));
+                edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
             }
         }
         //endregion
@@ -619,7 +626,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
 
             if(diskonListDouble.size()>0 && edHarga.getText().length() > 0){
 
-                double hargaAwal = iv.parseNullDouble(edHarga.getText().toString()) / iv.parseNullDouble(selectedIsiSatuan);
+                double hargaAwal = iv.parseNullDouble(edHarga.getText().toString().replaceAll("[,.]", "")) / iv.parseNullDouble(selectedIsiSatuan);
                 double newHargaNetto = 0;
                 Integer index = 1;
 
@@ -635,14 +642,14 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
 
                 if(statusChangeHarga != 2){
 
-                    edHargaWithDiskon.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan)));
-                    edHargaTotal.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah)));
+                    edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan))));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
                 }else{
 
-                    if(Double.parseDouble(edHargaWithDiskon.getText().toString()) > 0){
-                        newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString());
+                    if(Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")) > 0){
+                        newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
                     }
-                    edHargaTotal.setText(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah)));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah))));
                 }
                 //Log.d(TAG, "CalculateHargaByDiskon: "+ String.valueOf(newHargaNetto * iv.parseNullInteger(selectedIsiSatuan) * iv.parseNullInteger(jumlah)));
             }else{
@@ -695,6 +702,12 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                     jumlah = edJumlah.getText().toString();
                 }
 
+                if(iv.parseNullDouble(edHargaTotal.getText().toString().replaceAll("[,.]", "")) > iv.parseNullDouble(limitOrder)){
+
+                    Toast.makeText(DetailOrderEntryCanvas.this, "Total melebihi limit order, tidak dapat memproses order", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(iv.parseNullLong(edJumlah.getText().toString()) > iv.parseNullLong(stok)){
                     edJumlah.setError("Jumlah tidak boleh lebih dari " + iv.parseNullLong(stok));
                     edJumlah.requestFocus();
@@ -706,7 +719,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                     return;
                 }
 
-                if(iv.parseNullDouble(edHargaTotal.getText().toString()) < 0){
+                if(iv.parseNullDouble(edHargaTotal.getText().toString().replaceAll("[,.]", "")) < 0){
 
                 }
 
@@ -771,7 +784,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
 
                         harga = responseAPI.getJSONObject("response").getString("harga");
                         hargaPcs = responseAPI.getJSONObject("response").getString("harga");
-                        String diskonString = "0";
+                        String diskonString = "";
                         if(responseAPI.getJSONObject("response").getString("diskon").length() > 0){
                             diskonString = responseAPI.getJSONObject("response").getString("diskon");
                         }
@@ -812,16 +825,16 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                         String hargaText = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
                         String totalHarga = iv.doubleToString(jumlahHarga * iv.parseNullDouble(selectedIsiSatuan));
 
-                        edHarga.setText(hargaText);
+                        edHarga.setText(iv.ChangeToCurrencyFormat(hargaText));
 
                         //hargaToSave = edHarga.getText().toString().replace(",", "").replace(".", "");
-                        hargaToSave = edHarga.getText().toString();
+                        hargaToSave = edHarga.getText().toString().replaceAll("[,.]", "");
                         edDiskon.setText(diskon);
-                        edHargaWithDiskon.setText(hargaNetto);
-                        edHargaTotal.setText(totalHarga);
+                        edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaNetto));
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));
                     }else{
                         edHarga.setText("0");
-                        edDiskon.setText("0");
+                        edDiskon.setText("");
                         edHargaWithDiskon.setText("0");
                         edHargaTotal.setText("0");
                     }
@@ -866,7 +879,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 isLoadingHarga = false;
 
                 edHarga.setText("0");
-                edDiskon.setText("0");
+                edDiskon.setText("");
                 edHargaWithDiskon.setText("0");
                 edHargaTotal.setText("0");
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show(); // show message response
@@ -884,7 +897,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             @Override
             public void run() {
                 edHarga.setText("0");
-                edDiskon.setText("0");
+                edDiskon.setText("");
                 edHargaWithDiskon.setText("0");
                 edHargaTotal.setText("0");
             }
@@ -946,7 +959,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
         //final JSONObject jsonBody = new JSONObject();
 
         String method = "POST";
-        String hargaInput = edHarga.getText().toString();
+        String hargaInput = edHarga.getText().toString().replaceAll("[,.]", "");
 
         jumlahpcs = String.valueOf(Long.parseLong(edJumlah.getText().toString()) * Integer.parseInt(selectedIsiSatuan));
         hargaToSave = hargaInput;
@@ -965,8 +978,8 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 noKonsinyasi,       // 8. no konsinyasi
                 hargaPcs,           // 9. hargapcs
                 edDiskon.getText().toString(),           // 10. diskon: default
-                edHargaWithDiskon.getText().toString(),  // 11. harganetto: default 0
-                edHargaTotal.getText().toString(),       // 12. total harga * jumlahpcs
+                edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""),  // 11. harganetto: default 0
+                edHargaTotal.getText().toString().replaceAll("[,.]", ""),       // 12. total harga * jumlahpcs
                 String.valueOf(iv.parseNullInteger(stok)/* - iv.parseNullInteger(jumlah)*/)       // 13. sisa stok
         );
 
@@ -1027,7 +1040,6 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
 
             }else{ // add new Order
 
-                //TODO: DUMMY nobukti
 
                 ApiVolley apiVolley = new ApiVolley(DetailOrderEntryCanvas.this, new JSONObject(), "GET", urlGenerateNobukti, "", "", 0, new ApiVolley.VolleyCallback() {
                     @Override

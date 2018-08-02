@@ -9,6 +9,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:id="@+id/ll_keyword"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_keyword"
+                android:hint="Nama Pelanggan / Nomor Bukti"
+                style="@style/CustomAutoComplete1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/white_transparent"
+                android:elevation="1dp"
+                android:inputType="textPhonetic"
+                android:imeOptions="actionDone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/default_small_padding"
         android:paddingBottom="@dimen/default_small_padding"
         android:id="@+id/ll_footer"
@@ -29,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_total"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_total"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/default_small_padding1"
             android:text="0"
@@ -40,7 +69,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_below="@id/ll_keyword"
         android:layout_above="@id/ll_footer">
 
         <LinearLayout

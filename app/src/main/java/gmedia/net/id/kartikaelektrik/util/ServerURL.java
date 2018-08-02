@@ -20,7 +20,12 @@ public class ServerURL {
     public static final String getMasterBayar = baseURL + "Barang/master_bayar/";
     public static final String getDetailStokBarang = baseURL + "Barang/get_stok_detail/";
     public static final String getBarangTakLaku = baseURL + "Barangtaklaku/get_data/";
+    public static final String getBarangPalingLaku = baseURL + "BarangLaku/get_data/";
     public static final String getBarangPerKategori = baseURL + "Barang/barang_perkategori/";
     public static final String getDashboard = baseURL + "Dashboard/get_dashboard/";
     public static final String getLimitOrder = baseURL + "Canvas/limit_order/";
+    public static final String getListSales = baseURL + "sales/";
+    public static final String getSetoranPerNobukti = baseURL + "setoran/view_setoran_nobukti/";
+    public static final String getSetoranNobukti = baseURL + "setoran/view_detail_nobukti/";
+    public static final String getApproveSOBarang = baseURL + "barang/order_approve/";
 }

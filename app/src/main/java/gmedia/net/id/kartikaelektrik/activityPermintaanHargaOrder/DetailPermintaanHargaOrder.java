@@ -29,6 +29,7 @@ import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.adapter.CustomListItemTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import com.google.gson.Gson;
 
@@ -62,6 +63,7 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_permintaan_harga_order);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -72,7 +74,7 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
 
     private void initUI() {
 
-        urlGetDetailSO = getResources().getString(R.string.url_get_so_detail_by_id);
+        urlGetDetailSO = ServerURL.getApproveSOBarang;
         urlUpdateSOStatus = getResources().getString(R.string.url_update_status_so);
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);
         lvListBarang = (ListView) findViewById(R.id.lv_list_barang);

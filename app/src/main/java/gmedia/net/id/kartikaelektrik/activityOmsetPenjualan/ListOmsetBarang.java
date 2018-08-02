@@ -33,6 +33,7 @@ import gmedia.net.id.kartikaelektrik.adapter.OmsetPenjualan.OmsetPerCustomerTabl
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class ListOmsetBarang extends AppCompatActivity {
 
@@ -51,6 +52,8 @@ public class ListOmsetBarang extends AppCompatActivity {
     private ListView lvListOmset;
     private String formatDate = "", formatDateDisplay = "";
     private TextView tvTotal;
+    private SessionManager session;
+    private String nik = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class ListOmsetBarang extends AppCompatActivity {
         );
         setTitle("Omset Per Barang");
 
+        session = new SessionManager(this);
         initUI();
     }
 
@@ -98,6 +102,7 @@ public class ListOmsetBarang extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            nik = bundle.getString("nik", session.getNik());
             tanggalAwal = bundle.getString("tanggalawal");
             tanggalAkhir = bundle.getString("tanggalakhir");
 
@@ -159,6 +164,7 @@ public class ListOmsetBarang extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
+            jsonBody.put("nik", nik);
             jsonBody.put("flag","RB");
             jsonBody.put("kdcus","");
             jsonBody.put("tgl",tanggalAwal);
@@ -312,6 +318,7 @@ public class ListOmsetBarang extends AppCompatActivity {
                     String total = item.getListItem3();
 
                     Intent intent = new Intent(ListOmsetBarang.this, DetailOmsetPerBarang.class);
+                    intent.putExtra("nik", nik);
                     intent.putExtra("namabarang", namaBarang);
                     intent.putExtra("total", total);
                     intent.putExtra("kdbarang", kdBarang);

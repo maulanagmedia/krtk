@@ -559,6 +559,7 @@ public class ItemValidation {
 
     //region Nullable value
     public long parseNullLong(String s){
+
         long result = 0;
         if(s != null){
             try {

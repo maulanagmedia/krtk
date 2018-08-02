@@ -203,6 +203,7 @@
                         android:id="@+id/textView11"
                         android:ellipsize="end"
                         android:maxLines="2"
+                        android:textSize="@dimen/text_menu"
                         android:textColor="@color/color_font_light"
                         android:gravity="center" />
                 </LinearLayout>
@@ -241,6 +242,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:id="@+id/tv_tagihan_piutang"
+                        android:textSize="@dimen/text_menu"
                         android:textColor="@color/color_font_light"
                         android:gravity="center" />
                 </LinearLayout>
@@ -279,6 +281,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:id="@+id/tv_info_stok"
+                        android:textSize="@dimen/text_menu"
                         android:textColor="@color/color_font_light"
                         android:gravity="center" />
                 </LinearLayout>
@@ -329,6 +332,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -366,6 +370,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -404,6 +409,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -442,6 +448,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_tambah_canvas"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -455,45 +462,6 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/default_small_padding1"
                 android:weightSum="3">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:visibility="gone"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_custom_order"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_custom_order"
-                        android:id="@+id/ibt_menu_custom_order"/>
-
-                    <TextView
-                        android:text="Tambah Order Custom"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_custom_order"
-                        android:textColor="@color/color_font_light"
-                        android:gravity="center" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -530,6 +498,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_setoran"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -568,6 +537,7 @@
                         android:maxLines="2"
                         android:id="@+id/textView13"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -598,7 +568,7 @@
                         android:id="@+id/ibt_menu_entry_canvas"/>
 
                     <TextView
-                        android:text="Daftar Penjualan Canvas"
+                        android:text="History Penjualan Canvas"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.9"
@@ -606,6 +576,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_entry_canvas"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -655,6 +626,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_komisi"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -693,6 +665,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_denda"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -731,6 +704,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_bonus"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -780,6 +754,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_omset_penjualan"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -818,6 +793,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_retur"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -856,6 +832,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_customer_limit"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -947,6 +924,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -986,6 +964,7 @@
                         android:maxLines="2"
                         android:id="@+id/tv_update_master"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -1026,6 +1005,45 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_custom_order"
+                    android:layout_height="match_parent"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_custom_order"
+                        android:id="@+id/ibt_menu_custom_order"/>
+
+                    <TextView
+                        android:text="Pesanan Khusus"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_custom_order"
+                        android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:visibility="visible"
                     android:gravity="center_horizontal"
                     android:paddingRight="@dimen/padding_main_menu"
@@ -1058,22 +1076,8 @@
                         android:maxLines="2"
                         android:id="@+id/tv_admin"
                         android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
                         android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:weightSum="2">
-
                 </LinearLayout>
 
                 <LinearLayout

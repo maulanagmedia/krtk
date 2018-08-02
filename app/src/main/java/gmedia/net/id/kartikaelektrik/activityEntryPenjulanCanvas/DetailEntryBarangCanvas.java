@@ -23,10 +23,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -38,6 +42,7 @@ import gmedia.net.id.kartikaelektrik.adapter.BarangAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.EntryPenjualanCanvas.DetailEntryBarangCanvasAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.InfoStokAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
+import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
@@ -67,6 +72,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
     private String noKonsinyasi = "";
     private String noBukti = "", selectedBarang = "";
     private static String keyword = "";
+    private List<CustomListItem> selectedBarangList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +103,16 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
 
             try {
 
-                kdCus = bundle.getString("kdcus");
-                namaCustomer = bundle.getString("nama");
-                noBukti = bundle.getString("nobukti");
-                selectedBarang = bundle.getString("selectedbarang");
+                kdCus = bundle.getString("kdcus","");
+                namaCustomer = bundle.getString("nama","");
+                noBukti = bundle.getString("nobukti","");
+                selectedBarang = bundle.getString("selectedbarang","");
+
+                String selectedBarangString  = selectedBarang;
+                selectedBarangList = new ArrayList<>();
+                Type tipeBarangList = new TypeToken<List<CustomListItem>>(){}.getType();
+                Gson gson = new Gson();
+                selectedBarangList = gson.fromJson(selectedBarangString, tipeBarangList);
 
             }catch (Exception e){
 
@@ -149,7 +161,14 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
 
                             for(int i = 0; i < arrayJSON.length();i++){
                                 JSONObject jo = arrayJSON.getJSONObject(i);
-                                listMasterBarang.add(new Barang(jo.getString("kdbrg"),jo.getString("namabrg"),jo.getString("stok"),jo.getString("hargajual"), jo.getString("satuan"), "", jo.getString("nobukti")));
+                                listMasterBarang.add(new Barang(
+                                        jo.getString("kdbrg"),
+                                        jo.getString("namabrg"),
+                                        getStok(jo.getString("kdbrg"), jo.getString("stok")),
+                                        jo.getString("hargajual"),
+                                        jo.getString("satuan"),
+                                        "",
+                                        jo.getString("nobukti")));
                             }
 
                             iv.ProgressbarEvent(llLoadBarang, pbLoadBarang,btnRefreshBarang,"GONE");
@@ -436,7 +455,13 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
 
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    addList.add(new Barang(jo.getString("kdbrg"),jo.getString("namabrg"),jo.getString("stok"),jo.getString("hargajual"), jo.getString("satuan"), "", jo.getString("nobukti")));
+                                    addList.add(new Barang(jo.getString("kdbrg"),
+                                            jo.getString("namabrg"),
+                                            getStok(jo.getString("kdbrg"), jo.getString("stok")),
+                                            jo.getString("hargajual"),
+                                            jo.getString("satuan"),
+                                            "",
+                                            jo.getString("nobukti")));
                                 }
 
                                 Message msg = mHandler.obtainMessage(1, addList);
@@ -455,6 +480,23 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private String getStok(String kdbrg, String stok){
+
+        String newStok = stok;
+        if(selectedBarangList != null && selectedBarangList.size() > 0){
+
+            long currentSisa = 0;
+            for(CustomListItem item : selectedBarangList){
+
+                if(kdbrg.equals(item.getListItem1())) currentSisa += iv.parseNullLong(item.getListItem3());
+            }
+
+            newStok = String.valueOf(iv.parseNullLong(stok) - currentSisa);
+        }
+
+        return newStok;
     }
 
     @Override

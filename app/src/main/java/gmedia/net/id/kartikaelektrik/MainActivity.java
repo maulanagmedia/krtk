@@ -242,6 +242,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llBarangTidakLaku, ibtBarangTidakLaku);
         setOnClickMenu(llSetoran, ibtSetoran);
         setOnClickMenu(llMenuAdmin, ibtMenuAdmin);
+        setOnClickMenu(llCustomerLimit, ibtCustomerLimit);
 
         CheckUserLevel();
 
@@ -351,24 +352,26 @@ public class MainActivity extends RuntimePermissionsActivity {
     private void CheckUserLevel(){
 
         if(levelUser == 0 || levelUser == 1){ // 0 Owner , 1 Accounting
-            getJumlahSOPermintaanHarga();
+
+            //getJumlahSOPermintaanHarga();
+
             /*llPermintaanHarga.setVisibility(View.VISIBLE);
             llLogo.setVisibility(View.GONE);*/
-            llPermintaanHarga.setVisibility(View.VISIBLE);
+            //llPermintaanHarga.setVisibility(View.VISIBLE);
         }else{
             /*llPermintaanHarga.setVisibility(View.GONE);
             llLogo.setVisibility(View.VISIBLE);*/
-            llPermintaanHarga.setVisibility(View.INVISIBLE);
+            //llPermintaanHarga.setVisibility(View.INVISIBLE);
         }
 
         if(sessionManager.getLaba().equals("1")){
 
             llMenuAdmin.setVisibility(View.VISIBLE);
-            llLine6.setVisibility(View.VISIBLE);
+            //llLine6.setVisibility(View.VISIBLE);
         }else{
 
             llMenuAdmin.setVisibility(View.INVISIBLE);
-            llLine6.setVisibility(View.GONE);
+            //llLine6.setVisibility(View.GONE);
         }
     }
 

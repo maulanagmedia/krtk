@@ -31,6 +31,7 @@ import gmedia.net.id.kartikaelektrik.adapter.OmsetPenjualan.OmsetPerCustomerTabl
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class DetailOmsetCustomer extends AppCompatActivity {
 
@@ -46,6 +47,8 @@ public class DetailOmsetCustomer extends AppCompatActivity {
     private List<CustomListItem> masterList, autocompleteList, tableList;
     private String urlGetOmset = "", namaCustomer = "";
     private TextView tvTotal;
+    private String nik = "";
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class DetailOmsetCustomer extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        session = new SessionManager(this);
         initUI();
     }
 
@@ -75,6 +79,7 @@ public class DetailOmsetCustomer extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            nik = bundle.getString("nik", session.getNik());
             namaCustomer = bundle.getString("nama");
             tvNamaCustomer.setText(namaCustomer);
             tvTotal.setText(bundle.getString("total"));
@@ -102,6 +107,7 @@ public class DetailOmsetCustomer extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
+            jsonBody.put("nik", nik);
             jsonBody.put("flag","DN");
             jsonBody.put("kdcus",kdCus);
             jsonBody.put("tgl",tanggalAwal);
@@ -248,6 +254,7 @@ public class DetailOmsetCustomer extends AppCompatActivity {
                     String noNota = item.getListItem1();
 
                     Intent intent = new Intent(DetailOmsetCustomer.this, DetailOmsetPerNota.class);
+                    intent.putExtra("nik", nik);
                     intent.putExtra("nonota", noNota);
                     intent.putExtra("nama", namaCustomer);
                     intent.putExtra("kdcus", kdCus);

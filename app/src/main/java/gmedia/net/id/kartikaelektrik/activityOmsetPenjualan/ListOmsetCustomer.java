@@ -34,6 +34,7 @@ import gmedia.net.id.kartikaelektrik.adapter.OmsetPenjualan.OmsetPerCustomerTabl
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class ListOmsetCustomer extends AppCompatActivity {
 
@@ -52,6 +53,8 @@ public class ListOmsetCustomer extends AppCompatActivity {
     private ListView lvListOmset;
     private String formatDate = "", formatDateDisplay = "";
     private TextView tvTotal;
+    private SessionManager session;
+    private String nik = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class ListOmsetCustomer extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         setTitle("Omset Customer");
+
+        session = new SessionManager(this);
 
         initUI();
     }
@@ -99,6 +104,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
 
+            nik = bundle.getString("nik", session.getNik());
             tanggalAwal = bundle.getString("tanggalawal");
             tanggalAkhir = bundle.getString("tanggalakhir");
 
@@ -160,6 +166,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
+            jsonBody.put("nik", nik);
             jsonBody.put("flag","RO");
             jsonBody.put("kdcus","");
             jsonBody.put("tgl",tanggalAwal);
@@ -315,6 +322,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
                     String total = item.getListItem4();
 
                     Intent intent = new Intent(ListOmsetCustomer.this, DetailOmsetCustomer.class);
+                    intent.putExtra("nik", nik);
                     intent.putExtra("nama", namaCus);
                     intent.putExtra("total", total);
                     intent.putExtra("kdcus", kdCus);

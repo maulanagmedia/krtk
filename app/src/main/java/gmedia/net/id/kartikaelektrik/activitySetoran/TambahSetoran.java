@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
+import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.SetoranPernobuktiAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
@@ -50,6 +52,7 @@ public class TambahSetoran extends AppCompatActivity {
     private String formatDate = "", formatDateDisplay = "";
     private static List<CustomListItem> listSetoran;
     private static TextView tvTotal;
+    private static AutoCompleteTextView actvKeyword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class TambahSetoran extends AppCompatActivity {
         tanggalAwal = iv.sumDate(iv.getCurrentDate(formatDate), -7, formatDate);
         tanggalAkhir = iv.getCurrentDate(formatDate);
 
+        actvKeyword = (AutoCompleteTextView) findViewById(R.id.actv_keyword);
         tilTanggalAwal = (TextInputLayout) findViewById(R.id.til_tanggal_awal);
         tilTanggalAkhir = (TextInputLayout) findViewById(R.id.til_tanggal_akhir);
         edTanggalAwal = (EditText) findViewById(R.id.edt_tanggal_awal);
@@ -152,11 +156,12 @@ public class TambahSetoran extends AppCompatActivity {
         try {
             jBody.put("tgl_awal", tanggalAwal);
             jBody.put("tgl_akhir", tanggalAkhir);
+            jBody.put("keyword", actvKeyword.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranHeader, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranPerNobukti, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -177,11 +182,10 @@ public class TambahSetoran extends AppCompatActivity {
 
                             JSONObject jo = jsonArray.getJSONObject(i);
                             listSetoran.add(new CustomListItem(
-                                    jo.getString("kode_bank"),
-                                    jo.getString("bank"),
-                                    jo.getString("total"),
-                                    tanggalAwal,
-                                    tanggalAkhir));
+                                    jo.getString("nobukti"),
+                                    jo.getString("nama"),
+                                    jo.getString("tgl_input"),
+                                    jo.getString("total")));
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }
@@ -216,7 +220,7 @@ public class TambahSetoran extends AppCompatActivity {
 
         if(listItem != null && listItem.size() > 0){
 
-            HeaderSetoranAdapter adapter = new HeaderSetoranAdapter((Activity) context, listItem);
+            SetoranPernobuktiAdapter adapter = new SetoranPernobuktiAdapter((Activity) context, listItem);
 
             lvSetoran.setAdapter(adapter);
 
@@ -226,10 +230,9 @@ public class TambahSetoran extends AppCompatActivity {
 
                     CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
 
-                    Intent intent = new Intent(context, RincianSetoran.class);
-                    intent.putExtra("kode_bank", item.getListItem1());
-                    intent.putExtra("tgl_awal", item.getListItem4());
-                    intent.putExtra("tgl_akhir", item.getListItem5());
+                    Intent intent = new Intent(context, DetailSetoranPerNota.class);
+                    intent.putExtra("nobukti", item.getListItem1());
+                    intent.putExtra("namacus", item.getListItem2());
                     ((Activity) context).startActivity(intent);
 
                 }

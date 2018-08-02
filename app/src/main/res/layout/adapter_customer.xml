@@ -145,6 +145,7 @@
             android:layout_height="@dimen/default_line"
             android:layout_marginLeft="@dimen/default_small_padding"
             android:layout_marginRight="@dimen/default_small_padding"
+            android:visibility="invisible"
             android:background="@color/color_grey"></LinearLayout>
 
         <LinearLayout
