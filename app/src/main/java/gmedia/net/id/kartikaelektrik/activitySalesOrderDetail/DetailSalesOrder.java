@@ -149,8 +149,19 @@ public class DetailSalesOrder extends AppCompatActivity {
                                 JSONArray jsonArray = responseJSON.getJSONArray("so_detail");
 
                                 for(int i = 0; i < jsonArray.length(); i++){
+
                                     JSONObject jo = jsonArray.getJSONObject(i);
-                                    SalesOrderDetail sod = new SalesOrderDetail(jo.getString("id"), jo.getString("kdbrg"), jo.getString("namabrg"),jo.getString("jumlah"),jo.getString("satuan"),jo.getString("total"));
+                                    SalesOrderDetail sod = new SalesOrderDetail(
+                                            jo.getString("id"),
+                                            jo.getString("kdbrg"),
+                                            jo.getString("namabrg"),
+                                            jo.getString("jumlah"),
+                                            jo.getString("satuan"),
+                                            jo.getString("total"),
+                                            jo.getString("terkirim"),
+                                            jo.getString("sisa")
+                                    );
+
                                     sod.setHarga(jo.getString("harga"));
                                     sod.setHargapcs(jo.getString("hargapcs"));
                                     sod.setDiskon(jo.getString("diskon"));

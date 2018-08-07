@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/color_grey1"
+                android:id="@+id/ll_title"
                 android:weightSum="1">
 
                 <TextView
@@ -138,6 +139,77 @@
                         android:layout_width="match_parent"
                         android:id="@+id/tv_subtitle_3"
                         android:gravity="center_vertical|right" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_container"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:background="@color/color_grey"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/default_small_padding"
+                        android:layout_marginLeft="@dimen/default_small_padding"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Terkirim"
+                            android:textSize="@dimen/default_text_title_size_small"/>
+
+                        <TextView
+                            android:paddingLeft="@dimen/container_padding_horizontal"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:id="@+id/tv_subtitle_5"
+                            android:gravity="center_vertical|right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/default_line"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey1"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/default_small_padding"
+                        android:layout_marginLeft="@dimen/default_small_padding"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sisa Terkirim"
+                            android:textSize="@dimen/default_text_title_size_small"/>
+
+                        <TextView
+                            android:paddingLeft="@dimen/container_padding_horizontal"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:id="@+id/tv_subtitle_6"
+                            android:gravity="center_vertical|right" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

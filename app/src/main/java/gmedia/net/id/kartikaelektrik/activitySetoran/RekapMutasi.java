@@ -1,7 +1,10 @@
 package gmedia.net.id.kartikaelektrik.activitySetoran;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -42,14 +45,16 @@ public class RekapMutasi extends AppCompatActivity {
     private TextInputLayout tilTanggalAkhir;
     private EditText edTanggalAwal;
     private EditText edtTanggalAkhir;
-    private LinearLayout llSave;
-    private TextView tvSave;
+    private LinearLayout llShow;
+    private TextView tvShow;
     private static ItemValidation iv = new ItemValidation();
     private static String tanggalAwal;
     private static String tanggalAkhir;
     private String formatDate = "", formatDateDisplay = "";
     private static List<CustomListItem> listSetoran;
     private static TextView tvTotal;
+    private LinearLayout llSaveContainer;
+    private TextView tvSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +89,13 @@ public class RekapMutasi extends AppCompatActivity {
         edtTanggalAkhir.setText(iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
         lvSetoran = (ListView) findViewById(R.id.lv_setoran);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
-        llSave = (LinearLayout) findViewById(R.id.ll_save_container);
-        tvSave = (TextView) findViewById(R.id.tv_save);
+        llShow = (LinearLayout) findViewById(R.id.ll_show);
+        tvShow = (TextView) findViewById(R.id.tv_show);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+
+        llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
+        tvSave = (TextView) findViewById(R.id.tv_save);
+        tvSave.setText("Kunci Setoran");
 
         initValidation();
 
@@ -97,7 +106,7 @@ public class RekapMutasi extends AppCompatActivity {
 
     private void initEvent() {
 
-        llSave.setOnClickListener(new View.OnClickListener() {
+        llShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -125,6 +134,89 @@ public class RekapMutasi extends AppCompatActivity {
 
 
                 getDataSetoran();
+            }
+        });
+
+        llSaveContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(listSetoran != null && listSetoran.size() > 0){
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Konfirmasi")
+                            .setIcon(R.mipmap.logo_kartika)
+                            .setMessage("Apakah anda yakin ingin mengunci setoran pada periode ini?")
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    saveKunci();
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
+                }else{
+                    Toast.makeText(context, "List Masih Kosong", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
+
+    private void saveKunci() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("tgl_awal", tanggalAwal);
+            jBody.put("tgl_akhir", tanggalAkhir);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.kunciSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                progressDialog.dismiss();
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    if(status.equals("200")){
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                    setAdapter(null);
+
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                setAdapter(null);
             }
         });
     }

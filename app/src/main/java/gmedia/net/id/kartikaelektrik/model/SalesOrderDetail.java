@@ -21,6 +21,8 @@ public class SalesOrderDetail {
     private String kdPaket;
     private String namaPaket;
     private String jensiPaket;
+    private String terkirim;
+    private String sisa;
 
     public SalesOrderDetail(){}
 
@@ -31,6 +33,17 @@ public class SalesOrderDetail {
         this.jumlah = jumlah;
         this.satuan = satuan;
         this.hargaTotal = hargaTotal;
+    }
+
+    public SalesOrderDetail(String soDetailID, String idBarang,String namaBarang, String jumlah, String satuan, String hargaTotal, String terkirim, String sisa){
+        this.soDetailID = soDetailID;
+        this.idBarang = idBarang;
+        this.namaBarang = namaBarang;
+        this.jumlah = jumlah;
+        this.satuan = satuan;
+        this.hargaTotal = hargaTotal;
+        this.terkirim = terkirim;
+        this.sisa = sisa;
     }
 
     public String getSoDetailID() {
@@ -151,5 +164,21 @@ public class SalesOrderDetail {
 
     public void setKdPaket(String kdPaket) {
         this.kdPaket = kdPaket;
+    }
+
+    public String getTerkirim() {
+        return terkirim;
+    }
+
+    public void setTerkirim(String terkirim) {
+        this.terkirim = terkirim;
+    }
+
+    public String getSisa() {
+        return sisa;
+    }
+
+    public void setSisa(String sisa) {
+        this.sisa = sisa;
     }
 }

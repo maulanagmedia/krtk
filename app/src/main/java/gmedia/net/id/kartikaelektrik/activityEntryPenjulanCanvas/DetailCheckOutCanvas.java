@@ -251,7 +251,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
             HashMap<String, String> stringList = new HashMap<String, String>();
 
             stringList.put("nobukti", noBukti);
-            stringList.put("kdcus", noBukti);
+            stringList.put("kdcus", kdCus);
             stringList.put("namacus", customerName);
             Gson gson = new Gson();
             stringList.put("selectedbarang", gson.toJson(selectedBarangList).toString());

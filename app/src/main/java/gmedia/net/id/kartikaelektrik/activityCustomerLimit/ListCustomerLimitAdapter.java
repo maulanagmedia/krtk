@@ -35,7 +35,7 @@ public class ListCustomerLimitAdapter extends ArrayAdapter {
     private ItemValidation iv = new ItemValidation();
 
     public ListCustomerLimitAdapter(Activity context, int resource, List items) {
-        super(context, R.layout.adapter_customer, items);
+        super(context, R.layout.adapter_customer_limit, items);
         this.context = context;
         this.items = items;
         urlDeleteCustomer = context.getResources().getString(R.string.url_delete_customer_by_id);
@@ -48,6 +48,7 @@ public class ListCustomerLimitAdapter extends ArrayAdapter {
         private TextView item2;
         private TextView item3;
         private TextView item4;
+        private TextView item5;
         private LinearLayout deleteContainer;
     }
 
@@ -67,12 +68,13 @@ public class ListCustomerLimitAdapter extends ArrayAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
-            convertView = inflater.inflate(R.layout.adapter_customer, null);
+            convertView = inflater.inflate(R.layout.adapter_customer_limit, null);
             holder.container = (LinearLayout) convertView.findViewById(R.id.ll_item_container);
             holder.item1 = (TextView) convertView.findViewById(R.id.tv_item_1);
             holder.item2 = (TextView) convertView.findViewById(R.id.tv_item_2);
             holder.item3 = (TextView) convertView.findViewById(R.id.tv_item_3);
             holder.item4 = (TextView) convertView.findViewById(R.id.tv_item_4);
+            holder.item5 = (TextView) convertView.findViewById(R.id.tv_item_5);
             holder.deleteContainer = (LinearLayout) convertView.findViewById(R.id.ll_delete_container);
             convertView.setTag(holder);
         }else{
@@ -84,6 +86,7 @@ public class ListCustomerLimitAdapter extends ArrayAdapter {
         holder.item2.setText(customer.getAlamat() + " " + customer.getKota());
         holder.item3.setText(iv.ChangeToRupiahFormat(iv.parseNullFloat(customer.getMaxPiutang())));
         holder.item4.setText(iv.ChangeToRupiahFormat(iv.parseNullFloat(customer.getTotalPiutang())));
+        holder.item5.setText(iv.ChangeToRupiahFormat(iv.parseNullFloat(customer.getLimit())));
 
         return convertView;
     }

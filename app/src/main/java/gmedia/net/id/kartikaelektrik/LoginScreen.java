@@ -53,6 +53,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     private EditText edtPassword;
     private boolean doubleBackToExitPressedOnce = false;
     private ItemValidation iv = new ItemValidation();
+    private String refreshToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
 
         //String refreshToken = FirebaseInstanceId.getInstance().getToken();
         InitFirebaseSetting.getFirebaseSetting(LoginScreen.this);
+        refreshToken = FirebaseInstanceId.getInstance().getToken();
         JSON_URL = getResources().getString(R.string.url_login);
         edtUsername = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_username);
         edtPassword = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_password);

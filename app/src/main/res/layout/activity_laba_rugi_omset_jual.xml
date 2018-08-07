@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMenuAdmin.LabaRugiOmsetJual">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/default_small_padding"
+        android:layout_marginLeft="@dimen/default_small_padding"
+        android:layout_marginRight="@dimen/default_small_padding"
+        android:id="@+id/ll_header"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bulan"
+                android:textSize="12sp"
+                android:textColor="@color/color_grey"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_bulan"></Spinner>
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/color_grey"
+            android:id="@+id/til_tanggal_akhir">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tahun"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:id="@+id/edt_tahun"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_show"
+            android:layout_marginLeft="@dimen/default_small_padding1"
+            android:padding="@dimen/default_small_padding"
+            android:background="@drawable/background_custom_button">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tampil"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:id="@+id/tv_save"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:id="@+id/ll_footer"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_grey3"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/default_small_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/default_small_padding1"
+            android:text="0"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/ll_header"
+        android:gravity="center"
+        android:weightSum="1"
+        android:id="@+id/ll_container"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb_loading" />
+
+        <Button
+            android:text="Data not load, tap to refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="?attr/colorPrimary" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_container"
+        android:layout_above="@id/ll_footer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/lv_list_laba_rugi"
+        android:clickable="true" />
+
+</RelativeLayout>

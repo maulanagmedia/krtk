@@ -19,6 +19,7 @@
     <string name="format_date_display">dd/MM/yyyy</string>
     <string name="format_date_display1">dd/MM/yyyy</string>
     <string name="format_date_display2">dd-MM-yyyy</string>
+    <string name="format_date_display3">dd/MM/yyyy HH:mm</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

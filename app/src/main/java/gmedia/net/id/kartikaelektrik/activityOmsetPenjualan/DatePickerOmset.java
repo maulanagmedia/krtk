@@ -110,7 +110,7 @@ public class DatePickerOmset extends AppCompatActivity {
 
         Intent intent = new Intent();
 
-        if(!session.getLaba().equals("1")){
+        //if(!session.getLaba().equals("1")){
             switch(flag){
                 case "cus":
                     intent = new Intent(DatePickerOmset.this, ListOmsetCustomer.class);
@@ -128,13 +128,13 @@ public class DatePickerOmset extends AppCompatActivity {
                     intent.putExtra("tanggalakhir", tanggalAkhir);
                     break;
             }
-        }else {
+        /*}else {
 
             intent = new Intent(DatePickerOmset.this, ListSalesActivity.class);
             intent.putExtra("kode", flag);
             intent.putExtra("tanggalawal", tanggalAwal);
             intent.putExtra("tanggalakhir", tanggalAkhir);
-        }
+        }*/
 
 
         startActivity(intent);

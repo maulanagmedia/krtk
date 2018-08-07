@@ -110,6 +110,7 @@ public class ApiVolley {
                             responseAPI = null;
                             callback.onSuccess(response);
                         }else{
+                            callback.onError(response);
                             responseAPI = null;
                             Toast.makeText(context, "Terjadi kesalahan saat memuat data", Toast.LENGTH_LONG).show();
                         }
@@ -122,6 +123,8 @@ public class ApiVolley {
                     e.printStackTrace();
 //                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
                     Toast.makeText(context, "Terjadi kesalahan saat memuat data", Toast.LENGTH_LONG).show();
+                    callback.onError(response);
+
                 }
 
             }

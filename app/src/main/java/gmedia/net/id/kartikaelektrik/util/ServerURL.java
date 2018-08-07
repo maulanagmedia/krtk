@@ -28,4 +28,12 @@ public class ServerURL {
     public static final String getSetoranPerNobukti = baseURL + "setoran/view_setoran_nobukti/";
     public static final String getSetoranNobukti = baseURL + "setoran/view_detail_nobukti/";
     public static final String getApproveSOBarang = baseURL + "barang/order_approve/";
+    public static final String sendCustomerLimit = baseURL + "customer/limit/";
+    public static final String getCustomerLimit  = baseURL + "customer/view_pengajuan/";
+    public static final String getCustomerLimitApprove = baseURL + "customer/view_limit/";
+    public static final String saveStatusCustomerLimit = baseURL + "customer/approval/";
+    public static final String getGiroJatuhTempo = baseURL + "Giro/jatuh_tempo/";
+    public static final String getLabaRugiOmsetJual = baseURL + "LabaRugi/penjualan_barang/";
+    public static final String getLabaRugiOmsetSetoran = baseURL + "LabaRugi/pelunasan_piutang/";
+    public static final String kunciSetoran = baseURL + "Setoran/kunci_setoran/";
 }

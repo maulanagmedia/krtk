@@ -22,7 +22,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_small_padding2"
                 android:layout_marginBottom="@dimen/default_small_padding1"
                 android:orientation="vertical">
 
@@ -32,11 +31,15 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/default_small_padding1"
                         android:background="?attr/selectableItemBackground"
                         android:id="@+id/ll_data_piutang"
                         android:orientation="vertical">
@@ -45,7 +48,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data Piutang"
-                            android:padding="@dimen/default_small_padding2"
+                            android:paddingTop="@dimen/default_small_padding2"
+                            android:paddingBottom="@dimen/default_small_padding2"
+                            android:paddingLeft="@dimen/default_small_padding1"
+                            android:paddingRight="@dimen/default_small_padding1"
                             android:background="@color/color_grey"
                             android:textColor="@color/white"
                             />
@@ -54,18 +60,25 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:layout_marginTop="@dimen/default_small_padding1"
+                            android:layout_marginBottom="@dimen/default_small_padding1"
+                            android:layout_marginRight="@dimen/default_small_padding1"
+                            android:layout_marginLeft="@dimen/default_small_padding1"
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
                             android:id="@+id/tv_data_piutang"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/default_small_padding1"
                         android:id="@+id/ll_piutang_telat"
                         android:background="?attr/selectableItemBackground"
                         android:orientation="vertical">
@@ -76,19 +89,30 @@
                             android:text="Piutang Telat"
                             android:background="@color/color_grey"
                             android:textColor="@color/white"
-                            android:padding="@dimen/default_small_padding2"
+                            android:paddingTop="@dimen/default_small_padding2"
+                            android:paddingBottom="@dimen/default_small_padding2"
+                            android:paddingLeft="@dimen/default_small_padding1"
+                            android:paddingRight="@dimen/default_small_padding1"
                             />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:layout_marginTop="@dimen/default_small_padding1"
+                            android:layout_marginBottom="@dimen/default_small_padding1"
+                            android:layout_marginRight="@dimen/default_small_padding1"
+                            android:layout_marginLeft="@dimen/default_small_padding1"
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
                             android:id="@+id/tv_piutang_telat"/>
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
 
                 </LinearLayout>
 
@@ -98,11 +122,15 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/default_small_padding1"
                         android:background="?attr/selectableItemBackground"
                         android:id="@+id/ll_data_retur"
                         android:orientation="vertical">
@@ -113,25 +141,35 @@
                             android:text="Data Retur"
                             android:background="@color/color_grey"
                             android:textColor="@color/white"
-                            android:padding="@dimen/default_small_padding2"
+                            android:paddingTop="@dimen/default_small_padding2"
+                            android:paddingBottom="@dimen/default_small_padding2"
+                            android:paddingLeft="@dimen/default_small_padding1"
+                            android:paddingRight="@dimen/default_small_padding1"
                             />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:layout_marginTop="@dimen/default_small_padding1"
+                            android:layout_marginBottom="@dimen/default_small_padding1"
+                            android:layout_marginRight="@dimen/default_small_padding1"
+                            android:layout_marginLeft="@dimen/default_small_padding1"
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
                             android:id="@+id/tv_data_retur"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/default_small_padding1"
                         android:background="?attr/selectableItemBackground"
                         android:id="@+id/ll_denda_pelanggan"
                         android:orientation="vertical">
@@ -142,21 +180,37 @@
                             android:text="Denda Pelanggan"
                             android:background="@color/color_grey"
                             android:textColor="@color/white"
-                            android:padding="@dimen/default_small_padding2"
+                            android:paddingTop="@dimen/default_small_padding2"
+                            android:paddingBottom="@dimen/default_small_padding2"
+                            android:paddingLeft="@dimen/default_small_padding1"
+                            android:paddingRight="@dimen/default_small_padding1"
                             />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:layout_marginTop="@dimen/default_small_padding"
+                            android:layout_marginTop="@dimen/default_small_padding1"
+                            android:layout_marginBottom="@dimen/default_small_padding1"
+                            android:layout_marginRight="@dimen/default_small_padding1"
+                            android:layout_marginLeft="@dimen/default_small_padding1"
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
                             android:id="@+id/tv_denda_pelanggan"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_grey"/>
+
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/color_grey"></TextView>
 
             </LinearLayout>
 
@@ -341,90 +395,13 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
                     android:paddingRight="@dimen/padding_main_menu"
                     android:paddingLeft="@dimen/padding_main_menu"
                     android:background="@drawable/ripple_dashboard_menu"
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_barang_tidak_laku"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_barang_taklaku"
-                        android:id="@+id/ibt_menu_barang_tidak_laku"/>
-
-                    <TextView
-                        android:text="History Penjualan Barang"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_entry_order_paket"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_shop"
-                        android:id="@+id/ibt_menu_entry_order_paket"/>
-
-                    <TextView
-                        android:text="Tambah Order Paket"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_tambah_canvas"
+                    android:id="@+id/v_menu_daftar_so"
                     android:layout_height="match_parent"
                     android:weightSum="2">
 
@@ -436,32 +413,21 @@
                         android:layout_weight="1.1"
                         android:background="#00000000"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_pencil"
-                        android:id="@+id/ibt_menu_tambah_canvas"/>
+                        android:src="@mipmap/ic_order"
+                        android:id="@+id/ibt_menu_daftar_so"/>
 
                     <TextView
-                        android:text="Penjualan Canvas"
+                        android:text="History Order Sales"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.9"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:id="@+id/tv_tambah_canvas"
+                        android:id="@+id/textView13"
                         android:textColor="@color/color_font_light"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Ketiga-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_3"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/default_small_padding1"
-                android:weightSum="3">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -502,6 +468,57 @@
                         android:gravity="center" />
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_entry_order_paket"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_shop"
+                        android:id="@+id/ibt_menu_entry_order_paket"/>
+
+                    <TextView
+                        android:text="Tambah Order Paket"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Ketiga-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ll_line_3"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/default_small_padding1"
+                android:weightSum="3">
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="0dp"
@@ -513,7 +530,7 @@
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_daftar_so"
+                    android:id="@+id/v_menu_tambah_canvas"
                     android:layout_height="match_parent"
                     android:weightSum="2">
 
@@ -525,17 +542,17 @@
                         android:layout_weight="1.1"
                         android:background="#00000000"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_order"
-                        android:id="@+id/ibt_menu_daftar_so"/>
+                        android:src="@mipmap/ic_pencil"
+                        android:id="@+id/ibt_menu_tambah_canvas"/>
 
                     <TextView
-                        android:text="Daftar Order Sales"
+                        android:text="Penjualan Canvas"
                         android:layout_height="0dp"
                         android:layout_width="match_parent"
                         android:layout_weight="0.9"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:id="@+id/textView13"
+                        android:id="@+id/tv_tambah_canvas"
                         android:textColor="@color/color_font_light"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />
@@ -575,6 +592,44 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:id="@+id/tv_entry_canvas"
+                        android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding_main_menu"
+                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:background="@drawable/ripple_dashboard_menu"
+                    android:layout_marginLeft="@dimen/default_small_padding2"
+                    android:layout_marginRight="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_barang_tidak_laku"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_barang_taklaku"
+                        android:id="@+id/ibt_menu_barang_tidak_laku"/>
+
+                    <TextView
+                        android:text="History Penjualan Barang"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:textColor="@color/color_font_light"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />

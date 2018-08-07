@@ -102,21 +102,51 @@
         <activity android:name=".activityPiutang.DetailPiutangPerNota" />
         <activity android:name=".ActivityRetur.ReturCustomer" />
         <activity android:name=".ActivityRetur.ReturTelahDiproses" />
-        <activity android:name=".ActivityRetur.ReturSelisihNota" />
-        <activity android:name=".activityOmsetPenjualan.DetailOmsetCustomer" />
-        <activity android:name=".activityOmsetPenjualan.DetailOmsetPerNota" />
-        <activity android:name=".activityEntryPenjulanCanvas.DetailEntryBarangCanvas" />
-        <activity android:name=".activityEntryPenjulanCanvas.DetailOrderEntryCanvas" />
-        <activity android:name=".activityEntryPenjulanCanvas.DetailCheckOutCanvas" />
-        <activity android:name=".activityCustomerOrder.ListBarangSalesOrder" />
-        <activity android:name=".activityOmsetPenjualan.ListOmsetCustomer" />
-        <activity android:name=".activityOmsetPenjualan.ListOmsetBarang" />
-        <activity android:name=".activityOmsetPenjualan.DetailOmsetPerBarang" />
-        <activity android:name=".activityEntryPenjulanCanvas.AddNewCanvasOrder" />
-        <activity android:name=".activityPiutang.SubDetailPiutangJatuhTempo" />
-        <activity android:name=".activityEntryPenjulanCanvas.DetailBarangCanvas" />
-        <activity android:name=".activityEntryPaket.DetailBarangPaket" />
-        <activity android:name=".activityEntryPaket.OrderDetailPaket" />
+        <activity
+            android:name=".ActivityRetur.ReturSelisihNota"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.DetailOmsetCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.DetailOmsetPerNota"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPenjulanCanvas.DetailEntryBarangCanvas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPenjulanCanvas.DetailOrderEntryCanvas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPenjulanCanvas.DetailCheckOutCanvas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityCustomerOrder.ListBarangSalesOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.ListOmsetCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.ListOmsetBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.DetailOmsetPerBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPenjulanCanvas.AddNewCanvasOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.SubDetailPiutangJatuhTempo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPenjulanCanvas.DetailBarangCanvas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPaket.DetailBarangPaket"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityEntryPaket.OrderDetailPaket"
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="KARTIKA_HOME" />
@@ -124,32 +154,82 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityRetur.DetailBarangRetur" />
-        <activity android:name=".ActivityRetur.ReturDatePicker" />
-        <activity android:name=".activityOmsetPenjualan.DatePickerOmset" />
-        <activity android:name=".activityOrderCustom.OrderCustomDetail" />
-        <activity android:name=".activityOrderCustom.DetailOrderCustom" />
-        <activity android:name=".activityOrderCustom.AddNewCustomOrder" />
-        <activity android:name=".activityOrderCustom.ListBarangCustom" />
+        <activity
+            android:name=".ActivityRetur.DetailBarangRetur"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityRetur.ReturDatePicker"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.DatePickerOmset"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOrderCustom.OrderCustomDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOrderCustom.DetailOrderCustom"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOrderCustom.AddNewCustomOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOrderCustom.ListBarangCustom"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitySetoran.DetailFormSetoran"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitySetoran.CustomerSetoran" />
-        <activity android:name=".activitySetoran.RincianSetoran" />
-        <activity android:name=".activityInfoStok.DetailStokBarang" />
-        <activity android:name=".activitySetoran.TambahSetoran" />
-        <activity android:name=".activitySetoran.MutasiSetoran" />
-        <activity android:name=".activitySetoran.DetailMutasiSetoran" />
-        <activity android:name=".activityHistoryPenjualanBarang.BarangTidakLaku" />
-        <activity android:name=".activityHistoryPenjualanBarang.BarangPalingLaku" />
-        <activity android:name=".activityOmsetPenjualan.ListSalesActivity" />
+        <activity
+            android:name=".activitySetoran.CustomerSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.RincianSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityInfoStok.DetailStokBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.TambahSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.MutasiSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.DetailMutasiSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityHistoryPenjualanBarang.BarangTidakLaku"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityHistoryPenjualanBarang.BarangPalingLaku"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityOmsetPenjualan.ListSalesActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitySetoran.ListNotaPiutang"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitySetoran.DetailCheckoutSetoran" />
-        <activity android:name=".activitySetoran.RekapMutasi" />
-        <activity android:name=".activitySetoran.DetailSetoranPerNota" />
-        <activity android:name=".ActivityMenuAdmin.ApprovalHargaSO"></activity>
+        <activity
+            android:name=".activitySetoran.DetailCheckoutSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.RekapMutasi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.DetailSetoranPerNota"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.ApprovalHargaSO"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.LabaRugiOmsetJual"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.VerifikasiLimitCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.JatuhTempoGiro"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActivityMenuAdmin.LabaRugiOmsetSetoran"></activity>
     </application>
 
 </manifest>

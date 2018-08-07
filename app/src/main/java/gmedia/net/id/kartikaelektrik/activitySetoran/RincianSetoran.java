@@ -5,10 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -43,6 +48,8 @@ public class RincianSetoran extends AppCompatActivity {
     private ProgressBar pbLoading;
     private List<CustomListItem> listSetoran;
     private TextView tvTotal;
+    private AutoCompleteTextView actvKeyword;
+    private boolean firstLoad = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,7 @@ public class RincianSetoran extends AppCompatActivity {
         setTitle("Rincian Setoran");
         context = this;
         session = new SessionManager(context);
+        firstLoad = true;
 
         initUI();
     }
@@ -68,6 +76,7 @@ public class RincianSetoran extends AppCompatActivity {
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        actvKeyword = (AutoCompleteTextView) findViewById(R.id.actv_keyword);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -94,6 +103,57 @@ public class RincianSetoran extends AppCompatActivity {
 
                 llContainer.setVisibility(View.GONE);
                 getDataSetoran();
+            }
+        });
+
+        if(firstLoad){
+
+            firstLoad = false;
+
+            actvKeyword.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    if(s.length() == 0){
+                        setAdapter(listSetoran);
+                    }
+                }
+            });
+        }
+
+        actvKeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                    String keyword = actvKeyword.getText().toString().toLowerCase();
+                    List<CustomListItem> items = new ArrayList<>();
+                    if(listSetoran != null && listSetoran.size() > 0){
+
+                        for(CustomListItem item : listSetoran){
+                            if(item.getListItem2().toLowerCase().contains(keyword)){
+                                items.add(item);
+                            }
+                        }
+
+                        setAdapter(items);
+                    }
+
+                    iv.hideSoftKey(context);
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -174,6 +234,13 @@ public class RincianSetoran extends AppCompatActivity {
 
         if(listItems != null && listItems.size() > 0){
 
+            double total = 0;
+            for(CustomListItem item : listItems){
+
+                total += iv.parseNullDouble(item.getListItem4());
+            }
+
+            tvTotal.setText(iv.ChangeToRupiahFormat(total));
             DetailSetoranAdapter adapter = new DetailSetoranAdapter((Activity) context, listItems);
             lvRincianSetoran.setAdapter(adapter);
 

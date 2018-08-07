@@ -14,8 +14,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_margin="@dimen/default_small_padding"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:text="Pengajuan Limit "
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_close"
+                android:id="@+id/iv_close"
+                android:background="?attr/selectableItemBackground"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/default_small_padding"
+            android:layout_marginTop="@dimen/default_small_padding2"
             android:weightSum="1">
 
             <ImageView
@@ -60,7 +87,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Limit Order"
+                    android:hint="Jumlah Limit *"
                     android:id="@+id/edt_limit"
                     android:inputType="number"
                     android:imeOptions="actionDone"/>
@@ -76,6 +103,7 @@
             android:paddingLeft="@dimen/default_small_padding"
             android:paddingRight="@dimen/default_small_padding"
             android:paddingBottom="@dimen/default_small_padding"
+            android:gravity="center"
             android:weightSum="1">
 
             <LinearLayout
@@ -86,6 +114,7 @@
                 android:id="@+id/ll_tolak"
                 android:layout_margin="@dimen/default_small_padding2"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@drawable/bg_btn_dialog">
 
                 <TextView
@@ -112,7 +141,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Setujui"
+                    android:text="Proses"
+                    android:id="@+id/tv_proses"
                     android:textColor="@color/white"
                     android:layout_margin="@dimen/default_small_padding"/>
 

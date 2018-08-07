@@ -389,7 +389,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         version = pInfo.versionName;
         latestVersion = "";
         link = "";
-        getSupportActionBar().setSubtitle(" Version "+ version);
+        getSupportActionBar().setSubtitle("V"+ version + " a/n " + sessionManager.getFullName());
 
         urlGetLatestVersion = getResources().getString(R.string.url_get_latest_version);
 

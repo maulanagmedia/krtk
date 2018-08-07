@@ -105,7 +105,7 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
                         crBayar + (jo.getString("bank").length() > 0 ? "( "+jo.getString("bank") + ")" : ""),
                         jo.getString("jumlah")));
 
-                total += iv.parseNullDouble(jo.getString("total"));
+                total += iv.parseNullDouble(jo.getString("jumlah"));
 
             } catch (JSONException e) {
                 e.printStackTrace();

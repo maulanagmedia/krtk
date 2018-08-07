@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.ApprovalHargaSO;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker;
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.JatuhTempoGiro;
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.LabaRugiOmsetJual;
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.LabaRugiOmsetSetoran;
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.VerifikasiLimitCustomer;
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.ListSalesActivity;
+import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 
 /**
  * Created by Shin on 2/1/2017.
@@ -21,7 +26,7 @@ public class MenuUtamaAdmin extends Fragment {
 
     private View layout;
     private Context context;
-    private LinearLayout llLabaRugi, llApproveHargaSO;
+    private LinearLayout llLabaRugiOmsetJual, llApproveHargaSO, llLabaRugiOmsetSetoran, llJatuhTempoGiro, llVerifikasiLimitCustomer, llMasukSebagaiSales;
 
     public MenuUtamaAdmin(){}
 
@@ -43,20 +48,31 @@ public class MenuUtamaAdmin extends Fragment {
 
     private void initUI() {
 
-        llLabaRugi = (LinearLayout) layout.findViewById(R.id.ll_laba_rugi);
+        llLabaRugiOmsetJual = (LinearLayout) layout.findViewById(R.id.ll_laba_rugi_omset_jual);
+        llLabaRugiOmsetSetoran = (LinearLayout) layout.findViewById(R.id.ll_laba_rugi_omset_setoran);
         llApproveHargaSO = (LinearLayout) layout.findViewById(R.id.ll_approve_harga_so);
+        llJatuhTempoGiro = (LinearLayout) layout.findViewById(R.id.ll_jatuh_tempo_giro);
+        llVerifikasiLimitCustomer = (LinearLayout) layout.findViewById(R.id.ll_verifikasi_limit_customer);
+        llMasukSebagaiSales = (LinearLayout) layout.findViewById(R.id.ll_masuk_sebagai_sales);
 
         initEvent();
     }
 
-    private void initEvent() {
+    private void initEvent(){
 
-        llLabaRugi.setOnClickListener(new View.OnClickListener() {
+        llLabaRugiOmsetJual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, ReturDatePicker.class);
-                intent.putExtra("jenis", returCustomer);
-                context.startActivity(intent);*/
+                Intent intent = new Intent(context, LabaRugiOmsetJual.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llLabaRugiOmsetSetoran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LabaRugiOmsetSetoran.class);
+                context.startActivity(intent);
             }
         });
 
@@ -65,6 +81,34 @@ public class MenuUtamaAdmin extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, ApprovalHargaSO.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llVerifikasiLimitCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, VerifikasiLimitCustomer.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llJatuhTempoGiro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, JatuhTempoGiro.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llMasukSebagaiSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ListSalesActivity.class);
+                intent.putExtra("flag", "1");
                 context.startActivity(intent);
             }
         });

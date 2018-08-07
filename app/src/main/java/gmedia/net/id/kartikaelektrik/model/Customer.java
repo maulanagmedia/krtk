@@ -5,7 +5,7 @@ package gmedia.net.id.kartikaelektrik.model;
  */
 
 public class Customer {
-    private String kodeCustomer, namaCustomer, alamat, tempo, kota, totalPiutang, maxPiutang;
+    private String kodeCustomer, namaCustomer, alamat, tempo, kota, totalPiutang, maxPiutang, limit;
 
     public Customer(String kdCus, String nama, String alamat, String tempo) {
         this.kodeCustomer = kdCus;
@@ -21,6 +21,16 @@ public class Customer {
         this.kota = kota;
         this.totalPiutang = totalPiutang;
         this.maxPiutang = maxPiutang;
+    }
+
+    public Customer(String kdCus, String nama, String alamat, String kota, String totalPiutang, String maxPiutang, String limit){
+        this.kodeCustomer = kdCus;
+        this.namaCustomer = nama;
+        this.alamat = alamat;
+        this.kota = kota;
+        this.totalPiutang = totalPiutang;
+        this.maxPiutang = maxPiutang;
+        this.limit = limit;
     }
 
     public String getKodeCustomer() {
@@ -77,5 +87,13 @@ public class Customer {
 
     public void setMaxPiutang(String maxPiutang) {
         this.maxPiutang = maxPiutang;
+    }
+
+    public String getLimit() {
+        return limit;
+    }
+
+    public void setLimit(String limit) {
+        this.limit = limit;
     }
 }

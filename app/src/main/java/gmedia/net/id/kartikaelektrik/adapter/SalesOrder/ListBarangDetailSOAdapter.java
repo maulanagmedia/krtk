@@ -51,8 +51,8 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView item1, item2, item3, item4;
-        private LinearLayout container, deleteContainer, llPaket;
+        private TextView item1, item2, item3, item4, item5, item6;
+        private LinearLayout container, deleteContainer, llPaket, llContainer, llTitle;
     }
 
     @Override
@@ -63,12 +63,16 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
         if(convertView == null){
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_order_menu_with_delete, null);
+            holder.llTitle = (LinearLayout) convertView.findViewById(R.id.ll_title);
+            holder.llContainer = (LinearLayout) convertView.findViewById(R.id.ll_container);
             holder.container = (LinearLayout) convertView.findViewById(R.id.ll_item_container);
             holder.llPaket = (LinearLayout) convertView.findViewById(R.id.ll_paket);
             holder.item1 = (TextView) convertView.findViewById(R.id.tv_subtitle_1);
             holder.item2 = (TextView) convertView.findViewById(R.id.tv_subtitle_2);
             holder.item3 = (TextView) convertView.findViewById(R.id.tv_subtitle_3);
             holder.item4 = (TextView) convertView.findViewById(R.id.tv_subtitle_4);
+            holder.item5 = (TextView) convertView.findViewById(R.id.tv_subtitle_5);
+            holder.item6 = (TextView) convertView.findViewById(R.id.tv_subtitle_6);
             holder.deleteContainer = (LinearLayout) convertView.findViewById(R.id.ll_delete_container);
             convertView.setTag(holder);
         }else{
@@ -87,6 +91,22 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
             holder.item4.setText(selectedSOD.getNamaPaket() +": "+ selectedSOD.getJensiPaket());
             paket = true;
             urlDeleteDetailSO = context.getResources().getString(R.string.url_delete_so_paket_by_id);
+        }
+
+        if(selectedSOD.getTerkirim() != null){
+
+            holder.llContainer.setVisibility(View.VISIBLE);
+            holder.item5.setText(selectedSOD.getTerkirim());
+            holder.item6.setText(selectedSOD.getSisa());
+
+            if(!selectedSOD.getSisa().equals("0")){
+                holder.llTitle.setBackgroundColor(context.getResources().getColor(R.color.color_btn_white_2));
+            }else{
+                holder.llTitle.setBackgroundColor(context.getResources().getColor(R.color.color_grey1));
+            }
+        }else{
+
+            holder.llContainer.setVisibility(View.GONE);
         }
 
         //region click event whend tap on order list

@@ -73,6 +73,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private TextInputLayout tilNamaPemilik, tilTanggalTransfer;
     private boolean isConfirm = true;
     private TextView tvTotalPiutang;
+    private double totalPiutangCurrent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,13 +212,13 @@ public class DetailFormSetoran extends AppCompatActivity {
             }
         });*/
 
-        double total = 0;
+        totalPiutangCurrent = 0;
         for(OptionItem item : ListNotaPiutang.listNota){
 
-            total += iv.parseNullDouble(item.getAtt1());
+            totalPiutangCurrent += iv.parseNullDouble(item.getAtt1());
         }
 
-        tvTotalPiutang.setText("Total Piutang : "+ iv.ChangeToCurrencyFormat(iv.doubleToStringFull(total)));
+        tvTotalPiutang.setText("Total Piutang : "+ iv.ChangeToCurrencyFormat(iv.doubleToStringFull(totalPiutangCurrent)));
         setSalesPiutang(ListNotaPiutang.listNota);
     }
 
@@ -386,7 +387,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                     AlertDialog dialog = new AlertDialog.Builder(context)
                             .setIcon(R.mipmap.kartika_logo)
                             .setTitle("Konfirmasi")
-                            .setMessage("Apakah anda yaking ingin menghapus data?")
+                            .setMessage("Apakah anda yakin ingin menghapus data?")
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -409,6 +410,7 @@ public class DetailFormSetoran extends AppCompatActivity {
             }
         });
 
+        if(totalPiutangCurrent > 0) edtTotal.setText(iv.doubleToString(totalPiutangCurrent));
         getDataBank();
     }
 

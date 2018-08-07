@@ -2,7 +2,9 @@ package gmedia.net.id.kartikaelektrik.navMenuUtama;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,12 +19,15 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -34,6 +39,7 @@ import gmedia.net.id.kartikaelektrik.adapter.Customer.ListCustomerTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -54,6 +60,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
     private Button btnRefresh;
     private List<Customer> masterListCustomer , listCustomerAutocomplete, listCustomerTable;
     private boolean firstLoad = true;
+    private String currentString = "";
 
     public MenuUtamaCustomerLimit(){}
 
@@ -75,7 +82,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
 
     private void initUI() {
 
-        urlGetAllCustomer = context.getResources().getString(R.string.url_get_all_customer);
+        urlGetAllCustomer = ServerURL.getCustomerLimit;
 
         actvNamaPelanggan = (AutoCompleteTextView) layout.findViewById(R.id.actv_nama_pelanggan);
         lvListPelanggan = (ListView) layout.findViewById(R.id.lv_list_pelanggan);
@@ -116,7 +123,13 @@ public class MenuUtamaCustomerLimit extends Fragment {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    masterListCustomer.add(new Customer(jo.getString("kdcus"),jo.getString("nama"),jo.getString("alamat"),jo.getString("kota"),iv.parseNullString(jo.getString("total_piutang")),jo.getString("max_piutang")));
+                                    masterListCustomer.add(new Customer(jo.getString("kdcus"),
+                                            jo.getString("nama"),
+                                            jo.getString("alamat"),
+                                            jo.getString("kota"),
+                                            iv.parseNullString(jo.getString("total_piutang")),
+                                            jo.getString("max_piutang"),
+                                            jo.getString("pengajuan")));
                                 }
 
                                 int total = masterListCustomer.size();
@@ -141,7 +154,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
                     public void onError(String result) {
                         getListCustomerAutocomplete(null);
                         getListCustomerTable(null);
-                        iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"GONE");
+                        iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"ERROR");
                     }
                 });
     }
@@ -232,7 +245,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
         }
     }
 
-    private void getDialog(Customer customer){
+    private void getDialog(final Customer customer){
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -244,13 +257,45 @@ public class MenuUtamaCustomerLimit extends Fragment {
         final EditText edtLimit = (EditText) viewDialog.findViewById(R.id.edt_limit);
         final LinearLayout llTolak = (LinearLayout) viewDialog.findViewById(R.id.ll_tolak);
         final LinearLayout llSetujui = (LinearLayout) viewDialog.findViewById(R.id.ll_setujui);
+        final ImageView ivClose = (ImageView) viewDialog.findViewById(R.id.iv_close);
+
+        edtLimit.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!editable.toString().equals(currentString)){
+
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edtLimit.removeTextChangedListener(this);
+
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
+
+                    currentString = formatted;
+                    edtLimit.setText(formatted);
+                    edtLimit.setSelection(formatted.length());
+                    edtLimit.addTextChangedListener(this);
+                }
+            }
+        });
 
         edtNama.setText(customer.getNamaCustomer());
 
         final AlertDialog alert = builder.create();
         alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        llSetujui.setOnClickListener(new View.OnClickListener() {
+        ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -261,6 +306,46 @@ public class MenuUtamaCustomerLimit extends Fragment {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        llSetujui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //validasi
+                if(edtLimit.getText().toString().isEmpty()){
+
+                    edtLimit.setError("Jumlah harap diisi");
+                    edtLimit.requestFocus();
+                    return;
+                }
+
+                AlertDialog alertDialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Apakah anda yakin ingin memproses limit untuk "+customer.getNamaCustomer() + " ?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                if(alert != null){
+                                    try {
+                                        alert.dismiss();
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                saveApprove(customer.getKodeCustomer(), edtLimit.getText().toString().replaceAll("[,.]", ""));
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -275,6 +360,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
                         e.printStackTrace();
                     }
                 }
+
             }
         });
 
@@ -283,6 +369,55 @@ public class MenuUtamaCustomerLimit extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void saveApprove(String kdcus, String jumlah) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("kdcus", kdcus);
+            jBody.put("jumlah", jumlah);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley apiVolley = new ApiVolley(context, jBody, "POST", ServerURL.sendCustomerLimit, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                progressDialog.dismiss();
+                try {
+
+                    JSONObject responseAPI = new JSONObject(result);
+                    String status = responseAPI.getJSONObject("metadata").getString("status");
+                    String message = responseAPI.getJSONObject("metadata").getString("message");
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    if(Integer.parseInt(status) == 200){
+
+                        setListCustomerAutocomplete();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
