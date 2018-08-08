@@ -143,7 +143,13 @@ public class DetailListPiutangCustomer extends AppCompatActivity {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    masterList.add(new CustomListItem(jo.getString("nonota"),iv.ChangeToRupiahFormat(Float.parseFloat(jo.getString("piutang"))),iv.ChangeFormatDateString(jo.getString("tgltempo"), dateFormat, dateFormatDisplay),jo.getString("tempo")));
+                                    masterList.add(new CustomListItem(
+                                            jo.getString("nonota"),
+                                            iv.ChangeToRupiahFormat(Float.parseFloat(jo.getString("piutang"))),
+                                            iv.ChangeFormatDateString(jo.getString("tgltempo"), dateFormat, dateFormatDisplay),
+                                            jo.getString("tempo"),
+                                            iv.ChangeFormatDateString(jo.getString("tgl"), dateFormat, dateFormatDisplay)
+                                    ));
                                 }
                             }
 

@@ -91,12 +91,12 @@ public class LoginScreen extends RuntimePermissionsActivity {
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
-        if(session.isLoggedIn()){
+        /*if(session.isLoggedIn()){
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
-        }
+        }*/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -143,7 +143,6 @@ public class LoginScreen extends RuntimePermissionsActivity {
                 @Override
                 public void onResponse(String response) {
                     // sukseslogin(response);
-                    final boolean loged;
 
                     try {
                         JSONObject obj = new JSONObject(response);

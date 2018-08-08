@@ -79,7 +79,7 @@ public class DetailSetoranAdapter extends ArrayAdapter {
         }*/
 
         holder.item1.setText(item.getListItem2());
-        holder.item2.setText(item.getListItem3());
+        holder.item2.setText(item.getListItem6() + " - " + item.getListItem3());
         holder.item3.setText(item.getListItem5());
         holder.item4.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(item.getListItem4())));
 

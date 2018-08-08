@@ -34,15 +34,12 @@ public class DetailCustomerPiutangTableAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(items.size() < rowPerTableItem){
-            return items.size();
-        }else{
-            return rowPerTableItem;
-        }
+
+        return items.size();
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5;
     }
 
     @Override
@@ -58,6 +55,7 @@ public class DetailCustomerPiutangTableAdapter extends ArrayAdapter {
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item_2);
             holder.tvItem3 = (TextView) convertView.findViewById(R.id.tv_item_3);
             holder.tvItem4 = (TextView) convertView.findViewById(R.id.tv_item_4);
+            holder.tvItem5 = (TextView) convertView.findViewById(R.id.tv_item_5);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -66,8 +64,9 @@ public class DetailCustomerPiutangTableAdapter extends ArrayAdapter {
         final CustomListItem item = items.get(position);
         holder.tvItem1.setText(item.getListItem1());
         holder.tvItem2.setText(item.getListItem2());
-        holder.tvItem3.setText(item.getListItem3());
-        holder.tvItem4.setText(item.getListItem4());
+        holder.tvItem3.setText(item.getListItem5());
+        holder.tvItem4.setText(item.getListItem3());
+        holder.tvItem5.setText(item.getListItem4());
         return convertView;
     }
 }

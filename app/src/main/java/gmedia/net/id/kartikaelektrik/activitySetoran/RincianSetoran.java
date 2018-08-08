@@ -196,7 +196,9 @@ public class RincianSetoran extends AppCompatActivity {
                                     jo.getString("nama_customer"),
                                     jo.getString("bank"),
                                     jo.getString("total"),
-                                    jo.getString("tanggal")));
+                                    jo.getString("tanggal"),
+                                    jo.getString("daribank")
+                            ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }

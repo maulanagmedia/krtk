@@ -66,7 +66,7 @@ public class ListSalesActivity extends AppCompatActivity {
     private ListSalesAdapter adapter;
     private String kode = "", flag = "";
     private String tglAwal = "", tglAkhir = "";
-    private String uid = "", token = "", exp = "", level = "", laba = "", fullName = "", password = "";
+    private String uid = "", token = "", exp = "", level = "", laba = "", fullName = "", username = "",password = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -331,7 +331,7 @@ public class ListSalesActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getListSales, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.loginByNik, "", "", 0,
                 new ApiVolley.VolleyCallback(){
 
                     @Override
@@ -352,23 +352,25 @@ public class ListSalesActivity extends AppCompatActivity {
                                 level = obj.getJSONObject("response").getString("level");
                                 laba = obj.getJSONObject("response").getString("laba");
                                 fullName = obj.getJSONObject("response").getString("nama");
+                                username = obj.getJSONObject("response").getString("username");
                                 password = obj.getJSONObject("response").getString("password");
 
                                 if (token.isEmpty()) {
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
 
+                                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
                                     return;
                                 } else {
 
-                                    session.createLoginSession(uid, nik, fullName, password, token, exp, level, laba, fullName);
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                    session.createLoginSession(uid, nik, username, password, token, exp, level, "1", fullName);
+                                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                                     onLoginSuccess();
                                     progressDialog.dismiss();
                                 }
                             }else{
                                 progressDialog.dismiss();
-                                Snackbar.make(findViewById(R.id.activity_login_screen), message, BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
+                                View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+                                Snackbar.make(rootView, message, BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
 
@@ -389,6 +391,11 @@ public class ListSalesActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
+    }
+
+    public void showSnackBar(Activity activity, String message, int duration){
+        View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(rootView, message, duration).show();
     }
 
     public void onLoginSuccess() {

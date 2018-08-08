@@ -45,8 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/default_small_padding"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -66,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"
-                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingBottom="@dimen/default_small_padding1"
                     android:paddingLeft="@dimen/default_small_padding1"
                     android:paddingRight="@dimen/default_small_padding"
                     android:id="@+id/tv_item_2"
@@ -93,6 +92,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_small_padding1"
+                    android:text="Tanggal"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/default_small_padding1"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:id="@+id/tv_item_3"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_line"
+            android:background="@color/color_grey"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
                     android:text="Tanggal Tempo"
                     android:textSize="@dimen/default_text_subtitle_size"
                     android:textStyle="bold" />
@@ -101,10 +141,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingBottom="@dimen/default_small_padding1"
                     android:paddingLeft="@dimen/default_small_padding1"
                     android:paddingRight="@dimen/default_small_padding1"
-                    android:id="@+id/tv_item_3"
+                    android:id="@+id/tv_item_4"
                     android:textSize="@dimen/default_text_title_size"
                     android:ellipsize="none"
                     android:scrollHorizontally="false"
@@ -136,23 +176,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"
-                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingBottom="@dimen/default_small_padding1"
                     android:paddingLeft="@dimen/default_small_padding1"
                     android:paddingRight="@dimen/default_small_padding1"
-                    android:id="@+id/tv_item_4"
+                    android:id="@+id/tv_item_5"
                     android:ellipsize="none"
                     android:scrollHorizontally="false"
                     android:textSize="@dimen/default_text_title_size"
+                    android:text=""
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_line"
-            android:layout_marginLeft="@dimen/default_small_padding"
-            android:layout_marginRight="@dimen/default_small_padding"
-            android:background="@color/color_grey"></LinearLayout>
 
     </LinearLayout>
 

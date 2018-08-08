@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -39,7 +39,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             android:layout_height="wrap_content"
             android:textColorHint="@color/color_grey"
             android:id="@+id/til_tanggal_akhir">
