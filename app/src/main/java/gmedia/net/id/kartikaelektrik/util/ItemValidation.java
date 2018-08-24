@@ -587,15 +587,19 @@ public class ItemValidation {
     }
 
     public Double parseNullDouble(String s){
+
         double result = 0;
-        if(s != null){
+
+        if(s != null && !s.isEmpty()){
+
             try {
                 result = Double.parseDouble(s);
             }catch (Exception e){
+                result = 0;
                 e.printStackTrace();
-
             }
         }
+
         return result;
     }
 

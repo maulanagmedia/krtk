@@ -48,31 +48,11 @@ public class ListNotaPiutangAdapter extends ArrayAdapter {
         return super.getCount();
     }
 
-    public void resetData(){
-
-        for(int i = 0; i < items.size(); i++){
-
-            items.get(i).setAtt2("0");
-            items.get(i).setSelected(false);
-        }
-
-        notifyDataSetChanged();
-    }
 
     public List<OptionItem> getItems(){
 
-
         List<OptionItem> outputData = new ArrayList<>(items);
         return outputData;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-
-        if (getCount() != 0)
-            return getCount();
-
-        return 1;
     }
 
     @Override

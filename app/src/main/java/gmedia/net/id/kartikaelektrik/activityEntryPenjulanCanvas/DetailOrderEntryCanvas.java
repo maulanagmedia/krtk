@@ -9,6 +9,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -375,6 +376,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                         statusChangeHarga = 2;
                         afterChangeFlag = true;
                         edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
+                        //Log.d(TAG, "prevalidateelement harganetto > 0: "+edHargaWithDiskon.getText().toString());
                     }else{
                         statusChangeHarga = 1;
                     }
@@ -606,16 +608,18 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
 
     private void CalculateHargaByDiskon(){
 
+        //dummy bos
+
         if(flagHarga.trim().equals("2") && edJumlah.getText().length() > 0){ // diskon
             String changedString = edDiskon.getText().toString().replaceAll("[+]", ",");
 
             // Calculate harga netto * total Diskon
             List<String> diskonList = new ArrayList<String>(Arrays.asList(changedString.split(",")));
             List<Double> diskonListDouble = new ArrayList<Double>();
-            for (String diskon: diskonList){
+            for (String diskon1: diskonList){
 
                 try {
-                    Double x = iv.parseNullDouble(diskon);
+                    Double x = iv.parseNullDouble(diskon1);
                     diskonListDouble.add(x);
                 }catch (Exception e){
                     Double df = Double.valueOf(0);
@@ -630,14 +634,19 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 double newHargaNetto = 0;
                 Integer index = 1;
 
-                for(Double i: diskonListDouble){
-                    if(index == 1){
-                        double minDiskon = i / 100 * hargaAwal;
-                        newHargaNetto = hargaAwal - (i / 100 * hargaAwal);
-                    }else{
-                        newHargaNetto = newHargaNetto - ( i / 100 * newHargaNetto);
+                if(diskonListDouble.size() > 0){
+
+                    for(Double i: diskonListDouble){
+                        if(index == 1){
+                            //double minDiskon = i / 100 * hargaAwal;
+                            newHargaNetto = hargaAwal - (i / 100 * hargaAwal);
+                        }else{
+                            newHargaNetto = newHargaNetto - ( i / 100 * newHargaNetto);
+                        }
+                        index++;
                     }
-                    index++;
+                }else{
+                    newHargaNetto = hargaAwal;
                 }
 
                 if(statusChangeHarga != 2){
@@ -646,10 +655,14 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                     edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
                 }else{
 
-                    if(Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")) > 0){
+                    /*if(Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")) > 0){
                         newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
-                    }
-                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah))));
+                    }*/
+
+                    edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan))));
+                    edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
+
+                    //edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah))));
                 }
                 //Log.d(TAG, "CalculateHargaByDiskon: "+ String.valueOf(newHargaNetto * iv.parseNullInteger(selectedIsiSatuan) * iv.parseNullInteger(jumlah)));
             }else{
@@ -789,7 +802,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                             diskonString = responseAPI.getJSONObject("response").getString("diskon");
                         }
 
-                        diskon = diskonString;
+                        diskon = (diskonString.equals("0") ? "" : diskonString);
                         lastDiskon = diskonString;
                         hargaNetto = responseAPI.getJSONObject("response").getString("harganetto");
                         approveLevel = responseAPI.getJSONObject("response").getString("approve");
@@ -831,6 +844,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                         hargaToSave = edHarga.getText().toString().replaceAll("[,.]", "");
                         edDiskon.setText(diskon);
                         edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaNetto));
+                        //Log.d(TAG, "getHargaBarang: "+edHargaWithDiskon.getText().toString());
                         edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));
                     }else{
                         edHarga.setText("0");

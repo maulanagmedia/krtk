@@ -141,6 +141,8 @@
             <gmedia.net.id.kartikaelektrik.CustomView.NestedListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                android:layout_marginBottom="@dimen/default_small_padding"
                 android:id="@+id/lv_nota">
             </gmedia.net.id.kartikaelektrik.CustomView.NestedListView>
 

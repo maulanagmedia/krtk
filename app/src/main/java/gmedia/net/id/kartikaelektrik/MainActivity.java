@@ -89,6 +89,7 @@ public class MainActivity extends RuntimePermissionsActivity {
     private boolean dialogActive = false;
     private LinearLayout llDataPiutang, llPiutangTelat, llDataRetur, llDendaPelanggan;
     private TextView tvDataPiutang, tvPiutangTelat, tvDataRetur, tvDendaPelanggan;
+    private AlertDialog dialogVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -398,6 +399,10 @@ public class MainActivity extends RuntimePermissionsActivity {
             @Override
             public void onSuccess(String result) {
 
+                if(dialogVersion != null){
+                    if(dialogVersion.isShowing()) dialogVersion.dismiss();
+                }
+
                 JSONObject responseAPI;
                 try {
                     responseAPI = new JSONObject(result);
@@ -410,15 +415,16 @@ public class MainActivity extends RuntimePermissionsActivity {
 
                         if(!version.trim().equals(latestVersion.trim()) && link.length() > 0){
 
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             if(updateRequired){
 
-                                builder.setIcon(R.mipmap.kartika_logo)
+                                dialogVersion = new AlertDialog.Builder(MainActivity.this)
+                                        .setIcon(R.mipmap.kartika_logo)
                                         .setTitle("Update")
                                         .setMessage("Versi terbaru "+latestVersion+" telah tersedia, mohon download versi terbaru.")
                                         .setPositiveButton("Update Sekarang", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
+                                                dialogVersion.dismiss();
                                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                                                 startActivity(browserIntent);
                                             }
@@ -427,12 +433,14 @@ public class MainActivity extends RuntimePermissionsActivity {
                                         .show();
                             }else{
 
-                                builder.setIcon(R.mipmap.kartika_logo)
+                                dialogVersion = new AlertDialog.Builder(MainActivity.this)
+                                        .setIcon(R.mipmap.kartika_logo)
                                         .setTitle("Update")
                                         .setMessage("Versi terbaru "+latestVersion+" telah tersedia, mohon download versi terbaru.")
                                         .setPositiveButton("Update Sekarang", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
+                                                dialogVersion.dismiss();
                                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                                                 startActivity(browserIntent);
                                             }
@@ -440,7 +448,8 @@ public class MainActivity extends RuntimePermissionsActivity {
                                         .setNegativeButton("Update Nanti", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
+                                                dialogVersion.dismiss();
+                                                //dialog.dismiss();
                                             }
                                         }).show();
                             }
@@ -456,6 +465,9 @@ public class MainActivity extends RuntimePermissionsActivity {
             @Override
             public void onError(String result) {
 
+                if(dialogVersion != null){
+                    if(dialogVersion.isShowing()) dialogVersion.dismiss();
+                }
             }
         });
     }

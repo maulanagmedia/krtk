@@ -367,10 +367,11 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
 
         // Detail
         JSONArray detail = new JSONArray();
-        JSONObject detail0 = new JSONObject();
+
         for(CustomListItem item: selectedBarangList){
-            detail0 = new JSONObject();
+
             try {
+                JSONObject detail0 = new JSONObject();
                 detail0.put("nobukti", noBukti);
                 detail0.put("kdbrg", item.getListItem1());
                 detail0.put("harga", item.getListItem6());
@@ -384,13 +385,15 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
                 detail0.put("totalhpp", "");
                 detail0.put("hargadiskon", item.getListItem11());
                 detail0.put("nokonsinyasi", item.getListItem8());
+
+                detail.put(detail0);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            detail.put(detail0);
-        }
 
-        header.put(header0);
+        }
+        //header.put(header0);
 
         JSONObject jsonBody = new JSONObject();
 

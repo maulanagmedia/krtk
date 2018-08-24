@@ -24,7 +24,7 @@ public class DetailCustomerPiutangTableAdapter extends ArrayAdapter {
     private int rowPerTableItem;
     private View viewInflater;
 
-    public DetailCustomerPiutangTableAdapter(Activity context, int resource, List items) {
+    public DetailCustomerPiutangTableAdapter(Activity context, int resource, List items){
         super(context, resource, items);
         this.context = context;
         this.resource = resource;
