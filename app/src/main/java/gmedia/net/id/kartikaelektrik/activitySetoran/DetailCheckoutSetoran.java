@@ -186,6 +186,8 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
                 jData.put("kenamabank", jo.getString("bank"));
                 jData.put("tgltransfer", jo.getString("tgltransfer"));
                 jData.put("nonota", jo.getString("nonota"));
+                jData.put("diskon", jo.getString("diskon"));
+                jData.put("totaldiskon", jo.getString("totaldiskon"));
                 jData.put("jumlah", jo.getString("jumlah"));
 
                 jSetoran.put(jData);

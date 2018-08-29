@@ -61,7 +61,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private String crBayar = "";
     private ProgressBar pbLoading;
     private List<OptionItem> listBank;
-    private String currentString = "";
+    private String currentString = "", currentStringDiskon = "";
     private String idSetoran = "";
     private boolean isEdit = false;
     private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek, edtNamaPemilik;
@@ -74,6 +74,9 @@ public class DetailFormSetoran extends AppCompatActivity {
     private boolean isConfirm = true;
     private TextView tvTotalPiutang;
     private double totalPiutangCurrent = 0;
+    private LinearLayout llDiskon;
+    private EditText edtDiskon;
+    private EditText edtHargaDiskon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +124,10 @@ public class DetailFormSetoran extends AppCompatActivity {
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Simpan Setoran");
         tvTotalPiutang = (TextView) findViewById(R.id.tv_total_piutang);
+
+        llDiskon = (LinearLayout) findViewById(R.id.ll_diskon);
+        edtDiskon = (EditText) findViewById(R.id.edt_diskon);
+        edtHargaDiskon = (EditText) findViewById(R.id.edt_harga_diskon);
 
         isConfirm = true;
         sisaPiutang = 0;
@@ -228,6 +235,12 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         if(listItems != null && listItems.size() > 0){
 
+            if(listItems.size() == 1){
+                llDiskon.setVisibility(View.VISIBLE);
+            }else{
+                llDiskon.setVisibility(View.GONE);
+            }
+
             adapterPiutangSales = new ListDetailNotaAdapter((Activity) context, listItems);
             lvNota.setAdapter(adapterPiutangSales);
         }
@@ -275,6 +288,8 @@ public class DetailFormSetoran extends AppCompatActivity {
                         edtTanggal.setText(iv.ChangeFormatDateString(jo.getString("tanggal"), formatDate, formatDateDisplay));
                         edtTotal.setText(jo.getString("total"));
 
+                        edtDiskon.setText(jo.getString("diskon"));
+                        edtHargaDiskon.setText(jo.getString("totaldiskon"));
                         edtDariBank.setText(jo.getString("dari_bank"));
                         edtDariNorek.setText(jo.getString("dari_rekening"));
                         edtNamaPemilik.setText(jo.getString("daripemilik"));
@@ -373,7 +388,60 @@ public class DetailFormSetoran extends AppCompatActivity {
                         edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
                     }
 
+                    edtDiskon.setText("");
+
                     edtTotal.addTextChangedListener(this);
+                }
+            }
+        });
+
+        edtDiskon.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!edtTotal.getText().toString().equals("0") && !edtTotal.getText().toString().isEmpty()){
+
+                    double totalDibayar = iv.parseNullDouble(edtTotal.getText().toString().replaceAll("[,.]", ""));
+                    edtHargaDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(editable.toString()) / 100 * totalDibayar)));
+                }
+            }
+        });
+
+        edtHargaDiskon.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!editable.toString().equals(currentStringDiskon)){
+
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edtHargaDiskon.removeTextChangedListener(this);
+
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
+
+                    currentStringDiskon = formatted;
+                    edtHargaDiskon.setText(formatted);
+                    edtHargaDiskon.setSelection(formatted.length());
+                    edtHargaDiskon.addTextChangedListener(this);
                 }
             }
         });
@@ -637,6 +705,8 @@ public class DetailFormSetoran extends AppCompatActivity {
                         jOrder.put("bank", namaBank);
                         jOrder.put("kdcus", kdcus);
                         jOrder.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
+                        jOrder.put("diskon", edtDiskon.getText().toString());
+                        jOrder.put("totaldiskon", edtHargaDiskon.getText().toString().replaceAll("[,.]", ""));
                         jOrder.put("dari_bank", edtDariBank.getText().toString());
                         jOrder.put("dari_pemilik", edtNamaPemilik.getText().toString());
                         jOrder.put("dari_rekening", edtDariNorek.getText().toString());
