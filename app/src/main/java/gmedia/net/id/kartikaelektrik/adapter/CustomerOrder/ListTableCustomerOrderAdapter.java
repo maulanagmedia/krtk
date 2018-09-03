@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
+import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.ListBarangSalesOrder;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 
 import java.util.List;

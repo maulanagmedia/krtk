@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,16 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas.DetailBarangCanvas;
-import gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas.DetailEntryBarangCanvas;
 import gmedia.net.id.kartikaelektrik.activityOrderCustom.AddNewCustomOrder;
-import gmedia.net.id.kartikaelektrik.activityOrderCustom.OrderCustomDetail;
 import gmedia.net.id.kartikaelektrik.adapter.CustomOrder.ListCustomTableAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.CustomerOrder.ListSalesOrderAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.EntryPenjualanCanvas.ListCanvasCustomerTableAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.EntryPenjualanCanvas.ListCanvasOrderTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
-import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 

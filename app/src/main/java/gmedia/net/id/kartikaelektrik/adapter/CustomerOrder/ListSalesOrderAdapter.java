@@ -9,8 +9,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +35,14 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
     private String[] tanggal;
     private String[] total;
     private String[] status;
+    private String[] kirimanText;
     private String[] kiriman;
     private String[] namaSales;
     private Activity context;
     private View listViewItem;
     private ItemValidation iv = new ItemValidation();
 
-    public ListSalesOrderAdapter(Activity context, String[] nobukti, String[] nama, String[] alamat, String[] tanggal, String[] total, String[] status, String[] kiriman, String[] namaSales) {
+    public ListSalesOrderAdapter(Activity context, String[] nobukti, String[] nama, String[] alamat, String[] tanggal, String[] total, String[] status, String[] kirimanText, String[] namaSales, String[] kiriman) {
         super(context, R.layout.adapter_retro_5_menu_with_delete, nobukti);
         this.context = context;
         this.nobukti = nobukti;
@@ -52,18 +51,20 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
         this.tanggal = tanggal;
         this.total = total;
         this.status = status;
-        this.kiriman = kiriman;
+        this.kirimanText = kirimanText;
         this.namaSales = namaSales;
+        this.kiriman = kiriman;
     }
 
     @Override
     public int getCount() {
         int rowPerTableItem = Integer.parseInt(context.getResources().getString(R.string.rows_per_page_table));
-        if(nobukti.length < rowPerTableItem){
+        /*if(nobukti.length < rowPerTableItem){
             return nobukti.length;
         }else{
             return rowPerTableItem;
-        }
+        }*/
+        return nobukti.length;
     }
 
     private static class ViewHolder {
@@ -97,7 +98,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
 
         holder.item1.setText(nobukti[position]);
         holder.item2.setText(nama[position]);
-        holder.item6.setText(kiriman[position]);
+        holder.item6.setText(kirimanText[position]);
         holder.item7.setText(alamat[position]);
         holder.item8.setText(namaSales[position]);
 

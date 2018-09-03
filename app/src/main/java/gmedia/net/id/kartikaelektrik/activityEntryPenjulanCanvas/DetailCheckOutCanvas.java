@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -37,10 +36,7 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
-import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;
 import gmedia.net.id.kartikaelektrik.adapter.EntryPenjualanCanvas.ListBarangDetailCOAdapter;
-import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;

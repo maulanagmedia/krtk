@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail;
+import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.OrderDetail;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
@@ -51,7 +49,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView item1, item2, item3, item4, item5, item6;
+        private TextView item1, item2, item3, item4, item5, item6, item7;
         private LinearLayout container, deleteContainer, llPaket, llContainer, llTitle;
     }
 
@@ -73,6 +71,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
             holder.item4 = (TextView) convertView.findViewById(R.id.tv_subtitle_4);
             holder.item5 = (TextView) convertView.findViewById(R.id.tv_subtitle_5);
             holder.item6 = (TextView) convertView.findViewById(R.id.tv_subtitle_6);
+            holder.item7 = (TextView) convertView.findViewById(R.id.tv_subtitle_7);
             holder.deleteContainer = (LinearLayout) convertView.findViewById(R.id.ll_delete_container);
             convertView.setTag(holder);
         }else{
@@ -92,6 +91,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
             paket = true;
             urlDeleteDetailSO = context.getResources().getString(R.string.url_delete_so_paket_by_id);
         }
+        holder.item7.setText(iv.ChangeToRupiahFormat(iv.parseNullDouble(selectedSOD.getHarga())));
 
         if(selectedSOD.getTerkirim() != null){
 

@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,24 +20,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
-import gmedia.net.id.kartikaelektrik.activityEntryPaket.DetailBarangPaket;
-import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;
 import gmedia.net.id.kartikaelektrik.adapter.CustomOrder.ListCustomOrderAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
-import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 

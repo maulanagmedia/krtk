@@ -13,13 +13,11 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -51,6 +49,11 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
     private final String TAG = "Menu.Utama";
     private boolean firstLoad = true;
     private List<CustomListItem> masterList;
+    private String formatDate = "", formatDateDisplay = "";
+    private String tanggalAwal = "", tanggalAkhir = "";
+    private EditText edtAwal, edtAkhir;
+    private LinearLayout llShow;
+    private TextView tvTotal;
 
     public MenuUtamaSalesOrder(){}
 
@@ -78,14 +81,44 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
         pbLoadSO = (ProgressBar) layout.findViewById(R.id.pb_load_so);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh_so);
 
+        formatDate = context.getResources().getString(R.string.format_date);
+        formatDateDisplay = context.getResources().getString(R.string.format_date_display);
+
+        tanggalAwal = iv.sumDate(iv.getCurrentDate(formatDate), -7, formatDate);
+        tanggalAkhir = iv.getCurrentDate(formatDate);
+
+        edtAwal = (EditText) layout.findViewById(R.id.edt_awal);
+        edtAkhir = (EditText) layout.findViewById(R.id.edt_akhir);
+        llShow = (LinearLayout) layout.findViewById(R.id.ll_show);
+        tvTotal = (TextView) layout.findViewById(R.id.tv_total);
+
+        edtAwal.setText(iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
+        edtAkhir.setText(iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
+
+        initValidation();
+
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getListAutocomplete();
             }
         });
-        
+
+        llShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getListAutocomplete();
+            }
+        });
+
         getListAutocomplete();
+    }
+
+    private void initValidation() {
+
+        iv.datePickerEvent(context, edtAwal, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAwal, formatDate, formatDateDisplay));
+        iv.datePickerEvent(context, edtAkhir, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalAkhir, formatDate, formatDateDisplay));
     }
 
     @Override
@@ -101,8 +134,10 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
 
         actSalesOrder.setAdapter(null);
         lvSalesOrder.setAdapter(null);
+        tanggalAwal = iv.ChangeFormatDateString(edtAwal.getText().toString(), formatDateDisplay, formatDate);
+        tanggalAkhir = iv.ChangeFormatDateString(edtAkhir.getText().toString(), formatDateDisplay, formatDate);
         JSONObject jsonBody = new JSONObject();
-        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", baseURL, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", baseURL + "barang/index?datestart="+tanggalAwal+"&dateend="+tanggalAkhir, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
@@ -110,8 +145,10 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                         iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"GONE");
 
                         JSONObject responseAPI = new JSONObject();
-
                         String status = "0";
+                        double total = 0;
+                        tvTotal.setText(iv.ChangeToRupiahFormat(total));
+
                         try {
 
                             responseAPI = new JSONObject(result);
@@ -136,17 +173,28 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                                             jo.getString("total"),
                                             jo.getString("status"),
                                             jo.getString("kiriman_text"),
-                                            jo.getString("nama_sales")));
+                                            jo.getString("nama_sales"),
+                                            jo.getString("kiriman")));
+
+                                    total += iv.parseNullDouble(jo.getString("total"));
                                 }
                                 getAutocomplete(itemString);
+
+                                tvTotal.setText(iv.ChangeToRupiahFormat(total));
+                                if(arrayJSON.length() > 0){
+
+                                    if(!actSalesOrder.getText().toString().isEmpty()){
+                                        searchNoBukti(actSalesOrder.getText().toString());
+                                    }
+                                }
                             }else{
                                 showJSON(null);
                                 getAutocomplete(null);
                             }
 
                         }catch (Exception e){
-                            e.printStackTrace();
 
+                            e.printStackTrace();
                             showJSON(null);
                             if(Integer.parseInt(status) != 404){
                                 iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"ERROR");
@@ -202,12 +250,12 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
             });
         }
 
-        actSalesOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*actSalesOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 onNoBuktiChange(adapterView.getItemAtPosition(i).toString());
             }
-        });
+        });*/
 
         actSalesOrder.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -228,6 +276,8 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
     private void searchNoBukti(String keyword){
 
         int index = 0;
+        keyword = keyword.toUpperCase();
+        double total = 0;
 
         List<CustomListItem> bufferList = new ArrayList<>();
         for(CustomListItem item: masterList){
@@ -243,6 +293,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
         String[] tanggals = new String[index];
         String[] totals = new String[index];
         String[] status = new String[index];
+        String[] kirimanText = new String[index];
         String[] kiriman = new String[index];
         String[] namaSales = new String[index];
 
@@ -254,16 +305,20 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
             tanggals[i] = add.getListItem4();
             totals[i] = add.getListItem5();
             status[i] = add.getListItem6();
-            kiriman[i] = add.getListItem7();
+            kirimanText[i] = add.getListItem7();
             namaSales[i] = add.getListItem8();
+            kiriman[i] = add.getListItem9();
+            total += iv.parseNullDouble(add.getListItem5());
+
             i++;
         }
 
-        ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, stringNoBukti, namaString, alamatString, tanggals, totals, status, kiriman, namaSales);
+        tvTotal.setText(iv.ChangeToRupiahFormat(total));
+        ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, stringNoBukti, namaString, alamatString, tanggals, totals, status, kirimanText, namaSales, kiriman);
         lvSalesOrder.setAdapter(cl);
     }
 
-    private void onNoBuktiChange(final String noBukti){
+    /*private void onNoBuktiChange(final String noBukti){
         // Get All No bukti
         String baseURL = context.getResources().getString(R.string.url_get_so_detail_by_id) + noBukti;
 
@@ -295,12 +350,12 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
                                 totals[0] = joHeader.getString("total");
                                 String[] status = new String[1];
                                 status[0] = joHeader.getString("status");
-                                String[] kiriman = new String[1];
-                                kiriman[0] = joHeader.getString("kiriman_text");
+                                String[] kirimanText = new String[1];
+                                kirimanText[0] = joHeader.getString("kiriman_text");
                                 String[] namaSales = new String[1];
                                 namaSales[0] = joHeader.getString("nama_sales");
 
-                                ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, stringNoBukti, namaString, alamatString, tanggals, totals, status, kiriman, namaSales);
+                                ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, stringNoBukti, namaString, alamatString, tanggals, totals, status, kirimanText, namaSales);
                                 lvSalesOrder.setAdapter(cl);
 
                             }catch (Exception e){
@@ -319,7 +374,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
 
                     }
                 });
-    }
+    }*/
 
     private void showJSON(String json){
 
@@ -328,7 +383,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
             OrderJSONHandler pj = new OrderJSONHandler(json,"all");
             pj.ParseOrderJSON();
 
-            ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, pj.nobukti, pj.nama, pj.alamat, pj.tgl, pj.total, pj.status, pj.kiriman, pj.namaSales);
+            ListSalesOrderAdapter cl = new ListSalesOrderAdapter((Activity) context, pj.nobukti, pj.nama, pj.alamat, pj.tgl, pj.total, pj.status, pj.kirimanText, pj.namaSales, pj.kiriman);
             lvSalesOrder.setAdapter(cl);
         }
     }

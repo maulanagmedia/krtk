@@ -34,7 +34,6 @@ public class ApiVolley {
     private String level = "";
     private ItemValidation iv = new ItemValidation();
 
-
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
 
         /*

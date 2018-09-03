@@ -2,7 +2,6 @@ package gmedia.net.id.kartikaelektrik.activitySetoran;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,14 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranAdapter;
+import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailRekapSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
-public class RincianSetoran extends AppCompatActivity {
+public class DetailRincianSetoran extends AppCompatActivity {
 
     private Context context;
     private SessionManager session;
@@ -44,24 +43,25 @@ public class RincianSetoran extends AppCompatActivity {
     private ListView lvRincianSetoran;
     private LinearLayout llContainer;
     private Button btnRefresh;
-    private String kodeBank = "", tanggalAwal ="" , tanggalAkhir = "";
+    private String kodeBank = "", tanggal = "", kdcus = "", customer = "", bank = "";
     private ProgressBar pbLoading;
-    private List<CustomListItem> listSetoran;
+    private List<CustomListItem> listSetoran = new ArrayList<>();
     private TextView tvTotal;
     private AutoCompleteTextView actvKeyword;
     private boolean firstLoad = true;
+    private DetailRekapSetoranAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rincian_setoran);
+        setContentView(R.layout.activity_detail_rincian_setoran);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        setTitle("Rincian Setoran");
+        setTitle("Detail Rincian Setoran");
         context = this;
         session = new SessionManager(context);
         firstLoad = true;
@@ -82,11 +82,19 @@ public class RincianSetoran extends AppCompatActivity {
         if(bundle != null){
 
             kodeBank = bundle.getString("kode_bank", "");
-            tanggalAwal = bundle.getString("tgl_awal", "");
-            tanggalAkhir = bundle.getString("tgl_akhir", "");
+            tanggal = bundle.getString("tanggal", "");
+            kdcus = bundle.getString("kdcus", "");
+            customer = bundle.getString("customer", "");
+            bank = bundle.getString("bank", "");
+
+            setTitle(customer);
+            getSupportActionBar().setSubtitle(bank);
 
             initEvent();
         }
+
+        listSetoran = new ArrayList<>();
+        adapter = new DetailRekapSetoranAdapter((Activity) context, listSetoran);
     }
 
     @Override
@@ -125,7 +133,7 @@ public class RincianSetoran extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
 
                     if(s.length() == 0){
-                        setAdapter(listSetoran);
+                        getDataSetoran();
                     }
                 }
             });
@@ -147,7 +155,9 @@ public class RincianSetoran extends AppCompatActivity {
                             }
                         }
 
-                        setAdapter(items);
+                        listSetoran.clear();
+                        listSetoran.addAll(items);
+                        adapter.notifyDataSetChanged();
                     }
 
                     iv.hideSoftKey(context);
@@ -165,13 +175,13 @@ public class RincianSetoran extends AppCompatActivity {
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("kode_bank", kodeBank);
-            jBody.put("tgl_awal", tanggalAwal);
-            jBody.put("tgl_akhir", tanggalAkhir);
+            jBody.put("tanggal", tanggal);
+            jBody.put("kdcus", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranDetail, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDetailRekapSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -194,13 +204,7 @@ public class RincianSetoran extends AppCompatActivity {
                             listSetoran.add(new CustomListItem(
                                     jo.getString("id"),
                                     jo.getString("nama_customer"),
-                                    jo.getString("bank"),
-                                    jo.getString("total"),
-                                    jo.getString("tanggal"),
-                                    jo.getString("daribank"),
-                                    jo.getString("kode_bank"),
-                                    jo.getString("kdcus"),
-                                    jo.getString("nobukti")
+                                    jo.getString("total")
                             ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
@@ -211,14 +215,14 @@ public class RincianSetoran extends AppCompatActivity {
                     }
 
                     tvTotal.setText(iv.ChangeToRupiahFormat(total));
-                    setAdapter(listSetoran);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
-                    setAdapter(null);
                     llContainer.setVisibility(View.VISIBLE);
                 }
+
             }
 
             @Override
@@ -227,53 +231,8 @@ public class RincianSetoran extends AppCompatActivity {
                 pbLoading.setVisibility(View.GONE);
                 llContainer.setVisibility(View.VISIBLE);
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
-                setAdapter(null);
             }
         });
-    }
-
-    private void setAdapter(List<CustomListItem> listItems) {
-
-        lvRincianSetoran.setAdapter(null);
-
-        if(listItems != null && listItems.size() > 0){
-
-            double total = 0;
-            for(CustomListItem item : listItems){
-
-                total += iv.parseNullDouble(item.getListItem4());
-            }
-
-            tvTotal.setText(iv.ChangeToRupiahFormat(total));
-            DetailSetoranAdapter adapter = new DetailSetoranAdapter((Activity) context, listItems);
-            lvRincianSetoran.setAdapter(adapter);
-
-            lvRincianSetoran.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    CustomListItem item = (CustomListItem) parent.getItemAtPosition(position);
-
-                    if(!item.getListItem1().isEmpty()){
-
-                        /*Intent intent = new Intent(context, DetailRincianSetoran.class);
-                        intent.putExtra("tanggal", item.getListItem5());
-                        intent.putExtra("kode_bank", item.getListItem7());
-                        intent.putExtra("kdcus", item.getListItem8());
-                        intent.putExtra("customer", item.getListItem2());
-                        intent.putExtra("bank", item.getListItem3());
-                        startActivity(intent);*/
-                        Intent intent = new Intent(context, DetailSetoranPerNota.class);
-                        intent.putExtra("nobukti", item.getListItem9());
-                        intent.putExtra("namacus", item.getListItem2());
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(context, "Data merupakan mutasi", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            });
-        }
     }
 
     @Override

@@ -17,6 +17,7 @@ public class OrderJSONHandler {
     public static String[] tgl;
     public static String[] tgltempo;
     public static String[] nopo;
+    public static String[] kirimanText;
     public static String[] kiriman;
     public static String[] total;
     public static String[] keterangan;
@@ -36,7 +37,8 @@ public class OrderJSONHandler {
     public static final String KEY_TGL = "tgl";
     public static final String KEY_TGLTempo = "tgltempo";
     public static final String KEY_NOPO = "nopo";
-    public static final String KEY_Kiriman = "kiriman_text";
+    public static final String KEY_Kiriman_Text = "kiriman_text";
+    public static final String KEY_Kiriman = "kiriman";
     public static final String KEY_Total = "total";
     public static final String KEY_Keterangan = "keterangan";
     public static final String KEY_UserID = "userid";
@@ -75,6 +77,7 @@ public class OrderJSONHandler {
             tgl = new String[salesOrders.length()];
             tgltempo = new String[salesOrders.length()];
             nopo = new String[salesOrders.length()];
+            kirimanText = new String[salesOrders.length()];
             kiriman = new String[salesOrders.length()];
             total = new String[salesOrders.length()];
             keterangan = new String[salesOrders.length()];
@@ -98,6 +101,7 @@ public class OrderJSONHandler {
                     tgl[i] = jo.getString(KEY_TGL);
                     tgltempo[i] = jo.getString(KEY_TGLTempo);
                     nopo[i] = jo.getString(KEY_NOPO);
+                    kirimanText[i] = jo.getString(KEY_Kiriman_Text);
                     kiriman[i] = jo.getString(KEY_Kiriman);
                     total[i] = jo.getString(KEY_Total);
                     keterangan[i] = jo.getString(KEY_Keterangan);

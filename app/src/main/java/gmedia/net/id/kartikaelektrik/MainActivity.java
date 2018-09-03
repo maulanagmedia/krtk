@@ -814,6 +814,11 @@ public class MainActivity extends RuntimePermissionsActivity {
             startActivity(intent);
             return true;
         }else if(id == gmedia.net.id.kartikaelektrik.R.id.option_logout){
+
+            if(iv.isServiceRunning(MainActivity.this, LocationUpdater.class)){
+                stopService(new Intent(getApplicationContext(), LocationUpdater.class));
+            }
+
             sessionManager.logoutUser();
             finish();
             return true;

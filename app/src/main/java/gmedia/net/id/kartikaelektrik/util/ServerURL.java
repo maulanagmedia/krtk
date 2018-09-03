@@ -10,6 +10,7 @@ public class ServerURL {
 
     public static final String getSetoranHeader = baseURL + "Setoran/view_header_setoran/";
     public static final String getSetoranDetail = baseURL + "Setoran/view_detail_setoran/";
+    public static final String getDetailRekapSetoran = baseURL + "setoran/view_setoran_details/";
     public static final String getDetailSetoran = baseURL + "Setoran/detail_setoran/";
     public static final String saveSetoran = baseURL + "Setoran/process/";
     public static final String deleteSetoran = baseURL + "Setoran/hapus/";

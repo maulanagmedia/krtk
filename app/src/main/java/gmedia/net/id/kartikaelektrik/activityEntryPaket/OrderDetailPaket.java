@@ -1,6 +1,5 @@
 package gmedia.net.id.kartikaelektrik.activityEntryPaket;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail;
 import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;
 import gmedia.net.id.kartikaelektrik.adapter.EntryPaket.ListBarangOrderAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;

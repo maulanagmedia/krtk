@@ -4,35 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail;
 import gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas.DetailCheckOutCanvas;
 import gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas.DetailOrderEntryCanvas;
-import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
-import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
-import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 
 /**

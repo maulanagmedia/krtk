@@ -24,10 +24,9 @@ import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
+import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.ListBarangSalesOrder;
 import gmedia.net.id.kartikaelektrik.activityEntryPaket.DetailBarangPaket;
 import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAutocompleteAdapter;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.dialogFragment.UpdateSalesOrderDF;

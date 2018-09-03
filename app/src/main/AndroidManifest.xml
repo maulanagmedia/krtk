@@ -68,9 +68,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activityCustomerOrder.ListMenuCategoryBarang" />
-        <activity android:name=".activityCustomerOrder.ListMenuCategoryBarangDetailPotrait" />
-        <activity android:name=".activityCustomerOrder.OrderDetail" />
+        <activity android:name=".activityTambahOrderSales.ListMenuCategoryBarang" />
+        <activity android:name=".activityTambahOrderSales.ListMenuCategoryBarangDetailPotrait" />
+        <activity android:name=".activityTambahOrderSales.OrderDetail" />
         <activity android:name=".activitySalesOrderDetail.DetailSalesOrder" />
 
         <service android:name=".services.BackgroundLocationService" />
@@ -121,7 +121,7 @@
             android:name=".activityEntryPenjulanCanvas.DetailCheckOutCanvas"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activityCustomerOrder.ListBarangSalesOrder"
+            android:name=".activityTambahOrderSales.ListBarangSalesOrder"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activityOmsetPenjualan.ListOmsetCustomer"
@@ -229,7 +229,9 @@
         <activity
             android:name=".ActivityMenuAdmin.JatuhTempoGiro"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityMenuAdmin.LabaRugiOmsetSetoran"></activity>
+        <activity android:name=".ActivityMenuAdmin.LabaRugiOmsetSetoran" />
+        <activity android:name=".activitySetoran.DetailRincianSetoran" />
+        <activity android:name=".activityInfoStok.HistoryBarangCanvas"></activity>
     </application>
 
 </manifest>

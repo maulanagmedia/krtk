@@ -4,7 +4,7 @@
     android:id="@+id/activity_order_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail">
+    tools:context="gmedia.net.id.kartikaelektrik.activityTambahOrderSales.OrderDetail">
 
     <ScrollView
         android:layout_width="match_parent"

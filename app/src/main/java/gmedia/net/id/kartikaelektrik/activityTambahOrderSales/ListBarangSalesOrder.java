@@ -1,4 +1,4 @@
-package gmedia.net.id.kartikaelektrik.activityCustomerOrder;
+package gmedia.net.id.kartikaelektrik.activityTambahOrderSales;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,13 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.adapter.BarangAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListBarangTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
-import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class ListBarangSalesOrder extends AppCompatActivity {
 

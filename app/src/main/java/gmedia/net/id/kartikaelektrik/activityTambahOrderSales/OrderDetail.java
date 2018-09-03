@@ -1,4 +1,4 @@
-package gmedia.net.id.kartikaelektrik.activityCustomerOrder;
+package gmedia.net.id.kartikaelektrik.activityTambahOrderSales;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,8 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas.DetailOrderEntryCanvas;
-import gmedia.net.id.kartikaelektrik.activityOrderCustom.OrderCustomDetail;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
 import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;

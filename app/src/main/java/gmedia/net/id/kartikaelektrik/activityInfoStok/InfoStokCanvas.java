@@ -1,6 +1,7 @@
 package gmedia.net.id.kartikaelektrik.activityInfoStok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -361,6 +362,20 @@ public class InfoStokCanvas extends AppCompatActivity {
                         thread.start();
                     }
 
+                }
+            });
+
+            lvListStok.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                    Barang item = (Barang) adapterView.getItemAtPosition(i);
+
+                    Intent intent = new Intent(InfoStokCanvas.this, HistoryBarangCanvas.class);
+                    intent.putExtra("kdbrg", item.getKodeBarang());
+                    intent.putExtra("namabrg", item.getNamaBarang());
+                    startActivity(intent);
                 }
             });
         }

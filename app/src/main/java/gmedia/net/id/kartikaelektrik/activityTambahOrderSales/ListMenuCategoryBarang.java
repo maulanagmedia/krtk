@@ -1,4 +1,4 @@
-package gmedia.net.id.kartikaelektrik.activityCustomerOrder;
+package gmedia.net.id.kartikaelektrik.activityTambahOrderSales;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,7 +30,6 @@ import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListKategoriBara
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
-import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;

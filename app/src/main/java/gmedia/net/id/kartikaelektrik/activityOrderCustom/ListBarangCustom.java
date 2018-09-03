@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,17 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.ListBarangSalesOrder;
-import gmedia.net.id.kartikaelektrik.activityCustomerOrder.OrderDetail;
 import gmedia.net.id.kartikaelektrik.adapter.CustomOrder.ListBarangCustomAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListBarangTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
-import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
-import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
-import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class ListBarangCustom extends AppCompatActivity {
 

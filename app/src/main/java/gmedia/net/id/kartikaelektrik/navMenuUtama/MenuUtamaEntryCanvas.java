@@ -64,6 +64,7 @@ public class MenuUtamaEntryCanvas extends Fragment {
     private LinearLayout llShow;
     private String formatDate = "", formatDateDisplay = "", tanggalAwal = "", tanggalAkhir = "";
     private String keyword = "";
+    private TextView tvTotal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +92,7 @@ public class MenuUtamaEntryCanvas extends Fragment {
         llLoadCusxtomer = (LinearLayout) layout.findViewById(R.id.ll_load_customer);
         pbLoadCustomer = (ProgressBar) layout.findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
+        tvTotal = (TextView) layout.findViewById(R.id.tv_total);
 
         formatDate = context.getResources().getString(R.string.format_date);
         formatDateDisplay = context.getResources().getString(R.string.format_date_display);
@@ -163,7 +165,10 @@ public class MenuUtamaEntryCanvas extends Fragment {
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
+
                         JSONObject responseAPI = new JSONObject();
+                        double total = 0;
+                        tvTotal.setText(iv.ChangeToRupiahFormat(total));
 
                         try {
 
@@ -172,20 +177,24 @@ public class MenuUtamaEntryCanvas extends Fragment {
                             masterList = new ArrayList<CustomListItem>();
 
                             if(iv.parseNullInteger(status) == 200){
+
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
-                                    JSONObject jo = arrayJSON.getJSONObject(i);
 
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
                                     if(jo.getString("customer").toLowerCase().contains(keyword.toLowerCase())){
 
                                         masterList.add(new CustomListItem(jo.getString("nobukti"),
                                                 iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay),
                                                 iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))),
                                                 jo.getString("customer")));
+
+                                        total += iv.parseNullDouble(jo.getString("total"));
                                     }
                                 }
                             }
 
+                            tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             autocompleteList = new ArrayList<CustomListItem>(masterList);
                             tableList = new ArrayList<CustomListItem>(masterList);
                             getListCustomerAutocomplete(autocompleteList);
