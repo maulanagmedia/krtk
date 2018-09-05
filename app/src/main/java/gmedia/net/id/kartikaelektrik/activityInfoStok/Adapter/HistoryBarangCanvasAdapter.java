@@ -60,7 +60,7 @@ public class HistoryBarangCanvasAdapter extends ArrayAdapter {
 
         final CustomListItem item = items.get(position);
         holder.item1.setText(item.getListItem2());
-        holder.item2.setText(iv.ChangeToCurrencyFormat(item.getListItem3()));
+        holder.item2.setText(iv.ChangeToCurrencyFormat(item.getListItem3()) + " " + item.getListItem4());
 
         return convertView;
     }

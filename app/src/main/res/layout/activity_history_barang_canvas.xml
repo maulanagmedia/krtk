@@ -166,6 +166,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/default_small_padding"
         android:paddingBottom="@dimen/default_small_padding"
+        android:visibility="gone"
         android:id="@+id/ll_footer"
         android:orientation="vertical"
         android:background="@color/color_grey3"

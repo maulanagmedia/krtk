@@ -320,6 +320,10 @@ public class BackgroundLocationService extends Service implements GoogleApiClien
 
     private void UpdateLocationToServer(LocationModel locationModel){
 
+        if(!session.isLoggedIn()){
+
+            return;
+        }
         String urlPostLocation = getApplicationContext().getResources().getString(R.string.url_insert_location);
         JSONObject jsonBody = new JSONObject();
         try {

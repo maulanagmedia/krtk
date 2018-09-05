@@ -115,7 +115,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
         holder.item4.setText(stringTotal);
         String stringFlag = "Baru";
         final Global global = new Global();
-        CustomListItem statusItem = global.getStatus(status[position]);
+        CustomListItem statusItem = global.getStatus(status[position], kiriman[position]);
         holder.colorContainer.setBackgroundColor(context.getResources().getColor(statusItem.getListItemNumber1()));
         holder.item5.setText(statusItem.getListItem1());
 
@@ -133,7 +133,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
             @Override
             public void onClick(View view) {
 
-                CustomListItem statusItem = global.getStatus(status[position]);
+                CustomListItem statusItem = global.getStatus(status[position], kiriman[position]);
                 String peringatan = "Tidak Dapat Menghapus Order";
 
                 if(iv.parseNullInteger(status[position]) != 2){
@@ -146,7 +146,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        CustomListItem statusItem = global.getStatus(status[position]);
+                        CustomListItem statusItem = global.getStatus(status[position], kiriman[position]);
                         String peringatan = "Tidak Dapat Menghapus Order";
 
                         if(iv.parseNullInteger(status[position]) != 2){

@@ -17,6 +17,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +32,9 @@ import java.util.Locale;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityInfoStok.Adapter.HistoryBarangCanvasAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
+import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class HistoryBarangCanvas extends AppCompatActivity {
@@ -63,6 +69,7 @@ public class HistoryBarangCanvas extends AppCompatActivity {
 
         initUI();
         initEvent();
+        initData();
     }
 
     private void initUI() {
@@ -96,9 +103,6 @@ public class HistoryBarangCanvas extends AppCompatActivity {
         listHistory = new ArrayList<>();
         adapter = new HistoryBarangCanvasAdapter((Activity) context, listHistory);
         lvHistory.setAdapter(adapter);
-
-        listHistory.add(new CustomListItem("1", "Test", "29"));
-        adapter.notifyDataSetChanged();
     }
 
     private void initEvent() {
@@ -180,6 +184,81 @@ public class HistoryBarangCanvas extends AppCompatActivity {
                 return false;
             }
         });
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                initData();
+            }
+        });
+
+        llShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                initData();
+            }
+        });
+    }
+
+    private void initData() {
+
+        iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"SHOW");
+        final JSONObject jsonBody = new JSONObject();
+
+        try {
+            jsonBody.put("datestart", tanggalAwal);
+            jsonBody.put("dateend", tanggalAkhir);
+            jsonBody.put("kodebrg", kdbrg);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley restService = new ApiVolley(this, jsonBody, "POST", ServerURL.getHistoryBarangCanvas, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        JSONObject responseAPI = new JSONObject();
+                        iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"GONE");
+                        listHistory.clear();
+
+                        try {
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(Integer.parseInt(status) == 200){
+
+                                JSONArray ja = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < ja.length(); i++){
+
+                                    JSONObject jo = ja.getJSONObject(i);
+                                    if(i == 0) getSupportActionBar().setSubtitle(jo.getString("sales"));
+                                    listHistory.add(new CustomListItem(
+                                            jo.getString("tgl")
+                                            ,jo.getString("keterangan")
+                                            ,jo.getString("stok")
+                                            ,jo.getString("satuan")
+                                    ));
+                                }
+
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"ERROR");
+                        }
+
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"GONE");
+                    }
+                });
     }
 
     @Override

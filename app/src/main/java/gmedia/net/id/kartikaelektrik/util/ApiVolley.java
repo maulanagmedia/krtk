@@ -2,6 +2,7 @@ package gmedia.net.id.kartikaelektrik.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,6 +20,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
+import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
 
 /**
  * Created by indra on 16/12/2016.
@@ -85,6 +88,9 @@ public class ApiVolley {
                 if(response == null || response.equals("null")){
 
                     Toast.makeText(context, "Anda tidak memiliki ijin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
+                    if(iv.isServiceRunning(context, BackgroundLocationService.class)){
+                        context.stopService(new Intent(context, BackgroundLocationService.class));
+                    }
                     session.logoutUser();
                     ((Activity)context).finish();
                     return;
