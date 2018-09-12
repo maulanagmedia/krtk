@@ -958,7 +958,7 @@ public class OrderDetail extends AppCompatActivity {
                         approveLevel = responseAPI.getJSONObject("response").getString("approve");
 
                         // Enable or disable diskon
-                        if(/*!approveLevel.trim().equals("0") &&*/ flagHarga.trim().equals("2")){
+                        if(!approveLevel.trim().equals("0") && flagHarga.trim().equals("2")){
                             edDiskon.setFocusable(true);
                             edDiskon.setKeyListener(new EditText(OrderDetail.this).getKeyListener());
                             edDiskon.setFocusableInTouchMode(true);
@@ -971,7 +971,7 @@ public class OrderDetail extends AppCompatActivity {
                             edHargaWithDiskon.setKeyListener(null);
                         }
 
-                        double jumlahHarga = 0;
+                        /*double jumlahHarga = 0;
 
                         // Baik Pricelist(1) atau discount(2)
                         if(iv.parseNullDouble(hargaNetto) <= 0 ){
@@ -998,7 +998,13 @@ public class OrderDetail extends AppCompatActivity {
                         }else{
                             edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaText));
                         }
-                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));
+                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));*/
+
+                        String hargaText = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
+                        edHarga.setText(iv.ChangeToCurrencyFormat(hargaText));
+                        edDiskon.setText(diskon);
+
+                        CalculateHargaByDiskon();
                     }else{
                         edHarga.setText("0");
                         edDiskon.setText("");
