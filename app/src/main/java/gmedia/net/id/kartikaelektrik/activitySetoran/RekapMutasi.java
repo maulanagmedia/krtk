@@ -97,6 +97,12 @@ public class RekapMutasi extends AppCompatActivity {
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Kunci Setoran");
 
+        if(session.getLaba().equals("1")){
+            llSaveContainer.setVisibility(View.VISIBLE);
+        }else{
+            llSaveContainer.setVisibility(View.GONE);
+        }
+
         initValidation();
 
         getDataSetoran();

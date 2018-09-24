@@ -1,6 +1,7 @@
 package gmedia.net.id.kartikaelektrik.adapter.CustomOrder;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,8 @@ public class ListBarangCustomAdapter extends ArrayAdapter {
     private int rowPerTableItem;
     private View viewInflater;
 
-    public ListBarangCustomAdapter(Activity context, int resource, List items) {
-        super(context, resource, items);
+    public ListBarangCustomAdapter(Activity context, List items) {
+        super(context, R.layout.adapter_single_menu, items);
         this.context = context;
         this.resource = resource;
         this.items = items;
@@ -44,7 +45,7 @@ public class ListBarangCustomAdapter extends ArrayAdapter {
         notifyDataSetChanged();
     }
 
-    private static class ViewHolder {
+    private class ViewHolder {
         private TextView tvMenuName;
     }
 
@@ -66,6 +67,9 @@ public class ListBarangCustomAdapter extends ArrayAdapter {
         final Barang selectedItem = items.get(position);
         holder.tvMenuName.setText(selectedItem.getNamaBarang());
 
+        if(convertView == null){
+            Log.d("test", "getView: "+position);
+        }
         return convertView;
 
     }

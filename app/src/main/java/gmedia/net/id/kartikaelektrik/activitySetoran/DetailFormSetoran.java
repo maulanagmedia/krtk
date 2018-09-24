@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
@@ -409,11 +410,7 @@ public class DetailFormSetoran extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(!edtTotal.getText().toString().equals("0") && !edtTotal.getText().toString().isEmpty()){
-
-                    double totalDibayar = iv.parseNullDouble(edtTotal.getText().toString().replaceAll("[,.]", ""));
-                    edtHargaDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(editable.toString()) / 100 * totalDibayar)));
-                }
+                calculateDiscount();
             }
         });
 
@@ -482,22 +479,60 @@ public class DetailFormSetoran extends AppCompatActivity {
         getDataBank();
     }
 
-    public static void updateSisa(){
+    private void calculateDiscount(){
 
-        edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
+        String changedString = edtDiskon.getText().toString().replaceAll("[+]", ",");
 
-        /*double total = 0;
-        if(adapterPiutangSales != null){
-            for(OptionItem item: adapterPiutangSales.getItems()){
+        List<String> diskonList = new ArrayList<String>(Arrays.asList(changedString.split(",")));
+        List<Double> diskonListDouble = new ArrayList<Double>();
+        for (String diskon: diskonList){
 
-                if(item.isSelected()){
-
-                    total += iv.parseNullDouble(item.getAtt2());
-                }
+            try {
+                Double x = iv.parseNullDouble(diskon);
+                diskonListDouble.add(x);
+            }catch (Exception e){
+                Double df = Double.valueOf(0);
+                diskonListDouble.add(df);
+                e.printStackTrace();
             }
         }
 
-        edtTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToStringFull(total)));*/
+        if(diskonListDouble.size()>0 && edtTotal.getText().length() > 0){
+
+            String hargaClean = edtTotal.getText().toString().replaceAll("[,.]", "");
+            double hargaAwal = iv.parseNullDouble(hargaClean);
+            double newHargaNetto = 0;
+            double totalDiskon = 0;
+            Integer index = 1;
+
+            if(diskonListDouble.size() > 0){
+                for(Double i: diskonListDouble){
+                    if(index == 1){
+
+                        //double minDiskon = i / 100 * hargaAwal;
+                        newHargaNetto = hargaAwal - (i / 100 * hargaAwal);
+                        totalDiskon += (i / 100 * hargaAwal);
+                    }else{
+
+                        totalDiskon += (i / 100 * newHargaNetto);
+                        newHargaNetto = newHargaNetto - ( i / 100 * newHargaNetto);
+                    }
+                    index++;
+                }
+            }else{
+                newHargaNetto = hargaAwal;
+            }
+            edtHargaDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(totalDiskon)));
+
+        }else{
+            // clear field
+            edtHargaDiskon.setText("0");
+        }
+    }
+
+    public static void updateSisa(){
+
+        edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
     }
 
     private void getDataBank() {

@@ -132,6 +132,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
 
             jsonBody.put("username", edtUsername.getText());
             jsonBody.put("password", edtPassword.getText());
+            jsonBody.put("fcm_id", refreshToken);
 
             final String username = edtUsername.getText().toString();
             final String password = edtPassword.getText().toString();

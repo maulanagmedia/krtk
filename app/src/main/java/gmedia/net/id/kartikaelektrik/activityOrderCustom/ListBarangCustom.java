@@ -1,11 +1,13 @@
 package gmedia.net.id.kartikaelektrik.activityOrderCustom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -47,7 +49,7 @@ public class ListBarangCustom extends AppCompatActivity {
     private LinearLayout llProgressBarContainer;
     private Button btnRefreshBarang;
     private boolean firstLoadBarang = true;
-    private List<Barang> masterBarang, moreList;
+    private List<Barang> masterBarang = new ArrayList<>();
     private String kodeKategoriBarang = "0"; // Default all category
     private RadioGroup rgJenis;
     private String jenisBarang;
@@ -71,10 +73,13 @@ public class ListBarangCustom extends AppCompatActivity {
         setTitle("Pilih Barang Custom");
 
         initUI();
+        setDetailBarangAutocomplete();
     }
 
     private void initUI() {
 
+        LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        footerList = li.inflate(R.layout.foother_listview_loading, null);
         kodeKategoriBarang = "0"; // ALL Kategory
         urlGetAllBarangByKategori = ServerURL.getBarangPerKategori;
         urlGetDetailBarang = getResources().getString(R.string.url_get_barang_by_id);
@@ -82,7 +87,7 @@ public class ListBarangCustom extends AppCompatActivity {
         rgJenis = (RadioGroup) findViewById(R.id.rg_jenis);
         rbK = (RadioButton) findViewById(R.id.rb_1);
         rbR = (RadioButton) findViewById(R.id.rb_2);
-        lvListBarang = (ListView) findViewById(R.id.lv_fragment_detail_category_barang);
+        lvListBarang = (ListView) findViewById(R.id.lv_barang);
         pgbLoadBarang = (ProgressBar) findViewById(R.id.pgb_nama_barang);
         llProgressBarContainer = (LinearLayout) findViewById(R.id.ll_pgb_container);
         btnRefreshBarang = (Button) findViewById(R.id.btn_refresh);
@@ -109,7 +114,47 @@ public class ListBarangCustom extends AppCompatActivity {
             }
         }
 
-        setDetailBarangAutocomplete();
+        //set adapter for autocomplete
+        arrayAdapterString = new ListBarangCustomAdapter(ListBarangCustom.this, masterBarang);
+
+        //set adapter to autocomplete
+        lvListBarang.setAdapter(arrayAdapterString);
+
+        lvListBarang.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+                int threshold = 1;
+                int countMerchant = lvListBarang.getCount();
+
+                if (i == SCROLL_STATE_IDLE) {
+                    if ((lvListBarang.getLastVisiblePosition() >= (countMerchant - threshold)) && !isLoading) {
+
+                        isLoading = true;
+                        lvListBarang.addFooterView(footerList);
+                        start += count;
+                        getMoreData();
+                        //Log.i(TAG, "onScroll: last ");
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+            }
+        });
+
+        lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Barang barang = (Barang) adapterView.getItemAtPosition(i);
+                jenisBarang = "K";
+                if(rgJenis.getCheckedRadioButtonId() == R.id.rb_2) jenisBarang = "R";
+                GetBarangDetail(barang.getKodeBarang(), barang.getNamaBarang());
+            }
+        });
+
         btnRefreshBarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,7 +191,7 @@ public class ListBarangCustom extends AppCompatActivity {
 
                             responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
-                            masterBarang = new ArrayList<Barang>();
+                            masterBarang.clear();
 
                             if(iv.parseNullInteger(status) == 200){
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
@@ -158,124 +203,59 @@ public class ListBarangCustom extends AppCompatActivity {
                                 }
                             }
 
-                            getListBarangAutocomplete(masterBarang);
-                            getListBarangTable(masterBarang);
-
                         }catch (Exception e){
                             e.printStackTrace();
-                            getListBarangAutocomplete(null);
-                            getListBarangTable(null);
                         }
+
+                        getListBarangAutocomplete();
+                        arrayAdapterString.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(String result) {
                         iv.ProgressbarEvent(llProgressBarContainer,pgbLoadBarang,btnRefreshBarang,"ERROR");
                         isLoading = false;
-                        getListBarangAutocomplete(null);
-                        getListBarangTable(null);
                     }
                 });
     }
 
-    private void getListBarangAutocomplete(final List<Barang> listItems){
+    private void getListBarangAutocomplete(){
 
-        actvListBarang.setAdapter(null);
+        actvListBarang.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-        if (listItems != null && listItems.size() > 0){
-            /*BarangAdapter arrayAdapterString;
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
 
-            //set adapter for autocomplete//set adapter for autocomplete
-            arrayAdapterString = new BarangAdapter(ListBarangCustom.this, listItems.size(), listItems);
-
-            //set adapter to autocomplete
-            actvListBarang.setAdapter(arrayAdapterString);*/
-
-            actvListBarang.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                    if(actionId == EditorInfo.IME_ACTION_SEARCH){
-
-                        String keyword = actvListBarang.getText().toString();
-                        setDetailBarangAutocomplete();
-                        iv.hideSoftKey(ListBarangCustom.this);
-                        return true;
-                    }
-                    return false;
+                    String keyword = actvListBarang.getText().toString();
+                    setDetailBarangAutocomplete();
+                    iv.hideSoftKey(ListBarangCustom.this);
+                    return true;
                 }
-            });
-
-            if(firstLoadBarang){
-                firstLoadBarang = false;
-                actvListBarang.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        if(editable.toString().length() <= 0) {
-
-                            keyword = "";
-                            setDetailBarangAutocomplete();
-                        }
-                    }
-                });
+                return false;
             }
-        }
-    }
+        });
 
-    private void getListBarangTable(List<Barang> listItems){
-
-        lvListBarang.setAdapter(null);
-
-        if (listItems != null && listItems.size() > 0){
-
-            //set adapter for autocomplete
-            arrayAdapterString = new ListBarangCustomAdapter(ListBarangCustom.this, R.layout.adapter_single_menu, listItems);
-
-            //set adapter to autocomplete
-            lvListBarang.setAdapter(arrayAdapterString);
-
-            lvListBarang.setOnScrollListener(new AbsListView.OnScrollListener() {
+        if(firstLoadBarang){
+            firstLoadBarang = false;
+            actvListBarang.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onScrollStateChanged(AbsListView absListView, int i) {
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                    int threshold = 1;
-                    int countMerchant = lvListBarang.getCount();
+                }
 
-                    if (i == SCROLL_STATE_IDLE) {
-                        if (lvListBarang.getLastVisiblePosition() >= countMerchant - threshold && !isLoading) {
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                            isLoading = true;
-                            lvListBarang.addFooterView(footerList);
-                            start += count;
-                            getMoreData();
-                            //Log.i(TAG, "onScroll: last ");
-                        }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if(editable.toString().length() <= 0) {
+
+                        keyword = "";
+                        setDetailBarangAutocomplete();
                     }
-                }
-
-                @Override
-                public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-                }
-            });
-
-            lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Barang barang = (Barang) adapterView.getItemAtPosition(i);
-                    jenisBarang = "K";
-                    if(rgJenis.getCheckedRadioButtonId() == R.id.rb_2) jenisBarang = "R";
-                    GetBarangDetail(barang.getKodeBarang(), barang.getNamaBarang());
                 }
             });
         }
@@ -306,23 +286,23 @@ public class ListBarangCustom extends AppCompatActivity {
 
                             JSONObject responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
-                            moreList = new ArrayList<Barang>();
 
                             if(iv.parseNullInteger(status) == 200){
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
 
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    moreList.add(new Barang(jo.getString("kdbrg"),
+                                    masterBarang.add(new Barang(jo.getString("kdbrg"),
                                             jo.getString("namabrg")));
                                 }
                             }
 
-                            if(arrayAdapterString != null) arrayAdapterString.addMoreData(moreList);
                         }catch (Exception e){
                             e.printStackTrace();
 
                         }
+
+                        arrayAdapterString.notifyDataSetChanged();
                     }
 
                     @Override

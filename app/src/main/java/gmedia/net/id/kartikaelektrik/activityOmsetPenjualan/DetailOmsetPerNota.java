@@ -80,14 +80,17 @@ public class DetailOmsetPerNota extends AppCompatActivity {
         if(bundle != null){
 
             nik = bundle.getString("nik", session.getNik());
-            tvNamaCustomer.setText(bundle.getString("nama"));
-            noNota = bundle.getString("nonota");
+            tvNamaCustomer.setText(bundle.getString("nama",""));
+            noNota = bundle.getString("nonota","");
             tvNoNota.setText(noNota);
-            kdCus  = bundle.getString("kdcus");
-            tanggalAwal = bundle.getString("start");
-            tanggalAkhir = bundle.getString("end");
+            kdCus  = bundle.getString("kdcus","");
+            tanggalAwal = bundle.getString("start","");
+            tanggalAkhir = bundle.getString("end","");
+            String title = bundle.getString("title","");
             if(bundle.getBoolean("flagbarang", false)) flag = "BN";
             setListAutocomplete();
+
+            if(!title.isEmpty()) setTitle(title);
 
             btnRefresh.setOnClickListener(new View.OnClickListener() {
                 @Override

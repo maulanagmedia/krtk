@@ -139,9 +139,9 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                 }
             });
 
-            namaPelanggan = bundle.getString("namapelanggan");
-            namaAlamat = bundle.getString("namaalamat");
-            noBukti = bundle.getString("nobukti");
+            namaPelanggan = bundle.getString("namapelanggan","");
+            namaAlamat = bundle.getString("namaalamat","");
+            noBukti = bundle.getString("nobukti","");
             setTitle("Persetujuan Order "+ noBukti);
 
             setDetailSO();

@@ -89,14 +89,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_refresh"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/default_small_padding"
-            android:id="@+id/lv_fragment_detail_category_barang" />
+            android:id="@+id/lv_barang" />
     </LinearLayout>
 
 </RelativeLayout>

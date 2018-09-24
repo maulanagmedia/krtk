@@ -38,5 +38,6 @@ public class ServerURL {
     public static final String getLabaRugiOmsetSetoran = baseURL + "LabaRugi/pelunasan_piutang/";
     public static final String kunciSetoran = baseURL + "Setoran/kunci_setoran/";
     public static final String loginByNik = baseURL + "Auth/login_nik/";
-    public static final String getHistoryBarangCanvas = baseURL + "Barang/history_canvas//";
+    public static final String getHistoryBarangCanvas = baseURL + "Barang/history_canvas/";
+    public static final String getStatus = baseURL + "Barang/master_status/";
 }

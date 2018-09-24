@@ -35,7 +35,7 @@ public class ListJatuhTempoGiroAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private TextView item1, item2, item3, item4, item5, item6;
+        private TextView item1, item2, item3, item4, item5, item6, item7, item8;
     }
 
     public void addMoreData(List<CustomListItem> moreData){
@@ -63,13 +63,15 @@ public class ListJatuhTempoGiroAdapter extends ArrayAdapter {
             holder.item4 = (TextView) convertView.findViewById(R.id.tv_item_4);
             holder.item5 = (TextView) convertView.findViewById(R.id.tv_item_5);
             holder.item6 = (TextView) convertView.findViewById(R.id.tv_item_6);
+            holder.item7 = (TextView) convertView.findViewById(R.id.tv_item_7);
+            holder.item8 = (TextView) convertView.findViewById(R.id.tv_item_8);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
 
         String formatDate = context.getResources().getString(R.string.format_date);
-        String formatDateDisplay = context.getResources().getString(R.string.format_date_display3);
+        String formatDateDisplay = context.getResources().getString(R.string.format_date_display);
         final CustomListItem item = items.get(position);
 
         holder.item1.setText(item.getListItem3());
@@ -78,6 +80,8 @@ public class ListJatuhTempoGiroAdapter extends ArrayAdapter {
         holder.item4.setText(item.getListItem4());
         holder.item5.setText(item.getListItem5());
         holder.item6.setText(item.getListItem7());
+        holder.item7.setText(item.getListItem8());
+        holder.item8.setText(iv.ChangeToCurrencyFormat(item.getListItem9()));
 
         return convertView;
     }

@@ -381,7 +381,7 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/edt_diskon"
                                     android:hint="Diskon"
-                                    android:inputType="numberSigned"/>
+                                    android:inputType="phone"/>
                             </android.support.design.widget.TextInputLayout>
 
                             <TextView

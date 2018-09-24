@@ -15,13 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.OrderJSONHandler;
 import gmedia.net.id.kartikaelektrik.R;
@@ -29,6 +32,8 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.adapter.CustomerOrder.ListSalesOrderAdapter;
+import gmedia.net.id.kartikaelektrik.util.OptionItem;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,6 +59,9 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
     private EditText edtAwal, edtAkhir;
     private LinearLayout llShow;
     private TextView tvTotal;
+    private Spinner spnStatus;
+    private List<OptionItem> listStatus = new ArrayList<>();
+    private String selectedStatus = "";
 
     public MenuUtamaSalesOrder(){}
 
@@ -80,6 +88,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
         llLoadSO = (LinearLayout) layout.findViewById(R.id.ll_load_so);
         pbLoadSO = (ProgressBar) layout.findViewById(R.id.pb_load_so);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh_so);
+        spnStatus = (Spinner) layout.findViewById(R.id.spn_status);
 
         formatDate = context.getResources().getString(R.string.format_date);
         formatDateDisplay = context.getResources().getString(R.string.format_date_display);
@@ -112,7 +121,81 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
             }
         });
 
-        getListAutocomplete();
+        getDataStatus();
+    }
+
+    private void getDataStatus() {
+
+        JSONObject jsonBody = new JSONObject();
+        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", ServerURL.getStatus, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        JSONObject responseAPI = new JSONObject();
+
+                        try {
+
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            listStatus = new ArrayList<>();
+
+                            if(Integer.parseInt(status) == 200){
+
+                                JSONArray ja = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < ja.length(); i++){
+
+                                    JSONObject jo = ja.getJSONObject(i);
+                                    listStatus.add(new OptionItem(
+                                            jo.getString("kode")
+                                            , jo.getString("status")
+                                    ));
+                                }
+                            }
+
+                        }catch (Exception e){
+
+                            e.printStackTrace();
+                            Toast.makeText(context, "Keslaahan saat memuat data status, harap refresh halaman", Toast.LENGTH_LONG).show();
+                        }
+
+                        setStatusAdapter(listStatus);
+                        getListAutocomplete();
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        Toast.makeText(context, "Keslaahan saat memuat data status, harap refresh halaman", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void setStatusAdapter(List<OptionItem> listItem) {
+
+        spnStatus.setAdapter(null);
+
+        if(listItem != null && listItem.size() > 0){
+
+            ArrayAdapter adapter = new ArrayAdapter(context, R.layout.normal_spinner, listItem);
+            spnStatus.setAdapter(adapter);
+
+            spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    OptionItem item = (OptionItem) parent.getItemAtPosition(position);
+                    selectedStatus = item.getValue();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spnStatus.setSelection(0);
+            selectedStatus = listStatus.get(0).getValue();
+        }
     }
 
     private void initValidation() {
@@ -137,7 +220,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
         tanggalAwal = iv.ChangeFormatDateString(edtAwal.getText().toString(), formatDateDisplay, formatDate);
         tanggalAkhir = iv.ChangeFormatDateString(edtAkhir.getText().toString(), formatDateDisplay, formatDate);
         JSONObject jsonBody = new JSONObject();
-        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", baseURL + "barang/index?datestart="+tanggalAwal+"&dateend="+tanggalAkhir, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jsonBody, "GET", baseURL + "barang/index?datestart="+tanggalAwal+"&dateend="+tanggalAkhir+"&status="+selectedStatus, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){

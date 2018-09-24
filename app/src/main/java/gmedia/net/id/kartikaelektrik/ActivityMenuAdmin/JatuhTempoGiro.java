@@ -129,7 +129,9 @@ public class JatuhTempoGiro extends AppCompatActivity {
                                             jo.getString("daribank"),
                                             jo.getString("kebank"),
                                             jo.getString("tgljatuhtempo"),
-                                            jo.getString("umur")
+                                            jo.getString("umur"),
+                                            jo.getString("no_giro"),
+                                            jo.getString("total")
                                             ));
                                 }
                             }

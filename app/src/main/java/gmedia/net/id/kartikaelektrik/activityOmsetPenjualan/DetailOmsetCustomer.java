@@ -80,12 +80,12 @@ public class DetailOmsetCustomer extends AppCompatActivity {
         if(bundle != null){
 
             nik = bundle.getString("nik", session.getNik());
-            namaCustomer = bundle.getString("nama");
+            namaCustomer = bundle.getString("nama", "");
             tvNamaCustomer.setText(namaCustomer);
-            tvTotal.setText(bundle.getString("total"));
-            kdCus  = bundle.getString("kdcus");
-            tanggalAwal = bundle.getString("start");
-            tanggalAkhir = bundle.getString("end");
+            tvTotal.setText(bundle.getString("total",""));
+            kdCus  = bundle.getString("kdcus","");
+            tanggalAwal = bundle.getString("start","");
+            tanggalAkhir = bundle.getString("end","");
 
             setListAutocomplete();
 

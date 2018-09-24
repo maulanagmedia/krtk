@@ -2,11 +2,13 @@ package gmedia.net.id.kartikaelektrik.activitySetoran;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.DetailOmsetPerNota;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranNotaAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
@@ -136,7 +139,10 @@ public class DetailSetoranPerNota extends AppCompatActivity {
                                     jo.getString("daribank"),
                                     jo.getString("kenamabank"),
                                     jo.getString("tgltransfer"),
-                                    jo.getString("jumlah")));
+                                    jo.getString("jumlah"),
+                                    jo.getString("tgl_input"),
+                                    jo.getString("kdcus")
+                            ));
 
                             total += iv.parseNullDouble(jo.getString("jumlah"));
                         }
@@ -174,9 +180,30 @@ public class DetailSetoranPerNota extends AppCompatActivity {
 
         if(listItems != null && listItems.size() > 0){
 
-            DetailSetoranNotaAdapter adapter = new DetailSetoranNotaAdapter((Activity) context, listItems);
+            final DetailSetoranNotaAdapter adapter = new DetailSetoranNotaAdapter((Activity) context, listItems);
             lvRincianSetoran.setAdapter(adapter);
 
+            lvRincianSetoran.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
+
+                    String formatDateTime = context.getResources().getString(R.string.format_date1);
+                    String formatDate = context.getResources().getString(R.string.format_date);
+
+                    Intent intent = new Intent(context, DetailOmsetPerNota.class);
+                    intent.putExtra("nama", item.getListItem2());
+                    intent.putExtra("nonota", item.getListItem1());
+                    intent.putExtra("kdcus", item.getListItem9());
+                    intent.putExtra("start", iv.ChangeFormatDateString(item.getListItem8(), formatDateTime, formatDate));
+                    intent.putExtra("end", iv.ChangeFormatDateString(item.getListItem8(), formatDateTime, formatDate));
+                    intent.putExtra("flagbarang", true);
+                    intent.putExtra("title", "Detail Barang");
+
+                    startActivity(intent);
+                }
+            });
         }
     }
 

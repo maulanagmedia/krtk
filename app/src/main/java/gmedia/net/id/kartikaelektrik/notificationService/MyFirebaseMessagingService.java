@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gmedia.net.id.kartikaelektrik.MainActivity;
+import gmedia.net.id.kartikaelektrik.activityPermintaanHargaOrder.DetailPermintaanHargaOrder;
 
 /**
  * Created by Shin on 2/13/2017.
@@ -51,9 +52,35 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // need no change
         Intent intent = new Intent(this, MainActivity.class);
+        int typeContent = 0;
         for(String key: extra.keySet()){
-            intent.putExtra(key, extra.get(key));
+            if(key.trim().toUpperCase().equals("JENIS")){
+                if(extra.get(key).trim().toUpperCase().equals("ACT_APV_HARGA")){
+                    typeContent = 1;
+                }else if(extra.get(key).trim().toUpperCase().equals("CHAT")){
+                    typeContent = 2;
+                }else if(extra.get(key).trim().toUpperCase().equals("DEPOSIT")){
+                    typeContent = 3;
+                }
+            }
         }
+
+        if(typeContent != 9){
+            switch (typeContent){
+                case 1:
+                    intent = new Intent(this, DetailPermintaanHargaOrder.class);
+                    break;
+                default:
+                    intent = new Intent(this, MainActivity.class);
+                    break;
+            }
+
+            intent.putExtra("backto", true);
+            for(String key: extra.keySet()){
+                intent.putExtra(key, extra.get(key));
+            }
+        }
+
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0 /*request code*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
