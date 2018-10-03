@@ -92,6 +92,44 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/ll_diskon"
+            android:visibility="gone"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_small_padding1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:text="Total Diskon"
+                    android:textSize="@dimen/default_text_subtitle_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/default_small_padding1"
+                    android:paddingLeft="@dimen/default_small_padding1"
+                    android:paddingRight="@dimen/default_small_padding1"
+                    android:id="@+id/tv_item_4"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/default_text_title_size"
+                    android:ellipsize="none"
+                    android:scrollHorizontally="false"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

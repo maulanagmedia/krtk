@@ -103,14 +103,16 @@ public class ReturTelahDiproses extends AppCompatActivity {
 
             setListAutocomplete();
 
-            btnRefresh.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    setListAutocomplete();
-                }
-            });
         }
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setListAutocomplete();
+            }
+        });
     }
 
     private void initValidation() {
@@ -193,13 +195,16 @@ public class ReturTelahDiproses extends AppCompatActivity {
                                         namaCustomer = jo.getString("customer");
                                     }
 
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"),
-                                            jo.getString("customer"),
-                                            iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay),
-                                            jo.getString("ppn"),
-                                            jo.getString("diskon"),
-                                            iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))),
-                                            jo.getString("keterangan")));
+                                    masterList.add(new CustomListItem(
+                                            jo.getString("nobukti")
+                                            ,jo.getString("customer")
+                                            ,iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay)
+                                            ,jo.getString("ppn")
+                                            ,jo.getString("diskon")
+                                            ,iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total")))
+                                            ,jo.getString("keterangan")
+                                            ,jo.getString("status")
+                                    ));
 
                                     total += Double.parseDouble(jo.getString("total"));
                                 }
@@ -234,6 +239,7 @@ public class ReturTelahDiproses extends AppCompatActivity {
         actvNamaPelanggan.setAdapter(null);
 
         if(listItemCustomer != null && listItemCustomer.size() > 0){
+
             /*CustomListItemAutocompleteAdapter arrayAdapterString;
 
             //set adapter for autocomplete

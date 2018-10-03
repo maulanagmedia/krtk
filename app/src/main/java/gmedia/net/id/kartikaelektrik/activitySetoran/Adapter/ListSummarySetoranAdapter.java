@@ -37,8 +37,8 @@ public class ListSummarySetoranAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private LinearLayout container;
-        private TextView item1, item2, item3;
+        private LinearLayout container, llDiskon;
+        private TextView item1, item2, item3, item4;
     }
 
     @Override
@@ -57,9 +57,11 @@ public class ListSummarySetoranAdapter extends ArrayAdapter {
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_summary_setoran, null);
             holder.container = (LinearLayout) convertView.findViewById(R.id.ll_item_container);
+            holder.llDiskon= (LinearLayout) convertView.findViewById(R.id.ll_diskon);
             holder.item1 = (TextView) convertView.findViewById(R.id.tv_item_1);
             holder.item2 = (TextView) convertView.findViewById(R.id.tv_item_2);
             holder.item3 = (TextView) convertView.findViewById(R.id.tv_item_3);
+            holder.item4 = (TextView) convertView.findViewById(R.id.tv_item_4);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -69,6 +71,8 @@ public class ListSummarySetoranAdapter extends ArrayAdapter {
         holder.item1.setText(item.getListItem2());
         holder.item2.setText(item.getListItem3());
         holder.item3.setText(iv.ChangeToCurrencyFormat(item.getListItem4()));
+
+
 
         return convertView;
     }

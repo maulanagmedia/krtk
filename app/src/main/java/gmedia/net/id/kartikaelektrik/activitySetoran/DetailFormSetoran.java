@@ -78,6 +78,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private LinearLayout llDiskon;
     private EditText edtDiskon;
     private EditText edtHargaDiskon;
+    private EditText edtTotalDibayar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class DetailFormSetoran extends AppCompatActivity {
         llDiskon = (LinearLayout) findViewById(R.id.ll_diskon);
         edtDiskon = (EditText) findViewById(R.id.edt_diskon);
         edtHargaDiskon = (EditText) findViewById(R.id.edt_harga_diskon);
+        edtTotalDibayar = (EditText) findViewById(R.id.edt_total_dibayar);
 
         isConfirm = true;
         sisaPiutang = 0;
@@ -385,12 +387,11 @@ public class DetailFormSetoran extends AppCompatActivity {
                         sisaPiutang = 0;
                         edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
                     }else{
-                        sisaPiutang = iv.parseNullDouble(cleanString.toString());
+                        sisaPiutang = iv.parseNullDouble(cleanString);
                         edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
                     }
 
                     edtDiskon.setText("");
-
                     edtTotal.addTextChangedListener(this);
                 }
             }
@@ -436,6 +437,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                     String formatted = iv.ChangeToCurrencyFormat(cleanString);
 
                     currentStringDiskon = formatted;
+                    hitungTotalDibayar();
                     edtHargaDiskon.setText(formatted);
                     edtHargaDiskon.setSelection(formatted.length());
                     edtHargaDiskon.addTextChangedListener(this);
@@ -477,6 +479,13 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         if(totalPiutangCurrent > 0) edtTotal.setText(iv.doubleToString(totalPiutangCurrent));
         getDataBank();
+    }
+
+    private void hitungTotalDibayar() {
+
+        String totalBayar = edtTotal.getText().toString().replaceAll("[,.]", "");
+        String totalHargaDiskon = edtHargaDiskon.getText().toString().replaceAll("[,.]", "");
+        edtTotalDibayar.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(iv.parseNullDouble(totalBayar) - iv.parseNullDouble(totalHargaDiskon))));
     }
 
     private void calculateDiscount(){
@@ -726,15 +735,21 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         if(adapterPiutangSales != null){
 
+            List<OptionItem> listItems = adapterPiutangSales.getItems();
             int i = 0;
-            for(OptionItem item: adapterPiutangSales.getItems()){
+            for(OptionItem item: listItems){
 
                 if(item.isSelected()){
 
                     JSONObject jOrder = new JSONObject();
                     try {
+
+                        String total = (listItems.size() == 1
+                                && !edtTotalDibayar.getText().toString().isEmpty()
+                                && !edtTotalDibayar.getText().toString().equals("0")) ? edtTotalDibayar.getText().toString() : item.getAtt2();
+                        total = total.replaceAll("[,.]", "");
                         jOrder.put("nonota", item.getValue());
-                        jOrder.put("jumlah", item.getAtt2());
+                        jOrder.put("jumlah", total);
                         jOrder.put("crbayar", crBayar);
                         jOrder.put("kode_bank", kodeBank);
                         jOrder.put("bank", namaBank);

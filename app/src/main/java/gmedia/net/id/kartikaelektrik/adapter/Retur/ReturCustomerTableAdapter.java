@@ -107,7 +107,7 @@ public class ReturCustomerTableAdapter extends ArrayAdapter {
         }else if(tipeViewList == 2){
             holder.tvItem1.setText(item.getListItem1());
             holder.tvItem2.setText(item.getListItem3());
-            holder.tvItem3.setText(item.getListItem4());
+            holder.tvItem3.setText(item.getListItem8());
             holder.tvItem4.setText(item.getListItem5());
             holder.tvItem5.setText(item.getListItem6());
             holder.tvItem6.setText(item.getListItem7());

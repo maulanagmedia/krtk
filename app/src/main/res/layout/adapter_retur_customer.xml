@@ -98,7 +98,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="1.2"
                 android:paddingBottom="@dimen/default_small_padding"
                 android:orientation="vertical">
 
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_small_padding1"
-                    android:text="PPN"
+                    android:text="Status"
                     android:textSize="@dimen/default_text_subtitle_size"
                     android:textStyle="bold" />
 
@@ -129,10 +129,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/default_small_padding1"
                 android:layout_marginTop="@dimen/default_small_padding1"
+                android:visibility="gone"
                 android:background="@color/color_grey"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:paddingBottom="@dimen/default_small_padding"

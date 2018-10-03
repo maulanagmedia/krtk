@@ -100,10 +100,12 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
                 }
 
                 listSetoran.add(new CustomListItem(
-                        String.valueOf(i),
-                        jo.getString("nonota"),
-                        crBayar + (jo.getString("bank").length() > 0 ? "( "+jo.getString("bank") + ")" : ""),
-                        jo.getString("jumlah")));
+                        String.valueOf(i)
+                        ,jo.getString("nonota")
+                        ,crBayar + (jo.getString("bank").length() > 0 ? "( "+jo.getString("bank") + ")" : "")
+                        ,jo.getString("jumlah")
+                        ,jo.getString("totaldiskon")
+                ));
 
                 total += iv.parseNullDouble(jo.getString("jumlah"));
 

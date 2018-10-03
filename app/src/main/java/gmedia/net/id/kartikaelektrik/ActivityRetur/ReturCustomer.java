@@ -195,13 +195,16 @@ public class ReturCustomer extends AppCompatActivity {
                                         namaCustomer = jo.getString("customer");
                                     }
 
-                                    masterList.add(new CustomListItem(jo.getString("nobukti"),
-                                            jo.getString("customer"),
-                                            iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay),
-                                            jo.getString("ppn"),
-                                            jo.getString("diskon"),
-                                            iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total"))),
-                                            jo.getString("keterangan")));
+                                    masterList.add(new CustomListItem(
+                                            jo.getString("nobukti")
+                                            ,jo.getString("customer")
+                                            ,iv.ChangeFormatDateString(jo.getString("tgl"), formatDate, formatDateDisplay)
+                                            ,jo.getString("ppn")
+                                            ,jo.getString("diskon")
+                                            ,iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total")))
+                                            ,jo.getString("keterangan")
+                                            ,jo.getString("status")
+                                    ));
 
                                     total += Double.parseDouble(jo.getString("total"));
 
