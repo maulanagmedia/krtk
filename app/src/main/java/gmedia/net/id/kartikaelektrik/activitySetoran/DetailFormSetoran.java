@@ -309,8 +309,8 @@ public class DetailFormSetoran extends AppCompatActivity {
                             listNota.add(new OptionItem(
                                     jdp.getString("nonota"),
                                     jdp.getString("tanggal"),
-                                    jdp.getString("sisa"),
-                                    jdp.getString("jumlah"),
+                                    iv.doubleToString(iv.parseNullDouble(jdp.getString("sisa"))),
+                                    iv.doubleToString(iv.parseNullDouble(jdp.getString("jumlah"))),
                                     jdp.getString("tanda"),
                                     true));
                         }
@@ -392,6 +392,7 @@ public class DetailFormSetoran extends AppCompatActivity {
                     }
 
                     edtDiskon.setText("");
+                    hitungTotalDibayar();
                     edtTotal.addTextChangedListener(this);
                 }
             }
@@ -746,7 +747,8 @@ public class DetailFormSetoran extends AppCompatActivity {
 
                         String total = (listItems.size() == 1
                                 && !edtTotalDibayar.getText().toString().isEmpty()
-                                && !edtTotalDibayar.getText().toString().equals("0")) ? edtTotalDibayar.getText().toString() : item.getAtt2();
+                                && !edtTotalDibayar.getText().toString().equals("0")) ? edtTotalDibayar.getText().toString() : iv.doubleToString(iv.parseNullDouble(item.getAtt2()));
+
                         total = total.replaceAll("[,.]", "");
                         jOrder.put("nonota", item.getValue());
                         jOrder.put("jumlah", total);
