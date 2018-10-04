@@ -203,7 +203,7 @@ public class ReturTelahDiproses extends AppCompatActivity {
                                             ,jo.getString("diskon")
                                             ,iv.ChangeToRupiahFormat(Double.parseDouble(jo.getString("total")))
                                             ,jo.getString("keterangan")
-                                            ,jo.getString("status")
+                                            ,jo.getString("note")
                                     ));
 
                                     total += Double.parseDouble(jo.getString("total"));
