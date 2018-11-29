@@ -246,8 +246,8 @@ public class LocationUpdater extends Service implements LocationListener {
 
         try {
             jsonBody.put("tanggal", iv.getCurrentDate(formatDate));
-            jsonBody.put("longitude", iv.doubleToStringFull(latitude));
-            jsonBody.put("latitude", iv.doubleToStringFull(longitude));
+            jsonBody.put("longitude", iv.doubleToStringFull(longitude));
+            jsonBody.put("latitude", iv.doubleToStringFull(latitude));
             jsonBody.put("keterangan", address0);
             jsonBody.put("flag", "U");
         } catch (JSONException e) {

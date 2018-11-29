@@ -28,8 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
-import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
@@ -66,16 +66,22 @@ public class LoginScreen extends RuntimePermissionsActivity {
 
 
         // for android > M
-        if (ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.WRITE_SETTINGS) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
+        if (ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(LoginScreen.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
 
             LoginScreen.super.requestAppPermissions(new
-                            String[]{Manifest.permission.WRITE_SETTINGS, Manifest.permission.WAKE_LOCK, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.WAKE_LOCK, android.Manifest.permission.READ_EXTERNAL_STORAGE}, gmedia.net.id.kartikaelektrik.R.string
+                            String[]{
+                            Manifest.permission.WAKE_LOCK
+                            ,android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            ,Manifest.permission.READ_EXTERNAL_STORAGE
+                            ,Manifest.permission.CAMERA
+                            ,Manifest.permission.ACCESS_FINE_LOCATION
+                            ,Manifest.permission.ACCESS_COARSE_LOCATION
+                    }, gmedia.net.id.kartikaelektrik.R.string
                             .runtime_permissions_txt
                     , REQUEST_PERMISSIONS);
         }
@@ -91,12 +97,12 @@ public class LoginScreen extends RuntimePermissionsActivity {
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
-        /*if(session.isLoggedIn()){
+        if(session.isLoggedIn()){
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
-        }*/
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -174,7 +180,6 @@ public class LoginScreen extends RuntimePermissionsActivity {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                                 btnLogin.setEnabled(true);
-                                startService(new Intent(LoginScreen.this, BackgroundLocationService.class));
                                 onLoginSuccess();
 
                                 edtUsername.setText("");
@@ -302,7 +307,13 @@ public class LoginScreen extends RuntimePermissionsActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            stopService(new Intent(LoginScreen.this, BackgroundLocationService.class));
+            try {
+
+                stopService(new Intent(LoginScreen.this, LocationUpdater.class));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             finish();
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             System.exit(0);

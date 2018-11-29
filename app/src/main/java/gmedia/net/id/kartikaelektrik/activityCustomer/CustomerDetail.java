@@ -1,10 +1,14 @@
 package gmedia.net.id.kartikaelektrik.activityCustomer;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +23,7 @@ import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.Rayon;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +47,12 @@ public class CustomerDetail extends AppCompatActivity {
     private TextView tvSave;
     private LinearLayout llKodePelanggan;
     private EditText edtNPWP;
+    private Context context;
+    private boolean isFromSaveLimit = false;
+    private String kdcus = "";
+    private LinearLayout llLimit;
+    private EditText edtLimit;
+    private String currentString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +63,7 @@ public class CustomerDetail extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        context = this;
         initUI();
     }
 
@@ -82,13 +94,23 @@ public class CustomerDetail extends AppCompatActivity {
         spRayon = (Spinner) findViewById(R.id.sp_kode_rayon);
         llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
         tvSave = (TextView) findViewById(R.id.tv_save);
+        llLimit = (LinearLayout) findViewById(R.id.ll_limit);
+        edtLimit = (EditText) findViewById(R.id.edt_limit);
+
+        isFromSaveLimit = false;
 
         Bundle bundle = getIntent().getExtras();
 
         edtMaxPiutang.addTextChangedListener(iv.textChangeListenerCurrency(edtMaxPiutang));
 
         if(bundle != null){
-            kodeCustomer = bundle.getString("kodecustomer");
+
+            kodeCustomer = bundle.getString("kodecustomer","");
+            if(!kodeCustomer.isEmpty()){
+                llLimit.setVisibility(View.GONE);
+            }else{
+                llLimit.setVisibility(View.VISIBLE);
+            }
             edtKodePelanggan.setText(kodeCustomer);
             llKodePelanggan.setVisibility(View.VISIBLE);
             edtKodePelanggan.setKeyListener(null);
@@ -96,6 +118,8 @@ public class CustomerDetail extends AppCompatActivity {
             tvSave.setText("Update Pelanggan");
             llSaveContainer.setVisibility(View.GONE);
         }else{
+
+            llLimit.setVisibility(View.VISIBLE);
             llKodePelanggan.setVisibility(View.GONE);
             insertMode = true;
             tvSave.setText("Tambah Pelanggan");
@@ -103,6 +127,37 @@ public class CustomerDetail extends AppCompatActivity {
         }
 
         urlGetRayon = getResources().getString(R.string.url_get_all_rayon);
+
+        edtLimit.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!editable.toString().equals(currentString)){
+
+                    String cleanString = editable.toString().replaceAll("[,.]", "");
+                    edtLimit.removeTextChangedListener(this);
+
+                    String formatted = iv.ChangeToCurrencyFormat(cleanString);
+
+                    currentString = formatted;
+                    edtLimit.setText(formatted);
+                    edtLimit.setSelection(formatted.length());
+                    edtLimit.addTextChangedListener(this);
+                }
+            }
+        });
 
         getKodeRayon();
     }
@@ -225,6 +280,12 @@ public class CustomerDetail extends AppCompatActivity {
                                     }
                                 }
 
+                                if(isFromSaveLimit && !kdcus.isEmpty()){
+
+                                    saveApprove(kdcus, edtLimit.getText().toString().replaceAll("[,.]", ""));
+                                    return;
+                                }
+
                                 try {
                                     jsonBody.put("nama", edtNamaPelanggan.getText().toString());
                                     jsonBody.put("alamat", edtAlamat.getText().toString());
@@ -253,10 +314,14 @@ public class CustomerDetail extends AppCompatActivity {
                                             responseAPI = new JSONObject(result);
                                             String message = responseAPI.getJSONObject("metadata").getString("message");
                                             String status = responseAPI.getJSONObject("metadata").getString("status");
-                                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show(); // show message response
 
                                             if(Integer.parseInt(status) == 201 || Integer.parseInt(status) == 200){ // Success insert SO
-                                                finish();
+
+                                                kdcus = responseAPI.getJSONObject("response").getJSONObject("dat_customer").getString("kdcus");
+                                                saveApprove(kdcus, edtLimit.getText().toString().replaceAll("[,.]", ""));
+                                            }else{
+
+                                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show(); // show message response
                                             }
 
                                         } catch (Exception e) {
@@ -278,6 +343,58 @@ public class CustomerDetail extends AppCompatActivity {
                 return;
             }
         }).show();
+    }
+
+    public void saveApprove(String kdcus, String jumlah) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("kdcus", kdcus);
+            jBody.put("jumlah", jumlah);
+            jBody.put("flag", "1"); // tanda harus pakai limit
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        isFromSaveLimit = true;
+
+        ApiVolley apiVolley = new ApiVolley(context, jBody, "POST", ServerURL.sendCustomerLimit, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                progressDialog.dismiss();
+                try {
+
+                    JSONObject responseAPI = new JSONObject(result);
+                    String status = responseAPI.getJSONObject("metadata").getString("status");
+                    String message = responseAPI.getJSONObject("metadata").getString("message");
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+                    if(Integer.parseInt(status) == 200){
+
+                        finish();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void getDetailCustomer() {

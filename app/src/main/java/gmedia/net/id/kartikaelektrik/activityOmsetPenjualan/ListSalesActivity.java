@@ -41,7 +41,6 @@ import gmedia.net.id.kartikaelektrik.MainActivity;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.Adapter.ListSalesAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
-import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;

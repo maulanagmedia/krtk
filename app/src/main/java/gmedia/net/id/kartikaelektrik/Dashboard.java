@@ -21,9 +21,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.adapter.DashboardAdapter;
-import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.MasterDataHandler;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
@@ -351,7 +351,7 @@ public class Dashboard extends RuntimePermissionsActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            stopService(new Intent(Dashboard.this, BackgroundLocationService.class));
+            stopService(new Intent(Dashboard.this, LocationUpdater.class));
             finish();
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             System.exit(0);

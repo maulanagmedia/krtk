@@ -130,5 +130,6 @@
     <!--Status-->
     <string name="url_get_status">http://kartika.gmedia.bz/api/auth/get_mobile_status/</string>
     <string name="url_update_status">http://kartika.gmedia.bz/api/auth/update_mobile_status/</string>
+    <string name="title_activity_perjalanan_sales">Map</string>
 
 </resources>

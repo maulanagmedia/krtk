@@ -40,4 +40,8 @@ public class ServerURL {
     public static final String loginByNik = baseURL + "Auth/login_nik/";
     public static final String getHistoryBarangCanvas = baseURL + "Barang/history_canvas/";
     public static final String getStatus = baseURL + "Barang/master_status/";
+    public static final String getCustomerHistoryLimit = baseURL + "customer/header_limit/";
+    public static final String getCustomerHistoryLimitDetail = baseURL + "customer/detail_limit/";
+    public static final String getHeaderImages = baseURL + "promo/view_promo/";
+    public static final String saveHeaderImages = baseURL + "promo/index/";
 }

@@ -3,391 +3,574 @@
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin">
+    >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:weightSum="6"
-        android:layout_marginRight="4dp">
+        android:scrollbars="none"
+        android:padding="@dimen/default_small_padding"
+        >
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:weightSum="6"
+            android:layout_marginRight="4dp">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_laba_rugi_omset_jual"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_laba_rugi_omset_jual"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_money" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Laba Rugi Omset Jual"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_money" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Laba Rugi Omset Jual"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_laba_rugi_omset_setoran"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_laba_rugi_omset_setoran"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_setoran" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Laba Rugi Omset Setoran"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_setoran" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Laba Rugi Omset Setoran"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_approve_harga_so"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_approve_harga_so"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:id="@+id/imageView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_check" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Approval Harga SO"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_check" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Approval Harga SO"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_jatuh_tempo_giro"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_jatuh_tempo_giro"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_calendar" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Jatuh Tempo Giro"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_calendar" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Jatuh Tempo Giro"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_verifikasi_limit_customer"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_verifikasi_limit_customer"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_customer_limit" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Verifikasi Limit Customer"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_customer_limit" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Verifikasi Limit Customer"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardElevation="@dimen/default_small_padding"
-            android:layout_marginBottom="@dimen/default_small_padding">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/ll_masuk_sebagai_sales"
-                android:background="@drawable/ripple_red"
-                android:padding="@dimen/default_small_padding"
-                android:weightSum="1">
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_history_limit"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.7"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_people" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical|left"
-                    android:text="Masuk Sebagai Sales"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_forward" />
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
 
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_history_limit" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="History Limit Customer"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_pengaturan_header"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_image" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Pengaturan Header"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_perjalanan_sales"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_map" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Perjalanan Sales"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_menu_hight"
+                app:cardElevation="@dimen/default_small_padding"
+                android:layout_marginBottom="@dimen/default_small_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_masuk_sebagai_sales"
+                    android:background="@drawable/ripple_red"
+                    android:padding="@dimen/default_small_padding"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.7"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_people" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|left"
+                        android:text="Masuk Sebagai Sales"
+                        android:textSize="@dimen/default_menu_text"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_forward" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

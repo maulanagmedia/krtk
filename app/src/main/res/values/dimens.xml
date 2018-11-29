@@ -51,4 +51,7 @@
     <dimen name="text_dashboard">18sp</dimen>
     <dimen name="text_menu">12sp</dimen>
 
+    <dimen name="default_menu_hight">64dp</dimen>
+    <dimen name="default_menu_text">18sp</dimen>
+
 </resources>

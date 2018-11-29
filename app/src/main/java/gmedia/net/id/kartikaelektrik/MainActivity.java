@@ -2,6 +2,7 @@ package gmedia.net.id.kartikaelektrik;
 
 import android.*;
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +30,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -39,11 +41,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import gmedia.net.id.kartikaelektrik.CustomView.WrapContentViewPager;
 import gmedia.net.id.kartikaelektrik.activityPiutang.DetailPiutangJatuhTempo;
 import gmedia.net.id.kartikaelektrik.adapter.DashboardAdapter;
-import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
+import gmedia.net.id.kartikaelektrik.adapter.HeaderSliderAdapter;
+import gmedia.net.id.kartikaelektrik.model.CustomListItem;
+import gmedia.net.id.kartikaelektrik.model.PhotoModel;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
@@ -51,13 +60,15 @@ import gmedia.net.id.kartikaelektrik.util.MasterDataHandler;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
+import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends RuntimePermissionsActivity {
 
     private final String TAG = "MainAct";
+    private List<CustomListItem> sliderList = new ArrayList<>();
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHistoryLimit;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHistoryLimit;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -90,6 +101,14 @@ public class MainActivity extends RuntimePermissionsActivity {
     private LinearLayout llDataPiutang, llPiutangTelat, llDataRetur, llDendaPelanggan;
     private TextView tvDataPiutang, tvPiutangTelat, tvDataRetur, tvDendaPelanggan;
     private AlertDialog dialogVersion;
+    private WrapContentViewPager vpHeaderSlider;
+    private Context context;
+
+    //header slider
+    private boolean firstLoad = true;
+    private int changeHeaderTimes = 5;
+    private Timer timer;
+    private HeaderSliderAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,17 +129,18 @@ public class MainActivity extends RuntimePermissionsActivity {
         }
 
         // for android > M
-        if (ContextCompat.checkSelfPermission(
-                MainActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                MainActivity.this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
 
             MainActivity.super.requestAppPermissions(new
                             String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE,
                             android.Manifest.permission.WAKE_LOCK,
+                            Manifest.permission.CAMERA,
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION}, gmedia.net.id.kartikaelektrik.R.string
                             .runtime_permissions_txt
@@ -129,7 +149,9 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         /*MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
         mdh.checkWeeklyUpdate();*/
+        context = this;
         dialogActive = false;
+        firstLoad = true;
 
         initUI();
     }
@@ -158,6 +180,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llUpdateMaster = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master);
         llMenuAdmin = (LinearLayout) findViewById(R.id.v_menu_admin);
         llCustomerLimit = (LinearLayout) findViewById(R.id.v_menu_customer_limit);
+        llHistoryLimit = (LinearLayout) findViewById(R.id.v_menu_history_limit);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -180,6 +203,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtUpdateMaster = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_update_master);
         ibtMenuAdmin = (ImageButton) findViewById(R.id.ibt_menu_admin);
         ibtCustomerLimit = (ImageButton) findViewById(R.id.ibt_menu_customer_limit);
+        ibtHistoryLimit = (ImageButton) findViewById(R.id.ibt_menu_history_limit);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llLine1 = (LinearLayout) findViewById(R.id.ll_line_1);
@@ -198,6 +222,11 @@ public class MainActivity extends RuntimePermissionsActivity {
         tvPiutangTelat = (TextView) findViewById(R.id.tv_piutang_telat);
         tvDataRetur = (TextView) findViewById(R.id.tv_data_retur);
         tvDendaPelanggan = (TextView) findViewById(R.id.tv_denda_pelanggan);
+
+        vpHeaderSlider = (WrapContentViewPager) findViewById(R.id.pager_introduction);
+        vpHeaderSlider.setScrollDurationFactor(4);
+
+        getListHeaderSlider();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -250,6 +279,91 @@ public class MainActivity extends RuntimePermissionsActivity {
         menuAnimation = AnimationUtils.loadAnimation(this, gmedia.net.id.kartikaelektrik.R.anim.menu_item_open);
 
         initEvent();
+    }
+
+    //region Slider Header
+    private void getListHeaderSlider() {
+
+        final JSONObject jsonBody = new JSONObject();
+        ApiVolley restService = new ApiVolley(this, jsonBody, "GET", ServerURL.getHeaderImages, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        JSONObject responseAPI = new JSONObject();
+
+                        try {
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(status.equals("200")){
+
+                                JSONArray ja = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < ja.length();i++ ){
+
+                                    JSONObject jo = ja.getJSONObject(i);
+                                    sliderList.add(new CustomListItem(jo.getString("id"), jo.getString("gambar"), "",""));
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(context, "Terjadi kesalahan saat memuat data, harap ulangi proses", Toast.LENGTH_LONG).show();
+                        }
+
+                        if(firstLoad){
+                            setViewPagerTimer(changeHeaderTimes);
+                            firstLoad = false;
+                        }
+
+                        setHeaderSlider();
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        Toast.makeText(context, "Terjadi kesalahan saat memuat data, harap ulangi proses", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+    private void setHeaderSlider(){
+
+        vpHeaderSlider.setAdapter(null);
+        mAdapter = null;
+        mAdapter = new HeaderSliderAdapter(context, sliderList);
+        vpHeaderSlider.setAdapter(mAdapter);
+        vpHeaderSlider.setCurrentItem(0);
+
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.ci_indicator);
+        indicator.setViewPager(vpHeaderSlider);
+        mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+    }
+
+    private void setViewPagerTimer(int seconds){
+        timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000);
+    }
+
+    class RemindTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            // As the TimerTask run on a seprate thread from UI thread we have
+            // to call runOnUiThread to do work on UI thread.
+            ((Activity) context).runOnUiThread(new Runnable() {
+                public void run() {
+
+                    if(vpHeaderSlider.getCurrentItem() == mAdapter.getCount() - 1){
+                        vpHeaderSlider.setCurrentItem(0);
+
+                    }else{
+                        vpHeaderSlider.setCurrentItem(vpHeaderSlider.getCurrentItem() + 1);
+                    }
+                }
+            });
+
+        }
     }
 
     private void initEvent() {
@@ -308,6 +422,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         ApiVolley restService = new ApiVolley(MainActivity.this, jsonBody, "POST", ServerURL.getDashboard, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
@@ -480,7 +595,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         checkVersion();
         CheckUserLevel();
 
-        statusCheck();
+        if(!sessionManager.getLaba().equals("1")) statusCheck();
     }
 
     public void statusCheck() {

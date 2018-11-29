@@ -12,29 +12,66 @@
         android:paddingTop="@dimen/default_small_padding"
         android:paddingBottom="@dimen/default_small_padding"
         android:id="@+id/ll_footer"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/color_grey3"
         android:weightSum="1">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text="Total"
-            android:textSize="11sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/default_small_padding"/>
+            android:orientation="vertical"
+            android:weightSum="1">
 
-        <TextView
-            android:layout_width="match_parent"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumlah Customer"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_jml_customer"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:text="0"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical|right"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_total"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/default_small_padding1"
-            android:text="0"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:gravity="center"/>
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_total"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:text="0"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical|right"/>
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

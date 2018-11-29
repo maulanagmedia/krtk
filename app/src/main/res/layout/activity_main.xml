@@ -19,6 +19,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/color_grey"
+                android:id="@+id/rl_header_slide">
+
+                <gmedia.net.id.kartikaelektrik.CustomView.WrapContentViewPager
+                    android:id="@+id/pager_introduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/slider_pager_item"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"></gmedia.net.id.kartikaelektrik.CustomView.WrapContentViewPager>
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/ci_indicator"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"/>
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1142,12 +1163,37 @@
                     android:gravity="center_horizontal"
                     android:paddingRight="@dimen/padding_main_menu"
                     android:paddingLeft="@dimen/padding_main_menu"
+                    android:visibility="invisible"
+                    android:background="@drawable/ripple_dashboard_menu"
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
+                    android:id="@+id/v_menu_history_limit"
                     android:layout_height="match_parent"
                     android:weightSum="2">
 
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/padding_main_menu"
+                        android:layout_marginTop="@dimen/padding_main_menu"
+                        android:layout_weight="1.1"
+                        android:background="#00000000"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_customer_limit"
+                        android:id="@+id/ibt_menu_history_limit"/>
+
+                    <TextView
+                        android:text="History Limit"
+                        android:layout_height="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:id="@+id/tv_history_limit"
+                        android:textColor="@color/color_font_light"
+                        android:textSize="@dimen/text_menu"
+                        android:gravity="center" />
                 </LinearLayout>
 
             </LinearLayout>

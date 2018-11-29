@@ -21,8 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import gmedia.net.id.kartikaelektrik.services.BackgroundLocationService;
-
 /**
  * Created by indra on 16/12/2016.
  * Description : Class to Access Rest API with Volley
@@ -88,9 +86,12 @@ public class ApiVolley {
                 if(response == null || response.equals("null")){
 
                     Toast.makeText(context, "Anda tidak memiliki ijin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
-                    if(iv.isServiceRunning(context, BackgroundLocationService.class)){
-                        context.stopService(new Intent(context, BackgroundLocationService.class));
+                    try {
+                        context.stopService(new Intent(context, LocationUpdater.class));
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
+
                     session.logoutUser();
                     ((Activity)context).finish();
                     return;
@@ -104,11 +105,18 @@ public class ApiVolley {
 
                     if(iv.parseNullInteger(status) == 401) { // unauthorized
 
+                        try {
+                            context.stopService(new Intent(context, LocationUpdater.class));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
                         String message = responseAPI.getJSONObject("metadata").getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                         session.logoutUser();
                         ((Activity)context).finish();
                         responseAPI = null;
+
                     }else{
 
                         if(status != null){

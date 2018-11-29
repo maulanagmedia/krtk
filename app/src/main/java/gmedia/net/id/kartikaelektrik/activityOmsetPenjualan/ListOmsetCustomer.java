@@ -52,7 +52,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
     private List<CustomListItem> masterList, autocompleteList, tableList;
     private ListView lvListOmset;
     private String formatDate = "", formatDateDisplay = "";
-    private TextView tvTotal;
+    private TextView tvTotal, tvJmlCustomer;
     private SessionManager session;
     private String nik = "";
 
@@ -85,6 +85,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
         pbLoad = (ProgressBar) findViewById(R.id.pb_load);
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvJmlCustomer = (TextView) findViewById(R.id.tv_jml_customer);
 
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
@@ -187,6 +188,7 @@ public class ListOmsetCustomer extends AppCompatActivity {
                             String status = responseAPI.getJSONObject("metadata").getString("status");
                             masterList = new ArrayList<CustomListItem>();
                             double total = 0;
+                            double jmlPeserta = 0;
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -203,9 +205,12 @@ public class ListOmsetCustomer extends AppCompatActivity {
                                     total += Double.parseDouble(jo.getString("piutang"));
 
                                 }
+
+                                jmlPeserta = arrayJSON.length();
                             }
 
                             tvTotal.setText(iv.ChangeToRupiahFormat(total));
+                            tvJmlCustomer.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(jmlPeserta)));
                             autocompleteList = new ArrayList<CustomListItem>(masterList);
                             tableList= new ArrayList<CustomListItem>(masterList);
                             getListAutocomplete(autocompleteList);

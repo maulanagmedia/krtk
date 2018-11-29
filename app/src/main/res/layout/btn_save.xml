@@ -26,7 +26,8 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:id="@+id/tv_save"
-                android:textStyle="bold|italic" />
+                android:textAllCaps="true"
+                android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>

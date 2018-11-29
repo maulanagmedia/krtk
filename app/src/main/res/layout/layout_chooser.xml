@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:paddingLeft="@dimen/default_small_padding"
+        android:paddingRight="@dimen/default_small_padding"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_browse"
+            android:layout_marginTop="@dimen/default_small_padding1"
+            android:layout_marginBottom="@dimen/default_small_padding1"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_folder"
+                android:background="@drawable/bg_input_left"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:background="@drawable/bg_input_right"
+                android:textSize="18sp"
+                android:padding="@dimen/default_small_padding"
+                android:text="Buka File"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/ll_camera"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:layout_marginBottom="@dimen/default_small_padding2"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_camera"
+                android:background="@drawable/bg_input_left"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:background="@drawable/bg_input_right"
+                android:textSize="18sp"
+                android:padding="@dimen/default_small_padding"
+                android:text="Buka Kamera"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

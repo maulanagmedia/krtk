@@ -4,15 +4,13 @@
     package="gmedia.net.id.kartikaelektrik">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
@@ -27,6 +25,16 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <!-- Service -->
         <service android:name=".notificationService.MyFirebaseMessagingService">
@@ -69,76 +77,103 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activityTambahOrderSales.ListMenuCategoryBarang"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityTambahOrderSales.ListMenuCategoryBarangDetailPotrait"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityTambahOrderSales.OrderDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activitySalesOrderDetail.DetailSalesOrder"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activityTambahOrderSales.ListMenuCategoryBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityTambahOrderSales.ListMenuCategoryBarangDetailPotrait"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityTambahOrderSales.OrderDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySalesOrderDetail.DetailSalesOrder"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".services.BackgroundLocationService" />
+        <!-- <service android:name=".services.BackgroundLocationService" /> -->
 
-        <activity android:name=".activityPiutang.ListPiutang"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityCustomer.CustomerDetail"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginScreen"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activityPiutang.ListPiutang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityCustomer.CustomerDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginScreen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Dashboard"
-            android:theme="@style/AppTheme.NoActionBarDashboard"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DashboardContainer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ChangePassword"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityKomisi.KomisiPembayaran"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".activityKomisi.DetailKomisiDendaPembayaran"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityKomisi.SubDetailKomisiDendaPembayaran"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityDenda.DendaPembayaran"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityBonus.Bonus"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityBonus.DetailBonus"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityBonus.SubDetailBonus"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".activityPermintaanHargaOrder.DetailPermintaanHargaOrder"
+            android:theme="@style/AppTheme.NoActionBarDashboard" />
+        <activity
+            android:name=".DashboardContainer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChangePassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityKomisi.KomisiPembayaran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityKomisi.DetailKomisiDendaPembayaran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityKomisi.SubDetailKomisiDendaPembayaran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityDenda.DendaPembayaran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityBonus.Bonus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityBonus.DetailBonus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityBonus.SubDetailBonus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPermintaanHargaOrder.DetailPermintaanHargaOrder"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="ACT_APV_HARGA" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activityPermintaanHargaOrder.SubDetailPermintaanHargaOrder"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityPiutang.DetailPiutang"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityInfoStok.InfoStokBarang"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityInfoStok.InfoStokCanvas"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityKomisi.DetailKomisiDenda"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityPiutang.ListPiutangPerCustomer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityPiutang.DetailListPiutangCustomer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityPiutang.DetailPiutangJatuhTempo"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityPiutang.DetailPiutangPerNota"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityRetur.ReturCustomer"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityRetur.ReturTelahDiproses"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activityPermintaanHargaOrder.SubDetailPermintaanHargaOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.DetailPiutang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityInfoStok.InfoStokBarang"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityInfoStok.InfoStokCanvas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityKomisi.DetailKomisiDenda"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.ListPiutangPerCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.DetailListPiutangCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.DetailPiutangJatuhTempo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPiutang.DetailPiutangPerNota"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityRetur.ReturCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityRetur.ReturTelahDiproses"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityRetur.ReturSelisihNota"
             android:screenOrientation="portrait" />
@@ -184,7 +219,8 @@
         <activity
             android:name=".activityEntryPaket.OrderDetailPaket"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="KARTIKA_HOME" />
@@ -267,12 +303,34 @@
         <activity
             android:name=".ActivityMenuAdmin.JatuhTempoGiro"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityMenuAdmin.LabaRugiOmsetSetoran"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activitySetoran.DetailRincianSetoran"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activityInfoStok.HistoryBarangCanvas"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ActivityMenuAdmin.LabaRugiOmsetSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySetoran.DetailRincianSetoran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityInfoStok.HistoryBarangCanvas"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ActivityMenuAdmin.HistoryLimitCustomer" />
+        <activity android:name=".ActivityMenuAdmin.HistoryLimitCustomerDetail" />
+        <activity android:name=".MenuAdminPerjalananSales.ListSalesPerjalanan" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MenuAdminPerjalananSales.PerjalananSales"
+            android:label="@string/title_activity_perjalanan_sales" />
+        <activity android:name=".MenuAdminPengaturanHeader.DetailPengaturanHeader"></activity>
     </application>
 
 </manifest>

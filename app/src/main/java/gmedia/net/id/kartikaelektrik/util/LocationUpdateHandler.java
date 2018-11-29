@@ -115,7 +115,13 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
                 e.printStackTrace();
             }
 
-            LocationModel locationModel = new LocationModel(String.valueOf(mLastLocation.getLatitude()),String.valueOf(mLastLocation.getLongitude()),iv.getCurrentDate(dateFormat),keterangan + ": " + subKeterangan,"U");
+            LocationModel locationModel = new LocationModel(
+                    String.valueOf(mLastLocation.getLatitude())
+                    ,String.valueOf(mLastLocation.getLongitude())
+                    ,iv.getCurrentDate(dateFormat)
+                    ,keterangan + ": " + subKeterangan
+                    ,"U");
+
             mySQLiteHandler.addLocation(locationModel,dateFormat);
 
             sph.setLastUpdatedLocationDate(context, iv.getCurrentDate(dateFormat));
