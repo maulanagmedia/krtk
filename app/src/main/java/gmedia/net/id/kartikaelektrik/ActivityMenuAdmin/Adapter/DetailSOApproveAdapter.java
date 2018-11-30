@@ -1,11 +1,10 @@
-package gmedia.net.id.kartikaelektrik.adapter.NeedApproval;
+package gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import gmedia.net.id.kartikaelektrik.util.ItemValidation;
  * Created by Shin on 2/2/2017.
  */
 
-public class CustomNeedApprovalTableAdapter extends ArrayAdapter {
+public class DetailSOApproveAdapter extends ArrayAdapter {
 
     private Activity context;
     private int resource;
@@ -27,7 +26,7 @@ public class CustomNeedApprovalTableAdapter extends ArrayAdapter {
     private View viewInflater;
     private ItemValidation iv = new ItemValidation();
 
-    public CustomNeedApprovalTableAdapter(Activity context, int resource, List<CustomListItem> items) {
+    public DetailSOApproveAdapter(Activity context, int resource, List<CustomListItem> items) {
         super(context, resource, items);
         this.context = context;
         this.resource = resource;
@@ -45,8 +44,7 @@ public class CustomNeedApprovalTableAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5;
-        private LinearLayout llContainer;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4;
     }
 
     @Override
@@ -58,14 +56,11 @@ public class CustomNeedApprovalTableAdapter extends ArrayAdapter {
         if(convertView == null){
 
             LayoutInflater inflater = context.getLayoutInflater();
-
-            convertView = inflater.inflate(R.layout.adapter_list_order_approve, null);
+            convertView = inflater.inflate(R.layout.adapter_detail_order_approve, null);
             holder.tvItem1 = (TextView) convertView.findViewById(R.id.tv_subtitle_1);
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_subtitle_2);
             holder.tvItem3 = (TextView) convertView.findViewById(R.id.tv_subtitle_3);
             holder.tvItem4 = (TextView) convertView.findViewById(R.id.tv_subtitle_4);
-            holder.tvItem5 = (TextView) convertView.findViewById(R.id.tv_subtitle_5);
-            holder.llContainer = (LinearLayout) convertView.findViewById(R.id.ll_delete_container);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -73,14 +68,8 @@ public class CustomNeedApprovalTableAdapter extends ArrayAdapter {
 
         holder.tvItem1.setText(list.getListItem1());
         holder.tvItem2.setText(list.getListItem2());
-        holder.tvItem3.setText(list.getListItem3());
-        holder.tvItem4.setText(list.getListItem4());
-        holder.tvItem5.setText(list.getListItem7());
-        if(iv.parseNullInteger(list.getListItem6()) == 4){
-            holder.llContainer.setBackgroundColor(context.getResources().getColor(R.color.status_4));
-        }else if(iv.parseNullInteger(list.getListItem6()) == 5){
-            holder.llContainer.setBackgroundColor(context.getResources().getColor(R.color.status_5));
-        }
+        holder.tvItem3.setText(list.getListItem5());
+        holder.tvItem4.setText(list.getListItem3());
 
         return convertView;
     }

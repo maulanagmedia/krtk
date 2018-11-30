@@ -21,12 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter.DetailSOApproveAdapter;
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.adapter.CustomListItemAutocompleteAdapter;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
-import gmedia.net.id.kartikaelektrik.adapter.CustomListItemTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -214,6 +214,7 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                                     cli.setListItem2(jo.getString("jumlah") + " " + jo.getString("satuan"));
                                     cli.setListItem3(iv.ChangeToRupiahFormat(iv.parseNullFloat(jo.getString("total"))));
                                     cli.setListItem4(jo.getString("id"));
+                                    cli.setListItem5(iv.ChangeToRupiahFormat(iv.parseNullFloat(jo.getString("hargabeli3"))));
                                     masterList.add(cli);
                                 }
 
@@ -373,8 +374,8 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
 
         if(listItems != null && listItems.size() > 0){
 
-            CustomListItemTableAdapter arrayAdapter;
-            arrayAdapter = new CustomListItemTableAdapter(DetailPermintaanHargaOrder.this, listItems.size(), listItems, "");
+            DetailSOApproveAdapter arrayAdapter;
+            arrayAdapter = new DetailSOApproveAdapter(DetailPermintaanHargaOrder.this, listItems.size(), listItems);
             lvListBarang.setAdapter(arrayAdapter);
 
             lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {

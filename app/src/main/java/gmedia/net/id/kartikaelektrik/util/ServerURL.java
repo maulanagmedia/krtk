@@ -44,4 +44,5 @@ public class ServerURL {
     public static final String getCustomerHistoryLimitDetail = baseURL + "customer/detail_limit/";
     public static final String getHeaderImages = baseURL + "promo/view_promo/";
     public static final String saveHeaderImages = baseURL + "promo/index/";
+    public static final String getSalesLocation = baseURL + "sales/log/";
 }

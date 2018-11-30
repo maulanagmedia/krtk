@@ -64,7 +64,7 @@ public class MenuUtamaEntryCanvas extends Fragment {
     private LinearLayout llShow;
     private String formatDate = "", formatDateDisplay = "", tanggalAwal = "", tanggalAkhir = "";
     private String keyword = "";
-    private TextView tvTotal;
+    private TextView tvTotal, tvJmlPelanggan, tvJmlNota;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +93,8 @@ public class MenuUtamaEntryCanvas extends Fragment {
         pbLoadCustomer = (ProgressBar) layout.findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
         tvTotal = (TextView) layout.findViewById(R.id.tv_total);
+        tvJmlPelanggan = (TextView) layout.findViewById(R.id.tv_jml_customer);
+        tvJmlNota = (TextView) layout.findViewById(R.id.tv_jml_nota);
 
         formatDate = context.getResources().getString(R.string.format_date);
         formatDateDisplay = context.getResources().getString(R.string.format_date_display);
@@ -169,12 +171,16 @@ public class MenuUtamaEntryCanvas extends Fragment {
                         JSONObject responseAPI = new JSONObject();
                         double total = 0;
                         tvTotal.setText(iv.ChangeToRupiahFormat(total));
+                        tvJmlPelanggan.setText(iv.ChangeToCurrencyFormat("0"));
+                        tvJmlNota.setText(iv.ChangeToCurrencyFormat("0"));
 
                         try {
 
                             responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
                             masterList = new ArrayList<CustomListItem>();
+
+                            List<String> listKdcus = new ArrayList<>();
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -190,9 +196,26 @@ public class MenuUtamaEntryCanvas extends Fragment {
                                                 jo.getString("customer")));
 
                                         total += iv.parseNullDouble(jo.getString("total"));
+
+                                        boolean isExist = false;
+                                        for(String kdcus: listKdcus){
+
+                                            isExist = false;
+                                            if(kdcus.equals(jo.getString("kdcus"))){
+                                                isExist = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if(!isExist) listKdcus.add(jo.getString("kdcus"));
                                     }
                                 }
+
+                                tvJmlPelanggan.setText(iv.ChangeToCurrencyFormat(String.valueOf(listKdcus.size())));
+                                tvJmlNota.setText(iv.ChangeToCurrencyFormat(String.valueOf(arrayJSON.length())));
                             }
+
+
 
                             tvTotal.setText(iv.ChangeToRupiahFormat(total));
                             autocompleteList = new ArrayList<CustomListItem>(masterList);

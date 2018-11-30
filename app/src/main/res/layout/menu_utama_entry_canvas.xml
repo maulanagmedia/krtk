@@ -10,17 +10,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/default_small_padding"
-            android:paddingBottom="@dimen/default_small_padding"
+            android:paddingTop="@dimen/default_small_padding1"
+            android:paddingBottom="@dimen/default_small_padding1"
             android:id="@+id/ll_footer"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
             android:background="@color/color_grey3"
+            android:paddingRight="@dimen/default_small_padding"
+            android:paddingLeft="@dimen/default_small_padding"
             android:weightSum="1">
 
             <TextView
@@ -28,8 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textSize="11sp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="@dimen/default_small_padding"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,6 +43,69 @@
                 android:text="0"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/container_padding_vertical"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="@dimen/default_small_padding2"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jumlah Pelanggan"
+                        android:textSize="11sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_jml_customer"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="0"
+                        android:gravity="right"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="@dimen/default_small_padding2"
+                    android:paddingLeft="@dimen/default_small_padding2"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jumlah Nota"
+                        android:textSize="11sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_jml_nota"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="0"
+                        android:gravity="right"/>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

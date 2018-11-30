@@ -3,8 +3,8 @@
 
     !--Global-->
     <string name="rows_per_page_autocomplete">30</string>
-    <string name="rows_per_page_table">80</string>
-    <integer name="max_table">80</integer>
+    <string name="rows_per_page_table">200</string>
+    <integer name="max_table">200</integer>
     <string name="runtime_permissions_txt">Akses sangat dibutuhkan untuk berjalannya aplikasi</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -16,6 +16,7 @@
 
     <string name="format_date">yyyy-MM-dd</string>
     <string name="format_date1">yyyy-MM-dd HH:mm:ss</string>
+    <string name="format_time">HH:mm:ss</string>
     <string name="format_date_display">dd/MM/yyyy</string>
     <string name="format_date_display1">dd/MM/yyyy</string>
     <string name="format_date_display2">dd-MM-yyyy</string>

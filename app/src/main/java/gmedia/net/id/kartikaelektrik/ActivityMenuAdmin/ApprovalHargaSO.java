@@ -134,6 +134,7 @@ public class ApprovalHargaSO extends AppCompatActivity {
                                     cli.setListItem4(iv.ChangeToRupiahFormat(iv.parseNullFloat(jo.getString("total"))));
                                     cli.setListItem5(jo.getString("nama"));
                                     cli.setListItem6(jo.getString("status"));
+                                    cli.setListItem7(jo.getString("nama_sales"));
                                     masterList.add(cli);
                                 }
                             }

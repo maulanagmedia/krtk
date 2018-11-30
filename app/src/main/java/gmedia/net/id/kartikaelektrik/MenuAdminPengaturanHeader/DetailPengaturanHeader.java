@@ -93,6 +93,8 @@ public class DetailPengaturanHeader extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        setTitle("Pengaturan Gambar Header");
+
         context = this;
         initUI();
         initEvent();
