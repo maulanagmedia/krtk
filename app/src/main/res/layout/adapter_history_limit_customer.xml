@@ -7,7 +7,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="@dimen/default_small_padding1"
         android:id="@+id/ll_list_customer"
@@ -25,10 +25,12 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_weight="1.6"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingRight="@dimen/default_small_padding1"
             android:paddingLeft="@dimen/default_small_padding1"
+            android:paddingTop="@dimen/default_small_padding"
+            android:paddingBottom="@dimen/default_small_padding"
             android:id="@+id/ll_list_double_menu">
 
             <TextView
@@ -37,6 +39,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_item1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_item2"
+                android:textSize="12sp"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

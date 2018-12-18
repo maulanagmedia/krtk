@@ -23,6 +23,7 @@ import android.widget.Toast;
 import gmedia.net.id.kartikaelektrik.adapter.DashboardAdapter;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.MasterDataHandler;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
@@ -434,6 +435,8 @@ public class Dashboard extends RuntimePermissionsActivity {
             startActivity(intent);
             return true;
         }else if(id == gmedia.net.id.kartikaelektrik.R.id.option_logout){
+
+            if(!sessionManager.getLaba().equals("1")) new LocationUpdateHandler(Dashboard.this,"Logout");
             sessionManager.logoutUser();
             finish();
             return true;

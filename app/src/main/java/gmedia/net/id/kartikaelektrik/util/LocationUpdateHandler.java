@@ -1,6 +1,7 @@
 package gmedia.net.id.kartikaelektrik.util;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -91,6 +92,14 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
     private void updateLocation(){
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            if(keterangan.toLowerCase().equals("logout")){
+
+                SessionManager sessionManager = new SessionManager(context);
+                sessionManager.logoutUser();
+                ((Activity) context).finish();
+            }
+
             return;
         }
 
@@ -183,7 +192,7 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
             jsonBody.put("longitude", locationModel.getLongitude());
             jsonBody.put("latitude", locationModel.getLatitude());
             jsonBody.put("keterangan", locationModel.getKeterangan());
-            jsonBody.put("flag", locationModel.getFlag());
+            jsonBody.put("flag", keterangan.toLowerCase().equals("logout") ? "O" : locationModel.getFlag());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -199,6 +208,13 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+
+                if(keterangan.toLowerCase().equals("logout")){
+
+                    SessionManager sessionManager = new SessionManager(context);
+                    sessionManager.logoutUser();
+                    ((Activity) context).finish();
                 }
             }
 

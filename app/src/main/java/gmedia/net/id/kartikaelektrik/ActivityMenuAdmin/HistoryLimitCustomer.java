@@ -181,7 +181,7 @@ public class HistoryLimitCustomer extends AppCompatActivity {
                             listReller.add(new CustomListItem(
                                     jo.getString("kdcus")
                                     ,jo.getString("nama")
-                                    ,jo.getString("alamat")
+                                    ,jo.getString("sales")
                             ));
                         }
 

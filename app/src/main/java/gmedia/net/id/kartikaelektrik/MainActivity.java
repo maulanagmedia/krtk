@@ -55,6 +55,7 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.model.PhotoModel;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.MasterDataHandler;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
@@ -933,9 +934,17 @@ public class MainActivity extends RuntimePermissionsActivity {
             if(iv.isServiceRunning(MainActivity.this, LocationUpdater.class)){
                 stopService(new Intent(getApplicationContext(), LocationUpdater.class));
             }
+            if(!sessionManager.getLaba().equals("1")){
 
-            sessionManager.logoutUser();
-            finish();
+                new LocationUpdateHandler(MainActivity.this,"Logout");
+
+            }else{
+
+                sessionManager.logoutUser();
+                finish();
+            }
+
+
             return true;
         }else if(id == R.id.option_kill_access){
 

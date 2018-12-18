@@ -52,7 +52,7 @@ public class RekapMutasi extends AppCompatActivity {
     private static String tanggalAkhir;
     private String formatDate = "", formatDateDisplay = "";
     private static List<CustomListItem> listSetoran;
-    private static TextView tvTotal;
+    private static TextView tvTotal, tvTotalCustomer, tvTotalNota;
     private LinearLayout llSaveContainer;
     private TextView tvSave;
 
@@ -92,6 +92,8 @@ public class RekapMutasi extends AppCompatActivity {
         llShow = (LinearLayout) findViewById(R.id.ll_show);
         tvShow = (TextView) findViewById(R.id.tv_show);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvTotalCustomer = (TextView) findViewById(R.id.tv_total_customer);
+        tvTotalNota = (TextView) findViewById(R.id.tv_total_nota);
 
         llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
         tvSave = (TextView) findViewById(R.id.tv_save);
@@ -261,7 +263,7 @@ public class RekapMutasi extends AppCompatActivity {
 
                     if(status.equals("200")){
 
-                        JSONArray jsonArray = response.getJSONArray("response");
+                        JSONArray jsonArray = response.getJSONObject("response").getJSONArray("setoran");
                         for(int i = 0; i < jsonArray.length(); i++){
 
                             JSONObject jo = jsonArray.getJSONObject(i);
@@ -274,6 +276,12 @@ public class RekapMutasi extends AppCompatActivity {
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }
+
+                        JSONObject jumlahRes = response.getJSONObject("response").getJSONObject("jumlah");
+                        String totalCustomer = jumlahRes.getString("jumlah_customer");
+                        String totalNota = jumlahRes.getString("jumlah_nota");
+                        tvTotalCustomer.setText(iv.ChangeToCurrencyFormat(totalCustomer));
+                        tvTotalNota.setText(iv.ChangeToCurrencyFormat(totalNota));
 
                     }
 

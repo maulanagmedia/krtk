@@ -75,6 +75,7 @@ public class OrderDetail extends AppCompatActivity {
     private RadioButton rbNonPPN, rbPPN, rbEFaktur, rbCast, rbOperan;
     private TextView tvGudangBesar, tvGudangKecil;
     private String currentString = "", currentString1 = "";
+    private String keteranganBarang = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +172,7 @@ public class OrderDetail extends AppCompatActivity {
                 }else{
                     tvSave.setText("Tambah Order");
                     initEventAddOrder();
-                    rbQuantity2.setChecked(true);
+                    rbQuantity3.setChecked(true);
                 }
 
             }else{
@@ -179,7 +180,7 @@ public class OrderDetail extends AppCompatActivity {
                 tvSave.setText("Buat Order Baru");
                 llNoSO.setVisibility(View.GONE);
                 initEventNewSO();
-                rbQuantity2.setChecked(true);
+                rbQuantity3.setChecked(true);
             }
 
             // Event radion button
@@ -339,6 +340,7 @@ public class OrderDetail extends AppCompatActivity {
                                 gudangBesar = jo.getString("gudang_jual_b");
                                 isiSatuan1 = jo.getString("isi1");
                                 isiSatuan2 = jo.getString("isi2");
+                                keteranganBarang = jo.getString("keterangan");
 
                                 try {
                                     minStok = Integer.parseInt(jo.getString("stokminim"));
@@ -498,20 +500,28 @@ public class OrderDetail extends AppCompatActivity {
             }*/
         }else{
 
-            selectedSatuan = satuan2;
+            /*selectedSatuan = satuan2;
             selectedIsiSatuan = isiSatuan2;
-            selectedGudang = gudangKecil;
+            selectedGudang = gudangKecil;*/
+
+            selectedSatuan = satuan3;
+            selectedIsiSatuan = isiSatuan1;
+            selectedGudang = gudangBesar;
         }
 
         if(satuan2.trim().equals(satuan3.trim())){
-            tvKetSatuan.setVisibility(View.GONE);
-            rbQuantity2.setText(satuan2);
-            rbQuantity3.setVisibility(View.INVISIBLE);
+            tvKetSatuan.setText(isiSatuan1 + " " + satuan2 + " : " + isiSatuan2 + " " + satuan3 + "\n"+keteranganBarang);
+            //tvKetSatuan.setVisibility(View.GONE);
+            /*rbQuantity2.setText(satuan2);
+            rbQuantity3.setVisibility(View.INVISIBLE);*/
+            rbQuantity3.setText(satuan3);
+            rbQuantity2.setVisibility(View.GONE);
 //            listRadioButton = new ArrayList<RadioButton>();
         }else{
 
-            tvKetSatuan.setText(isiSatuan1 + " " + satuan2 + " : " + isiSatuan2 + " " + satuan3);
+            tvKetSatuan.setText(isiSatuan1 + " " + satuan2 + " : " + isiSatuan2 + " " + satuan3+ "\n"+keteranganBarang);
             rbQuantity2.setText(satuan2);
+            rbQuantity2.setVisibility(View.GONE);
             rbQuantity3.setText(satuan3);
             rbQuantity3.setVisibility(View.VISIBLE);
         }

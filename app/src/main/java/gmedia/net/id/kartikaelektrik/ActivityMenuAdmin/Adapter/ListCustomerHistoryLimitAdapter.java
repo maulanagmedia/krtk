@@ -30,7 +30,7 @@ public class ListCustomerHistoryLimitAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView tvItem1;
+        private TextView tvItem1, tvItem2;
     }
 
     public void addMoreData(List<CustomListItem> moreData){
@@ -53,6 +53,7 @@ public class ListCustomerHistoryLimitAdapter extends ArrayAdapter{
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_history_limit_customer, null);
             holder.tvItem1 = convertView.findViewById(R.id.tv_item1);
+            holder.tvItem2 = convertView.findViewById(R.id.tv_item2);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -60,6 +61,7 @@ public class ListCustomerHistoryLimitAdapter extends ArrayAdapter{
 
         final CustomListItem itemSelected = items.get(position);
         holder.tvItem1.setText(itemSelected.getListItem2());
+        holder.tvItem2.setText(itemSelected.getListItem3());
 
         return convertView;
 

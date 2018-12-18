@@ -95,7 +95,7 @@ public class PhotosKeteranganAdapter extends RecyclerView.Adapter<PhotosKeterang
             }
 
             iu.LoadRealImage(context, file, holder.ivItem1, newWidth, newHeight);
-            masterList.get(position).setKeterangan(ImageUtils.convert(BitmapFactory.decodeFile(file.getAbsolutePath())));
+            //masterList.get(position).setKeterangan(ImageUtils.convert(BitmapFactory.decodeFile(file.getAbsolutePath())));
         }else{
 
             URL url = null;
@@ -132,6 +132,7 @@ public class PhotosKeteranganAdapter extends RecyclerView.Adapter<PhotosKeterang
                 }
 
                 iu.LoadRealImage(context, image.getWeb(), holder.ivItem1, newWidth, newHeight);
+                //masterList.get(position).setKeterangan(ImageUtils.convert(bmp));
             }else{
 
                 iu.LoadRealImage(context, image.getWeb(), holder.ivItem1);
@@ -178,7 +179,7 @@ public class PhotosKeteranganAdapter extends RecyclerView.Adapter<PhotosKeterang
             @Override
             public void afterTextChanged(Editable editable) {
 
-                masterList.get(position).setKeterangan(editable.toString());
+                //masterList.get(position).setKeterangan(editable.toString());
             }
         });
 

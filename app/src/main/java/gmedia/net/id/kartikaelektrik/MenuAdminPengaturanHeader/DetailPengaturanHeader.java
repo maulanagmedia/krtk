@@ -13,6 +13,7 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
@@ -43,6 +44,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -289,6 +292,33 @@ public class DetailPengaturanHeader extends AppCompatActivity {
                         }
 
                         adapterPhoto.notifyDataSetChanged();
+
+                        for(PhotoModel model : listPhoto){
+
+                            String base64Data = "";
+
+                            URL url = null;
+                            try {
+                                url = new URL(model.getWeb());
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
+
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
+                            Bitmap bmp = null;
+                            try {
+                                if(url != null) bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if(bmp != null){
+                                base64Data = ImageUtils.convert(bmp);
+                            }
+
+                            model.setKeterangan(base64Data);
+                        }
                     }
 
                     @Override
@@ -532,7 +562,10 @@ public class DetailPengaturanHeader extends AppCompatActivity {
 
             extension = extension.toLowerCase();
             Bitmap bm2 = null;
-            if(extension.equals(".jpeg") || extension.equals(".jpg") || extension.equals(".png") || extension.equals(".bmp")){
+            if(extension.equals(".jpeg")
+                    || extension.equals(".jpg")
+                    || extension.equals(".png")
+                    || extension.equals(".bmp")){
 
                 outputStream = new FileOutputStream( saveDirectory.getAbsoluteFile() + File.separator + time + namaFile); // filename.png, .mp3, .mp4 ...
                 bm2 = BitmapFactory.decodeStream(inputStream);
@@ -595,7 +628,9 @@ public class DetailPengaturanHeader extends AppCompatActivity {
 
             if(bm2 != null){
 
-                listPhoto.add(new PhotoModel(filePathURI, "", ImageUtils.convert(bm2)));
+                String baset64Image = ImageUtils.convert(bm2);
+                //Log.d(TAG, "copyFileFromUri: "+ baset64Image);
+                listPhoto.add(new PhotoModel(filePathURI, "", baset64Image));
                 adapterPhoto.notifyDataSetChanged();
             }
 

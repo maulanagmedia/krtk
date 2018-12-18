@@ -23,6 +23,7 @@
                 android:layout_weight="0.85"
                 android:layout_height="wrap_content"
                 android:text="Pengajuan Limit "
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -61,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Nama Pelanggan"
                     android:id="@+id/edt_nama"
+                    android:textColor="@color/black"
                     style="@style/DisableEditText" />
 
             </android.support.design.widget.TextInputLayout>
@@ -89,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Jumlah Limit *"
                     android:id="@+id/edt_limit"
+                    android:textColor="@color/black"
                     android:inputType="number"
                     android:imeOptions="actionDone"/>
 
