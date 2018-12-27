@@ -198,7 +198,6 @@ public class MutasiSetoran extends AppCompatActivity {
                     setAdapter(null);
 
                 }
-
             }
 
             @Override

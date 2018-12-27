@@ -56,7 +56,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private RadioGroup rgCaraBayar;
     private RadioButton rbTunai, rbBank, rbGiro;
     private Spinner spBank;
-    private LinearLayout llSaveContainer;
+    private LinearLayout llSaveContainer, llSisaPembayaran;
     private TextView tvSave;
     private String kdcus = "", namaCus = "";
     private String crBayar = "";
@@ -68,7 +68,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek, edtNamaPemilik;
     private ListView lvNota;
     private List<OptionItem> listNota;
-    private static EditText edtSisa;
+    private static EditText edtSisa, edtSisaTotal;
     public static double sisaPiutang = 0;
     private static ListDetailNotaAdapter adapterPiutangSales;
     private TextInputLayout tilNamaPemilik, tilTanggalTransfer;
@@ -79,6 +79,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private EditText edtDiskon;
     private EditText edtHargaDiskon;
     private EditText edtTotalDibayar;
+    public static boolean isSinggleData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +94,14 @@ public class DetailFormSetoran extends AppCompatActivity {
         setTitle("Detail Setoran");
         context = this;
         session = new SessionManager(context);
+        isSinggleData = false;
 
         intiUI();
     }
 
     private void intiUI() {
 
+        llSisaPembayaran = (LinearLayout) findViewById(R.id.ll_sisa_pebayaran);
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
 
@@ -120,6 +123,7 @@ public class DetailFormSetoran extends AppCompatActivity {
         edtKeNorek = (EditText) findViewById(R.id.edt_ke_norek);
         edtTotal = (EditText) findViewById(R.id.edt_total);
         edtSisa = (EditText) findViewById(R.id.edt_sisa);
+        edtSisaTotal = (EditText) findViewById(R.id.edt_sisa_total);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         lvNota = (ListView) findViewById(R.id.lv_nota);
         llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
@@ -240,8 +244,12 @@ public class DetailFormSetoran extends AppCompatActivity {
 
             if(listItems.size() == 1){
                 llDiskon.setVisibility(View.VISIBLE);
+                llSisaPembayaran.setVisibility(View.VISIBLE);
+                isSinggleData = true;
             }else{
                 llDiskon.setVisibility(View.GONE);
+                llSisaPembayaran.setVisibility(View.GONE);
+                isSinggleData = false;
             }
 
             adapterPiutangSales = new ListDetailNotaAdapter((Activity) context, listItems);
@@ -385,11 +393,11 @@ public class DetailFormSetoran extends AppCompatActivity {
 
                     if(isEdit){
                         sisaPiutang = 0;
-                        edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
                     }else{
                         sisaPiutang = iv.parseNullDouble(cleanString);
-                        edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
                     }
+
+                    edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
 
                     edtDiskon.setText("");
                     hitungTotalDibayar();
@@ -543,6 +551,33 @@ public class DetailFormSetoran extends AppCompatActivity {
     public static void updateSisa(){
 
         edtSisa.setText(iv.ChangeToRupiahFormat(sisaPiutang));
+
+        if(isSinggleData){
+
+            double sisaYangDibayar = 0;
+
+            if(adapterPiutangSales != null){
+
+                List<OptionItem> listItems = adapterPiutangSales.getItems();
+                try {
+
+                    if(listItems.get(0).isSelected()){
+
+                        double totalNota = iv.parseNullDouble(listItems.get(0).getAtt1());
+                        double total = iv.parseNullDouble(edtTotal.getText().toString().replaceAll("[,.]", ""));
+
+                        if(totalNota > total){
+
+                            sisaYangDibayar = totalNota - total;
+                        }
+                    }
+                }catch (Exception e){e.printStackTrace();}
+
+            }
+
+            edtSisaTotal.setText(iv.ChangeToRupiahFormat(sisaYangDibayar));
+        }
+
     }
 
     private void getDataBank() {

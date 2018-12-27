@@ -45,4 +45,8 @@ public class ServerURL {
     public static final String getHeaderImages = baseURL + "promo/view_promo/";
     public static final String saveHeaderImages = baseURL + "promo/index/";
     public static final String getSalesLocation = baseURL + "sales/log/";
+    public static final String getCustomerDenda = baseURL + "Denda/view_customer/";
+    public static final String getNotaCustomerDenda = baseURL + "Denda/list_nota/";
+    public static final String savePengajuanHapusDenda = baseURL + "Denda/pengajuan/";
+    public static final String getPengajuanHapusDendaCustomer = baseURL + "Denda/list_pengajuan/";
 }

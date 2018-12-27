@@ -544,6 +544,20 @@ public class ItemValidation {
         return hasil;
     }
 
+    public String ChangeToCurrencyFormat(Double number){
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        DecimalFormatSymbols symbols = ((DecimalFormat) format).getDecimalFormatSymbols();
+
+        symbols.setCurrencySymbol("");
+        ((DecimalFormat) format).setDecimalFormatSymbols(symbols);
+        format.setMaximumFractionDigits(0);
+
+        String hasil = String.valueOf(format.format(number));
+
+        return hasil;
+    }
+
     //region Nullable value
     public int parseNullInteger(String s){
         int result = 0;

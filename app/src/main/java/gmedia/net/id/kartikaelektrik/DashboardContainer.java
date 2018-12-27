@@ -25,6 +25,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerOrder;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryCanvas;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryPaket;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaHapusDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaInformasiStok;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaKomisi;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetPenjualan;
@@ -244,6 +245,15 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaCustomerLimit.setView(DashboardContainer.this, childLayoutMenuCustomerLimit);
                     toolbar.setTitle("Customer Limit");
                     setTitle("Customer Limit");
+                    break;
+                case "menuhapusdenda":
+                    state = 20;
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaHapusDenda menuUtamaHapusDenda = new MenuUtamaHapusDenda();
+                    View childLayoutMenuHapusDenda = inflater.inflate(R.layout.menu_utama_hapus_denda, flContainer);
+                    menuUtamaHapusDenda.setView(DashboardContainer.this, childLayoutMenuHapusDenda);
+                    toolbar.setTitle("Hapus Denda");
+                    setTitle("Hapus Denda");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

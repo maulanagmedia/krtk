@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityHapusDenda.DetailDendaCustomerActivity">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_footer"
+        android:id="@+id/lv_denda"></ListView>
+
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/view_save"
+        layout="@layout/btn_save"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_small_padding"
+        android:id="@+id/ll_footer"
+        android:orientation="vertical"
+        android:layout_above="@id/view_save"
+        android:background="@color/color_grey3"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:text="Total Nota Terpilih"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:text="Total Denda Terpilih"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_total_nota"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                android:text="0"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_total_denda"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                android:text="0"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/pb_loading"
+        android:visibility="gone"/>
+</RelativeLayout>

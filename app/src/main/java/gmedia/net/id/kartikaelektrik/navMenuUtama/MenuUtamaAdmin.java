@@ -15,6 +15,7 @@ import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.JatuhTempoGiro;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.LabaRugiOmsetJual;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.LabaRugiOmsetSetoran;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.VerifikasiLimitCustomer;
+import gmedia.net.id.kartikaelektrik.MenuAdminApvHapusDenda.DetailApvHapusDenda;
 import gmedia.net.id.kartikaelektrik.MenuAdminPengaturanHeader.DetailPengaturanHeader;
 import gmedia.net.id.kartikaelektrik.MenuAdminPerjalananSales.ListSalesPerjalanan;
 import gmedia.net.id.kartikaelektrik.R;
@@ -33,6 +34,7 @@ public class MenuUtamaAdmin extends Fragment {
     private LinearLayout llHistoryLimit;
     private LinearLayout llPerjalananSales;
     private LinearLayout llPengaturanHeader;
+    private LinearLayout llApvHapusDenda;
 
     public MenuUtamaAdmin(){}
 
@@ -62,6 +64,7 @@ public class MenuUtamaAdmin extends Fragment {
         llHistoryLimit = (LinearLayout) layout.findViewById(R.id.ll_history_limit);
         llPerjalananSales = (LinearLayout) layout.findViewById(R.id.ll_perjalanan_sales);
         llPengaturanHeader = (LinearLayout) layout.findViewById(R.id.ll_pengaturan_header);
+        llApvHapusDenda = (LinearLayout) layout.findViewById(R.id.ll_apv_hapus_denda);
         llMasukSebagaiSales = (LinearLayout) layout.findViewById(R.id.ll_masuk_sebagai_sales);
 
         initEvent();
@@ -146,6 +149,15 @@ public class MenuUtamaAdmin extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, HistoryLimitCustomer.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llApvHapusDenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, DetailApvHapusDenda.class);
                 context.startActivity(intent);
             }
         });

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_default"
+        android:padding="@dimen/default_small_padding1"
+        android:layout_margin="@dimen/default_small_padding1">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/cb_item"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:text="Total Denda"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_item1"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                android:text="0"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_item2"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/default_small_padding1"
+                android:layout_marginLeft="@dimen/default_small_padding"
+                android:layout_marginRight="@dimen/default_small_padding"
+                android:text="0"
+                android:gravity="center|right"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

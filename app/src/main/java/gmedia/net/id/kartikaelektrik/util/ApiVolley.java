@@ -33,6 +33,7 @@ public class ApiVolley {
     private String token = "";
     private String id = "";
     private String level = "";
+    private String laba = "";
     private ItemValidation iv = new ItemValidation();
 
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
@@ -54,6 +55,7 @@ public class ApiVolley {
         token = user.get(SessionManager.TAG_TOKEN);
         id = user.get(SessionManager.TAG_UID);
         level = user.get(SessionManager.TAG_LEVEL);
+        laba = user.get(SessionManager.TAG_LABA);
 
         final String requestBody = jsonBody.toString();
 
@@ -81,7 +83,7 @@ public class ApiVolley {
         StringRequest stringRequest = new StringRequest(method, REST_URL, new Response.Listener<String>() {
 
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response){
 
                 if(response == null || response.equals("null")){
 
@@ -162,6 +164,7 @@ public class ApiVolley {
                 params.put("token", token);
                 params.put("id", id);
                 params.put("level", level);
+                params.put("laba", laba);
                 return params;
             }
 
