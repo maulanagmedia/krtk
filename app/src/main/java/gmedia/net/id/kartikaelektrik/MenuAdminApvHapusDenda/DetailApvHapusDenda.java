@@ -67,6 +67,13 @@ public class DetailApvHapusDenda extends AppCompatActivity {
         context = this;
         initUI();
         initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        start = 0;
+        masterList.clear();
         initData();
     }
 
@@ -155,6 +162,7 @@ public class DetailApvHapusDenda extends AppCompatActivity {
                 Intent intent = new Intent(context, DetailApvHapusDendaCustomer.class);
                 intent.putExtra("kdcus", item.getListItem1());
                 intent.putExtra("nama", item.getListItem2());
+                intent.putExtra("nik", item.getListItem5());
                 startActivity(intent);
             }
         });
@@ -183,7 +191,11 @@ public class DetailApvHapusDenda extends AppCompatActivity {
 
                         JSONObject responseAPI = new JSONObject();
                         lvListPelanggan.removeFooterView(footerList);
-                        if(start == 0) iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"GONE");
+                        if(start == 0) {
+
+                            iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"GONE");
+
+                        }
                         String message = "";
                         isLoading = false;
 
@@ -201,7 +213,9 @@ public class DetailApvHapusDenda extends AppCompatActivity {
                                             jo.getString("kdcus"),
                                             jo.getString("customer"),
                                             jo.getString("alamat"),
-                                            jo.getString("piutang")));
+                                            jo.getString("piutang"),
+                                            jo.getString("nik")
+                                    ));
                                 }
 
                                 int total = masterList.size();

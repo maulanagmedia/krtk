@@ -141,6 +141,8 @@ public class DetailDendaCustomerActivity extends AppCompatActivity {
         progressDialog.setMessage("Menyimpan...");
         progressDialog.show();
 
+        llSaveContainer.setEnabled(false);
+
         JSONArray jArray = new JSONArray();
 
         for(OptionItem item : masterList){

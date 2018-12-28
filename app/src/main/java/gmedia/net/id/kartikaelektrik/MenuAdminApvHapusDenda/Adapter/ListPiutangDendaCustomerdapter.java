@@ -87,7 +87,7 @@ public class ListPiutangDendaCustomerdapter extends ArrayAdapter{
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                 items.get(position).setSelected(b);
-                ((DetailApvHapusDendaCustomer) context).updateCCID();
+                ((DetailApvHapusDendaCustomer) context).updateTotal();
             }
         });
 
