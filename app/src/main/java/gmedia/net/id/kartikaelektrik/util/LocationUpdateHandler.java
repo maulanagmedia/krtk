@@ -137,6 +137,12 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
             UpdateLocationToServer(locationModel);
         }
 
+        if(keterangan.toLowerCase().equals("logout")){
+
+            SessionManager sessionManager = new SessionManager(context);
+            sessionManager.logoutUser();
+            ((Activity) context).finish();
+        }
     }
 
     protected synchronized void buildGoogleApiClient() {

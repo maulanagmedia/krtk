@@ -2,6 +2,7 @@ package gmedia.net.id.kartikaelektrik.activityPermintaanHargaOrder;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -94,9 +95,29 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
+                    String message = "Apakah Anda yakin akan MENYETUJUI Order ini?";
+
+                    String hargaJual = "", hargaBeli = "", barang = "";
+                    boolean isExist = false;
+
+                    for(CustomListItem item: masterList){
+
+                        if(iv.parseNullDouble(item.getListItem6()) < iv.parseNullDouble(item.getListItem7())){ // harga jual <  harga beli
+
+                            barang = item.getListItem1();
+                            isExist = true;
+                            break;
+                        }
+                    }
+
+                    if(isExist){
+
+                        message = "Apakah Anda yakin akan MENYETUJUI Order ini?, harga jual item " + barang + " lebih kecil dari harga beli.";
+                    }
+
                     AlertDialog alert = new AlertDialog.Builder(DetailPermintaanHargaOrder.this)
                             .setTitle("Konfirmasi")
-                            .setMessage("Apakah Anda yakin akan MENYETUJUI Order ini?")
+                            .setMessage(message)
                             .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -215,6 +236,8 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                                     cli.setListItem3(iv.ChangeToRupiahFormat(iv.parseNullFloat(jo.getString("total"))));
                                     cli.setListItem4(jo.getString("id"));
                                     cli.setListItem5(iv.ChangeToRupiahFormat(iv.parseNullFloat(jo.getString("hargabeli3"))));
+                                    cli.setListItem6(jo.getString("harga"));
+                                    cli.setListItem7(jo.getString("hargabeli3"));
                                     masterList.add(cli);
                                 }
 
