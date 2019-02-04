@@ -48,7 +48,7 @@ public class ListCanvasCustomerTableAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private TextView item1;
+        private TextView item1, item2;
     }
 
     @Override
@@ -70,6 +70,7 @@ public class ListCanvasCustomerTableAdapter extends ArrayAdapter {
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_single_menu, null);
             holder.item1 = (TextView) convertView.findViewById(R.id.tv_menu_name);
+            holder.item2 = (TextView) convertView.findViewById(R.id.tv_menu_desc);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -77,6 +78,7 @@ public class ListCanvasCustomerTableAdapter extends ArrayAdapter {
 
         final Customer customer = items.get(position);
         holder.item1.setText(customer.getNamaCustomer());
+        holder.item2.setText(customer.getAlamat() +", "+customer.getKota());
 
         return convertView;
     }

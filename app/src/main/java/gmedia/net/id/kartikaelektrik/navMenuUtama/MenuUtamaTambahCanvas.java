@@ -114,7 +114,12 @@ public class MenuUtamaTambahCanvas extends Fragment {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    masterListCustomer.add(new Customer(jo.getString("kdcus"),jo.getString("nama"),jo.getString("alamat"),jo.getString("kota"),iv.parseNullString(jo.getString("total_piutang")),jo.getString("max_piutang")));
+                                    masterListCustomer.add(new Customer(jo.getString("kdcus")
+                                            ,jo.getString("nama")
+                                            ,jo.getString("alamat")
+                                            ,jo.getString("kota")
+                                            ,iv.parseNullString(jo.getString("total_piutang"))
+                                            ,jo.getString("max_piutang")));
                                 }
                             }
 

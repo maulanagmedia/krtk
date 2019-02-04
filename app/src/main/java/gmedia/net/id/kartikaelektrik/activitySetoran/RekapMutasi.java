@@ -6,19 +6,24 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +35,7 @@ import java.util.List;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
+import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -159,7 +165,8 @@ public class RekapMutasi extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                                    saveKunci();
+                                    //saveKunci();
+                                    checkLogin();
                                 }
                             })
                             .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -174,6 +181,133 @@ public class RekapMutasi extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void checkLogin() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_login, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+
+        final EditText edtUsername = (EditText) viewDialog.findViewById(R.id.edt_username);
+        final EditText edtPassword = (EditText) viewDialog.findViewById(R.id.edt_password);
+        final Button btnLogin = (Button) viewDialog.findViewById(R.id.btn_login);
+
+        final AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                String refreshToken = "";
+                InitFirebaseSetting.getFirebaseSetting(RekapMutasi.this);
+                refreshToken = FirebaseInstanceId.getInstance().getToken();
+
+                if(edtUsername.getText().toString().isEmpty()){
+
+                    edtUsername.setError("Harap diisi");
+                    edtUsername.requestFocus();
+                    return;
+                }else{
+
+                    edtUsername.setError(null);
+                }
+
+                if(edtPassword.getText().toString().isEmpty()){
+
+                    edtPassword.setError("Harap diisi");
+                    edtPassword.requestFocus();
+                    return;
+                }else{
+
+                    edtPassword.setError(null);
+                }
+
+                final ProgressDialog progressDialog = new ProgressDialog(context,
+                        gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Menproses...");
+                progressDialog.show();
+
+                JSONObject jBody = new JSONObject();
+                try {
+                    jBody.put("username", edtUsername.getText());
+                    jBody.put("password", edtPassword.getText());
+                    jBody.put("fcm_id", refreshToken);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String url = getResources().getString(R.string.url_login);
+
+                ApiVolley request = new ApiVolley(context, jBody, "POST", url, "", "", 0, new ApiVolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+
+                        if(alert != null) {
+
+                            try {
+                                alert.dismiss();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+
+                        progressDialog.dismiss();
+
+                        try {
+
+                            JSONObject response = new JSONObject(result);
+                            String status = response.getJSONObject("metadata").getString("status");
+                            String message = response.getJSONObject("metadata").getString("message");
+
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            if(status.equals("200")){
+
+                                String laba = response.getJSONObject("response").getString("laba");
+                                if(laba.equals("1")){
+                                    saveKunci();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                            setAdapter(null);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        progressDialog.dismiss();
+                        Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                        setAdapter(null);
+                    }
+                });
+
+                /*if(alert != null) {
+
+                    try {
+                        alert.dismiss();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }*/
+            }
+        });
+
+        try {
+            alert.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void saveKunci() {

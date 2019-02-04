@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_default"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_head"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog_red"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Silahkan login untuk mendapat ijin"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_margin="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_footer"
+            android:gravity="center"
+            android:padding="@dimen/margin_default"
+            android:background="@drawable/bg_dialog_white"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:weightSum="1">
+
+                    <EditText android:id="@+id/edt_username"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="Username"
+                        android:layout_marginTop="@dimen/margin_top_big"
+                        android:background="@drawable/bg_login1"
+                        android:padding="3dp"
+                        android:textColorHint="@color/input_login_hint"
+                        android:drawableLeft="@mipmap/icon_user" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:weightSum="1">
+
+                    <EditText android:id="@+id/edt_password"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="Password"
+                        android:layout_marginTop="0.5dp"
+                        android:layout_marginBottom="@dimen/margin_top_big"
+                        android:background="@drawable/bg_login1"
+                        android:padding="3dp"
+                        android:textColorHint="@color/input_login_hint"
+                        android:drawableLeft="@mipmap/ic_password" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="2dp"
+                        android:background="@color/black"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="@dimen/default_line"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="2dp"
+                        android:background="@color/black"></LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:weightSum="1">
+
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_login"
+                        android:layout_marginTop="@dimen/margin_top_big"
+                        android:layout_marginBottom="@dimen/default_small_padding"
+                        android:textSize="@dimen/text_button_login"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="LOGIN"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
