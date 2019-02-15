@@ -680,6 +680,16 @@ public class DetailFormSetoran extends AppCompatActivity {
             edtTotal.setError(null);
         }
 
+        if(crBayar.equals("G") && edtDariBank.getText().toString().isEmpty()){
+
+            edtDariBank.setError("Harap diisi");
+            edtDariBank.requestFocus();
+            return;
+        }else{
+
+            edtDariBank.setError(null);
+        }
+
         if(sisaPiutang != 0){
 
             Toast.makeText(context, "Sisa harus habis atau Rp 0", Toast.LENGTH_LONG).show();

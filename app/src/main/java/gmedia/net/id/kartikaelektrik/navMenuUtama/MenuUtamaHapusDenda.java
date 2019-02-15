@@ -69,6 +69,7 @@ public class MenuUtamaHapusDenda extends Fragment {
     private int start = 0, count = 10;
     private String keyword = "";
     private boolean isLoading = false;
+    private TextView tvCustomer, tvTotalDenda, tvTotalHapusDenda;
 
     public MenuUtamaHapusDenda(){}
 
@@ -99,6 +100,9 @@ public class MenuUtamaHapusDenda extends Fragment {
         llLoadCusxtomer = (LinearLayout) layout.findViewById(R.id.ll_load_customer);
         pbLoadCustomer = (ProgressBar) layout.findViewById(R.id.pb_load_customer);
         btnRefresh = (Button) layout.findViewById(R.id.btn_refresh);
+        tvCustomer = (TextView) layout.findViewById(R.id.tv_customer);
+        tvTotalDenda = (TextView) layout.findViewById(R.id.tv_total_denda);
+        tvTotalHapusDenda = (TextView) layout.findViewById(R.id.tv_total_hapus_denda);
 
         LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         footerList = li.inflate(R.layout.foother_listview_loading, null);
