@@ -92,4 +92,10 @@
     <color name="color_blue_btn_act">#719be1</color>
     <color name="color_blue_btn">#2561c7</color>
 
+    <color name="color_x0">#4EC70F</color>
+    <color name="color_x1">#2196F3</color>
+    <color name="color_x2">#B9B608</color>
+    <color name="color_x3">#E20202</color>
+    <color name="color_x4">#000000</color>
+
 </resources>

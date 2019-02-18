@@ -68,6 +68,23 @@ public class ListTableCustomerOrderAdapter extends ArrayAdapter {
         holder.edCustomerName.setText(customer.getNamaCustomer());
         holder.edCustomerAddress.setText(customer.getAlamat());
 
+        if(customer.getXdenda().equals("0")){
+            holder.edCustomerName.setTextColor(context.getResources().getColor(R.color.color_x0));
+            holder.edCustomerAddress.setTextColor(context.getResources().getColor(R.color.color_x0));
+        }else if(customer.getXdenda().equals("1")){
+            holder.edCustomerName.setTextColor(context.getResources().getColor(R.color.color_x1));
+            holder.edCustomerAddress.setTextColor(context.getResources().getColor(R.color.color_x1));
+        }else if(customer.getXdenda().equals("2")){
+            holder.edCustomerName.setTextColor(context.getResources().getColor(R.color.color_x2));
+            holder.edCustomerAddress.setTextColor(context.getResources().getColor(R.color.color_x2));
+        }else if(customer.getXdenda().equals("3")){
+            holder.edCustomerName.setTextColor(context.getResources().getColor(R.color.color_x3));
+            holder.edCustomerAddress.setTextColor(context.getResources().getColor(R.color.color_x3));
+        }else{
+            holder.edCustomerName.setTextColor(context.getResources().getColor(R.color.color_x4));
+            holder.edCustomerAddress.setTextColor(context.getResources().getColor(R.color.color_x4));
+        }
+
         //region click event when tap on order list
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

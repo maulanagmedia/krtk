@@ -51,4 +51,5 @@ public class ServerURL {
     public static final String getPengajuanHapusDendaCustomer = baseURL + "Denda/list_pengajuan/";
     public static final String getDetailPengajuanHapusDendaCustomer = baseURL + "Denda/apv_pengajuan/";
     public static final String saveApvHapusDenda = baseURL + "Denda/persetujuan/";
+    public static final String getSummaryHapusDenda = baseURL + "Denda/view_denda/";
 }

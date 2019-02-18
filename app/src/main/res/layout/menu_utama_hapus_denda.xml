@@ -67,7 +67,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.4"
                     android:layout_height="wrap_content"
-                    android:text="Total Denda"
+                    android:text="Jumlah Denda"
                     android:textSize="11sp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="@dimen/default_small_padding2"

@@ -5,13 +5,20 @@ package gmedia.net.id.kartikaelektrik.model;
  */
 
 public class Customer {
-    private String kodeCustomer, namaCustomer, alamat, tempo, kota, totalPiutang, maxPiutang, limit;
+    private String kodeCustomer, namaCustomer, alamat, tempo, kota, totalPiutang, maxPiutang, limit, xdenda;
 
     public Customer(String kdCus, String nama, String alamat, String tempo) {
         this.kodeCustomer = kdCus;
         this.namaCustomer = nama;
         this.alamat = alamat;
         this.tempo = tempo;
+    }
+
+    public Customer(String kdCus, String nama, String alamat, String tempo, String xdenda) {
+        this.kodeCustomer = kdCus;
+        this.namaCustomer = nama;
+        this.alamat = alamat;
+        this.xdenda = xdenda;
     }
 
     public Customer(String kdCus, String nama, String alamat, String kota, String totalPiutang, String maxPiutang){
@@ -31,6 +38,17 @@ public class Customer {
         this.totalPiutang = totalPiutang;
         this.maxPiutang = maxPiutang;
         this.limit = limit;
+    }
+
+    public Customer(String kdCus, String nama, String alamat, String kota, String totalPiutang, String maxPiutang, String limit, String xdenda){
+        this.kodeCustomer = kdCus;
+        this.namaCustomer = nama;
+        this.alamat = alamat;
+        this.kota = kota;
+        this.totalPiutang = totalPiutang;
+        this.maxPiutang = maxPiutang;
+        this.limit = limit;
+        this.xdenda = xdenda;
     }
 
     public String getKodeCustomer() {
@@ -95,5 +113,13 @@ public class Customer {
 
     public void setLimit(String limit) {
         this.limit = limit;
+    }
+
+    public String getXdenda() {
+        return xdenda;
+    }
+
+    public void setXdenda(String xdenda) {
+        this.xdenda = xdenda;
     }
 }

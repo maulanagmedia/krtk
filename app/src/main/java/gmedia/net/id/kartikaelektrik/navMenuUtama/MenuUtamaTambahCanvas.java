@@ -119,7 +119,10 @@ public class MenuUtamaTambahCanvas extends Fragment {
                                             ,jo.getString("alamat")
                                             ,jo.getString("kota")
                                             ,iv.parseNullString(jo.getString("total_piutang"))
-                                            ,jo.getString("max_piutang")));
+                                            ,jo.getString("max_piutang")
+                                            ,"0"
+                                            ,jo.getString("xdenda")
+                                    ));
                                 }
                             }
 
@@ -218,7 +221,7 @@ public class MenuUtamaTambahCanvas extends Fragment {
                                 String customerCity = customer.getKota();
                                 String customerPiutang = iv.parseNullString(customer.getTotalPiutang());
                                 String customerMaxPiutang = customer.getMaxPiutang();
-                                itemCustomer.add(new Customer(kdCustomer,lastCustomerName,customerAddress, customerCity, customerPiutang, customerMaxPiutang));
+                                itemCustomer.add(customer);
                             }
                         }
                         getListCustomerTable(itemCustomer);

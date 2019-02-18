@@ -80,6 +80,29 @@ public class ListCanvasCustomerTableAdapter extends ArrayAdapter {
         holder.item1.setText(customer.getNamaCustomer());
         holder.item2.setText(customer.getAlamat() +", "+customer.getKota());
 
+        try {
+
+            if(customer.getXdenda() != null){
+
+                if(customer.getXdenda().equals("0")){
+                    holder.item1.setTextColor(context.getResources().getColor(R.color.color_x0));
+                    holder.item2.setTextColor(context.getResources().getColor(R.color.color_x0));
+                }else if(customer.getXdenda().equals("1")){
+                    holder.item1.setTextColor(context.getResources().getColor(R.color.color_x1));
+                    holder.item2.setTextColor(context.getResources().getColor(R.color.color_x1));
+                }else if(customer.getXdenda().equals("2")){
+                    holder.item1.setTextColor(context.getResources().getColor(R.color.color_x2));
+                    holder.item2.setTextColor(context.getResources().getColor(R.color.color_x2));
+                }else if(customer.getXdenda().equals("3")){
+                    holder.item1.setTextColor(context.getResources().getColor(R.color.color_x3));
+                    holder.item2.setTextColor(context.getResources().getColor(R.color.color_x3));
+                }else{
+                    holder.item1.setTextColor(context.getResources().getColor(R.color.color_x4));
+                    holder.item2.setTextColor(context.getResources().getColor(R.color.color_x4));
+                }
+            }
+        }catch (Exception e){e.printStackTrace();}
+
         return convertView;
     }
 }

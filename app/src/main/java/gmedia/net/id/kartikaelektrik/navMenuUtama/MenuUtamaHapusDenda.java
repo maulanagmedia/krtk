@@ -90,6 +90,7 @@ public class MenuUtamaHapusDenda extends Fragment {
         initUI();
         initEvent();
         initData();
+        //getSummaryHapusDenda();
     }
 
     private void initUI() {
@@ -241,11 +242,63 @@ public class MenuUtamaHapusDenda extends Fragment {
                         }
 
                         adapter.notifyDataSetChanged();
+
+                        if(start == 0) getSummaryHapusDenda();
                     }
 
                     @Override
                     public void onError(String result) {
                         iv.ProgressbarEvent(llLoadCusxtomer,pbLoadCustomer,btnRefresh,"ERROR");
+                    }
+                });
+    }
+
+    public void getSummaryHapusDenda(){
+
+        JSONObject jBody = new JSONObject();
+
+        try {
+            jBody.put("nik", session.getNik());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley restService = new ApiVolley(layout.getContext(), jBody, "POST", ServerURL.getSummaryHapusDenda, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        JSONObject responseAPI = new JSONObject();
+                        String message = "";
+
+                        try {
+
+                            responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+
+                            if(iv.parseNullInteger(status) == 200){
+
+                                JSONArray ja = responseAPI.getJSONArray("response");
+                                if(ja.length() > 0) {
+
+                                    JSONObject jo = ja.getJSONObject(0);
+
+                                    tvCustomer.setText(iv.ChangeToCurrencyFormat(jo.getString("jml_customer")));
+                                    tvTotalDenda.setText(iv.ChangeToCurrencyFormat(jo.getString("jml_denda")));
+                                    tvTotalHapusDenda.setText(iv.ChangeToCurrencyFormat(jo.getString("total")));
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(context, "Terjadi kesalahan saat memuat data, harap coba kembali.", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String result) {
+                        Toast.makeText(context, "Terjadi kesalahan saat memuat data, harap coba kembali", Toast.LENGTH_LONG).show();
                     }
                 });
     }
