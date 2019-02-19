@@ -124,7 +124,14 @@ public class MenuUtamaCustomerOrder extends Fragment {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    listCustomer.add(new Customer(jo.getString("kdcus"),jo.getString("nama"),jo.getString("alamat"),jo.getString("tempo")));
+
+                                    listCustomer.add(new Customer(jo.getString("kdcus")
+                                            ,jo.getString("nama")
+                                            ,jo.getString("alamat")
+                                            ,jo.getString("tempo")
+                                            ,jo.getString("xdenda")
+                                    ));
+
                                     listCustomerTable.add(
                                             new Customer(
                                                     jo.getString("kdcus")
