@@ -6,7 +6,7 @@ package gmedia.net.id.kartikaelektrik.util;
 
 public class ServerURL {
 
-    private static final String baseURL = "http://kartika.gmedia.bz/api/";
+    private static final String baseURL = "http://kartikaelectric.com/";
 
     public static final String getSetoranHeader = baseURL + "Setoran/view_header_setoran/";
     public static final String getSetoranDetail = baseURL + "Setoran/view_detail_setoran/";
@@ -52,4 +52,5 @@ public class ServerURL {
     public static final String getDetailPengajuanHapusDendaCustomer = baseURL + "Denda/apv_pengajuan/";
     public static final String saveApvHapusDenda = baseURL + "Denda/persetujuan/";
     public static final String getSummaryHapusDenda = baseURL + "Denda/view_denda/";
+    public static final String getBarangPerKatogory = baseURL + "barang/all_barang/kategori/";
 }

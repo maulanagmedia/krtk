@@ -23,6 +23,7 @@ import android.widget.TextView;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListBarangTableAdapter;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -48,7 +49,7 @@ public class ListMenuCategoryBarangDetailPotrait extends AppCompatActivity {
     private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "";
 
     //Fragment Detail Barang
-    private final String urlGetAllBarangByKategori = "http://kartika.gmedia.bz/api/barang/all_barang/kategori/";
+    private final String urlGetAllBarangByKategori = ServerURL.getBarangPerKategori;
     private List<Barang> listMasterBarang, moreList;
     private SharedPreferenceHandler cfs = new SharedPreferenceHandler();
     private ProgressBar pgbLoadBarang;
