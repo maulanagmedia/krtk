@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_grey2"
     tools:context="gmedia.net.id.kartikaelektrik.MainActivity"
     android:layout_margin="@dimen/default_small_padding1">
 
@@ -55,7 +54,7 @@
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -73,7 +72,7 @@
                             android:paddingBottom="@dimen/default_small_padding2"
                             android:paddingLeft="@dimen/default_small_padding1"
                             android:paddingRight="@dimen/default_small_padding1"
-                            android:background="@color/color_grey"
+                            android:background="@color/black"
                             android:textColor="@color/white"
                             />
 
@@ -88,13 +87,14 @@
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
+                            android:textColor="@color/black"
                             android:id="@+id/tv_data_piutang"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -108,7 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Piutang Telat"
-                            android:background="@color/color_grey"
+                            android:background="@color/black"
                             android:textColor="@color/white"
                             android:paddingTop="@dimen/default_small_padding2"
                             android:paddingBottom="@dimen/default_small_padding2"
@@ -127,13 +127,14 @@
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
+                            android:textColor="@color/black"
                             android:id="@+id/tv_piutang_telat"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                 </LinearLayout>
 
@@ -146,7 +147,7 @@
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -160,7 +161,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data Retur"
-                            android:background="@color/color_grey"
+                            android:background="@color/black"
                             android:textColor="@color/white"
                             android:paddingTop="@dimen/default_small_padding2"
                             android:paddingBottom="@dimen/default_small_padding2"
@@ -177,6 +178,7 @@
                             android:layout_marginRight="@dimen/default_small_padding1"
                             android:layout_marginLeft="@dimen/default_small_padding1"
                             android:text="Rp 0"
+                            android:textColor="@color/black"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
                             android:id="@+id/tv_data_retur"/>
@@ -185,7 +187,7 @@
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -199,7 +201,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Denda Pelanggan"
-                            android:background="@color/color_grey"
+                            android:background="@color/black"
                             android:textColor="@color/white"
                             android:paddingTop="@dimen/default_small_padding2"
                             android:paddingBottom="@dimen/default_small_padding2"
@@ -218,20 +220,821 @@
                             android:text="Rp 0"
                             android:padding="@dimen/default_small_padding2"
                             android:textSize="@dimen/text_dashboard"
+                            android:textColor="@color/black"
                             android:id="@+id/tv_denda_pelanggan"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
-                        android:background="@color/color_grey"/>
+                        android:background="@color/black"/>
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/color_grey"></TextView>
+                    android:background="@color/black"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_menu_admin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Menu Admin"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginLeft="@dimen/margin_default"
+                    android:layout_marginRight="@dimen/margin_default"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:background="@color/black"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:layout_marginLeft="@dimen/margin_default"
+                    android:layout_marginRight="@dimen/margin_default"/>
+
+                <android.support.v7.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:columnCount="3">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:visibility="visible"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_admin"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:id="@+id/ibt_menu_admin"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_admin" />
+
+                        <TextView
+                            android:text="Menu Admin"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_admin"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_margin="@dimen/default_small_padding2"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_margin="@dimen/default_small_padding2"></LinearLayout>
+
+                </android.support.v7.widget.GridLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_menu_utama">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Menu Utama"
+                    android:layout_marginLeft="@dimen/margin_default"
+                    android:layout_marginRight="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:background="@color/black"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:layout_marginLeft="@dimen/margin_default"
+                    android:layout_marginRight="@dimen/margin_default"/>
+
+                <android.support.v7.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:columnCount="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_tambah_pelanggan"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.1"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:background="#00000000"
+                            android:src="@mipmap/ic_customer"
+                            android:id="@+id/ibt_menu_tambah_pelanggan"
+                            android:scaleType="fitCenter"/>
+
+                        <TextView
+                            android:text="Entry Pelanggan"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:id="@+id/textView11"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textSize="@dimen/text_menu"
+                            android:textColor="@color/black"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_tagihan_piutang"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_currency"
+                            android:id="@+id/ibt_menu_tagihan_piutang"/>
+
+                        <TextView
+                            android:text="Tagihan / Piutang"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_tagihan_piutang"
+                            android:textSize="@dimen/text_menu"
+                            android:textColor="@color/black"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_info_stok"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_stock"
+                            android:id="@+id/ibt_menu_info_stok"/>
+
+                        <TextView
+                            android:text="Informasi Stok"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_info_stok"
+                            android:textSize="@dimen/text_menu"
+                            android:textColor="@color/black"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_tambah_so"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:id="@+id/ibt_menu_tambah_so"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_add_order" />
+
+                        <TextView
+                            android:text="Tambah Order Sales"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:id="@+id/textView12"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_daftar_so"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_order"
+                            android:id="@+id/ibt_menu_daftar_so"/>
+
+                        <TextView
+                            android:text="History Order Sales"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/textView13"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_setoran"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_setoran"
+                            android:id="@+id/ibt_menu_setoran"/>
+
+                        <TextView
+                            android:text="Setoran"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_setoran"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_tambah_canvas"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_pencil"
+                            android:id="@+id/ibt_menu_tambah_canvas"/>
+
+                        <TextView
+                            android:text="Penjualan Canvas"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_tambah_canvas"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_entry_canvas"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_document"
+                            android:id="@+id/ibt_menu_entry_canvas"/>
+
+                        <TextView
+                            android:text="History Penjualan Canvas"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_entry_canvas"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_barang_tidak_laku"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_barang_taklaku"
+                            android:id="@+id/ibt_menu_barang_tidak_laku"/>
+
+                        <TextView
+                            android:text="History Penjualan Barang"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_komisi"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:id="@+id/ibt_menu_komisi"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_booklet" />
+
+                        <TextView
+                            android:text="Komisi"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_komisi"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_denda"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_caution"
+                            android:id="@+id/ibt_menu_denda"/>
+
+                        <TextView
+                            android:text="Denda"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_denda"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_bonus"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_briefcast"
+                            android:id="@+id/ibt_menu_bonus"/>
+
+                        <TextView
+                            android:text="Bonus"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_bonus"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_omset_penjualan"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:id="@+id/ibt_menu_omset_penjualan"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_omset_penjualan" />
+
+                        <TextView
+                            android:text="Omset Penjualan"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_omset_penjualan"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_retur"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_retur"
+                            android:id="@+id/ibt_menu_retur"/>
+
+                        <TextView
+                            android:text="Retur"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_retur"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_customer_limit"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_customer_limit"
+                            android:id="@+id/ibt_menu_customer_limit"/>
+
+                        <TextView
+                            android:text="Customer Limit"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_customer_limit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_custom_order"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_custom_order"
+                            android:id="@+id/ibt_menu_custom_order"/>
+
+                        <TextView
+                            android:text="Pesanan Khusus"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_custom_order"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_hapus_denda"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_hapus_denda"
+                            android:id="@+id/ibt_menu_hapus_denda"/>
+
+                        <TextView
+                            android:text="Hapus Denda"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_history_limit"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        app:layout_columnWeight="1"
+                        android:layout_height="@dimen/menu_height"
+                        android:visibility="visible"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_pengeluaran"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:id="@+id/ibt_pengeluaran"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_shop" />
+
+                        <TextView
+                            android:text="Pemakaian Uang"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_rekap_pemakaian"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.GridLayout>
 
             </LinearLayout>
 
@@ -239,135 +1042,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:id="@+id/ll_line_1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/default_small_padding1"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_tambah_pelanggan"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.1"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:background="#00000000"
-                        android:src="@mipmap/ic_customer"
-                        android:id="@+id/ibt_menu_tambah_pelanggan"
-                        android:scaleType="fitCenter"/>
-
-                    <TextView
-                        android:text="Entry Pelanggan"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:id="@+id/textView11"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textSize="@dimen/text_menu"
-                        android:textColor="@color/color_font_light"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_tagihan_piutang"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_currency"
-                        android:id="@+id/ibt_menu_tagihan_piutang"/>
-
-                    <TextView
-                        android:text="Tagihan / Piutang"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_tagihan_piutang"
-                        android:textSize="@dimen/text_menu"
-                        android:textColor="@color/color_font_light"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_info_stok"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_stock"
-                        android:id="@+id/ibt_menu_info_stok"/>
-
-                    <TextView
-                        android:text="Informasi Stok"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_info_stok"
-                        android:textSize="@dimen/text_menu"
-                        android:textColor="@color/color_font_light"
-                        android:gravity="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Kedua-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_2"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/default_small_padding1"
                 android:weightSum="3">
@@ -376,127 +1051,9 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_tambah_so"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/ibt_menu_tambah_so"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_add_order" />
-
-                    <TextView
-                        android:text="Tambah Order Sales"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:id="@+id/textView12"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_daftar_so"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_order"
-                        android:id="@+id/ibt_menu_daftar_so"/>
-
-                    <TextView
-                        android:text="History Order Sales"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/textView13"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_setoran"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_setoran"
-                        android:id="@+id/ibt_menu_setoran"/>
-
-                    <TextView
-                        android:text="Setoran"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_setoran"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="@dimen/menu_height"
                     android:visibility="gone"
                     android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
                     android:paddingRight="@dimen/padding_main_menu"
                     android:paddingLeft="@dimen/padding_main_menu"
                     android:background="@drawable/ripple_dashboard_menu"
@@ -524,57 +1081,7 @@
                         android:layout_weight="0.9"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Ketiga-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_3"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/default_small_padding1"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_tambah_canvas"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_pencil"
-                        android:id="@+id/ibt_menu_tambah_canvas"/>
-
-                    <TextView
-                        android:text="Penjualan Canvas"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_tambah_canvas"
-                        android:textColor="@color/color_font_light"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
@@ -583,339 +1090,29 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:layout_height="@dimen/menu_height"
                     android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
+                    android:padding="@dimen/default_small_padding"
                     android:layout_marginLeft="@dimen/default_small_padding2"
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_entry_canvas"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_document"
-                        android:id="@+id/ibt_menu_entry_canvas"/>
-
-                    <TextView
-                        android:text="History Penjualan Canvas"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_entry_canvas"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
+                    android:visibility="gone"
                     android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_barang_tidak_laku"
+                    android:id="@+id/v_logo"
                     android:weightSum="2">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_barang_taklaku"
-                        android:id="@+id/ibt_menu_barang_tidak_laku"/>
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/kartika_logo"
+                        android:scaleType="fitCenter"/>
 
-                    <TextView
-                        android:text="History Penjualan Barang"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Keempat-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_4"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/default_small_padding1"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_komisi"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/ibt_menu_komisi"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_booklet" />
-
-                    <TextView
-                        android:text="Komisi"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_komisi"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_denda"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_caution"
-                        android:id="@+id/ibt_menu_denda"/>
-
-                    <TextView
-                        android:text="Denda"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_denda"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_bonus"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_briefcast"
-                        android:id="@+id/ibt_menu_bonus"/>
-
-                    <TextView
-                        android:text="Bonus"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_bonus"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Kelima-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_5"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/default_small_padding1"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_omset_penjualan"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/ibt_menu_omset_penjualan"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_omset_penjualan" />
-
-                    <TextView
-                        android:text="Omset Penjualan"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_omset_penjualan"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_retur"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_retur"
-                        android:id="@+id/ibt_menu_retur"/>
-
-                    <TextView
-                        android:text="Retur"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_retur"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_customer_limit"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_customer_limit"
-                        android:id="@+id/ibt_menu_customer_limit"/>
-
-                    <TextView
-                        android:text="Customer Limit"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_customer_limit"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/menu_height"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
                     android:paddingRight="@dimen/padding_main_menu"
@@ -999,7 +1196,7 @@
                         android:layout_weight="0.9"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:textColor="@color/color_font_light"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
@@ -1008,6 +1205,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:layout_height="@dimen/menu_height"
                     android:gravity="center_horizontal"
                     android:paddingRight="@dimen/padding_main_menu"
                     android:paddingLeft="@dimen/padding_main_menu"
@@ -1017,7 +1215,6 @@
                     android:layout_marginRight="@dimen/default_small_padding2"
                     android:paddingBottom="@dimen/default_small_padding2"
                     android:id="@+id/v_menu_update_master"
-                    android:layout_height="match_parent"
                     android:weightSum="2">
 
                     <ImageButton
@@ -1039,163 +1236,13 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:id="@+id/tv_update_master"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/default_small_padding"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:visibility="gone"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:id="@+id/v_logo"
-                    android:weightSum="2">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/kartika_logo"
-                        android:scaleType="fitCenter"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--Keenam-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ll_line_6"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_custom_order"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_custom_order"
-                        android:id="@+id/ibt_menu_custom_order"/>
-
-                    <TextView
-                        android:text="Pesanan Khusus"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_custom_order"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_hapus_denda"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_hapus_denda"
-                        android:id="@+id/ibt_menu_hapus_denda"/>
-
-                    <TextView
-                        android:text="Hapus Denda"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_history_limit"
-                        android:textColor="@color/color_font_light"
-                        android:textSize="@dimen/text_menu"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:visibility="visible"
-                    android:gravity="center_horizontal"
-                    android:paddingRight="@dimen/padding_main_menu"
-                    android:paddingLeft="@dimen/padding_main_menu"
-                    android:background="@drawable/ripple_dashboard_menu"
-                    android:layout_marginLeft="@dimen/default_small_padding2"
-                    android:layout_marginRight="@dimen/default_small_padding2"
-                    android:paddingBottom="@dimen/default_small_padding2"
-                    android:id="@+id/v_menu_admin"
-                    android:layout_height="match_parent"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/ibt_menu_admin"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="@dimen/padding_main_menu"
-                        android:layout_marginTop="@dimen/padding_main_menu"
-                        android:layout_weight="1.1"
-                        android:background="#00000000"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_admin" />
-
-                    <TextView
-                        android:text="Menu Admin"
-                        android:layout_height="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_weight="0.9"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:id="@+id/tv_admin"
-                        android:textColor="@color/color_font_light"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_menu"
                         android:gravity="center" />
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -31,6 +31,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaKomisi;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetPenjualan;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetSales;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderCustom;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPengeluaran;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPermintaanHargaOrder;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaRetur;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaSalesOrder;
@@ -254,6 +255,15 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaHapusDenda.setView(DashboardContainer.this, childLayoutMenuHapusDenda);
                     toolbar.setTitle("Hapus Denda");
                     setTitle("Hapus Denda");
+                    break;
+                case "menupengeluaran":
+                    state = 20;
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaPengeluaran menuUtamaPengeluaran = new MenuUtamaPengeluaran();
+                    View childLayoutMenuPengeluaran = inflater.inflate(R.layout.menu_utama_pengeluaran, flContainer);
+                    menuUtamaPengeluaran.setView(DashboardContainer.this, childLayoutMenuPengeluaran);
+                    toolbar.setTitle("Rekap Pengeluaran");
+                    setTitle("Rekap Pengeluaran");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

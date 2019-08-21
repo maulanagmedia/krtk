@@ -21,6 +21,11 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activityProfile.ProfileActivity"></activity>
+        <activity
+            android:name=".activityPengeluaran.DetailPengeluaran"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -29,9 +34,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider>
-
-        <!-- Service -->
+        </provider> <!-- Service -->
         <service android:name=".notificationService.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -83,10 +86,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitySalesOrderDetail.DetailSalesOrder"
-            android:screenOrientation="portrait" />
-
-        <!-- <service android:name=".services.BackgroundLocationService" /> -->
-
+            android:screenOrientation="portrait" /> <!-- <service android:name=".services.BackgroundLocationService" /> -->
         <activity
             android:name=".activityPiutang.ListPiutang"
             android:screenOrientation="portrait" />
@@ -307,9 +307,15 @@
         <activity
             android:name=".activityInfoStok.HistoryBarangCanvas"
             android:screenOrientation="portrait" />
-        <activity android:name=".ActivityMenuAdmin.HistoryLimitCustomer" />
-        <activity android:name=".ActivityMenuAdmin.HistoryLimitCustomerDetail" />
-        <activity android:name=".MenuAdminPerjalananSales.ListSalesPerjalanan" />
+        <activity
+            android:name=".ActivityMenuAdmin.HistoryLimitCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.HistoryLimitCustomerDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuAdminPerjalananSales.ListSalesPerjalanan"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -324,11 +330,20 @@
 
         <activity
             android:name=".MenuAdminPerjalananSales.PerjalananSales"
-            android:label="@string/title_activity_perjalanan_sales" />
-        <activity android:name=".MenuAdminPengaturanHeader.DetailPengaturanHeader" />
-        <activity android:name=".ActivityHapusDenda.DetailDendaCustomerActivity" />
-        <activity android:name=".MenuAdminApvHapusDenda.DetailApvHapusDenda" />
-        <activity android:name=".MenuAdminApvHapusDenda.DetailApvHapusDendaCustomer"></activity>
+            android:label="@string/title_activity_perjalanan_sales"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuAdminPengaturanHeader.DetailPengaturanHeader"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityHapusDenda.DetailDendaCustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuAdminApvHapusDenda.DetailApvHapusDenda"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuAdminApvHapusDenda.DetailApvHapusDendaCustomer"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

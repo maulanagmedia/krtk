@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
+import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderRekapSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -403,10 +403,15 @@ public class RekapMutasi extends AppCompatActivity {
                             JSONObject jo = jsonArray.getJSONObject(i);
                             listSetoran.add(new CustomListItem(
                                     jo.getString("kode_bank"),
-                                    jo.getString("bank"),
-                                    jo.getString("total"),
-                                    tanggalAwal,
-                                    tanggalAkhir));
+                                    jo.getString("bank")
+                                    ,jo.getString("total")
+                                    ,tanggalAwal
+                                    ,tanggalAkhir
+                                    ,jo.getString("crbayar")
+                                    ,jo.getString("saldo")
+                                    ,jo.getString("pengeluaran")
+                                    ,jo.getString("sisa")
+                                    ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }
@@ -447,7 +452,7 @@ public class RekapMutasi extends AppCompatActivity {
 
         if(listItem != null && listItem.size() > 0){
 
-            HeaderSetoranAdapter adapter = new HeaderSetoranAdapter((Activity) context, listItem);
+            HeaderRekapSetoranAdapter adapter = new HeaderRekapSetoranAdapter((Activity) context, listItem);
 
             lvSetoran.setAdapter(adapter);
 
@@ -462,7 +467,6 @@ public class RekapMutasi extends AppCompatActivity {
                     intent.putExtra("tgl_awal", item.getListItem4());
                     intent.putExtra("tgl_akhir", item.getListItem5());
                     ((Activity) context).startActivity(intent);
-
                 }
             });
         }

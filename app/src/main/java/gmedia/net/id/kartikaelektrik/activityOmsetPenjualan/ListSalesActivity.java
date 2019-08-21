@@ -60,7 +60,7 @@ public class ListSalesActivity extends AppCompatActivity {
     private String keyword = "";
     private View footerList;
     private boolean isLoading = false;
-    private List<CustomListItem> listItem, moreItem;
+    private List<CustomListItem> masterlist = new ArrayList<>(), listItem = new ArrayList<>(), moreItem;
     private boolean firstLoad = true;
     private ListSalesAdapter adapter;
     private String kode = "", flag = "";
@@ -110,6 +110,94 @@ public class ListSalesActivity extends AppCompatActivity {
                 tglAkhir = bundle.getString("tanggalakhir", "");
             }
 
+
+            listItem = new ArrayList<>();
+            adapter = new ListSalesAdapter((Activity) context, listItem);
+            lvSales.setAdapter(adapter);
+
+            actvSales.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                    if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                        String keyword = actvSales.getText().toString().toLowerCase();
+                        List<CustomListItem> items = new ArrayList<>();
+                        if(masterlist != null && masterlist.size() > 0){
+
+                            for(CustomListItem item : masterlist){
+                                if(item.getListItem2().toLowerCase().contains(keyword)){
+                                    items.add(item);
+                                }
+                            }
+
+                            listItem.clear();
+                            listItem.addAll(items);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        iv.hideSoftKey(context);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+
+            lvSales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    final CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
+
+                    if(flag.equals("1")){
+
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Konfirmasi")
+                                .setMessage("Apakah anda yakin ingin masuk sebagai "+item.getListItem2()+" ?")
+                                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        masukSales(item.getListItem1());
+                                    }
+                                })
+                                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                })
+                                .show();
+
+                    }else{
+
+                        Intent intent = new Intent();
+                        switch(kode){
+                            case "cus":
+                                intent = new Intent(context, ListOmsetCustomer.class);
+                                intent.putExtra("nik", item.getListItem1());
+                                intent.putExtra("tanggalawal", tglAwal);
+                                intent.putExtra("tanggalakhir", tglAkhir);
+                                break;
+                            case "brg":
+                                intent = new Intent(context, ListOmsetBarang.class);
+                                intent.putExtra("nik", item.getListItem1());
+                                intent.putExtra("tanggalawal", tglAwal);
+                                intent.putExtra("tanggalakhir", tglAkhir);
+                                break;
+                            default:
+                                intent = new Intent(context, ListOmsetCustomer.class);
+                                intent.putExtra("nik", item.getListItem1());
+                                intent.putExtra("tanggalawal", tglAwal);
+                                intent.putExtra("tanggalakhir", tglAkhir);
+                                break;
+                        }
+
+                        startActivity(intent);
+                    }
+
+                }
+            });
+
             getDataSales();
         }
     }
@@ -129,7 +217,7 @@ public class ListSalesActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getListSales, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "GET", ServerURL.getSalesAdmin, "", "", 0,
                 new ApiVolley.VolleyCallback(){
 
                     @Override
@@ -137,12 +225,13 @@ public class ListSalesActivity extends AppCompatActivity {
 
                         iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"GONE");
                         isLoading = false;
+                        listItem.clear();
+                        masterlist.clear();
 
                         try {
 
                             JSONObject responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
-                            listItem = new ArrayList<>();
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -153,72 +242,30 @@ public class ListSalesActivity extends AppCompatActivity {
                                     listItem.add(new CustomListItem(
                                             jo.getString("nik"),
                                             jo.getString("nama"),
-                                            jo.getString("alamat")));
+                                            jo.getString("jabatan")));
+
+                                    masterlist.add(new CustomListItem(
+                                            jo.getString("nik"),
+                                            jo.getString("nama"),
+                                            jo.getString("jabatan")));
                                 }
                             }
 
-                            getListAutocomplete(listItem);
-                            getListTable(listItem);
 
                         }catch (Exception e){
                             e.printStackTrace();
-                            getListAutocomplete(null);
-                            getListTable(null);
                         }
+
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(String result) {
 
                         isLoading = false;
-                        getListAutocomplete(null);
-                        getListTable(null);
                         iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"ERROR");
                     }
                 });
-    }
-
-    private void getListAutocomplete(List<CustomListItem> listItem) {
-
-        actvSales.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
-
-                    keyword = actvSales.getText().toString();
-                    getDataSales();
-                    iv.hideSoftKey(context);
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        if(firstLoad){
-            firstLoad = false;
-            actvSales.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                    if(editable.toString().length() <= 0) {
-
-                        keyword = "";
-                        getDataSales();
-                    }
-                }
-            });
-        }
     }
 
     private void getListTable(List<CustomListItem> listItems){
@@ -228,7 +275,7 @@ public class ListSalesActivity extends AppCompatActivity {
         if (listItems != null && listItems.size() > 0){
 
             //set adapter for autocomplete
-            adapter = new ListSalesAdapter((Activity) context, listItems.size(), listItems);
+            adapter = new ListSalesAdapter((Activity) context, listItems);
 
             //set adapter to autocomplete
             lvSales.setAdapter(adapter);

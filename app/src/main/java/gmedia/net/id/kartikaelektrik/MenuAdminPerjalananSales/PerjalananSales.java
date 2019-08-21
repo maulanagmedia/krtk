@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class PerjalananSales extends FragmentActivity implements OnMapReadyCallb
     private ItemValidation iv = new ItemValidation();
     private EditText edtTanggal;
     private double latitude = 0, longitude = 0;
+    private ImageView ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,14 @@ public class PerjalananSales extends FragmentActivity implements OnMapReadyCallb
                 new DatePickerDialog(context,date, iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
             }
         });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                onBackPressed();
+            }
+        });
     }
 
     private void initUI() {
@@ -107,6 +117,8 @@ public class PerjalananSales extends FragmentActivity implements OnMapReadyCallb
         formatTime = context.getResources().getString(R.string.format_time);
 
         curdate = iv.getCurrentDate(formatDateDisplay);
+
+        ivBack = (ImageView) findViewById(R.id.iv_back);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){

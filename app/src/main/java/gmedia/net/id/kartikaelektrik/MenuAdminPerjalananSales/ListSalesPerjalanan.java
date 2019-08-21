@@ -53,7 +53,7 @@ public class ListSalesPerjalanan extends AppCompatActivity {
     private String keyword = "";
     private View footerList;
     private boolean isLoading = false;
-    private List<CustomListItem> listItem, moreItem;
+    private List<CustomListItem> listItem = new ArrayList<>(), masterlist = new ArrayList<>(), moreItem;
     private boolean firstLoad = true;
     private ListSalesAdapter adapter;
 
@@ -85,6 +85,50 @@ public class ListSalesPerjalanan extends AppCompatActivity {
         LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         footerList = li.inflate(R.layout.foother_listview_loading, null);
 
+        listItem = new ArrayList<>();
+        adapter = new ListSalesAdapter((Activity) context, listItem);
+        lvSales.setAdapter(adapter);
+
+        actvSales.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                    String keyword = actvSales.getText().toString().toLowerCase();
+                    List<CustomListItem> items = new ArrayList<>();
+                    if(masterlist != null && masterlist.size() > 0){
+
+                        for(CustomListItem item : masterlist){
+                            if(item.getListItem2().toLowerCase().contains(keyword)){
+                                items.add(item);
+                            }
+                        }
+
+                        listItem.clear();
+                        listItem.addAll(items);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    iv.hideSoftKey(context);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        lvSales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(context, PerjalananSales.class);
+                intent.putExtra("nik", item.getListItem1());
+                intent.putExtra("nama", item.getListItem2());
+                startActivity(intent);
+            }
+        });
+
         getDataSales();
     }
 
@@ -103,7 +147,7 @@ public class ListSalesPerjalanan extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getListSales, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "GET", ServerURL.getSalesAdmin, "", "", 0,
                 new ApiVolley.VolleyCallback(){
 
                     @Override
@@ -116,7 +160,8 @@ public class ListSalesPerjalanan extends AppCompatActivity {
 
                             JSONObject responseAPI = new JSONObject(result);
                             String status = responseAPI.getJSONObject("metadata").getString("status");
-                            listItem = new ArrayList<>();
+                            listItem.clear();
+                            masterlist.clear();
 
                             if(iv.parseNullInteger(status) == 200){
 
@@ -124,178 +169,32 @@ public class ListSalesPerjalanan extends AppCompatActivity {
                                 for(int i = 0; i < arrayJSON.length();i++){
 
                                     JSONObject jo = arrayJSON.getJSONObject(i);
+
+                                    masterlist.add(new CustomListItem(
+                                            jo.getString("nik"),
+                                            jo.getString("nama"),
+                                            jo.getString("jabatan")));
+
                                     listItem.add(new CustomListItem(
                                             jo.getString("nik"),
                                             jo.getString("nama"),
-                                            jo.getString("alamat")));
+                                            jo.getString("jabatan")));
                                 }
                             }
 
-                            getListAutocomplete(listItem);
-                            getListTable(listItem);
-
                         }catch (Exception e){
                             e.printStackTrace();
-                            getListAutocomplete(null);
-                            getListTable(null);
+
                         }
+
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(String result) {
 
                         isLoading = false;
-                        getListAutocomplete(null);
-                        getListTable(null);
                         iv.ProgressbarEvent(llContainer,pbLoading,btnRefresh,"ERROR");
-                    }
-                });
-    }
-
-    private void getListAutocomplete(List<CustomListItem> listItem) {
-
-        actvSales.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
-
-                    keyword = actvSales.getText().toString();
-                    getDataSales();
-                    iv.hideSoftKey(context);
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        if(firstLoad){
-            firstLoad = false;
-            actvSales.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                    if(editable.toString().length() <= 0) {
-
-                        keyword = "";
-                        getDataSales();
-                    }
-                }
-            });
-        }
-    }
-
-    private void getListTable(List<CustomListItem> listItems){
-
-        lvSales.setAdapter(null);
-
-        if (listItems != null && listItems.size() > 0){
-
-            //set adapter for autocomplete
-            adapter = new ListSalesAdapter((Activity) context, listItems.size(), listItems);
-
-            //set adapter to autocomplete
-            lvSales.setAdapter(adapter);
-
-            lvSales.setOnScrollListener(new AbsListView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(AbsListView absListView, int i) {
-
-                    int threshold = 1;
-                    int countMerchant = lvSales.getCount();
-
-                    if (i == SCROLL_STATE_IDLE) {
-                        if (lvSales.getLastVisiblePosition() >= countMerchant - threshold && !isLoading) {
-
-                            isLoading = true;
-                            lvSales.addFooterView(footerList);
-                            start += count;
-                            getMoreData();
-                            //Log.i(TAG, "onScroll: last ");
-                        }
-                    }
-                }
-
-                @Override
-                public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-                }
-            });
-
-            lvSales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    final CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
-                    Intent intent = new Intent(context, PerjalananSales.class);
-                    intent.putExtra("nik", item.getListItem1());
-                    intent.putExtra("nama", item.getListItem2());
-                    startActivity(intent);
-                }
-            });
-        }
-    }
-
-    private void getMoreData() {
-
-        isLoading = true;
-        JSONObject jBody = new JSONObject();
-        try {
-            jBody.put("keyword", keyword);
-            jBody.put("start", String.valueOf(start));
-            jBody.put("count", String.valueOf(count));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getListSales, "", "", 0,
-                new ApiVolley.VolleyCallback(){
-
-                    @Override
-                    public void onSuccess(String result){
-
-                        isLoading = false;
-                        lvSales.removeFooterView(footerList);
-
-                        try {
-
-                            JSONObject responseAPI = new JSONObject(result);
-                            String status = responseAPI.getJSONObject("metadata").getString("status");
-                            moreItem = new ArrayList<>();
-
-                            if(iv.parseNullInteger(status) == 200){
-
-                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
-                                for(int i = 0; i < arrayJSON.length();i++){
-                                    JSONObject jo = arrayJSON.getJSONObject(i);
-
-                                    moreItem.add(new CustomListItem(jo.getString("nik"),
-                                            jo.getString("nama"),
-                                            jo.getString("alamat")));
-                                }
-                            }
-
-                            if(adapter != null) adapter.addMoreData(moreItem);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(String result) {
-
-                        isLoading = false;
-                        lvSales.removeFooterView(footerList);
                     }
                 });
     }

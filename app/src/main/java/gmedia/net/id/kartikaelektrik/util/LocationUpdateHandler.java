@@ -93,11 +93,17 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            if(keterangan.toLowerCase().equals("logout")){
+            SessionManager sessionManager = new SessionManager(context);
+            if(sessionManager.isLoggedIn()) {
 
-                SessionManager sessionManager = new SessionManager(context);
-                sessionManager.logoutUser();
-                ((Activity) context).finish();
+                if(keterangan.toLowerCase().equals("logout")){
+
+                    if(sessionManager.isLoggedIn()) {
+
+                        sessionManager.logoutUser((Activity) context);
+                    }
+
+                }
             }
 
             return;
@@ -137,11 +143,13 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
             UpdateLocationToServer(locationModel);
         }
 
-        if(keterangan.toLowerCase().equals("logout")){
+        SessionManager sessionManager = new SessionManager(context);
+        if(sessionManager.isLoggedIn()) {
 
-            SessionManager sessionManager = new SessionManager(context);
-            sessionManager.logoutUser();
-            ((Activity) context).finish();
+            if(keterangan.toLowerCase().equals("logout")){
+
+                sessionManager.logoutUser((Activity) context);
+            }
         }
     }
 
@@ -216,11 +224,13 @@ public class LocationUpdateHandler implements GoogleApiClient.ConnectionCallback
                     e.printStackTrace();
                 }
 
-                if(keterangan.toLowerCase().equals("logout")){
+                SessionManager sessionManager = new SessionManager(context);
+                if(sessionManager.isLoggedIn()){
 
-                    SessionManager sessionManager = new SessionManager(context);
-                    sessionManager.logoutUser();
-                    ((Activity) context).finish();
+                    if(keterangan.toLowerCase().equals("logout")){
+
+                        sessionManager.logoutUser((Activity) context);
+                    }
                 }
             }
 

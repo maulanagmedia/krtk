@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activityPengeluaran.DetailPengeluaran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -46,10 +47,13 @@ public class RincianSetoran extends AppCompatActivity {
     private Button btnRefresh;
     private String kodeBank = "", tanggalAwal ="" , tanggalAkhir = "";
     private ProgressBar pbLoading;
-    private List<CustomListItem> listSetoran;
-    private TextView tvTotal;
+    private List<CustomListItem> listSetoran = new ArrayList<>(), moreList = new ArrayList<>();
+    private TextView tvTotal, tvTotalPengeluaran;
     private AutoCompleteTextView actvKeyword;
     private boolean firstLoad = true;
+    private LinearLayout llTotal, llTotalPengeluaran;
+    private LinearLayout llFooter;
+    private double totalPengeluaran = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,11 @@ public class RincianSetoran extends AppCompatActivity {
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+        tvTotalPengeluaran = (TextView) findViewById(R.id.tv_total_pengeluaran);
         actvKeyword = (AutoCompleteTextView) findViewById(R.id.actv_keyword);
+        llTotal = (LinearLayout) findViewById(R.id.ll_total);
+        llTotalPengeluaran = (LinearLayout) findViewById(R.id.ll_total_pengeluaran);
+        llFooter = (LinearLayout) findViewById(R.id.ll_footer_sub);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -84,6 +92,12 @@ public class RincianSetoran extends AppCompatActivity {
             kodeBank = bundle.getString("kode_bank", "");
             tanggalAwal = bundle.getString("tgl_awal", "");
             tanggalAkhir = bundle.getString("tgl_akhir", "");
+
+            if(!kodeBank.equals("1009")){
+
+                llTotalPengeluaran.setVisibility(View.GONE);
+                llFooter.setWeightSum(1);
+            }
 
             initEvent();
         }
@@ -210,7 +224,89 @@ public class RincianSetoran extends AppCompatActivity {
                         onBackPressed();
                     }
 
-                    tvTotal.setText(iv.ChangeToRupiahFormat(total));
+                    //tvTotal.setText(iv.ChangeToRupiahFormat(total));
+                    if(kodeBank.equals("1009")){
+
+                        getDataSetoranPengeluaran();
+                    }else{
+
+                        setAdapter(listSetoran);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                    setAdapter(null);
+                    llContainer.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+                llContainer.setVisibility(View.VISIBLE);
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                setAdapter(null);
+            }
+        });
+    }
+
+    private void getDataSetoranPengeluaran() {
+
+        pbLoading.setVisibility(View.VISIBLE);
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("kode_bank", "0000"); // akun pengeluaran
+            jBody.put("tgl_awal", tanggalAwal);
+            jBody.put("tgl_akhir", tanggalAkhir);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranDetail, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+                    moreList = new ArrayList<>();
+                    totalPengeluaran = 0;
+
+                    if(status.equals("200")){
+
+                        JSONArray jsonArray = response.getJSONArray("response");
+                        for(int i = 0; i < jsonArray.length(); i++){
+
+                            JSONObject jo = jsonArray.getJSONObject(i);
+                            moreList.add(new CustomListItem(
+                                    jo.getString("id"),
+                                    jo.getString("nama_customer"),
+                                    jo.getString("bank"),
+                                    jo.getString("total"),
+                                    jo.getString("tanggal"),
+                                    jo.getString("daribank"),
+                                    jo.getString("kode_bank"),
+                                    jo.getString("kdcus"),
+                                    jo.getString("nobukti")
+                            ));
+
+                            totalPengeluaran += iv.parseNullDouble(jo.getString("total"));
+                        }
+
+                        listSetoran.addAll(moreList);
+
+                    }else{
+                        onBackPressed();
+                    }
+
+                    //tvTotal.setText(iv.ChangeToRupiahFormat(total));
                     setAdapter(listSetoran);
 
                 } catch (JSONException e) {
@@ -244,7 +340,10 @@ public class RincianSetoran extends AppCompatActivity {
                 total += iv.parseNullDouble(item.getListItem4());
             }
 
+            total -= totalPengeluaran;
+
             tvTotal.setText(iv.ChangeToRupiahFormat(total));
+            tvTotalPengeluaran.setText(iv.ChangeToRupiahFormat(totalPengeluaran));
             DetailSetoranAdapter adapter = new DetailSetoranAdapter((Activity) context, listItems);
             lvRincianSetoran.setAdapter(adapter);
 
@@ -263,10 +362,19 @@ public class RincianSetoran extends AppCompatActivity {
                         intent.putExtra("customer", item.getListItem2());
                         intent.putExtra("bank", item.getListItem3());
                         startActivity(intent);*/
-                        Intent intent = new Intent(context, DetailSetoranPerNota.class);
-                        intent.putExtra("nobukti", item.getListItem9());
-                        intent.putExtra("namacus", item.getListItem2());
-                        startActivity(intent);
+
+                        if(item.getListItem7().equals("0000")){
+
+                            Intent intent = new Intent(context, DetailPengeluaran.class);
+                            intent.putExtra("id", item.getListItem1());
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(context, DetailSetoranPerNota.class);
+                            intent.putExtra("nobukti", item.getListItem9());
+                            intent.putExtra("namacus", item.getListItem2());
+                            startActivity(intent);
+                        }
+
                     }else{
                         Toast.makeText(context, "Data merupakan mutasi", Toast.LENGTH_LONG).show();
                     }

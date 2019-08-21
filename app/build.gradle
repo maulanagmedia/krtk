@@ -8,8 +8,8 @@ android {
         applicationId 'gmedia.net.id.kartikaelektrik'
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 31
-        versionName '12.20.1'
+        versionCode 33
+        versionName '13.0.1'
     }
     buildTypes {
         release {
@@ -44,11 +44,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
     implementation 'com.android.support:multidex:1.0.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5' // for crashlitycs
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'cz.intik:overflow-pager-indicator:1.2.1'
+    implementation 'com.android.support:gridlayout-v7:27.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

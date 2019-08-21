@@ -49,6 +49,7 @@ import java.util.TimerTask;
 
 import gmedia.net.id.kartikaelektrik.CustomView.WrapContentViewPager;
 import gmedia.net.id.kartikaelektrik.activityPiutang.DetailPiutangJatuhTempo;
+import gmedia.net.id.kartikaelektrik.activityProfile.ProfileActivity;
 import gmedia.net.id.kartikaelektrik.adapter.DashboardAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.HeaderSliderAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
@@ -68,8 +69,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private final String TAG = "MainAct";
     private List<CustomListItem> sliderList = new ArrayList<>();
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -83,7 +84,6 @@ public class MainActivity extends RuntimePermissionsActivity {
     private ImageButton ibtTambahCanvas, ibtEntryCanvas, ibtRetur, ibtOmsetPenjualan;
     private LinearLayout llEntryPaket;
     private ImageButton ibtEntryPaket;
-    private LinearLayout llLine1, llLine2, llLine3, llLine4, llLine5, llLine6;
     private String version = "";
     private String latestVersion = "";
     private String link = "";
@@ -104,6 +104,7 @@ public class MainActivity extends RuntimePermissionsActivity {
     private AlertDialog dialogVersion;
     private WrapContentViewPager vpHeaderSlider;
     private Context context;
+    private LinearLayout llAdmin, llUtama;
 
     //header slider
     private boolean firstLoad = true;
@@ -123,10 +124,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         // Check Login
         sessionManager = new SessionManager(MainActivity.this);
         user = sessionManager.getUserDetails();
+        context = this;
 
         if(!sessionManager.isLoggedIn()) {
-            sessionManager.logoutUser();
-            finish();
+            sessionManager.logoutUser((Activity) context);
         }
 
         // for android > M
@@ -150,7 +151,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         /*MasterDataHandler mdh = new MasterDataHandler(MainActivity.this);
         mdh.checkWeeklyUpdate();*/
-        context = this;
+
         dialogActive = false;
         firstLoad = true;
 
@@ -182,6 +183,9 @@ public class MainActivity extends RuntimePermissionsActivity {
         llMenuAdmin = (LinearLayout) findViewById(R.id.v_menu_admin);
         llCustomerLimit = (LinearLayout) findViewById(R.id.v_menu_customer_limit);
         llHapusDenda = (LinearLayout) findViewById(R.id.v_menu_hapus_denda);
+        llPengeluaran = (LinearLayout) findViewById(R.id.v_pengeluaran);
+        llAdmin = (LinearLayout) findViewById(R.id.ll_menu_admin);
+        llUtama = (LinearLayout) findViewById(R.id.ll_menu_utama);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -205,14 +209,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtMenuAdmin = (ImageButton) findViewById(R.id.ibt_menu_admin);
         ibtCustomerLimit = (ImageButton) findViewById(R.id.ibt_menu_customer_limit);
         ibtHapusDenda = (ImageButton) findViewById(R.id.ibt_menu_hapus_denda);
+        ibtPengeluaran = (ImageButton) findViewById(R.id.ibt_pengeluaran);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
-
-        llLine1 = (LinearLayout) findViewById(R.id.ll_line_1);
-        llLine2 = (LinearLayout) findViewById(R.id.ll_line_2);
-        llLine3 = (LinearLayout) findViewById(R.id.ll_line_3);
-        llLine4 = (LinearLayout) findViewById(R.id.ll_line_4);
-        llLine5 = (LinearLayout) findViewById(R.id.ll_line_5);
-        llLine6 = (LinearLayout) findViewById(R.id.ll_line_6);
 
         llDataPiutang = (LinearLayout) findViewById(R.id.ll_data_piutang);
         llPiutangTelat = (LinearLayout) findViewById(R.id.ll_piutang_telat);
@@ -245,7 +243,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         int menuWidth = 0;
         menuWidth = size.x;
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(menuWidth - iv.dpToPx(MainActivity.this, 8) , menuWidth/3);
+        /*LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(menuWidth - iv.dpToPx(MainActivity.this, 8) , menuWidth/3);
         lp.setMargins(iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 4));
         llLine1.setLayoutParams(lp);
         llLine2.setLayoutParams(lp);
@@ -253,6 +251,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llLine4.setLayoutParams(lp);
         llLine5.setLayoutParams(lp);
         llLine6.setLayoutParams(lp);
+        llLine7.setLayoutParams(lp);*/
 
         setOnClickMenu(llTambahPelanggan,ibtTambahPelanggan);
         setOnClickMenu(llPermintaanHarga,null);
@@ -275,6 +274,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llMenuAdmin, ibtMenuAdmin);
         setOnClickMenu(llCustomerLimit, ibtCustomerLimit);
         setOnClickMenu(llHapusDenda, ibtHapusDenda);
+        setOnClickMenu(llPengeluaran, ibtPengeluaran);
 
         CheckUserLevel();
 
@@ -484,11 +484,11 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         if(sessionManager.getLaba().equals("1")){
 
-            llMenuAdmin.setVisibility(View.VISIBLE);
+            llAdmin.setVisibility(View.VISIBLE);
             //llLine6.setVisibility(View.VISIBLE);
         }else{
 
-            llMenuAdmin.setVisibility(View.INVISIBLE);
+            llAdmin.setVisibility(View.GONE);
             //llLine6.setVisibility(View.GONE);
         }
     }
@@ -791,6 +791,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","menuhapusdenda");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_pengeluaran){
+                    intent.putExtra("kodemenu","menupengeluaran");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -886,6 +890,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         intent.putExtra("kodemenu","menuhapusdenda");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_pengeluaran){
+                        intent.putExtra("kodemenu","menupengeluaran");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 }
             });
@@ -949,11 +957,18 @@ public class MainActivity extends RuntimePermissionsActivity {
 
             }else{
 
-                sessionManager.logoutUser();
-                finish();
+                if(sessionManager.isLoggedIn()) {
+
+                    sessionManager.logoutUser((Activity) context);
+                }
             }
 
+            return true;
 
+        }else if(id == R.id.option_profile){
+
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
             return true;
         }else if(id == R.id.option_kill_access){
 

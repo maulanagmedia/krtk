@@ -20,15 +20,13 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 public class ListSalesAdapter extends ArrayAdapter {
 
     private Activity context;
-    private int resource;
     private List<CustomListItem> items;
     private int rowPerTableItem;
     private View viewInflater;
 
-    public ListSalesAdapter(Activity context, int resource, List items) {
-        super(context, resource, items);
+    public ListSalesAdapter(Activity context, List items) {
+        super(context, R.layout.adapter_single_menu, items);
         this.context = context;
-        this.resource = resource;
         this.items = items;
         this.rowPerTableItem = Integer.parseInt(context.getResources().getString(R.string.rows_per_page_table));
     }
@@ -39,7 +37,7 @@ public class ListSalesAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private TextView tvMenuName;
+        private TextView tvMenuName, tvMenuDesc;
     }
 
     public void addMoreData(List<CustomListItem> addItems){
@@ -58,6 +56,7 @@ public class ListSalesAdapter extends ArrayAdapter {
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_single_menu, null);
             holder.tvMenuName = (TextView) convertView.findViewById(R.id.tv_menu_name);
+            holder.tvMenuDesc = (TextView) convertView.findViewById(R.id.tv_menu_desc);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -65,6 +64,7 @@ public class ListSalesAdapter extends ArrayAdapter {
 
         final CustomListItem item = items.get(position);
         holder.tvMenuName.setText(item.getListItem2());
+        holder.tvMenuDesc.setText(item.getListItem3());
 
         return convertView;
 

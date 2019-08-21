@@ -54,83 +54,83 @@
     </array>
 
     <!--API List-->
-    <string name="url_login">http://kartikaelectric.com/auth/login/</string>
-    <string name="url_change_password">http://kartikaelectric.com/auth/change_password/</string>
+    <string name="url_login">http://api.kartikaelectric.com/auth/login/</string>
+    <string name="url_change_password">http://api.kartikaelectric.com/auth/change_password/</string>
 
-    <string name="url_get_so">http://kartikaelectric.com/</string>
-    <string name="url_get_so_detail_by_id">http://kartikaelectric.com/barang/detail/</string>
-    <string name="url_insert_so">http://kartikaelectric.com/barang/create/</string>
-    <string name="url_insert_so_detail">http://kartikaelectric.com/barang/create/</string>
-    <string name="url_update_so_header">http://kartikaelectric.com/barang/update/</string>
-    <string name="url_update_so_detail">http://kartikaelectric.com/barang/update_detail/</string>
-    <string name="url_get_harga_so_detail">http://kartikaelectric.com/barang/get_harga/</string>
-    <string name="url_delete_so_by_id">http://kartikaelectric.com/barang/delete/</string>
-    <string name="url_delete_so_detail_by_id">http://kartikaelectric.com/barang/delete_detail/</string>
-    <string name="url_delete_so_paket_by_id">http://kartikaelectric.com/paket/delete_detail/</string>
-    <string name="url_get_gudang_so_detail_by_id">http://kartikaelectric.com/barang/kode_gudang/</string>
-    <string name="url_get_so_permintaan_harga">http://kartikaelectric.com/barang/so_approve/</string>
-    <string name="url_update_status_so">http://kartikaelectric.com/barang/update_status/</string>
+    <string name="url_get_so">http://api.kartikaelectric.com/</string>
+    <string name="url_get_so_detail_by_id">http://api.kartikaelectric.com/barang/detail/</string>
+    <string name="url_insert_so">http://api.kartikaelectric.com/barang/create/</string>
+    <string name="url_insert_so_detail">http://api.kartikaelectric.com/barang/create/</string>
+    <string name="url_update_so_header">http://api.kartikaelectric.com/barang/update/</string>
+    <string name="url_update_so_detail">http://api.kartikaelectric.com/barang/update_detail/</string>
+    <string name="url_get_harga_so_detail">http://api.kartikaelectric.com/barang/get_harga/</string>
+    <string name="url_delete_so_by_id">http://api.kartikaelectric.com/barang/delete/</string>
+    <string name="url_delete_so_detail_by_id">http://api.kartikaelectric.com/barang/delete_detail/</string>
+    <string name="url_delete_so_paket_by_id">http://api.kartikaelectric.com/paket/delete_detail/</string>
+    <string name="url_get_gudang_so_detail_by_id">http://api.kartikaelectric.com/barang/kode_gudang/</string>
+    <string name="url_get_so_permintaan_harga">http://api.kartikaelectric.com/barang/so_approve/</string>
+    <string name="url_update_status_so">http://api.kartikaelectric.com/barang/update_status/</string>
 
-    <string name="url_get_all_kategori_barang">http://kartikaelectric.com/barang/all_kategori/</string>
-    <string name="url_get_all_barang">http://kartikaelectric.com/barang/all_barang/</string>
-    <string name="url_get_barang_by_id">http://kartikaelectric.com/barang/get_barang/</string>
-    <string name="url_get_all_barang_by_kategori">http://kartikaelectric.com/barang/all_barang/kategori/</string>
-    <string name="url_get_filter_barang">http://kartikaelectric.com/barang/filter_barang/</string>
-    <string name="url_get_filter_canvas">http://kartikaelectric.com/barang/stok_canvas/</string>
+    <string name="url_get_all_kategori_barang">http://api.kartikaelectric.com/barang/all_kategori/</string>
+    <string name="url_get_all_barang">http://api.kartikaelectric.com/barang/all_barang/</string>
+    <string name="url_get_barang_by_id">http://api.kartikaelectric.com/barang/get_barang/</string>
+    <string name="url_get_all_barang_by_kategori">http://api.kartikaelectric.com/barang/all_barang/kategori/</string>
+    <string name="url_get_filter_barang">http://api.kartikaelectric.com/barang/filter_barang/</string>
+    <string name="url_get_filter_canvas">http://api.kartikaelectric.com/barang/stok_canvas/</string>
 
-    <string name="url_get_all_customer">http://kartikaelectric.com/barang/customer/</string>
+    <string name="url_get_all_customer">http://api.kartikaelectric.com/barang/customer/</string>
     <string name="url_get_customer_by_id">http://gmedia.bz/kartika/api/barang/customer/</string>
-    <string name="url_insert_customer">http://kartikaelectric.com/barang/create_customer/</string>
-    <string name="url_update_customer">http://kartikaelectric.com/barang/update_customer/</string>
-    <string name="url_delete_customer_by_id">http://kartikaelectric.com/barang/delete_customer/</string>
+    <string name="url_insert_customer">http://api.kartikaelectric.com/barang/create_customer/</string>
+    <string name="url_update_customer">http://api.kartikaelectric.com/barang/update_customer/</string>
+    <string name="url_delete_customer_by_id">http://api.kartikaelectric.com/barang/delete_customer/</string>
 
 
-    <string name="url_get_all_rayon">http://kartikaelectric.com/barang/kode_rayon/</string>
-    <string name="url_get_list_barang_by_id">http://kartikaelectric.com/barang/all_barang/id_barang/</string>
+    <string name="url_get_all_rayon">http://api.kartikaelectric.com/barang/kode_rayon/</string>
+    <string name="url_get_list_barang_by_id">http://api.kartikaelectric.com/barang/all_barang/id_barang/</string>
 
-    <string name="url_get_piutang_by_range">http://kartikaelectric.com/piutang/data_piutang/</string>
-    <string name="url_get_detail_piutang_by_id">http://kartikaelectric.com/piutang/piutang_detail/</string>
+    <string name="url_get_piutang_by_range">http://api.kartikaelectric.com/piutang/data_piutang/</string>
+    <string name="url_get_detail_piutang_by_id">http://api.kartikaelectric.com/piutang/piutang_detail/</string>
 
-    <string name="url_get_komisi_by_range">http://kartikaelectric.com/komisi/data_komisi/</string>
-    <string name="url_get_denda_by_range">http://kartikaelectric.com/komisi/data_denda/</string>
-    <string name="url_post_komisi_denda_by_range">http://kartikaelectric.com/komisi/data_denda_komisi/</string>
-    <string name="url_get_bonus_header">http://kartikaelectric.com/komisi/data_bonus_h/</string>
-    <string name="url_get_bonus_detail">http://kartikaelectric.com/komisi/data_bonus_d/</string>
+    <string name="url_get_komisi_by_range">http://api.kartikaelectric.com/komisi/data_komisi/</string>
+    <string name="url_get_denda_by_range">http://api.kartikaelectric.com/komisi/data_denda/</string>
+    <string name="url_post_komisi_denda_by_range">http://api.kartikaelectric.com/komisi/data_denda_komisi/</string>
+    <string name="url_get_bonus_header">http://api.kartikaelectric.com/komisi/data_bonus_h/</string>
+    <string name="url_get_bonus_detail">http://api.kartikaelectric.com/komisi/data_bonus_d/</string>
 
-    <string name="url_insert_location">http://kartikaelectric.com/barang/add_location/</string>
+    <string name="url_insert_location">http://api.kartikaelectric.com/barang/add_location/</string>
 
     <!--Menu Baru-->
-    <string name="url_get_all_piutang">http://kartikaelectric.com/piutang/piutang_customer/</string>
-    <string name="url_get_all_omset">http://kartikaelectric.com/komisi/omset_customer/</string>
-    <string name="url_get_retur">http://kartikaelectric.com/barang/retur_penjualan/</string>
-    <string name="url_get_omset">http://kartikaelectric.com/komisi/omset_customer/</string>
+    <string name="url_get_all_piutang">http://api.kartikaelectric.com/piutang/piutang_customer/</string>
+    <string name="url_get_all_omset">http://api.kartikaelectric.com/komisi/omset_customer/</string>
+    <string name="url_get_retur">http://api.kartikaelectric.com/barang/retur_penjualan/</string>
+    <string name="url_get_omset">http://api.kartikaelectric.com/komisi/omset_customer/</string>
 
     <!--Entry Penjualan Canvas-->
-    <string name="url_insert_canvas_order">http://kartikaelectric.com/canvas/insert_canvas/</string>
-    <string name="url_get_canvas_header">http://kartikaelectric.com/canvas/get_header/</string>
-    <string name="url_get_canvas_detail">http://kartikaelectric.com/canvas/get_detail/</string>
-    <string name="url_generate_no_gc">http://kartikaelectric.com/canvas/generate_no_gc/</string>
+    <string name="url_insert_canvas_order">http://api.kartikaelectric.com/canvas/insert_canvas/</string>
+    <string name="url_get_canvas_header">http://api.kartikaelectric.com/canvas/get_header/</string>
+    <string name="url_get_canvas_detail">http://api.kartikaelectric.com/canvas/get_detail/</string>
+    <string name="url_generate_no_gc">http://api.kartikaelectric.com/canvas/generate_no_gc/</string>
 
     <!--Entry Paket-->
-    <string name="url_get_paket">http://kartikaelectric.com/paket/get_paket/</string>
-    <string name="url_get_barang_paket">http://kartikaelectric.com/paket/get_barang/</string>
-    <string name="url_save_so_paket">http://kartikaelectric.com/paket/save/</string>
-    <string name="url_get_detail_retur">http://kartikaelectric.com/barang/detail_retur/</string>
+    <string name="url_get_paket">http://api.kartikaelectric.com/paket/get_paket/</string>
+    <string name="url_get_barang_paket">http://api.kartikaelectric.com/paket/get_barang/</string>
+    <string name="url_save_so_paket">http://api.kartikaelectric.com/paket/save/</string>
+    <string name="url_get_detail_retur">http://api.kartikaelectric.com/barang/detail_retur/</string>
 
     <!--Get Latest Version-->
-    <string name="url_get_latest_version">http://kartikaelectric.com/auth/get_latest_version/</string>
+    <string name="url_get_latest_version">http://api.kartikaelectric.com/auth/get_latest_version/</string>
 
     <!--Get Latest Version-->
-    <string name="url_save_custom_order">http://kartikaelectric.com/custom/save/</string>
-    <string name="url_save_custom_detail">http://kartikaelectric.com/custom/save_detail/</string>
-    <string name="url_get_custom_detail">http://kartikaelectric.com/custom/get_detail/</string>
-    <string name="url_get_custom_header">http://kartikaelectric.com/custom/get_header/</string>
-    <string name="url_delete_oc">http://kartikaelectric.com/custom/delete/</string>
-    <string name="url_delete_oc_detail">http://kartikaelectric.com/custom/delete_detail/</string>
+    <string name="url_save_custom_order">http://api.kartikaelectric.com/custom/save/</string>
+    <string name="url_save_custom_detail">http://api.kartikaelectric.com/custom/save_detail/</string>
+    <string name="url_get_custom_detail">http://api.kartikaelectric.com/custom/get_detail/</string>
+    <string name="url_get_custom_header">http://api.kartikaelectric.com/custom/get_header/</string>
+    <string name="url_delete_oc">http://api.kartikaelectric.com/custom/delete/</string>
+    <string name="url_delete_oc_detail">http://api.kartikaelectric.com/custom/delete_detail/</string>
 
     <!--Status-->
-    <string name="url_get_status">http://kartikaelectric.com/auth/get_mobile_status/</string>
-    <string name="url_update_status">http://kartikaelectric.com/auth/update_mobile_status/</string>
+    <string name="url_get_status">http://api.kartikaelectric.com/auth/get_mobile_status/</string>
+    <string name="url_update_status">http://api.kartikaelectric.com/auth/update_mobile_status/</string>
     <string name="title_activity_perjalanan_sales">Map</string>
 
 </resources>

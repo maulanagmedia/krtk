@@ -34,6 +34,7 @@ public class ApiVolley {
     private String id = "";
     private String level = "";
     private String laba = "";
+    private String nikAsli = "";
     private ItemValidation iv = new ItemValidation();
 
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
@@ -56,6 +57,7 @@ public class ApiVolley {
         id = user.get(SessionManager.TAG_UID);
         level = user.get(SessionManager.TAG_LEVEL);
         laba = user.get(SessionManager.TAG_LABA);
+        nikAsli = user.get(SessionManager.TAG_NIK_ASLI);
 
         final String requestBody = jsonBody.toString();
 
@@ -94,8 +96,11 @@ public class ApiVolley {
                         e.printStackTrace();
                     }
 
-                    session.logoutUser();
-                    ((Activity)context).finish();
+                    if(session.isLoggedIn()){
+
+                        session.logoutUser((Activity) context);
+                    }
+
                     return;
                 }
 
@@ -115,8 +120,11 @@ public class ApiVolley {
 
                         String message = responseAPI.getJSONObject("metadata").getString("message");
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                        session.logoutUser();
-                        ((Activity)context).finish();
+
+                        if (session.isLoggedIn()) {
+
+                            session.logoutUser((Activity)context);
+                        }
                         responseAPI = null;
 
                     }else{
@@ -165,6 +173,7 @@ public class ApiVolley {
                 params.put("id", id);
                 params.put("level", level);
                 params.put("laba", laba);
+                params.put("Nik-Asli", nikAsli);
                 return params;
             }
 

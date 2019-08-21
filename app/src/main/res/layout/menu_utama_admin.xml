@@ -24,13 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_masuk_sebagai_sales"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_masuk_sebagai_sales"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -85,13 +85,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_laba_rugi_omset_jual"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_laba_rugi_omset_jual"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -146,13 +146,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_laba_rugi_omset_setoran"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_laba_rugi_omset_setoran"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -207,13 +207,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_approve_harga_so"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_approve_harga_so"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -269,13 +269,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_jatuh_tempo_giro"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_jatuh_tempo_giro"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -330,13 +330,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_verifikasi_limit_customer"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_verifikasi_limit_customer"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -391,13 +391,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_history_limit"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_history_limit"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -452,13 +452,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_pengaturan_header"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_pengaturan_header"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -513,13 +513,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_perjalanan_sales"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_perjalanan_sales"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">
@@ -574,13 +574,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_menu_hight"
                 app:cardElevation="@dimen/default_small_padding1"
+                android:id="@+id/ll_apv_hapus_denda"
                 android:layout_marginBottom="@dimen/default_small_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:id="@+id/ll_apv_hapus_denda"
                     android:background="@drawable/ripple_red"
                     android:padding="@dimen/default_small_padding"
                     android:weightSum="1">

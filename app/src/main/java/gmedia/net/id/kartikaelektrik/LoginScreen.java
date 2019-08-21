@@ -45,7 +45,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private String JSON_URL = "";
-    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "", fullName = "";
+    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "", fullName = "", jabatan = "", levelJabatan = "";
     SessionManager session;
     private Button btnLogin;
     private static final int REQUEST_PERMISSIONS = 20;
@@ -97,12 +97,12 @@ public class LoginScreen extends RuntimePermissionsActivity {
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
-        /*if(session.isLoggedIn()){
+        if(session.isLoggedIn()){
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
-        }*/
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -164,7 +164,18 @@ public class LoginScreen extends RuntimePermissionsActivity {
                             level = obj.getJSONObject("response").getString("level");
                             laba = obj.getJSONObject("response").getString("laba");
                             fullName = obj.getJSONObject("response").getString("nama");
-//                        nik = obj.getJSONObject("response").getString("nik");
+
+                            //TODO: About privilege user
+                            // Diambil dari privilege - Level
+                            // Level 1: Menu admin all write and read
+                            // Level 2: Menu admin view only
+                            // Level 3: Menu admin only available for masuk sebagai sales
+                            // Level 4 : Sales, tidak ada akses admin
+
+                            jabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("jabatan");
+                            levelJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("level");
+
+                            // nik = obj.getJSONObject("response").getString("nik");
                             nama = username;// obj.getJSONObject("response").getString("nama");
                             nik= uid;
 
@@ -178,6 +189,10 @@ public class LoginScreen extends RuntimePermissionsActivity {
 
                                 session.createLoginSession(uid, nik, nama, password, token, exp, level, laba, fullName);
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                session.saveNikAsli(nik);
+                                session.saveNamaAsli(fullName);
+                                session.saveJabatan(jabatan);
+                                session.saveLevelJabatan(levelJabatan);
 
                                 btnLogin.setEnabled(true);
                                 onLoginSuccess();

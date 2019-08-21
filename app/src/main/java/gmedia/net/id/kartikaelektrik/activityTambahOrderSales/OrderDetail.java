@@ -340,7 +340,8 @@ public class OrderDetail extends AppCompatActivity {
                                 gudangBesar = jo.getString("gudang_jual_b");
                                 isiSatuan1 = jo.getString("isi1");
                                 isiSatuan2 = jo.getString("isi2");
-                                keteranganBarang = jo.getString("keterangan");
+                                //keteranganBarang = jo.getString("keterangan");
+                                keteranganBarang = "";
 
                                 try {
                                     minStok = Integer.parseInt(jo.getString("stokminim"));

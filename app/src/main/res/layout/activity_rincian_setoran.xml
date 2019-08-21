@@ -46,24 +46,69 @@
         android:background="@color/color_grey3"
         android:weightSum="1">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total"
-            android:textSize="11sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/default_small_padding"/>
+            android:orientation="horizontal"
+            android:id="@+id/ll_footer_sub"
+            android:weightSum="2">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_total"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/default_small_padding1"
-            android:text="0"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/ll_total"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/default_small_padding"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_total"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/default_small_padding1"
+                    android:text="0"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/ll_total_pengeluaran"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Pemakaian Uang"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/default_small_padding"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_total_pengeluaran"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/default_small_padding1"
+                    android:text="0"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

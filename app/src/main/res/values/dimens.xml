@@ -10,6 +10,7 @@
     <dimen name="margin_top_big">40dp</dimen>
     <dimen name="margin_top_xbig">80dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_default">8dp</dimen>
     <dimen name="margin_big">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
@@ -55,5 +56,9 @@
 
     <dimen name="default_menu_hight">64dp</dimen>
     <dimen name="default_menu_text">18sp</dimen>
+    <dimen name="menu_height">110dp</dimen>
+
+    <dimen name="title_size">12sp</dimen>
+    <dimen name="value_size">16sp</dimen>
 
 </resources>

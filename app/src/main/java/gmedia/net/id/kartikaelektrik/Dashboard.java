@@ -1,6 +1,7 @@
 package gmedia.net.id.kartikaelektrik;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -437,8 +438,15 @@ public class Dashboard extends RuntimePermissionsActivity {
         }else if(id == gmedia.net.id.kartikaelektrik.R.id.option_logout){
 
             if(!sessionManager.getLaba().equals("1")) new LocationUpdateHandler(Dashboard.this,"Logout");
-            sessionManager.logoutUser();
-            finish();
+
+            if(sessionManager.isLoggedIn()) {
+
+                sessionManager.logoutUser(Dashboard.this);
+            }
+            return true;
+        }else if( id == R.id.option_profile){
+
+
             return true;
         }
 

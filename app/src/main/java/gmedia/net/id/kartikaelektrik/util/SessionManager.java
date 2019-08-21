@@ -1,5 +1,6 @@
 package gmedia.net.id.kartikaelektrik.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +31,7 @@ public class SessionManager {
 	private static final String IS_LOGIN = "IsLoggedIn";
 	public static final String TAG_UID = "uid";
 	public static final String TAG_NIK = "nik";
+	public static final String TAG_NIK_ASLI = "nik_asli";
 	public static final String TAG_NAMA = "nama";
 	public static final String TAG_PASSWORD = "password";
 	public static final String TAG_TOKEN = "token";
@@ -37,6 +39,9 @@ public class SessionManager {
 	public static final String TAG_LEVEL = "level";
 	public static final String TAG_LABA = "laba";
 	public static final String TAG_NAMA_FULL = "nama_lengkap";
+	public static final String TAG_NAMA_ASLI = "nama_asli";
+	public static final String TAG_JABATAN = "jabatan";
+	public static final String TAG_LEVEL_JABATAN = "level_jabatan";
 
 	// Constructor
 	public SessionManager(Context context){
@@ -117,8 +122,38 @@ public class SessionManager {
 		user.put(TAG_LEVEL, pref.getString(TAG_LEVEL, ""));
 
 		user.put(TAG_LABA, pref.getString(TAG_LABA, ""));
+
+		user.put(TAG_NIK_ASLI, pref.getString(TAG_NIK_ASLI, ""));
 		// return user
 		return user;
+	}
+
+	public void saveNikAsli(String nikAsli){
+
+		editor.putString(TAG_NIK_ASLI, nikAsli);
+
+		editor.commit();
+	}
+
+	public void saveNamaAsli(String namaAsli){
+
+		editor.putString(TAG_NAMA_ASLI, namaAsli);
+
+		editor.commit();
+	}
+
+	public void saveJabatan(String jabatan){
+
+		editor.putString(TAG_JABATAN, jabatan);
+
+		editor.commit();
+	}
+
+	public void saveLevelJabatan(String levelJabatan){
+
+		editor.putString(TAG_LEVEL_JABATAN, levelJabatan);
+
+		editor.commit();
 	}
 
 	public String getUser(){
@@ -141,11 +176,32 @@ public class SessionManager {
 		return pref.getString(TAG_NAMA_FULL, "");
 	}
 
+	public String getNikAsli(){
+
+		return pref.getString(TAG_NIK_ASLI, "");
+	}
+
+	public String getNamaAsli(){
+
+		return pref.getString(TAG_NAMA_ASLI, "");
+	}
+
+	public String getJabatan(){
+
+		return pref.getString(TAG_JABATAN, "");
+	}
+
+	public String getLevelJabatan(){
+
+		return pref.getString(TAG_LEVEL_JABATAN, "");
+	}
+
 	/**
 	 * Clear session details
 	 * */
-	public void logoutUser(){
+	public void logoutUser(Activity activity){
 		// Clearing all data from Shared Preferences
+
 		try {
 			editor.clear();
 			editor.commit();
@@ -153,9 +209,10 @@ public class SessionManager {
 			e.printStackTrace();
 		}
 
-		Intent intent = new Intent(_context, LoginScreen.class);
+		Intent intent = new Intent(activity, LoginScreen.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		_context.startActivity(intent);
+		activity.startActivity(intent);
+		activity.finish();
 	}
 	
 	/**
@@ -163,7 +220,7 @@ public class SessionManager {
 	 * **/
 	// Get Login State
 	public boolean isLoggedIn(){
-		if(!getUserDetails().get(TAG_NAMA).isEmpty()){
+		if(!getUserDetails().get(TAG_NIK).isEmpty()){
 			return true;
 		}else{
 			return false;

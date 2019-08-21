@@ -12,6 +12,11 @@
 
         <menu>
 
+            <item android:title="Profile"
+                android:id="@+id/option_profile"
+                app:showAsAction="ifRoom"
+                android:icon="@mipmap/ic_profile"/>
+
             <item android:title="Ubah Password"
                 android:id="@+id/option_ubah_password"
                 app:showAsAction="ifRoom"
