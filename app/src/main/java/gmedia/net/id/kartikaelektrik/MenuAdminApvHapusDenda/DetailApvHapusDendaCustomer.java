@@ -93,6 +93,27 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(session.getLevelJabatan().equals("1") // Owner
+                        || session.getLevelJabatan().equals("5")) { // Finance
+
+
+                }else{
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Peringatan")
+                            .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            })
+                            .show();
+
+                    return;
+                }
+
                 if(totalNota == 0){
 
                     AlertDialog dialog = new AlertDialog.Builder(context)
@@ -131,6 +152,27 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
         llTolak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(session.getLevelJabatan().equals("1") // Owner
+                        || session.getLevelJabatan().equals("5")) { // Finance
+
+
+                }else{
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Peringatan")
+                            .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            })
+                            .show();
+
+                    return;
+                }
 
                 if(totalNota == 0){
 

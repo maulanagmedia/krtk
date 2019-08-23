@@ -246,7 +246,25 @@ public class VerifikasiLimitCustomer extends AppCompatActivity {
 
                     CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
 
-                    getDialog(item.getListItem6(), item.getListItem2(), item.getListItem3());
+                    if(session.getLevelJabatan().equals("1") // Owner
+                            || session.getLevelJabatan().equals("5")) { // Finance
+
+                        getDialog(item.getListItem6(), item.getListItem2(), item.getListItem3());
+                    }else{
+
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Peringatan")
+                                .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                    }
+                                })
+                                .show();
+                    }
+
                 }
             });
         }

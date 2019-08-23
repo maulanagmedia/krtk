@@ -1,5 +1,6 @@
 package gmedia.net.id.kartikaelektrik.activityPermintaanHargaOrder;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Message;
@@ -31,6 +32,7 @@ import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 import com.google.gson.Gson;
 
@@ -59,6 +61,8 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
     private boolean firstLoad = true;
     private String status;
     private String namaPelanggan, namaAlamat;
+    private Context context;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,8 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+        context = this;
+        session = new SessionManager(context);
         initUI();
     }
 
@@ -95,43 +101,61 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    String message = "Apakah Anda yakin akan MENYETUJUI Order ini?";
+                    // Update 20 Agutus 2019, hanya owner dan finance yang bisa approve, level data di dat_jabatan
+                    if(session.getLevelJabatan().equals("1") // Owner
+                            || session.getLevelJabatan().equals("5")){ // Finance
 
-                    String hargaJual = "", hargaBeli = "", barang = "";
-                    boolean isExist = false;
+                        String message = "Apakah Anda yakin akan MENYETUJUI Order ini?";
 
-                    for(CustomListItem item: masterList){
+                        String hargaJual = "", hargaBeli = "", barang = "";
+                        boolean isExist = false;
 
-                        if(iv.parseNullDouble(item.getListItem6()) < iv.parseNullDouble(item.getListItem7())){ // harga jual <  harga beli
+                        for(CustomListItem item: masterList){
 
-                            barang = item.getListItem1();
-                            isExist = true;
-                            break;
+                            if(iv.parseNullDouble(item.getListItem6()) < iv.parseNullDouble(item.getListItem7())){ // harga jual <  harga beli
+
+                                barang = item.getListItem1();
+                                isExist = true;
+                                break;
+                            }
                         }
+
+                        if(isExist){
+
+                            message = "Apakah Anda yakin akan MENYETUJUI Order ini?, harga jual item " + barang + " lebih kecil dari harga beli.";
+                        }
+
+                        AlertDialog alert = new AlertDialog.Builder(DetailPermintaanHargaOrder.this)
+                                .setTitle("Konfirmasi")
+                                .setMessage(message)
+                                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        status = "3";
+                                        UpdateApprovement();
+                                    }
+                                })
+                                .show();
+                    }else{
+
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Peringatan")
+                                .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                    }
+                                })
+                                .show();
                     }
-
-                    if(isExist){
-
-                        message = "Apakah Anda yakin akan MENYETUJUI Order ini?, harga jual item " + barang + " lebih kecil dari harga beli.";
-                    }
-
-                    AlertDialog alert = new AlertDialog.Builder(DetailPermintaanHargaOrder.this)
-                            .setTitle("Konfirmasi")
-                            .setMessage(message)
-                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
-                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    status = "3";
-                                    UpdateApprovement();
-                                }
-                            })
-                            .show();
                 }
             });
 
@@ -140,23 +164,43 @@ public class DetailPermintaanHargaOrder extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    AlertDialog alert = new AlertDialog.Builder(DetailPermintaanHargaOrder.this)
-                            .setTitle("Konfirmasi")
-                            .setMessage("Apakah Anda yakin akan MENOLAK Order ini?")
-                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
 
-                                }
-                            })
-                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    status = "9";
-                                    UpdateApprovement();
-                                }
-                            })
-                            .show();
+                    // Update 20 Agutus 2019, hanya owner dan finance yang bisa approve, level data di dat_jabatan
+                    if(session.getLevelJabatan().equals("1") // Owner
+                            || session.getLevelJabatan().equals("5")){ // Finance
+
+                        AlertDialog alert = new AlertDialog.Builder(DetailPermintaanHargaOrder.this)
+                                .setTitle("Konfirmasi")
+                                .setMessage("Apakah Anda yakin akan MENOLAK Order ini?")
+                                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        status = "9";
+                                        UpdateApprovement();
+                                    }
+                                })
+                                .show();
+                    }else{
+
+                        AlertDialog dialog = new AlertDialog.Builder(context)
+                                .setTitle("Peringatan")
+                                .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                    }
+                                })
+                                .show();
+                    }
+
                 }
             });
 

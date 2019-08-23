@@ -62,10 +62,12 @@ import gmedia.net.id.kartikaelektrik.util.ImageUtils;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.PermissionUtils;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class DetailPengaturanHeader extends AppCompatActivity {
 
     private Context context;
+    private SessionManager session;
     private RecyclerView rvPhoto;
     private ImageButton ibPhoto;
     private List<PhotoModel> listPhoto = new ArrayList<>();
@@ -99,6 +101,7 @@ public class DetailPengaturanHeader extends AppCompatActivity {
         setTitle("Pengaturan Gambar Header");
 
         context = this;
+        session = new SessionManager(context);
         initUI();
         initEvent();
         getCurrectImages();
@@ -136,6 +139,27 @@ public class DetailPengaturanHeader extends AppCompatActivity {
         llSaveContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(session.getLevelJabatan().equals("1") // Owner
+                        || session.getLevelJabatan().equals("5")) { // Finance
+
+
+                }else{
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Peringatan")
+                            .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            })
+                            .show();
+
+                    return;
+                }
 
                 if(listPhoto.size() <= 0){
 
