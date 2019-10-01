@@ -30,11 +30,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -63,6 +66,7 @@ import gmedia.net.id.kartikaelektrik.model.PhotoModel;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ImageUtils;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.OptionItem;
 import gmedia.net.id.kartikaelektrik.util.PermissionUtils;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -96,6 +100,10 @@ public class DetailPengeluaran extends AppCompatActivity {
     private EditText edtNominal;
     private String currentString = "";
     private String idPengeluaran = "";
+    private Spinner spJenis;
+    private List<OptionItem> listJenis = new ArrayList<>();
+    private ArrayAdapter adapterJenis;
+    private String selectedJenis = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,19 +120,6 @@ public class DetailPengeluaran extends AppCompatActivity {
         setTitle("Detail Pengeluaran");
         initUI();
         initEvent();
-
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-
-            idPengeluaran = bundle.getString("id", "");
-
-            if(!idPengeluaran.isEmpty()){
-
-                btnSave.setVisibility(View.GONE);
-
-                initData();
-            }
-        }
     }
 
     private void initUI() {
@@ -135,6 +130,7 @@ public class DetailPengeluaran extends AppCompatActivity {
         tilTanggal = (TextInputLayout) findViewById(R.id.til_tanggal);
         edtTanggal = (EditText) findViewById(R.id.edt_tanggal);
         edtTanggal.setText(iv.getToday(formatDateDisplay));
+        spJenis = (Spinner) findViewById(R.id.sp_jenis);
 
         iv.datePickerEvent(context, edtTanggal, "RIGHT", formatDateDisplay);
 
@@ -151,6 +147,26 @@ public class DetailPengeluaran extends AppCompatActivity {
         adapterPhoto = new PhotosKeteranganAdapter(context, listPhoto);
         rvPhoto.setLayoutManager(layoutManager);
         rvPhoto.setAdapter(adapterPhoto);
+
+        listJenis = new ArrayList<>();
+        adapterJenis = new ArrayAdapter(context, android.R.layout.simple_list_item_1, listJenis);
+        spJenis.setAdapter(adapterJenis);
+
+        spJenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                OptionItem item = listJenis.get(position);
+                selectedJenis = item.getValue();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        getDataJenis();
 
         opiPhoto.attachToRecyclerView(rvPhoto);
         new SimpleSnapHelper(opiPhoto).attachToRecyclerView(rvPhoto);
@@ -292,6 +308,7 @@ public class DetailPengeluaran extends AppCompatActivity {
                         String tgl = response.getJSONObject("response").getJSONObject("header").getString("tgl");
                         String keterangan = response.getJSONObject("response").getJSONObject("header").getString("keterangan");
                         String nominal = response.getJSONObject("response").getJSONObject("header").getString("nominal");
+                        selectedJenis = response.getJSONObject("response").getJSONObject("header").getString("id_jenis");
 
                         edtTanggal.setText(iv.ChangeFormatDateString(tgl, formatDate, formatDateDisplay));
                         edtKeterangan.setText(keterangan);
@@ -308,6 +325,84 @@ public class DetailPengeluaran extends AppCompatActivity {
                         }
 
                         adapterPhoto.notifyDataSetChanged();
+
+                        int jenisPosition = 0;
+                        for (int j = 0; j < listJenis.size(); j++){
+
+                            if(selectedJenis.equals(listJenis.get(j).getValue())){
+
+                                jenisPosition = j;
+                                break;
+                            }
+                        }
+
+                        spJenis.setSelection(jenisPosition);
+
+                    }else{
+
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    Toast.makeText(context, "Terjadi kesalahan dalam parsing data", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                Toast.makeText(context, "Terjadi kesalahan, harap ulangi proses", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void getDataJenis() {
+
+        final JSONObject jBody = new JSONObject();
+
+        ApiVolley request = new ApiVolley(context, jBody, "GET", ServerURL.getJenisPengeluaran,"", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                String message = "";
+                listJenis.clear();
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        JSONArray jArray = response.getJSONArray("response");
+
+                        for (int i = 0; i < jArray.length(); i ++){
+
+                            JSONObject jo = jArray.getJSONObject(i);
+                            listJenis.add(new OptionItem(jo.getString("id"), jo.getString("biaya")));
+
+                        }
+
+                        adapterJenis.notifyDataSetChanged();
+
+                        Bundle bundle = getIntent().getExtras();
+                        if(bundle != null) {
+
+                            idPengeluaran = bundle.getString("id", "");
+
+                            if(!idPengeluaran.isEmpty()){
+
+                                btnSave.setVisibility(View.GONE);
+
+                                initData();
+                            }
+                        }
 
                     }else{
 
@@ -351,6 +446,7 @@ public class DetailPengeluaran extends AppCompatActivity {
         try {
 
             jsonBody.put("foto", jImage);
+            jsonBody.put("id_jenis", selectedJenis);
             jsonBody.put("tgl", iv.ChangeFormatDateString(edtTanggal.getText().toString(), formatDateDisplay, formatDate));
             jsonBody.put("keterangan", edtKeterangan.getText().toString());
             jsonBody.put("nominal", edtNominal.getText().toString().replaceAll("[,.]", ""));

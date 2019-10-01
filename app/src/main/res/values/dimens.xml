@@ -51,8 +51,9 @@
     <dimen name="text_date_small">12sp</dimen>
     <dimen name="text_nota">16sp</dimen>
     <dimen name="text_total">18sp</dimen>
-    <dimen name="text_dashboard">18sp</dimen>
+    <dimen name="text_dashboard">16sp</dimen>
     <dimen name="text_menu">12sp</dimen>
+    <dimen name="text_small">11sp</dimen>
 
     <dimen name="default_menu_hight">64dp</dimen>
     <dimen name="default_menu_text">18sp</dimen>
@@ -60,5 +61,8 @@
 
     <dimen name="title_size">12sp</dimen>
     <dimen name="value_size">16sp</dimen>
+
+    <dimen name="menu_pad">6dp</dimen>
+    <dimen name="menu_pad2">3dp</dimen>
 
 </resources>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gmedia.net.id.kartikaelektrik.MainActivity"
-    android:layout_margin="@dimen/default_small_padding1">
+    tools:context="gmedia.net.id.kartikaelektrik.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,32 +48,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="@dimen/menu_pad"
                     android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/btn_menu"
+                        android:layout_marginRight="@dimen/menu_pad2"
                         android:id="@+id/ll_data_piutang"
                         android:orientation="vertical">
 
-                        <TextView
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Data Piutang"
-                            android:paddingTop="@dimen/default_small_padding2"
-                            android:paddingBottom="@dimen/default_small_padding2"
-                            android:paddingLeft="@dimen/default_small_padding1"
-                            android:paddingRight="@dimen/default_small_padding1"
-                            android:background="@color/black"
-                            android:textColor="@color/white"
-                            />
+                            >
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/ic_piutang"
+                                android:padding="@dimen/margin_small"
+                                android:id="@+id/iv_piutang" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Data Piutang"
+                                android:textSize="@dimen/text_small"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/iv_piutang"
+                                android:paddingTop="@dimen/default_small_padding2"
+                                android:paddingBottom="@dimen/default_small_padding2"
+                                android:paddingLeft="@dimen/default_small_padding1"
+                                android:paddingRight="@dimen/default_small_padding1"
+                                android:textColor="@color/black"
+                                />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -91,30 +107,44 @@
                             android:id="@+id/tv_data_piutang"/>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:id="@+id/ll_piutang_telat"
-                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginLeft="@dimen/menu_pad2"
+                        android:background="@drawable/btn_menu"
                         android:orientation="vertical">
 
-                        <TextView
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Piutang Telat"
-                            android:background="@color/black"
-                            android:textColor="@color/white"
-                            android:paddingTop="@dimen/default_small_padding2"
-                            android:paddingBottom="@dimen/default_small_padding2"
-                            android:paddingLeft="@dimen/default_small_padding1"
-                            android:paddingRight="@dimen/default_small_padding1"
-                            />
+                            >
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/ic_telat"
+                                android:padding="@dimen/margin_small"
+                                android:id="@+id/iv_telat" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Piutang Telat"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/iv_telat"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_small"
+                                android:paddingTop="@dimen/default_small_padding2"
+                                android:paddingBottom="@dimen/default_small_padding2"
+                                android:paddingLeft="@dimen/default_small_padding1"
+                                android:paddingRight="@dimen/default_small_padding1"
+                                />
+                        </RelativeLayout>
+
 
                         <TextView
                             android:layout_width="match_parent"
@@ -131,43 +161,55 @@
                             android:id="@+id/tv_piutang_telat"/>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
+                    android:weightSum="2"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/menu_pad"
+                    android:paddingRight="@dimen/menu_pad"
+                    android:paddingBottom="@dimen/menu_pad"
+                    android:background="@color/colorPrimary">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/btn_menu"
                         android:id="@+id/ll_data_retur"
+                        android:layout_marginRight="@dimen/menu_pad2"
                         android:orientation="vertical">
 
-                        <TextView
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Data Retur"
-                            android:background="@color/black"
-                            android:textColor="@color/white"
-                            android:paddingTop="@dimen/default_small_padding2"
-                            android:paddingBottom="@dimen/default_small_padding2"
-                            android:paddingLeft="@dimen/default_small_padding1"
-                            android:paddingRight="@dimen/default_small_padding1"
-                            />
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/ic_data_retur"
+                                android:padding="@dimen/margin_small"
+                                android:id="@+id/iv_retur" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Data Retur"
+                                android:layout_centerVertical="true"
+                                android:textSize="@dimen/text_small"
+                                android:layout_toRightOf="@id/iv_retur"
+                                android:paddingTop="@dimen/default_small_padding2"
+                                android:paddingBottom="@dimen/default_small_padding2"
+                                android:paddingLeft="@dimen/default_small_padding1"
+                                android:paddingRight="@dimen/default_small_padding1"
+                                android:textColor="@color/black"
+                                />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -184,30 +226,42 @@
                             android:id="@+id/tv_data_retur"/>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/btn_menu"
                         android:id="@+id/ll_denda_pelanggan"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/menu_pad2">
 
-                        <TextView
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Denda Pelanggan"
-                            android:background="@color/black"
-                            android:textColor="@color/white"
-                            android:paddingTop="@dimen/default_small_padding2"
-                            android:paddingBottom="@dimen/default_small_padding2"
-                            android:paddingLeft="@dimen/default_small_padding1"
-                            android:paddingRight="@dimen/default_small_padding1"
-                            />
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentLeft="true"
+                                android:src="@mipmap/ic_denda"
+                                android:padding="@dimen/margin_small"
+                                android:id="@+id/iv_denda" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Denda Pelanggan"
+                                android:layout_centerVertical="true"
+                                android:textSize="@dimen/text_small"
+                                android:layout_toRightOf="@id/iv_denda"
+                                android:paddingTop="@dimen/default_small_padding2"
+                                android:paddingBottom="@dimen/default_small_padding2"
+                                android:paddingLeft="@dimen/default_small_padding1"
+                                android:paddingRight="@dimen/default_small_padding1"
+                                android:textColor="@color/black"
+                                />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -224,17 +278,7 @@
                             android:id="@+id/tv_denda_pelanggan"/>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/black"/>
-
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/black"></TextView>
 
             </LinearLayout>
 
@@ -242,6 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_margin="@dimen/default_small_padding1"
                 android:id="@+id/ll_menu_admin">
 
                 <TextView
@@ -269,8 +314,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:visibility="visible"
                         android:gravity="center_horizontal"
@@ -306,25 +350,15 @@
                             android:gravity="center" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_columnWeight="1"
-                        android:layout_margin="@dimen/default_small_padding2"></LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_columnWeight="1"
-                        android:layout_margin="@dimen/default_small_padding2"></LinearLayout>
-
                 </android.support.v7.widget.GridLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_margin="@dimen/default_small_padding1"
                 android:id="@+id/ll_menu_utama">
 
                 <TextView
@@ -348,11 +382,11 @@
                 <android.support.v7.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:columnCount="3">
+                    app:columnCount="3"
+                    app:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:orientation="vertical"
                         android:gravity="center_horizontal"
@@ -390,8 +424,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -428,8 +461,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -466,8 +498,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -504,8 +535,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -542,46 +572,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
-                        android:layout_height="@dimen/menu_height"
-                        android:gravity="center_horizontal"
-                        android:paddingRight="@dimen/padding_main_menu"
-                        android:paddingLeft="@dimen/padding_main_menu"
-                        android:paddingBottom="@dimen/default_small_padding2"
-                        android:background="@drawable/ripple_dashboard_menu"
-                        android:layout_margin="@dimen/default_small_padding2"
-                        android:id="@+id/v_menu_setoran"
-                        android:weightSum="2">
-
-                        <ImageButton
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_marginBottom="@dimen/padding_main_menu"
-                            android:layout_marginTop="@dimen/padding_main_menu"
-                            android:layout_weight="1.1"
-                            android:background="#00000000"
-                            android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_setoran"
-                            android:id="@+id/ibt_menu_setoran"/>
-
-                        <TextView
-                            android:text="Setoran"
-                            android:layout_height="0dp"
-                            android:layout_width="match_parent"
-                            android:layout_weight="0.9"
-                            android:ellipsize="end"
-                            android:maxLines="2"
-                            android:id="@+id/tv_setoran"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_menu"
-                            android:gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -618,8 +609,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -656,8 +646,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -693,8 +682,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -731,8 +719,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -769,8 +756,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -807,8 +793,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -845,8 +830,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -883,8 +867,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -921,8 +904,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -959,8 +941,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:gravity="center_horizontal"
                         android:paddingRight="@dimen/padding_main_menu"
@@ -997,8 +978,44 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        app:layout_columnWeight="1"
+                        android:layout_width="120dp"
+                        android:layout_height="@dimen/menu_height"
+                        android:gravity="center_horizontal"
+                        android:paddingRight="@dimen/padding_main_menu"
+                        android:paddingLeft="@dimen/padding_main_menu"
+                        android:paddingBottom="@dimen/default_small_padding2"
+                        android:background="@drawable/ripple_dashboard_menu"
+                        android:layout_margin="@dimen/default_small_padding2"
+                        android:id="@+id/v_menu_setoran"
+                        android:weightSum="2">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="@dimen/padding_main_menu"
+                            android:layout_marginTop="@dimen/padding_main_menu"
+                            android:layout_weight="1.1"
+                            android:background="#00000000"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_setoran"
+                            android:id="@+id/ibt_menu_setoran"/>
+
+                        <TextView
+                            android:text="Setoran"
+                            android:layout_height="0dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="0.9"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:id="@+id/tv_setoran"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_menu"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="120dp"
                         android:layout_height="@dimen/menu_height"
                         android:visibility="visible"
                         android:gravity="center_horizontal"

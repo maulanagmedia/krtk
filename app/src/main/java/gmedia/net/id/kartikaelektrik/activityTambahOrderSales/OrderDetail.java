@@ -73,9 +73,11 @@ public class OrderDetail extends AppCompatActivity {
     private EditText edtKetarangan;
     private RadioGroup rgPilihanPPN, rgJenisPPN;
     private RadioButton rbNonPPN, rbPPN, rbEFaktur, rbCast, rbOperan;
-    private TextView tvGudangBesar, tvGudangKecil;
+    private TextView tvGudangBesar, tvGudangKecil, tvTempo;
     private String currentString = "", currentString1 = "";
     private String keteranganBarang = "";
+    private String formatDate = "", formatDateDisplay = "";
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +107,12 @@ public class OrderDetail extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
+
             idOrderDetail = extras.getString("idOrderDetail");
             noSalesOrder = extras.getString("noSalesOrder");
             kdCus = extras.getString("kdCus");
             namaPelanggan = extras.getString("namaPelanggan");
-            tempo = extras.getString("tempo");
+            tempo = extras.getString("tempo", "30");
             jumlah = extras.getString("jumlah");
             selectedSatuan = extras.getString("satuan");
             kodeBarang = extras.getString("kodeBarang");
@@ -142,6 +145,7 @@ public class OrderDetail extends AppCompatActivity {
             tvSave = (TextView) findViewById(R.id.tv_save);
             tvGudangBesar = (TextView) findViewById(R.id.tv_gudang_besar);
             tvGudangKecil = (TextView) findViewById(R.id.tv_gudang_kecil);
+            tvTempo = (TextView) findViewById(R.id.tv_tempo);
 
             edtKetarangan = (EditText) findViewById(R.id.edt_keterangan);
             rgPilihanPPN = (RadioGroup) findViewById(R.id.rg_pilihan_ppn);
@@ -154,13 +158,6 @@ public class OrderDetail extends AppCompatActivity {
 
             edNamaPelanggan.setText(namaPelanggan);
             edNamaBarang.setText(namaBarang);
-
-            /*edHarga.addTextChangedListener(iv.textChangeListenerCurrency(edHarga));*/
-            //iv.setCurrencyFormatOnFocus(edHarga);
-            //edHarga.addTextChangedListener(iv.textChangeListenerCurrency(edHarga));
-
-            /*edHargaWithDiskon.addTextChangedListener(iv.textChangeListenerCurrency(edHargaWithDiskon));
-            edHargaTotal.addTextChangedListener(iv.textChangeListenerCurrency(edHargaTotal));*/
 
             if(noSalesOrder != null && !noSalesOrder.toLowerCase().equals("null") && noSalesOrder.length() > 0){
 
@@ -218,21 +215,13 @@ public class OrderDetail extends AppCompatActivity {
     private void initEventNewSO() {
 
         // add New Sales Order
-        String formatDate = getResources().getString(R.string.format_date);
-        String formatDateDisplay = getResources().getString(R.string.format_date_display);
+        formatDate = getResources().getString(R.string.format_date);
+        formatDateDisplay = getResources().getString(R.string.format_date_display);
         tanggal = iv.getCurrentDate(formatDate);
         edTanggal.setText(iv.ChangeFormatDateString(tanggal, formatDate, formatDateDisplay));
 
-        //region Validation
-        // Tanggal Validation
-        //tanggalTempo = iv.sumDate(edTanggal.getText().toString(),Integer.parseInt(/*tempo*/),"yyyy-MM-dd");
-        tanggalTempo = iv.sumDate(tanggal,30,formatDate);
-        edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
-        edTanggalTempo.setKeyListener(null);
-        // tilTanggalTempo.setVisibility(View.GONE);
-        /*iv.PreValidateCustomDate(edTanggalTempo,tilTanggalTempo,"yyyy-MM-dd");
-        iv.CustomDateFormatCorrection(edTanggalTempo);*/
-        iv.datePickerEvent(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+        // Get Tanggal tempo
+        getTanggalTempo();
 
         //endregion
 
@@ -446,19 +435,6 @@ public class OrderDetail extends AppCompatActivity {
                     edHarga.setText(iv.ChangeToCurrencyFormat(extras.getString("harga")));
                     edDiskon.setText(extras.getString("diskon"));
 
-                    /*if(extras.getString("status").trim().equals("4") || extras.getString("status").trim().equals("5")){
-                        edDiskon.setFocusable(true);
-                        edDiskon.setKeyListener(new EditText(OrderDetail.this).getKeyListener());
-                        edDiskon.setFocusableInTouchMode(true);
-
-                        edHargaWithDiskon.setFocusable(true);
-                        edHargaWithDiskon.setKeyListener(new DigitsKeyListener(true,true));
-                        edHargaWithDiskon.setFocusableInTouchMode(true);
-                    }else{
-                        edDiskon.setKeyListener(null);
-                        edHargaWithDiskon.setKeyListener(null);
-                    }*/
-
                     edDiskon.setFocusable(true);
                     edDiskon.setKeyListener(new EditText(OrderDetail.this).getKeyListener());
                     edDiskon.setFocusableInTouchMode(true);
@@ -484,26 +460,9 @@ public class OrderDetail extends AppCompatActivity {
                     edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(extras.getString("harganetto")));
                     edHargaTotal.setText(iv.ChangeToCurrencyFormat(extras.getString("total")));
                 }
-
-                /*if(edHarga.getText().length() > 0 || edHarga.getText().equals("0")){
-                    String pattern = "#,##0.00";
-                    DecimalFormat formatter = new DecimalFormat(pattern);
-                    String formattedString = formatter.format(iv.parseNullFloat(edHarga.getText().toString()));
-                    edHarga.setText(formattedString);
-                }*/
-
             }
 
-            /*try {
-                getHargaBarang();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
         }else{
-
-            /*selectedSatuan = satuan2;
-            selectedIsiSatuan = isiSatuan2;
-            selectedGudang = gudangKecil;*/
 
             selectedSatuan = satuan3;
             selectedIsiSatuan = isiSatuan1;
@@ -751,6 +710,7 @@ public class OrderDetail extends AppCompatActivity {
         //endregion
     }
 
+    // Perhitungan Harga dengan diskon, diskon bertingkat
     private void CalculateHargaByDiskon(){
 
         if(flagHarga.trim().equals("2") && edJumlah.getText().length() > 0){ // diskon
@@ -801,16 +761,11 @@ public class OrderDetail extends AppCompatActivity {
                     edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
                 }else{
 
-                    /*if(Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", "")) > 0){
-                        newHargaNetto = Double.parseDouble(edHargaWithDiskon.getText().toString().replaceAll("[,.]", ""));
-                    }*/
-
                     edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan))));
                     edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(selectedIsiSatuan) * iv.parseNullDouble(jumlah))));
 
-                    //edHargaTotal.setText(iv.ChangeToCurrencyFormat(iv.doubleToString(newHargaNetto * iv.parseNullDouble(jumlah))));
                 }
-                //Log.d(TAG, "CalculateHargaByDiskon: "+ String.valueOf(newHargaNetto * iv.parseNullInteger(selectedIsiSatuan) * iv.parseNullInteger(jumlah)));
+
             }else{
                 // clear field
                 edHargaWithDiskon.setText("0");
@@ -831,8 +786,8 @@ public class OrderDetail extends AppCompatActivity {
 
                 //region validate before saving
                 // date
-                String formatDate = getResources().getString(R.string.format_date);
-                String formatDateDisplay = getResources().getString(R.string.format_date_display);
+                formatDate = getResources().getString(R.string.format_date);
+                formatDateDisplay = getResources().getString(R.string.format_date_display);
                 tanggal = iv.ChangeFormatDateString(edTanggal.getText().toString(), formatDateDisplay, formatDate);
                 tanggalTempo = iv.ChangeFormatDateString(edTanggalTempo.getText().toString(), formatDateDisplay, formatDate);
 
@@ -847,10 +802,7 @@ public class OrderDetail extends AppCompatActivity {
                 }
 
                 if(!iv.isMoreThanCurrentDate(edTanggalTempo,edTanggal,formatDateDisplay)){
-                    //tilTanggalTempo.setErrorEnabled(true);
-                    //tilTanggalTempo.setError("Tanggal Tempo Tidak Dapat Sebelum Tanggal Order");
                     Toast.makeText(OrderDetail.this, "Tanggal Tempo harus lebih dari tanggal order",Toast.LENGTH_SHORT).show();
-                    //edTanggalTempo.requestFocus();
                     return;
                 }
 
@@ -982,35 +934,6 @@ public class OrderDetail extends AppCompatActivity {
                             edHargaWithDiskon.setKeyListener(null);
                         }
 
-                        /*double jumlahHarga = 0;
-
-                        // Baik Pricelist(1) atau discount(2)
-                        if(iv.parseNullDouble(hargaNetto) <= 0 ){
-                            jumlahHarga = iv.parseNullDouble(harga) * iv.parseNullDouble(jumlah);
-                        }else{
-                            jumlahHarga = iv.parseNullDouble(hargaNetto) * iv.parseNullDouble(jumlah);
-                        }
-
-                        if(iv.parseNullDouble(hargaNetto) <= 0 && iv.parseNullInteger(flagHarga) == 2){ // if diskon with flag 1 or 2
-                            hargaNetto = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
-                        }else{
-                            hargaNetto = (iv.doubleToString(iv.parseNullDouble(hargaNetto) * iv.parseNullDouble(selectedIsiSatuan)));
-                        }
-                        String hargaText = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
-                        String totalHarga = iv.doubleToString(jumlahHarga * iv.parseNullDouble(selectedIsiSatuan));
-
-                        edHarga.setText(iv.ChangeToCurrencyFormat(hargaText));
-
-                        //hargaToSave = edHarga.getText().toString().replace(",", "").replace(".", "");
-                        hargaToSave = edHarga.getText().toString().replaceAll("[,.]", "");
-                        edDiskon.setText(diskon);
-                        if(flagHarga.equals("2")){
-                            edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaNetto));
-                        }else{
-                            edHargaWithDiskon.setText(iv.ChangeToCurrencyFormat(hargaText));
-                        }
-                        edHargaTotal.setText(iv.ChangeToCurrencyFormat(totalHarga));*/
-
                         String hargaText = (iv.doubleToString(iv.parseNullDouble(harga) * iv.parseNullDouble(selectedIsiSatuan)));
                         edHarga.setText(iv.ChangeToCurrencyFormat(hargaText));
                         edDiskon.setText(diskon);
@@ -1111,11 +1034,60 @@ public class OrderDetail extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        /*Intent intent = new Intent(getApplicationContext(), DetailSalesOrder.class);
-                        intent.putExtra("nosalesorder","SO170100008");
-                        finish();
-                        startActivity(intent);*/
+                    }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show(); // show message response
+            }
+        });
+    }
+
+    private void getTanggalTempo(){
+
+        /*
+         * get Gudang by input of satuan
+         */
+
+        final JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("kodebrg", kodeBarang);
+            jsonBody.put("kdcus", kdCus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jsonBody, "POST", ServerURL.getTanggalTempo, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                JSONObject responseAPI = new JSONObject();
+                try {
+
+                    responseAPI = new JSONObject(result);
+                    String status = responseAPI.getJSONObject("metadata").getString("status");
+                    String message = responseAPI.getJSONObject("metadata").getString("message");
+
+                    if(Integer.parseInt(status) == 200){
+
+                        JSONObject jo = responseAPI.getJSONObject("response");
+                        tempo = jo.getString("tempo");
+
+                        tanggalTempo = iv.sumDate(tanggal,iv.parseNullInteger(tempo),formatDate);
+                        tvTempo.setText(tempo + " Hari");
+                        edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+                        edTanggalTempo.setKeyListener(null);
+
+                        iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+
+                    }else{
+                        
+                        Toast.makeText(OrderDetail.this, message, Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception e) {
@@ -1187,6 +1159,7 @@ public class OrderDetail extends AppCompatActivity {
                 jsonBody.put("tgl", tanggal);
                 jsonBody.put("tgltempo", tanggalTempo);
             }
+
             jsonBody.put("kdbrg", kodeBarang);
             jsonBody.put("jumlah", jumlah);
             jsonBody.put("gudang", selectedGudang);

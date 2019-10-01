@@ -168,6 +168,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingRight="60dp"
+                android:paddingLeft="60dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Maksimal tempo"
+                    android:layout_marginRight="@dimen/default_small_padding1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 hari"
+                    android:id="@+id/tv_tempo"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="@dimen/default_small_padding1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@color/white"

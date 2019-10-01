@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayout;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -225,7 +226,25 @@ public class MainActivity extends RuntimePermissionsActivity {
         vpHeaderSlider = (WrapContentViewPager) findViewById(R.id.pager_introduction);
         vpHeaderSlider.setScrollDurationFactor(4);
 
-        getListHeaderSlider();
+        //Akses menu
+        llTambahPelanggan.setVisibility(View.GONE);
+        llTagihanPiutang.setVisibility(View.GONE);
+        llInfoStok.setVisibility(View.GONE);
+        llTambahSO.setVisibility(View.GONE);
+        llDaftarSO.setVisibility(View.GONE);
+        llSetoran.setVisibility(View.GONE);
+        llTambahCanvas.setVisibility(View.GONE);
+        llEntryCanvas.setVisibility(View.GONE);
+        llBarangTidakLaku.setVisibility(View.GONE);
+        llKomisi.setVisibility(View.GONE);
+        llDenda.setVisibility(View.GONE);
+        llBonus.setVisibility(View.GONE);
+        llOmsetPenjualan.setVisibility(View.GONE);
+        llRetur.setVisibility(View.GONE);
+        llCustomerLimit.setVisibility(View.GONE);
+        llCustomOrder.setVisibility(View.GONE);
+        llHapusDenda.setVisibility(View.GONE);
+        llPengeluaran.setVisibility(View.GONE);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -241,7 +260,111 @@ public class MainActivity extends RuntimePermissionsActivity {
         }
 
         int menuWidth = 0;
-        menuWidth = size.x;
+        menuWidth = (size.x / 3) - iv.dpToPx(MainActivity.this, 8);
+
+        GridLayout.LayoutParams lp = (GridLayout.LayoutParams) llMenuAdmin.getLayoutParams();
+        lp.width = menuWidth;
+        llMenuAdmin.setLayoutParams(lp);
+
+        GridLayout.LayoutParams lp1 = (GridLayout.LayoutParams) llTambahPelanggan.getLayoutParams();
+        lp1.width = menuWidth;
+        llTambahPelanggan.setLayoutParams(lp1);
+
+        GridLayout.LayoutParams lp2 = (GridLayout.LayoutParams) llTagihanPiutang.getLayoutParams();
+        lp2.width = menuWidth;
+        llTagihanPiutang.setLayoutParams(lp2);
+
+        GridLayout.LayoutParams lp3 = (GridLayout.LayoutParams) llInfoStok.getLayoutParams();
+        lp3.width = menuWidth;
+        llInfoStok.setLayoutParams(lp3);
+
+        GridLayout.LayoutParams lp4 = (GridLayout.LayoutParams) llTambahSO.getLayoutParams();
+        lp4.width = menuWidth;
+        llTambahSO.setLayoutParams(lp4);
+
+        GridLayout.LayoutParams lp5 = (GridLayout.LayoutParams) llDaftarSO.getLayoutParams();
+        lp5.width = menuWidth;
+        llDaftarSO.setLayoutParams(lp5);
+
+        GridLayout.LayoutParams lp6 = (GridLayout.LayoutParams) llSetoran.getLayoutParams();
+        lp6.width = menuWidth;
+        llSetoran.setLayoutParams(lp6);
+
+        GridLayout.LayoutParams lp7 = (GridLayout.LayoutParams) llTambahCanvas.getLayoutParams();
+        lp7.width = menuWidth;
+        llTambahCanvas.setLayoutParams(lp7);
+
+        GridLayout.LayoutParams lp8 = (GridLayout.LayoutParams) llEntryCanvas.getLayoutParams();
+        lp8.width = menuWidth;
+        llEntryCanvas.setLayoutParams(lp8);
+
+        GridLayout.LayoutParams lp9 = (GridLayout.LayoutParams) llBarangTidakLaku.getLayoutParams();
+        lp9.width = menuWidth;
+        llBarangTidakLaku.setLayoutParams(lp9);
+
+        GridLayout.LayoutParams lp10 = (GridLayout.LayoutParams) llKomisi.getLayoutParams();
+        lp10.width = menuWidth;
+        llKomisi.setLayoutParams(lp10);
+
+        GridLayout.LayoutParams lp11 = (GridLayout.LayoutParams) llDenda.getLayoutParams();
+        lp11.width = menuWidth;
+        llDenda.setLayoutParams(lp11);
+
+        GridLayout.LayoutParams lp12 = (GridLayout.LayoutParams) llBonus.getLayoutParams();
+        lp12.width = menuWidth;
+        llBonus.setLayoutParams(lp12);
+
+        GridLayout.LayoutParams lp13 = (GridLayout.LayoutParams) llOmsetPenjualan.getLayoutParams();
+        lp13.width = menuWidth;
+        llOmsetPenjualan.setLayoutParams(lp13);
+
+        GridLayout.LayoutParams lp14 = (GridLayout.LayoutParams) llRetur.getLayoutParams();
+        lp14.width = menuWidth;
+        llRetur.setLayoutParams(lp14);
+
+        GridLayout.LayoutParams lp15 = (GridLayout.LayoutParams) llCustomerLimit.getLayoutParams();
+        lp15.width = menuWidth;
+        llCustomerLimit.setLayoutParams(lp15);
+
+        GridLayout.LayoutParams lp16 = (GridLayout.LayoutParams) llCustomOrder.getLayoutParams();
+        lp16.width = menuWidth;
+        llCustomOrder.setLayoutParams(lp16);
+
+        GridLayout.LayoutParams lp17 = (GridLayout.LayoutParams) llHapusDenda.getLayoutParams();
+        lp17.width = menuWidth;
+        llHapusDenda.setLayoutParams(lp17);
+
+        GridLayout.LayoutParams lp18 = (GridLayout.LayoutParams) llPengeluaran.getLayoutParams();
+        lp18.width = menuWidth;
+        llPengeluaran.setLayoutParams(lp18);
+
+        if(sessionManager.getIdJabatan().equals("8")){ // Supir
+
+            llSetoran.setVisibility(View.VISIBLE);
+            llPengeluaran.setVisibility(View.VISIBLE);
+        }else{
+
+            llTambahPelanggan.setVisibility(View.VISIBLE);
+            llTagihanPiutang.setVisibility(View.VISIBLE);
+            llInfoStok.setVisibility(View.VISIBLE);
+            llTambahSO.setVisibility(View.VISIBLE);
+            llDaftarSO.setVisibility(View.VISIBLE);
+            llSetoran.setVisibility(View.VISIBLE);
+            llTambahCanvas.setVisibility(View.VISIBLE);
+            llEntryCanvas.setVisibility(View.VISIBLE);
+            llBarangTidakLaku.setVisibility(View.VISIBLE);
+            llKomisi.setVisibility(View.VISIBLE);
+            llDenda.setVisibility(View.VISIBLE);
+            llBonus.setVisibility(View.VISIBLE);
+            llOmsetPenjualan.setVisibility(View.VISIBLE);
+            llRetur.setVisibility(View.VISIBLE);
+            llCustomerLimit.setVisibility(View.VISIBLE);
+            llCustomOrder.setVisibility(View.VISIBLE);
+            llHapusDenda.setVisibility(View.VISIBLE);
+            llPengeluaran.setVisibility(View.VISIBLE);
+        }
+
+        getListHeaderSlider();
 
         /*LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(menuWidth - iv.dpToPx(MainActivity.this, 8) , menuWidth/3);
         lp.setMargins(iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 0),iv.dpToPx(MainActivity.this, 4));

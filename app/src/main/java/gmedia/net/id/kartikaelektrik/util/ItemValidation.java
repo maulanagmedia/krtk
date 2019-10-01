@@ -348,6 +348,99 @@ public class ItemValidation {
             }
         });
     }
+
+    public void datePickerEventMax(final Context context, final EditText edt, final String drawablePosition, final String formatDate, final String value, final String maxVal){
+        edt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                int prePosition;
+                final Calendar customDate;
+
+                switch (drawablePosition.toUpperCase()){
+                    case "LEFT":
+                        prePosition = 0;
+                        break;
+                    case "TOP":
+                        prePosition = 1;
+                        break;
+                    case "RIGHT":
+                        prePosition = 2;
+                        break;
+                    case "Bottom":
+                        prePosition = 3;
+                        break;
+                    default:
+                        prePosition = 2;
+                }
+
+                final int position = prePosition;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (edt.getRight() - edt.getCompoundDrawables()[position].getBounds().width())) {
+
+                        /*Log.d(TAG, "onTouch: ");
+                        // set format date
+                        customDate = Calendar.getInstance();
+                        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                                customDate.set(Calendar.YEAR,year);
+                                customDate.set(Calendar.MONTH,month);
+                                customDate.set(Calendar.DATE,date);
+
+                                SimpleDateFormat sdFormat = new SimpleDateFormat(formatDate, Locale.US);
+                                edt.setText(sdFormat.format(customDate.getTime()));
+                            }
+                        };
+
+                        new DatePickerDialog(context,date,customDate.get(Calendar.YEAR),customDate.get(Calendar.MONTH),customDate.get(Calendar.DATE)).show();
+                        return true;*/
+                    }
+
+                    SimpleDateFormat sdf = new SimpleDateFormat(formatDate);
+
+                    Date dateValue = null;
+
+                    try {
+                        dateValue = sdf.parse(value);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    Date dateMaxValue = null;
+
+                    try {
+                        dateMaxValue = sdf.parse(maxVal);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    customDate = Calendar.getInstance();
+                    final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                            customDate.set(Calendar.YEAR,year);
+                            customDate.set(Calendar.MONTH,month);
+                            customDate.set(Calendar.DATE,date);
+
+                            SimpleDateFormat sdFormat = new SimpleDateFormat(formatDate, Locale.US);
+                            edt.setText(sdFormat.format(customDate.getTime()));
+                        }
+                    };
+
+
+                    SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+
+                    DatePickerDialog dialogDate = new DatePickerDialog(context,date, parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate());
+                    dialogDate.getDatePicker().setMaxDate(dateMaxValue.getTime());
+                    dialogDate.show();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
     //endregion
 
     //region Autocomplete

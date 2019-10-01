@@ -45,7 +45,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private String JSON_URL = "";
-    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "", fullName = "", jabatan = "", levelJabatan = "";
+    private String uid = "", nik = "", nama = "", token = "", exp = "", level = "", laba = "", fullName = "", idJabatan = "",jabatan = "", levelJabatan = "";
     SessionManager session;
     private Button btnLogin;
     private static final int REQUEST_PERMISSIONS = 20;
@@ -172,6 +172,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                             // Level 3: Menu admin only available for masuk sebagai sales
                             // Level 4 : Sales, tidak ada akses admin
 
+                            idJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("id_jab");
                             jabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("jabatan");
                             levelJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("level");
 
@@ -191,6 +192,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 session.saveNikAsli(nik);
                                 session.saveNamaAsli(fullName);
+                                session.saveIdJabatan(idJabatan);
                                 session.saveJabatan(jabatan);
                                 session.saveLevelJabatan(levelJabatan);
 

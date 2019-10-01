@@ -40,6 +40,7 @@ public class SessionManager {
 	public static final String TAG_LABA = "laba";
 	public static final String TAG_NAMA_FULL = "nama_lengkap";
 	public static final String TAG_NAMA_ASLI = "nama_asli";
+	public static final String TAG_ID_JABATAN = "id_jabatan";
 	public static final String TAG_JABATAN = "jabatan";
 	public static final String TAG_LEVEL_JABATAN = "level_jabatan";
 
@@ -156,6 +157,13 @@ public class SessionManager {
 		editor.commit();
 	}
 
+	public void saveIdJabatan(String idJabatan){
+
+		editor.putString(TAG_ID_JABATAN, idJabatan);
+
+		editor.commit();
+	}
+
 	public String getUser(){
 		return pref.getString(TAG_NAMA, "");
 	}
@@ -184,6 +192,11 @@ public class SessionManager {
 	public String getNamaAsli(){
 
 		return pref.getString(TAG_NAMA_ASLI, "");
+	}
+
+	public String getIdJabatan(){
+
+		return pref.getString(TAG_ID_JABATAN, "");
 	}
 
 	public String getJabatan(){

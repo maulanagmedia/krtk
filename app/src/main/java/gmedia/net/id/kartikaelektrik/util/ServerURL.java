@@ -55,7 +55,9 @@ public class ServerURL {
     public static final String getBarangPerKatogory = baseURL + "barang/all_barang/kategori/";
     public static final String savePengeluaran = baseURL + "pengeluaran/simpan_pengeluaran/";
     public static final String getPengeluaran = baseURL + "pengeluaran/view_pengeluaran/";
+    public static final String getJenisPengeluaran = baseURL + "pengeluaran/view_jenis_pengeluaran/";
     public static final String getMenuAdmin = baseURL + "Auth/get_menu_admin/";
     public static final String getSalesAdmin = baseURL + "Sales/get_child/";
     public static final String deletePengeluaran = baseURL + "pengeluaran/delete_pengeluaran/";
+    public static final String getTanggalTempo = baseURL + "Barang/get_tanggal_tempo/";
 }

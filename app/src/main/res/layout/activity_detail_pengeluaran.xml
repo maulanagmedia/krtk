@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="@dimen/margin_default">
+            android:layout_margin="@dimen/margin_default"
+            android:paddingBottom="@dimen/margin_default">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -55,6 +56,25 @@
                 android:gravity="top"
                 android:background="@drawable/bg_default"
                 android:layout_marginTop="@dimen/default_small_padding1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="Jenis Biaya" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_default"
+                >
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_jenis"/>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
