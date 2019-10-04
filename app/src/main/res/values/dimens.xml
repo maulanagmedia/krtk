@@ -65,4 +65,8 @@
     <dimen name="menu_pad">6dp</dimen>
     <dimen name="menu_pad2">3dp</dimen>
 
+    <dimen name="padding_dex">10dp</dimen>
+    <dimen name="padding_big">16dp</dimen>
+    <dimen name="padding_default">8dp</dimen>
+
 </resources>

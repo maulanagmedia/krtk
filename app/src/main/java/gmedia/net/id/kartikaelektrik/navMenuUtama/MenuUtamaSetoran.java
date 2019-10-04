@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 /**
  * Created by Shin on 2/1/2017.
@@ -47,7 +49,10 @@ public class MenuUtamaSetoran extends Fragment {
 
     private View layout;
     private static Context context;
+    private SessionManager session;
     private LinearLayout llTambahSetoran, llMutasiSetoran, llRekapSetoran;
+    private CardView cvTambahSetoran, cvMutasiSetoran;
+    private TextView tvRekapSetoran;
 
     public MenuUtamaSetoran(){}
 
@@ -63,6 +68,7 @@ public class MenuUtamaSetoran extends Fragment {
     }
 
     public void setView(Context context, View layout){
+
         this.context = context;
         this.layout = layout;
         initUI();
@@ -70,9 +76,21 @@ public class MenuUtamaSetoran extends Fragment {
 
     private void initUI() {
 
+        session = new SessionManager(context);
         llTambahSetoran = (LinearLayout) layout.findViewById(R.id.ll_tambah_setoran);
         llMutasiSetoran = (LinearLayout) layout.findViewById(R.id.ll_mutasi_setoran);
         llRekapSetoran = (LinearLayout) layout.findViewById(R.id.ll_rekap_setoran);
+
+        cvTambahSetoran = (CardView) layout.findViewById(R.id.cv_tambah_setoran);
+        cvMutasiSetoran = (CardView) layout.findViewById(R.id.cv_mutasi_setoran);
+        tvRekapSetoran = (TextView) layout.findViewById(R.id.tv_rekap_setoran);
+
+        if(session.getIdJabatan().equals("8")){ // Supir
+
+            cvTambahSetoran.setVisibility(View.GONE);
+            cvMutasiSetoran.setVisibility(View.GONE);
+            tvRekapSetoran.setText("Rekap Biaya");
+        }
         initEvent();
     }
 

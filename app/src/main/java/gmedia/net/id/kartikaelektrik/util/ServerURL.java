@@ -60,4 +60,5 @@ public class ServerURL {
     public static final String getSalesAdmin = baseURL + "Sales/get_child/";
     public static final String deletePengeluaran = baseURL + "pengeluaran/delete_pengeluaran/";
     public static final String getTanggalTempo = baseURL + "Barang/get_tanggal_tempo/";
+    public static final String getMasterTempo = baseURL + "Barang/master_tempo/";
 }

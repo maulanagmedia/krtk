@@ -111,6 +111,11 @@ public class RekapMutasi extends AppCompatActivity {
             llSaveContainer.setVisibility(View.GONE);
         }
 
+        if(session.getIdJabatan().equals("8")){ // Supir
+
+            setTitle("Rekap Biaya");
+        }
+
         initValidation();
 
         getDataSetoran();

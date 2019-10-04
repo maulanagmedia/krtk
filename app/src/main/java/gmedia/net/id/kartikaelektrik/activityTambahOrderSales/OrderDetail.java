@@ -221,7 +221,13 @@ public class OrderDetail extends AppCompatActivity {
         edTanggal.setText(iv.ChangeFormatDateString(tanggal, formatDate, formatDateDisplay));
 
         // Get Tanggal tempo
-        getTanggalTempo();
+        //getTanggalTempo();
+        tanggalTempo = iv.sumDate(tanggal,iv.parseNullInteger(tempo),formatDate);
+        tvTempo.setText(tempo + " Hari");
+        edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+        edTanggalTempo.setKeyListener(null);
+
+        iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
 
         //endregion
 

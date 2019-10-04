@@ -37,7 +37,7 @@ public class ApiVolley {
     private String nikAsli = "";
     private ItemValidation iv = new ItemValidation();
 
-    public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
+    public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, final String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
 
         /*
         context : Application context
@@ -87,6 +87,7 @@ public class ApiVolley {
             @Override
             public void onResponse(String response){
 
+                String ok = REST_URL;
                 if(response == null || response.equals("null")){
 
                     Toast.makeText(context, "Anda tidak memiliki ijin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();

@@ -112,6 +112,9 @@ public class MainActivity extends RuntimePermissionsActivity {
     private int changeHeaderTimes = 5;
     private Timer timer;
     private HeaderSliderAdapter mAdapter;
+    private LinearLayout llDashboard;
+    private LinearLayout llPengajuanTempo;
+    private ImageButton ibtPengajuanTempo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +190,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         llPengeluaran = (LinearLayout) findViewById(R.id.v_pengeluaran);
         llAdmin = (LinearLayout) findViewById(R.id.ll_menu_admin);
         llUtama = (LinearLayout) findViewById(R.id.ll_menu_utama);
+        llDashboard = (LinearLayout) findViewById(R.id.ll_dashboard);
+        llPengajuanTempo = (LinearLayout) findViewById(R.id.v_pengajuan_tempo);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -211,6 +216,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtCustomerLimit = (ImageButton) findViewById(R.id.ibt_menu_customer_limit);
         ibtHapusDenda = (ImageButton) findViewById(R.id.ibt_menu_hapus_denda);
         ibtPengeluaran = (ImageButton) findViewById(R.id.ibt_pengeluaran);
+        ibtPengajuanTempo = (ImageButton) findViewById(R.id.ibt_pengajuan_tempo);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llDataPiutang = (LinearLayout) findViewById(R.id.ll_data_piutang);
@@ -245,6 +251,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llCustomOrder.setVisibility(View.GONE);
         llHapusDenda.setVisibility(View.GONE);
         llPengeluaran.setVisibility(View.GONE);
+        llPengajuanTempo.setVisibility(View.GONE);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -342,6 +349,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
             llSetoran.setVisibility(View.VISIBLE);
             llPengeluaran.setVisibility(View.VISIBLE);
+            llDashboard.setVisibility(View.GONE);
         }else{
 
             llTambahPelanggan.setVisibility(View.VISIBLE);
@@ -362,6 +370,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             llCustomOrder.setVisibility(View.VISIBLE);
             llHapusDenda.setVisibility(View.VISIBLE);
             llPengeluaran.setVisibility(View.VISIBLE);
+            llPengajuanTempo.setVisibility(View.VISIBLE);
         }
 
         getListHeaderSlider();
@@ -398,6 +407,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llCustomerLimit, ibtCustomerLimit);
         setOnClickMenu(llHapusDenda, ibtHapusDenda);
         setOnClickMenu(llPengeluaran, ibtPengeluaran);
+        setOnClickMenu(llPengajuanTempo, ibtPengajuanTempo);
 
         CheckUserLevel();
 

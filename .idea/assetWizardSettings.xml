@@ -24,6 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -95,7 +96,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_people_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_av_timer_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -105,9 +106,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="f0533c" />
+                                      <entry key="backgroundColor" value="f22d3b" />
                                       <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="ic_denda" />
+                                      <entry key="outputName" value="ic_tempo" />
                                     </map>
                                   </option>
                                 </PersistentState>
