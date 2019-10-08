@@ -59,6 +59,7 @@ public class DetailSalesOrder extends AppCompatActivity {
     private ProgressBar pbLoad;
     private Button btnRefresh;
     private boolean paketMode = false;
+    private String tempo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +140,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                                     kdCustomer = responseJSON.getJSONObject("so_header").getString("kdcus");
                                     tanggal = responseJSON.getJSONObject("so_header").getString("tgl");
                                     tanggalTempo = responseJSON.getJSONObject("so_header").getString("tgltempo");
+                                    tempo = responseJSON.getJSONObject("so_header").getString("tempo");
                                     tvTotalSO.setText(iv.ChangeToRupiahFormat(Float.parseFloat(responseJSON.getJSONObject("so_header").getString("total"))));
                                 }catch (Exception e){
                                     e.printStackTrace();
@@ -410,6 +412,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                             intent.putExtra("noSalesOrder", noSalesOrder);
                             intent.putExtra("kdCus",kdCustomer);
                             intent.putExtra("namaPelanggan",customerName);
+                            intent.putExtra("tempo",tempo);
                             startActivity(intent);
                         }else if(which == 1){
 
@@ -417,6 +420,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                             intent.putExtra("nobukti", noSalesOrder);
                             intent.putExtra("kdcus",kdCustomer);
                             intent.putExtra("nama",customerName);
+                            intent.putExtra("tempo",tempo);
                             startActivity(intent);
                         }
                     }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMenuAdmin.ApprovalPengajuanTempo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:id="@+id/ll_header"
+        android:paddingTop="@dimen/default_small_padding"
+        android:paddingLeft="@dimen/default_small_padding"
+        android:paddingRight="@dimen/default_small_padding"
+        android:paddingBottom="@dimen/default_small_padding"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_default"
+            android:padding="@dimen/default_small_padding">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/ic_search_1"
+                android:id="@+id/iv_icon"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_icon"
+                android:text=""
+                android:id="@+id/edt_keyword"
+                android:inputType="textPersonName"
+                android:imeOptions="actionSearch"
+                android:background="@android:color/transparent"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_pengajuan"
+        android:divider="@null"
+        android:layout_below="@id/ll_header"></ListView>
+
+</RelativeLayout>

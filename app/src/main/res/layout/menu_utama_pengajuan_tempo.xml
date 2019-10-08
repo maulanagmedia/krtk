@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_add"
         android:textColor="@color/white"
-        android:text="Tambah Pengajuan"
+        android:text="Tambah Pengajuan Tempo"
         android:layout_alignParentBottom="true"
         android:background="@drawable/btn_normal"/>
 

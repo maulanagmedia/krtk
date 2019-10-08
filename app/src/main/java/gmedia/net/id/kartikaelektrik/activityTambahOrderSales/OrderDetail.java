@@ -159,6 +159,8 @@ public class OrderDetail extends AppCompatActivity {
             edNamaPelanggan.setText(namaPelanggan);
             edNamaBarang.setText(namaBarang);
 
+            tvTempo.setText(tempo + " Hari");
+
             if(noSalesOrder != null && !noSalesOrder.toLowerCase().equals("null") && noSalesOrder.length() > 0){
 
                 if(idOrderDetail != null && !idOrderDetail.toLowerCase().equals("null")){
@@ -1194,6 +1196,7 @@ public class OrderDetail extends AppCompatActivity {
 
             jsonBody.put("ppn", ppn);
             jsonBody.put("jenis_ppn", jenisPpn);
+            jsonBody.put("tempo", tempo);
         }
 
         ApiVolley insertData = new ApiVolley(getApplicationContext(), jsonBody, method, urlSaveSO, "", "", 0, new ApiVolley.VolleyCallback() {

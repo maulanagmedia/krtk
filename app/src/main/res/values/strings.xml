@@ -1,39 +1,4 @@
 <resources>
-    <string name="app_name">KARTIKA ELEKTRIK</string>
-
-    !--Global-->
-    <string name="rows_per_page_autocomplete">30</string>
-    <string name="rows_per_page_table">200</string>
-    <integer name="max_table">200</integer>
-    <string name="runtime_permissions_txt">Akses sangat dibutuhkan untuk berjalannya aplikasi</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_menu_utama">MenuUtama</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
-    <string name="format_date">yyyy-MM-dd</string>
-    <string name="format_date1">yyyy-MM-dd HH:mm:ss</string>
-    <string name="format_time">HH:mm:ss</string>
-    <string name="format_date_display">dd/MM/yyyy</string>
-    <string name="format_date_display1">dd/MM/yyyy</string>
-    <string name="format_date_display2">dd-MM-yyyy</string>
-    <string name="format_date_display3">dd/MM/yyyy HH:mm</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!--Menu Utama Order Pelanggan-->
-    <string name="menu_utama_pelanggan">Pelanggan</string>
-    <string name="sub_menu_kategori_barang">Kategori Barang</string>
-    <string name="order_detail"><u>Order Detail</u></string>
-    <string name="sales_order"><u>Sales Order %1$s</u></string>
-    <string name="update_sales_order"><u>Update Sales Order</u></string>
-    <string name="customer_detail_title"><u>Customer Detail</u></string>
-
-    <!--Test Array-->
     <array name="test_array">
         <item>list 1</item>
         <item>list 2</item>
@@ -47,11 +12,46 @@
         <item>list 10</item>
     </array>
 
-    <!--Jenis Tanggal-->
+    !--Global-->
     <array name="jenis_tanggal_array">
         <item>Tanggal Masukan</item>
         <item>Tanggal Pembayaran</item>
     </array>
+    <integer name="max_table">200</integer>
+    <string name="app_name">KARTIKA ELEKTRIK</string>
+    <string name="rows_per_page_autocomplete">30</string>
+
+    <string name="rows_per_page_table">200</string>
+    <string name="runtime_permissions_txt">Akses sangat dibutuhkan untuk berjalannya aplikasi</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_menu_utama">MenuUtama</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="format_date">yyyy-MM-dd</string>
+    <string name="format_date1">yyyy-MM-dd HH:mm:ss</string>
+    <string name="format_time">HH:mm:ss</string>
+    <string name="format_date_display">dd/MM/yyyy</string>
+    <string name="format_date_display1">dd/MM/yyyy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="format_date_display2">dd-MM-yyyy</string>
+
+    <!--Menu Utama Order Pelanggan-->
+    <string name="format_date_display3">dd/MM/yyyy HH:mm</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_utama_pelanggan">Pelanggan</string>
+    <string name="sub_menu_kategori_barang">Kategori Barang</string>
+    <string name="order_detail"><u>Order Detail</u></string>
+    <string name="sales_order"><u>Sales Order %1$s</u></string>
+
+    <!--Test Array-->
+    <string name="update_sales_order"><u>Update Sales Order</u></string>
+
+    <!--Jenis Tanggal-->
+    <string name="customer_detail_title"><u>Customer Detail</u></string>
 
     <!--API List-->
     <string name="url_login">http://api.kartikaelectric.com/auth/login/</string>

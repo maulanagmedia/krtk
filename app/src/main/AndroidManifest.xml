@@ -3,15 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="gmedia.net.id.kartikaelektrik">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -21,42 +12,13 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activityProfile.ProfileActivity"></activity>
+        <activity android:name=".ActivityMenuAdmin.ApprovalPengajuanTempo"></activity>
+        <activity android:name=".activityPengajuanTempo.ActBarangPengajuanTempo" />
+        <activity android:name=".activityPengajuanTempo.ActCustomerPengajuanTempo" />
+        <activity android:name=".activityProfile.ProfileActivity" />
         <activity
             android:name=".activityPengeluaran.DetailPengeluaran"
             android:screenOrientation="portrait" />
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider> <!-- Service -->
-        <service android:name=".notificationService.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".notificationService.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".util.LocationUpdater"
-            android:enabled="true"
-            android:exported="true" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notif" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/color_notif" />
-
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
@@ -66,15 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
+        </activity> <!-- Service -->
         <activity
             android:name=".activityTambahOrderSales.ListMenuCategoryBarang"
             android:screenOrientation="portrait" />
@@ -86,13 +40,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitySalesOrderDetail.DetailSalesOrder"
-            android:screenOrientation="portrait" /> <!-- <service android:name=".services.BackgroundLocationService" /> -->
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activityPiutang.ListPiutang"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activityCustomer.CustomerDetail"
             android:screenOrientation="portrait" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <activity
             android:name=".LoginScreen"
             android:screenOrientation="portrait" />
@@ -108,7 +66,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activityKomisi.KomisiPembayaran"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" /> <!-- <service android:name=".services.BackgroundLocationService" /> -->
         <activity
             android:name=".activityKomisi.DetailKomisiDendaPembayaran"
             android:screenOrientation="portrait" />
@@ -316,18 +274,6 @@
         <activity
             android:name=".MenuAdminPerjalananSales.ListSalesPerjalanan"
             android:screenOrientation="portrait" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".MenuAdminPerjalananSales.PerjalananSales"
             android:label="@string/title_activity_perjalanan_sales"
@@ -344,6 +290,61 @@
         <activity
             android:name=".MenuAdminApvHapusDenda.DetailApvHapusDendaCustomer"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notif" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/color_notif" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service android:name=".notificationService.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".notificationService.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".util.LocationUpdater"
+            android:enabled="true"
+            android:exported="true" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

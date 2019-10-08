@@ -5,7 +5,8 @@ package gmedia.net.id.kartikaelektrik.model;
  */
 
 public class Barang {
-    private String kodeBarang, namaBarang, harga, jumlah, satuan, stok, idKategori, sisa, noKonsinyasi;
+
+    private String kodeBarang, namaBarang, harga, jumlah, satuan, stok, idKategori, sisa, noKonsinyasi, kdMerk, kdJenis;
 
     public Barang(String kodeBarang, String namaBarang) {
         this.kodeBarang = kodeBarang;
@@ -119,5 +120,21 @@ public class Barang {
 
     public void setNoKonsinyasi(String noKonsinyasi) {
         this.noKonsinyasi = noKonsinyasi;
+    }
+
+    public String getKdMerk() {
+        return kdMerk;
+    }
+
+    public void setKdMerk(String kdMerk) {
+        this.kdMerk = kdMerk;
+    }
+
+    public String getKdJenis() {
+        return kdJenis;
+    }
+
+    public void setKdJenis(String kdJenis) {
+        this.kdJenis = kdJenis;
     }
 }

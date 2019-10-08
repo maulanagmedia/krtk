@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.ApprovalHargaSO;
+import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.ApprovalPengajuanTempo;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.HistoryLimitCustomer;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.JatuhTempoGiro;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.LabaRugiOmsetJual;
@@ -45,6 +46,7 @@ public class MenuUtamaAdmin extends Fragment {
             llPerjalananSales, llPengaturanHeader, llApvHapusDenda;
     private ItemValidation iv  = new ItemValidation();
     private SessionManager session;
+    private CardView llApprovalTempo;
 
     public MenuUtamaAdmin(){}
 
@@ -78,6 +80,7 @@ public class MenuUtamaAdmin extends Fragment {
         llPengaturanHeader = (CardView) layout.findViewById(R.id.ll_pengaturan_header);
         llApvHapusDenda = (CardView) layout.findViewById(R.id.ll_apv_hapus_denda);
         llMasukSebagaiSales = (CardView) layout.findViewById(R.id.ll_masuk_sebagai_sales);
+        llApprovalTempo = (CardView) layout.findViewById(R.id.ll_apv_tempo);
 
         llMasukSebagaiSales.setVisibility(View.GONE);
         llLabaRugiOmsetJual.setVisibility(View.GONE);
@@ -89,6 +92,7 @@ public class MenuUtamaAdmin extends Fragment {
         llApvHapusDenda.setVisibility(View.GONE);
         llPengaturanHeader.setVisibility(View.GONE);
         llPerjalananSales.setVisibility(View.GONE);
+        llApprovalTempo.setVisibility(View.GONE);
 
         initData();
         initEvent();
@@ -145,6 +149,9 @@ public class MenuUtamaAdmin extends Fragment {
                                     }else if(menu.equals("perjalanan_sales")){
 
                                         llPerjalananSales.setVisibility(View.VISIBLE);
+                                    }else if(menu.equals("approval_tempo")){
+
+                                        llApprovalTempo.setVisibility(View.VISIBLE);
                                     }
                                 }
                             }else{
@@ -302,6 +309,15 @@ public class MenuUtamaAdmin extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, DetailApvHapusDenda.class);
+                context.startActivity(intent);
+            }
+        });
+
+        llApprovalTempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ApprovalPengajuanTempo.class);
                 context.startActivity(intent);
             }
         });

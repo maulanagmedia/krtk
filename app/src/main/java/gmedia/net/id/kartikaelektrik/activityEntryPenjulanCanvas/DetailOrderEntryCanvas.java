@@ -79,6 +79,8 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
     private EditText edtLimitOrder;
     private String currentString = "", currentString1 = "";
     private String limitOrder = "";
+    private TextView tvTempo;
+    private String tempo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             namaPelanggan = extras.getString("nama");
             jumlah = extras.getString("jumlah");
             stok = extras.getString("stok");
+            tempo = extras.getString("tempo", "30");
 
             selectedSatuan = extras.getString("satuan");
             satuanAsli = extras.getString("satuan");
@@ -146,6 +149,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
             tvSave = (TextView) findViewById(R.id.tv_save);
             edtLimitOrder = (EditText) findViewById(R.id.edt_limit_order);
+            tvTempo = (TextView) findViewById(R.id.tv_tempo);
 
             edNamaPelanggan.setText(namaPelanggan);
             edNamaBarang.setText(namaBarang);
@@ -153,10 +157,12 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             /*edHargaWithDiskon.addTextChangedListener(iv.textChangeListenerCurrency(edHargaWithDiskon));
             edHargaTotal.addTextChangedListener(iv.textChangeListenerCurrency(edHargaTotal));*/
             edTanggal.setText(iv.getToday(formatDateDisplay));
-            tanggalTempo = iv.sumDate(iv.getToday(formatDate),37,formatDate);
+            tanggalTempo = iv.sumDate(iv.getToday(formatDate),iv.parseNullInteger(tempo),formatDate);
             edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo, formatDate, formatDateDisplay));
             edTanggalTempo.setKeyListener(null);
-            iv.datePickerEvent(DetailOrderEntryCanvas.this, edTanggalTempo, "RIGHT", formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo, formatDate, formatDateDisplay));
+            iv.datePickerEventMax(DetailOrderEntryCanvas.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+
+            tvTempo.setText(tempo + " Hari");
 
             if(noBukti != null && !noBukti.toLowerCase().equals("null") && noBukti.length() > 0){
 
@@ -1024,6 +1030,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             intent.putExtra("nama", namaPelanggan);
             intent.putExtra("tanggal", tanggal);
             intent.putExtra("tanggaltempo", tanggalTempo);
+            intent.putExtra("tempo", tempo);
             startActivity(intent);
             Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
             finish();
@@ -1052,6 +1059,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 intent.putExtra("nama", namaPelanggan);
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("tanggaltempo", tanggalTempo);
+                intent.putExtra("tempo", tempo);
                 startActivity(intent);
                 Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
                 finish();
@@ -1078,6 +1086,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                                 intent.putExtra("nama", namaPelanggan);
                                 intent.putExtra("tanggal", tanggal);
                                 intent.putExtra("tanggaltempo", tanggalTempo);
+                                intent.putExtra("tempo", tempo);
                                 startActivity(intent);
                                 Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
                                 finish();

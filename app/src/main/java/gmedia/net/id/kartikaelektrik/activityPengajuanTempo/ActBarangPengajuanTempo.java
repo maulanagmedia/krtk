@@ -1,6 +1,10 @@
-package gmedia.net.id.kartikaelektrik.activityTambahOrderSales;
+package gmedia.net.id.kartikaelektrik.activityPengajuanTempo;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,23 +33,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.adapter.MenuCategoryBarang.ListBarangTableAdapter;
+import gmedia.net.id.kartikaelektrik.activityPengajuanTempo.Adapter.BarangTempoAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
-public class ListBarangSalesOrder extends AppCompatActivity {
+public class ActBarangPengajuanTempo extends AppCompatActivity {
 
     private AutoCompleteTextView actvListBarang;
     private String TAG = "BarangOrder";
     private ListView lvListBarang;
     private ItemValidation iv = new ItemValidation();
-    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "0", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "";
+    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "";
 
     //Fragment Detail Barang
-    private String urlGetAllBarangByKategori = "";
     private List<Barang> listMasterBarang, moreList;
     private ProgressBar pgbLoadBarang;
     private LinearLayout llProgressBarContainer;
@@ -54,24 +59,28 @@ public class ListBarangSalesOrder extends AppCompatActivity {
     private String keyword = "";
     private View footerList;
     private boolean isLoading = false;
-    private ListBarangTableAdapter arrayAdapterString;
+    private BarangTempoAdapter arrayAdapterString;
+    private Context context;
+
+    //remember, this page using "not best practice" process
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_barang_sales_order);
+        setContentView(R.layout.activity_act_barang_pengajuan_tempo);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Pilih Barang Order");
 
+        context = this;
         initUI();
     }
 
     private void initUI() {
 
-        urlGetAllBarangByKategori = ServerURL.getBarangPerKategori;
         actvListBarang = (AutoCompleteTextView) findViewById(R.id.actv_list_nama_barang);
         lvListBarang = (ListView) findViewById(R.id.lv_fragment_detail_category_barang);
         pgbLoadBarang = (ProgressBar) findViewById(R.id.pgb_nama_barang);
@@ -82,13 +91,10 @@ public class ListBarangSalesOrder extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            kodeKategoriBarang = "0"; // ALL Kategory
-            noSalesOrder = extras.getString("noSalesOrder");
+            kodeKategoriBarang = ""; // ALL Kategory
             kdCus = extras.getString("kdCus");
             namaPelanggan = extras.getString("namaPelanggan");
-            tempo = extras.getString("tempo", "30");
-            kodeBarang = extras.getString("kodeBarang");
-            namaBarang = extras.getString("namaBarang");
+            tempo = extras.getString("tempo");
         }
 
         getDetailBarangAutocomplete();
@@ -114,11 +120,10 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
-            jBody.put("tempo", tempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ApiVolley restService = new ApiVolley(ListBarangSalesOrder.this, jBody, "POST", urlGetAllBarangByKategori, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getJenisBarangTempo, "", "", 0,
                 new ApiVolley.VolleyCallback(){
 
                     @Override
@@ -137,8 +142,13 @@ public class ListBarangSalesOrder extends AppCompatActivity {
 
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    listMasterBarang.add(new Barang(jo.getString("kdbrg"),
-                                            jo.getString("namabrg")));
+                                    Barang item = new Barang(
+                                            jo.getString("kdjenis"),
+                                            jo.getString("merk"));
+
+                                    item.setKdMerk(jo.getString("kdmerk"));
+                                    item.setKdJenis(jo.getString("kdjenis"));
+                                    listMasterBarang.add(item);
                                 }
                             }
 
@@ -188,7 +198,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
 
                     keyword = actvListBarang.getText().toString();
                     getDetailBarangAutocomplete();
-                    iv.hideSoftKey(ListBarangSalesOrder.this);
+                    iv.hideSoftKey(context);
                     return true;
                 }
                 return false;
@@ -228,7 +238,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
         if (listItems != null && listItems.size() > 0){
 
             //set adapter for autocomplete
-            arrayAdapterString = new ListBarangTableAdapter(ListBarangSalesOrder.this, listItems.size(), listItems);
+            arrayAdapterString = new BarangTempoAdapter((Activity) context, listItems.size(), listItems);
 
             //set adapter to autocomplete
             lvListBarang.setAdapter(arrayAdapterString);
@@ -261,20 +271,28 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             lvListBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Barang barang = (Barang) adapterView.getItemAtPosition(i);
+                    final Barang barang = (Barang) adapterView.getItemAtPosition(i);
                     kodeBarang = barang.getKodeBarang();
                     namaBarang = barang.getNamaBarang();
 
-                    Intent intent = new Intent(getApplicationContext(), OrderDetail.class);
-                    intent.putExtra("noSalesOrder",noSalesOrder);
-                    intent.putExtra("namaPelanggan", namaPelanggan);
-                    intent.putExtra("kdCus", kdCus);
-                    intent.putExtra("tempo", tempo);
-                    intent.putExtra("kodeKategoriBarang", kodeKategoriBarang);
-                    intent.putExtra("namaKategoriBarang", namaKategoriBarang);
-                    intent.putExtra("kodeBarang", kodeBarang);
-                    intent.putExtra("namaBarang", namaBarang);
-                    startActivity(intent);
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Konfirmasi")
+                            .setMessage("Apakah anda yakin ingin menyimpan data?\n"+namaPelanggan+"\n"+"Tempo " + tempo+ "\n"+namaBarang)
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    saveData(barang);
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                            .show();
+
                 }
             });
         }
@@ -290,12 +308,11 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
-            jBody.put("tempo", tempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley restService = new ApiVolley(ListBarangSalesOrder.this, jBody, "POST", urlGetAllBarangByKategori, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "POST", ServerURL.getJenisBarangTempo, "", "", 0,
                 new ApiVolley.VolleyCallback(){
 
                     @Override
@@ -314,8 +331,14 @@ public class ListBarangSalesOrder extends AppCompatActivity {
                                 JSONArray arrayJSON = responseAPI.getJSONArray("response");
                                 for(int i = 0; i < arrayJSON.length();i++){
                                     JSONObject jo = arrayJSON.getJSONObject(i);
-                                    moreList.add(new Barang(jo.getString("kdbrg"),
-                                            jo.getString("namabrg")));
+
+                                    Barang item = new Barang(
+                                            jo.getString("kdjenis"),
+                                            jo.getString("merk"));
+
+                                    item.setKdMerk(jo.getString("kdmerk"));
+                                    item.setKdJenis(jo.getString("kdjenis"));
+                                    moreList.add(item);
                                 }
                             }
 
@@ -333,6 +356,64 @@ public class ListBarangSalesOrder extends AppCompatActivity {
                         isLoading = false;
                     }
                 });
+    }
+
+    private void saveData(Barang barang) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+
+            jsonBody.put("kdmerk", barang.getKdMerk());
+            jsonBody.put("kdjenis", barang.getKdJenis());
+            jsonBody.put("kdcus", kdCus);
+            jsonBody.put("tempo", tempo);
+            jsonBody.put("toleransi", "4");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley restService = new ApiVolley(this, jsonBody, "POST", ServerURL.savePengajuanTempo, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        progressDialog.dismiss();
+                        JSONObject responseAPI = new JSONObject();
+                        try {
+                            responseAPI = new JSONObject(result);
+                            String statusString = responseAPI.getJSONObject("metadata").getString("status");
+                            String message = responseAPI.getJSONObject("metadata").getString("message");
+                            Toast.makeText(context,message, Toast.LENGTH_LONG).show();
+
+                            if(iv.parseNullInteger(statusString) == 200){
+
+                                Intent intent = new Intent(context, DashboardContainer.class);
+                                intent.putExtra("kodemenu", "menupengajuantempo");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }catch (Exception e){
+                            Toast.makeText(context,"Terjadi kesalahan", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        progressDialog.dismiss();
+                        Toast.makeText(context, result,Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
     @Override

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_small_padding2"
+        android:layout_marginBottom="@dimen/default_small_padding2"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:padding="@dimen/default_small_padding1"
+                android:id="@+id/tv_item0"
+                android:gravity="right"
+                android:background="@color/color_red_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_title_size_small"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_item1"
+                android:textSize="18sp"
+                android:paddingTop="@dimen/default_small_padding"
+                android:paddingLeft="@dimen/default_small_padding1"
+                android:paddingRight="@dimen/default_small_padding1"
+                android:paddingBottom="@dimen/default_small_padding2"
+                android:textStyle="bold"
+                android:text=""
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_red_bg"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/color_red_bg"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Customer"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_text_title_size_small"/>
+
+                    <TextView
+                        android:id="@+id/tv_item2"
+                        android:textSize="14sp"
+                        android:text=""
+                        android:paddingTop="@dimen/default_small_padding2"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="@dimen/default_line"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_small_padding1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tempo"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_text_title_size_small"/>
+
+                    <TextView
+                        android:id="@+id/tv_item3"
+                        android:textSize="14sp"
+                        android:text=""
+                        android:gravity="right"
+                        android:paddingTop="@dimen/default_small_padding2"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

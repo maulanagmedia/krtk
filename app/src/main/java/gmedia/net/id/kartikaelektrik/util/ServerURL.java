@@ -61,4 +61,9 @@ public class ServerURL {
     public static final String deletePengeluaran = baseURL + "pengeluaran/delete_pengeluaran/";
     public static final String getTanggalTempo = baseURL + "Barang/get_tanggal_tempo/";
     public static final String getMasterTempo = baseURL + "Barang/master_tempo/";
+    public static final String getPengajuanTempo = baseURL + "Tempo/view_pengajuan/";
+    public static final String getCustomer = baseURL + "barang/customer/";
+    public static final String savePengajuanTempo = baseURL + "Tempo/pengajuan/";
+    public static final String apvPengajuanTempo = baseURL + "Tempo/approval/";
+    public static final String getJenisBarangTempo = baseURL + "Tempo/view_jenis//";
 }

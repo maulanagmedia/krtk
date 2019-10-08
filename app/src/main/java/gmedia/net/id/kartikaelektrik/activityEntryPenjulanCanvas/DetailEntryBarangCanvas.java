@@ -73,6 +73,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
     private String noBukti = "", selectedBarang = "";
     private static String keyword = "";
     private List<CustomListItem> selectedBarangList;
+    private String tempo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
                 kdCus = bundle.getString("kdcus","");
                 namaCustomer = bundle.getString("nama","");
                 noBukti = bundle.getString("nobukti","");
+                tempo = bundle.getString("tempo", "30");
                 selectedBarang = bundle.getString("selectedbarang","");
 
                 String selectedBarangString  = selectedBarang;
@@ -144,6 +146,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
             jsonBody.put("startindex", filterIndex);
             jsonBody.put("filterquantity", filterQuantity);
             jsonBody.put("keyword", keyword);
+            jsonBody.put("tempo", tempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -392,6 +395,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
                     intent.putExtra("nokonsinyasi", barang.getNoKonsinyasi());
                     intent.putExtra("nobukti", noBukti);
                     intent.putExtra("selectedbarang", selectedBarang);
+                    intent.putExtra("tempo", tempo);
                     startActivity(intent);
                     finish();
                 }
@@ -438,6 +442,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
                 jsonBody.put("startindex", filterIndex);
                 jsonBody.put("filterquantity", filterQuantity);
                 jsonBody.put("keyword", keyword);
+                jsonBody.put("tempo", tempo);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

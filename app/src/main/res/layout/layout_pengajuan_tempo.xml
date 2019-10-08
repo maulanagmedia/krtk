@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rounded_corner"
+        android:layout_margin="@dimen/default_small_padding"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_margin="@dimen/default_small_padding"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:text="Pengajuan Tempo"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_close"
+                android:id="@+id/iv_close"
+                android:background="?attr/selectableItemBackground"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:padding="@dimen/margin_default"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:id="@+id/tv_tanggal"
+                android:textSize="@dimen/text_button_login"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:padding="@dimen/margin_default"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Merk Jenis"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Merk"
+                android:id="@+id/tv_merk"
+                android:textSize="@dimen/text_button_login"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:padding="@dimen/margin_default"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer"
+                android:id="@+id/tv_customer"
+                android:textSize="@dimen/text_button_login"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:padding="@dimen/margin_default"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pengaju"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pengaju"
+                android:id="@+id/tv_pengaju"
+                android:textSize="@dimen/text_button_login"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/default_small_padding2"
+            android:padding="@dimen/margin_default"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tempo"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tempo"
+                android:id="@+id/tv_tempo"
+                android:textSize="@dimen/text_button_login"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_small_padding"
+            android:paddingLeft="@dimen/default_small_padding"
+            android:paddingRight="@dimen/default_small_padding"
+            android:paddingBottom="@dimen/default_small_padding"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_tolak"
+                android:layout_margin="@dimen/default_small_padding2"
+                android:gravity="center"
+                android:background="@drawable/bg_btn_dialog">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Tolak"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/default_small_padding"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/default_small_padding2"
+                android:gravity="center"
+                android:id="@+id/ll_setujui"
+                android:background="@drawable/bg_btn_dialog_blue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Terima"
+                    android:id="@+id/tv_proses"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/default_small_padding"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

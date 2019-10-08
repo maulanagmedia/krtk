@@ -5,25 +5,32 @@ package gmedia.net.id.kartikaelektrik.navMenuUtama;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +48,10 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.OptionItem;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MenuUtamaTambahCanvas extends Fragment {
 
@@ -55,6 +66,9 @@ public class MenuUtamaTambahCanvas extends Fragment {
     private Button btnRefresh;
     private List<Customer> masterListCustomer , listCustomerAutocomplete, listCustomerTable;
     private boolean firstLoad = true;
+    private List<OptionItem> listTempo = new ArrayList<>();
+    private ArrayAdapter adapterTempo;
+    private String selectedTempo = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -255,13 +269,143 @@ public class MenuUtamaTambahCanvas extends Fragment {
 
                     Customer customer = (Customer) parent.getItemAtPosition(position);
 
-                    Intent intent = new Intent(context, DetailEntryBarangCanvas.class);
-                    intent.putExtra("kdcus", customer.getKodeCustomer());
-                    intent.putExtra("nama", customer.getNamaCustomer());
-                    context.startActivity(intent);
-                    //finish();
+                    showLabel(customer.getNamaCustomer(), customer.getKodeCustomer());
                 }
             });
+        }
+    }
+
+    private void getDataTempo() {
+
+        // Get All Barang by Kategori
+        JSONObject jBody = new JSONObject();
+
+        ApiVolley restService = new ApiVolley(context, jBody, "GET", ServerURL.getMasterTempo, "", "", 0,
+                new ApiVolley.VolleyCallback(){
+                    @Override
+                    public void onSuccess(String result){
+
+                        String message = "Data ";
+                        try {
+
+                            JSONObject responseAPI = new JSONObject(result);
+                            String status = responseAPI.getJSONObject("metadata").getString("status");
+                            listTempo.clear();
+
+                            if(iv.parseNullInteger(status) == 200){
+                                JSONArray arrayJSON = responseAPI.getJSONArray("response");
+                                for(int i = 0; i < arrayJSON.length();i++){
+                                    JSONObject jo = arrayJSON.getJSONObject(i);
+                                    listTempo.add(
+                                            new OptionItem(
+                                                    jo.getString("tempo")
+                                                    ,jo.getString("nama") + " (" +jo.getString("tempo") + ")"
+                                            )
+                                    );
+                                }
+                            }
+
+                            adapterTempo.notifyDataSetChanged();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void showLabel(final String customer, final String kdcus){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_tempo, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+        final TextView tvLabel = (TextView) viewDialog.findViewById(R.id.tv_label);
+        final Spinner spTempo = (Spinner) viewDialog.findViewById(R.id.sp_tempo);
+
+        final TextView tvBatal = (TextView) viewDialog.findViewById(R.id.tv_batal);
+        final TextView tvSimpan = (TextView) viewDialog.findViewById(R.id.tv_simpan);
+
+        tvLabel.setText(customer);
+        adapterTempo = new ArrayAdapter(context, android.R.layout.simple_list_item_1, listTempo);
+
+        spTempo.setAdapter(adapterTempo);
+
+        spTempo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                OptionItem item = listTempo.get(position);
+                selectedTempo = item.getValue();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        getDataTempo();
+
+        AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        alert.getWindow().setGravity(Gravity.BOTTOM);
+
+        final AlertDialog alertDialogs = alert;
+
+        tvBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alertDialogs != null) {
+
+                    try {
+                        alertDialogs.dismiss();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        tvSimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alertDialogs != null) {
+
+                    try {
+                        alertDialogs.dismiss();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                Intent intent = new Intent(context, DetailEntryBarangCanvas.class);
+                intent.putExtra("kdcus", customer);
+                intent.putExtra("nama", kdcus);
+                intent.putExtra("tempo", selectedTempo);
+                context.startActivity(intent);
+
+            }
+        });
+
+        try {
+
+            alert.show();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

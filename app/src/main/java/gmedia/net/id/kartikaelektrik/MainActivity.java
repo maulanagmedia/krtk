@@ -345,6 +345,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp18.width = menuWidth;
         llPengeluaran.setLayoutParams(lp18);
 
+        GridLayout.LayoutParams lp19 = (GridLayout.LayoutParams) llPengajuanTempo.getLayoutParams();
+        lp19.width = menuWidth;
+        llPengajuanTempo.setLayoutParams(lp19);
+
         if(sessionManager.getIdJabatan().equals("8")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
@@ -928,6 +932,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","menupengeluaran");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_pengajuan_tempo){
+                    intent.putExtra("kodemenu","menupengajuantempo");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -1025,6 +1033,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_pengeluaran){
                         intent.putExtra("kodemenu","menupengeluaran");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_pengajuan_tempo){
+                        intent.putExtra("kodemenu","menupengajuantempo");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
