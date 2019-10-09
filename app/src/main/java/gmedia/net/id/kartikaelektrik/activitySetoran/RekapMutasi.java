@@ -439,7 +439,7 @@ public class RekapMutasi extends AppCompatActivity {
                                     ,jo.getString("sisa")
                                     ));
 
-                            total += iv.parseNullDouble(jo.getString("total"));
+                            total += (iv.parseNullDouble(jo.getString("total")) + iv.parseNullDouble(jo.getString("sisa")));
                         }
 
                         JSONObject jumlahRes = response.getJSONObject("response").getJSONObject("jumlah");

@@ -34,6 +34,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderCustom;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPengajuanTempo;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPengeluaran;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPermintaanHargaOrder;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPotensiDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaRetur;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaSalesOrder;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaSetoran;
@@ -258,7 +259,7 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Hapus Denda");
                     break;
                 case "menupengeluaran":
-                    state = 20;
+                    state = 21;
                     //fragment = new MenuUtamaOmsetPenjualan();
                     MenuUtamaPengeluaran menuUtamaPengeluaran = new MenuUtamaPengeluaran();
                     View childLayoutMenuPengeluaran = inflater.inflate(R.layout.menu_utama_pengeluaran, flContainer);
@@ -267,13 +268,22 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Rekap Pengeluaran");
                     break;
                 case "menupengajuantempo":
-                    state = 20;
+                    state = 22;
                     //fragment = new MenuUtamaOmsetPenjualan();
                     MenuUtamaPengajuanTempo menuUtamaPengajuanTempo = new MenuUtamaPengajuanTempo();
                     View childPengajuanTempo = inflater.inflate(R.layout.menu_utama_pengajuan_tempo, flContainer);
                     menuUtamaPengajuanTempo.setView(DashboardContainer.this, childPengajuanTempo);
                     toolbar.setTitle("Pengajuan Tempo");
                     setTitle("Pengajuan Tempo");
+                    break;
+                case "menupotensidenda":
+                    state = 23;
+                    //fragment = new MenuUtamaOmsetPenjualan();
+                    MenuUtamaPotensiDenda menuUtamaPotensiDenda = new MenuUtamaPotensiDenda();
+                    View childPotensiDenda = inflater.inflate(R.layout.menu_utama_potensi_denda, flContainer);
+                    menuUtamaPotensiDenda.setView(DashboardContainer.this, childPotensiDenda);
+                    toolbar.setTitle("Potensi Denda");
+                    setTitle("Potensi Denda");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

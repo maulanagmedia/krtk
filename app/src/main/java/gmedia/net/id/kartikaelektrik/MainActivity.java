@@ -113,8 +113,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private Timer timer;
     private HeaderSliderAdapter mAdapter;
     private LinearLayout llDashboard;
-    private LinearLayout llPengajuanTempo;
-    private ImageButton ibtPengajuanTempo;
+    private LinearLayout llPengajuanTempo, llPotensiDenda;
+    private ImageButton ibtPengajuanTempo, ibtPotensiDenda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +192,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llUtama = (LinearLayout) findViewById(R.id.ll_menu_utama);
         llDashboard = (LinearLayout) findViewById(R.id.ll_dashboard);
         llPengajuanTempo = (LinearLayout) findViewById(R.id.v_pengajuan_tempo);
+        llPotensiDenda = (LinearLayout) findViewById(R.id.v_potensi_denda);
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
@@ -217,6 +218,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtHapusDenda = (ImageButton) findViewById(R.id.ibt_menu_hapus_denda);
         ibtPengeluaran = (ImageButton) findViewById(R.id.ibt_pengeluaran);
         ibtPengajuanTempo = (ImageButton) findViewById(R.id.ibt_pengajuan_tempo);
+        ibtPotensiDenda = (ImageButton) findViewById(R.id.ibt_potensi_denda);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llDataPiutang = (LinearLayout) findViewById(R.id.ll_data_piutang);
@@ -252,6 +254,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llHapusDenda.setVisibility(View.GONE);
         llPengeluaran.setVisibility(View.GONE);
         llPengajuanTempo.setVisibility(View.GONE);
+        llPotensiDenda.setVisibility(View.GONE);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -349,6 +352,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp19.width = menuWidth;
         llPengajuanTempo.setLayoutParams(lp19);
 
+        GridLayout.LayoutParams lp20 = (GridLayout.LayoutParams) llPotensiDenda.getLayoutParams();
+        lp20.width = menuWidth;
+        llPotensiDenda.setLayoutParams(lp20);
+
         if(sessionManager.getIdJabatan().equals("8")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
@@ -375,6 +382,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             llHapusDenda.setVisibility(View.VISIBLE);
             llPengeluaran.setVisibility(View.VISIBLE);
             llPengajuanTempo.setVisibility(View.VISIBLE);
+            llPotensiDenda.setVisibility(View.VISIBLE);
         }
 
         getListHeaderSlider();
@@ -412,6 +420,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llHapusDenda, ibtHapusDenda);
         setOnClickMenu(llPengeluaran, ibtPengeluaran);
         setOnClickMenu(llPengajuanTempo, ibtPengajuanTempo);
+        setOnClickMenu(llPotensiDenda, ibtPotensiDenda);
 
         CheckUserLevel();
 
@@ -936,6 +945,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","menupengajuantempo");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_potensi_denda){
+                    intent.putExtra("kodemenu","menupotensidenda");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -1035,8 +1048,8 @@ public class MainActivity extends RuntimePermissionsActivity {
                         intent.putExtra("kodemenu","menupengeluaran");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    }else if(ib.getId() == R.id.ibt_pengajuan_tempo){
-                        intent.putExtra("kodemenu","menupengajuantempo");
+                    }else if(ib.getId() == R.id.ibt_potensi_denda){
+                        intent.putExtra("kodemenu","menupotensidenda");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }

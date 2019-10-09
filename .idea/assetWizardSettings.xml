@@ -96,7 +96,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_av_timer_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_monetization_on_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -108,7 +108,7 @@
                                     <map>
                                       <entry key="backgroundColor" value="f22d3b" />
                                       <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="ic_tempo" />
+                                      <entry key="outputName" value="ic_potensi_denda" />
                                     </map>
                                   </option>
                                 </PersistentState>

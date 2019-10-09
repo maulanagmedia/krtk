@@ -66,4 +66,5 @@ public class ServerURL {
     public static final String savePengajuanTempo = baseURL + "Tempo/pengajuan/";
     public static final String apvPengajuanTempo = baseURL + "Tempo/approval/";
     public static final String getJenisBarangTempo = baseURL + "Tempo/view_jenis//";
+    public static final String getPotensiDenda = baseURL + "Denda/view_potensi_denda/";
 }
