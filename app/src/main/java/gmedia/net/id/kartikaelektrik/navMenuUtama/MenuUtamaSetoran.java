@@ -85,7 +85,7 @@ public class MenuUtamaSetoran extends Fragment {
         cvMutasiSetoran = (CardView) layout.findViewById(R.id.cv_mutasi_setoran);
         tvRekapSetoran = (TextView) layout.findViewById(R.id.tv_rekap_setoran);
 
-        if(session.getIdJabatan().equals("8")){ // Supir
+        if(session.getLevelJabatan().equals("6")){ // Supir
 
             cvTambahSetoran.setVisibility(View.GONE);
             cvMutasiSetoran.setVisibility(View.GONE);

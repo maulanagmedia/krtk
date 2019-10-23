@@ -356,7 +356,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp20.width = menuWidth;
         llPotensiDenda.setLayoutParams(lp20);
 
-        if(sessionManager.getIdJabatan().equals("8")){ // Supir
+        if(sessionManager.getLevelJabatan().equals("6")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
             llPengeluaran.setVisibility(View.VISIBLE);

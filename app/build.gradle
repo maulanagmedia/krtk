@@ -8,8 +8,8 @@ android {
         applicationId 'gmedia.net.id.kartikaelektrik'
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 33
-        versionName '13.0.1'
+        versionCode 34
+        versionName '14.0.0'
     }
     buildTypes {
         release {
