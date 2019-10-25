@@ -12,6 +12,7 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -175,7 +176,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                             idJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("id_jab");
                             jabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("jabatan");
                             levelJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("level");
-
+                            Log.d(TAG, "jabatan: " + levelJabatan);
                             // nik = obj.getJSONObject("response").getString("nik");
                             nama = username;// obj.getJSONObject("response").getString("nama");
                             nik= uid;

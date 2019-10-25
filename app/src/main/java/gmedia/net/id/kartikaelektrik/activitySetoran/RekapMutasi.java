@@ -105,7 +105,7 @@ public class RekapMutasi extends AppCompatActivity {
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Kunci Setoran");
 
-        if(session.getLaba().equals("1")){
+        if(session.getLevelJabatan().equals("1") || session.getLevelJabatan().equals("5")){ // hanya owner / finance yang bisa
             llSaveContainer.setVisibility(View.VISIBLE);
         }else{
             llSaveContainer.setVisibility(View.GONE);
