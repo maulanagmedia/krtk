@@ -1116,7 +1116,7 @@
                             android:src="@mipmap/ic_potensi_denda" />
 
                         <TextView
-                            android:text="Potensi Denda"
+                            android:text="Potensi Denda / Komisi"
                             android:layout_height="0dp"
                             android:layout_width="match_parent"
                             android:layout_weight="0.9"

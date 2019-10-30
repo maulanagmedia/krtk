@@ -26,7 +26,7 @@ public class PotensiDendaAdapter extends ArrayAdapter {
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvLabel;
     }
 
     @Override
@@ -42,6 +42,7 @@ public class PotensiDendaAdapter extends ArrayAdapter {
         if(convertView == null){
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.adapter_potensi_denda, null);
+            holder.tvLabel = convertView.findViewById(R.id.tv_label);
             holder.tvItem1 = convertView.findViewById(R.id.tv_item1);
             holder.tvItem2 = convertView.findViewById(R.id.tv_item2);
             holder.tvItem3 = convertView.findViewById(R.id.tv_item3);
@@ -60,9 +61,16 @@ public class PotensiDendaAdapter extends ArrayAdapter {
         holder.tvItem1.setText(itemSelected.getListItem2());
         holder.tvItem2.setText(itemSelected.getListItem3());
         holder.tvItem3.setText(iv.ChangeFormatDateString(itemSelected.getListItem4(), formatDate, formatDateDisplay));
-        holder.tvItem4.setText(iv.ChangeFormatDateString(itemSelected.getListItem5(), formatDate, formatDateDisplay));
+        holder.tvItem4.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem5()));
         holder.tvItem5.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem6()));
-        holder.tvItem6.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem7()));
+        holder.tvLabel.setText(itemSelected.getListItem9());
+        if(itemSelected.getListItem9().equals("Komisi")){
+
+            holder.tvItem6.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem7()));
+        }else{
+
+            holder.tvItem6.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem8()));
+        }
 
         return convertView;
 

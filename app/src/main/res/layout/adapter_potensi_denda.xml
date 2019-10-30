@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/default_text_title_size_small"
                         android:textColor="@color/white"
-                        android:text="Tanggal"/>
+                        android:text="Tanggal Piutang"/>
 
                     <TextView
                         android:id="@+id/tv_item3"
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/default_text_title_size_small"
                         android:textColor="@color/white"
-                        android:text="Tanggal Tempo"/>
+                        android:text="Umur Piutang"/>
 
                     <TextView
                         android:id="@+id/tv_item4"
@@ -191,12 +191,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/default_text_title_size_small"
+                        android:id="@+id/tv_label"
                         android:textColor="@color/white"
                         android:text="Potensi Denda"/>
 
                     <TextView
                         android:id="@+id/tv_item6"
                         android:textSize="@dimen/default_text_title_size"
+                        android:gravity="right"
                         android:textColor="@android:color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
