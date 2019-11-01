@@ -41,7 +41,7 @@ import java.util.TimerTask;
 
 public class OrderDetail extends AppCompatActivity {
 
-    private String kdCus, namaPelanggan, tempo, kodeBarang, namaBarang, noSalesOrder = "", hargaPcs;
+    private String kdCus, namaPelanggan, tempo, idTempo, kodeBarang, namaBarang, noSalesOrder = "", hargaPcs;
     private String approveLevel = ""; // 1. Keuangan, 2. Bos
     private String tanggal, tanggalTempo, jumlah, diskon, lastDiskon, isiSatuan1, isiSatuan2, selectedIsiSatuan, jumlahpcs;
     private ItemValidation iv = new ItemValidation();
@@ -113,6 +113,7 @@ public class OrderDetail extends AppCompatActivity {
             kdCus = extras.getString("kdCus");
             namaPelanggan = extras.getString("namaPelanggan");
             tempo = extras.getString("tempo", "30");
+            idTempo = extras.getString("idTempo", "");
             jumlah = extras.getString("jumlah");
             selectedSatuan = extras.getString("satuan");
             kodeBarang = extras.getString("kodeBarang");
@@ -1197,6 +1198,7 @@ public class OrderDetail extends AppCompatActivity {
             jsonBody.put("ppn", ppn);
             jsonBody.put("jenis_ppn", jenisPpn);
             jsonBody.put("tempo", tempo);
+            jsonBody.put("id_tempo", idTempo);
         }
 
         ApiVolley insertData = new ApiVolley(getApplicationContext(), jsonBody, method, urlSaveSO, "", "", 0, new ApiVolley.VolleyCallback() {

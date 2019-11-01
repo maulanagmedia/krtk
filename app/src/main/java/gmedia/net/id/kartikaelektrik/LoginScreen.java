@@ -59,7 +59,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(gmedia.net.id.kartikaelektrik.R.layout.activity_login_screen);
+        setContentView(R.layout.activity_login_screen);
         getSupportActionBar().hide();
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -98,12 +98,12 @@ public class LoginScreen extends RuntimePermissionsActivity {
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
-        /*if(session.isLoggedIn()){
+        if(session.isLoggedIn()){
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
-        }*/
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 

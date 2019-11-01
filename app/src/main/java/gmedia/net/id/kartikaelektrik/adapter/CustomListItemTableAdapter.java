@@ -43,11 +43,8 @@ public class CustomListItemTableAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        if(items.size() < rowPerTableItem){
-            return items.size();
-        }else{
-            return rowPerTableItem;
-        }
+
+        return items.size();
     }
 
     private static class ViewHolder {

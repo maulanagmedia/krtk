@@ -68,7 +68,7 @@ public class MenuUtamaTambahCanvas extends Fragment {
     private boolean firstLoad = true;
     private List<OptionItem> listTempo = new ArrayList<>();
     private ArrayAdapter adapterTempo;
-    private String selectedTempo = "";
+    private String selectedTempo = "", selectedIdTempo = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -300,6 +300,7 @@ public class MenuUtamaTambahCanvas extends Fragment {
                                             new OptionItem(
                                                     jo.getString("tempo")
                                                     ,jo.getString("nama") + " (" +jo.getString("tempo") + ")"
+                                                    , jo.getString("id")
                                             )
                                     );
                                 }
@@ -345,6 +346,7 @@ public class MenuUtamaTambahCanvas extends Fragment {
 
                 OptionItem item = listTempo.get(position);
                 selectedTempo = item.getValue();
+                selectedIdTempo = item.getAtt1();
             }
 
             @Override
@@ -396,6 +398,7 @@ public class MenuUtamaTambahCanvas extends Fragment {
                 intent.putExtra("kdcus", customer);
                 intent.putExtra("nama", kdcus);
                 intent.putExtra("tempo", selectedTempo);
+                intent.putExtra("idTempo", selectedIdTempo);
                 context.startActivity(intent);
 
             }

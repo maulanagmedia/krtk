@@ -41,7 +41,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
     private String TAG = "BarangOrder";
     private ListView lvListBarang;
     private ItemValidation iv = new ItemValidation();
-    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "0", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "";
+    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "0", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "", idTempo = "";
 
     //Fragment Detail Barang
     private String urlGetAllBarangByKategori = "";
@@ -87,6 +87,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             kdCus = extras.getString("kdCus");
             namaPelanggan = extras.getString("namaPelanggan");
             tempo = extras.getString("tempo", "30");
+            idTempo = extras.getString("idTempo", "");
             kodeBarang = extras.getString("kodeBarang");
             namaBarang = extras.getString("namaBarang");
         }
@@ -115,6 +116,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
             jBody.put("tempo", tempo);
+            jBody.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -270,6 +272,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
                     intent.putExtra("namaPelanggan", namaPelanggan);
                     intent.putExtra("kdCus", kdCus);
                     intent.putExtra("tempo", tempo);
+                    intent.putExtra("idTempo", idTempo);
                     intent.putExtra("kodeKategoriBarang", kodeKategoriBarang);
                     intent.putExtra("namaKategoriBarang", namaKategoriBarang);
                     intent.putExtra("kodeBarang", kodeBarang);
@@ -291,6 +294,7 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
             jBody.put("tempo", tempo);
+            jBody.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }

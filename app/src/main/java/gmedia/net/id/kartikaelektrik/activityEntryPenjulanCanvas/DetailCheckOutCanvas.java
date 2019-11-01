@@ -47,7 +47,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
 
     private static String noBukti = "";
     private static String kdCus;
-    private static String customerName = "", tanggal = "", tanggalTempo = "", tempo = "";
+    private static String customerName = "", tanggal = "", tanggalTempo = "", tempo = "", idTempo = "";
     private static LinearLayout llAddOrder;
     private LinearLayout llHapusCanvasOrder;
     private static TextView tvTotal;
@@ -118,6 +118,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
             tanggal = extras.getString("tanggal");
             tanggalTempo = extras.getString("tanggaltempo");
             tempo = extras.getString("tempo");
+            idTempo = extras.getString("idTempo");
 
             selectedBarangList = new ArrayList<>();
 
@@ -304,6 +305,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
                 intent.putExtra("kdcus", kdCus);
                 intent.putExtra("nama", customerName);
                 intent.putExtra("tempo", tempo);
+                intent.putExtra("idTempo", idTempo);
                 context.startActivity(intent);
                 //((Activity)context).finish();
             }
@@ -358,6 +360,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
             header0.put("status", "3");
             header0.put("kdgudang", "13");
             header0.put("tempo", tempo);
+            header0.put("idTempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }

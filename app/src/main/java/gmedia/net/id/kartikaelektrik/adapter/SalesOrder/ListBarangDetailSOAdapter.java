@@ -119,6 +119,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
                 intent.putExtra("namaPelanggan", stringList.get("namaPelanggan"));
                 intent.putExtra("kdCus", stringList.get("kdCus"));
                 intent.putExtra("tempo", stringList.get("tempo"));
+                intent.putExtra("idTempo", stringList.get("idTempo"));
                 intent.putExtra("jumlah", selectedSOD.getJumlah());
                 intent.putExtra("satuan", selectedSOD.getSatuan());
                 intent.putExtra("kodeBarang", selectedSOD.getIdBarang());

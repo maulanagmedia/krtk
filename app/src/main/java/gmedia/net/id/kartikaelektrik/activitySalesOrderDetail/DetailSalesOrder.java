@@ -59,7 +59,7 @@ public class DetailSalesOrder extends AppCompatActivity {
     private ProgressBar pbLoad;
     private Button btnRefresh;
     private boolean paketMode = false;
-    private String tempo = "";
+    private String tempo = "", idTempo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +141,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                                     tanggal = responseJSON.getJSONObject("so_header").getString("tgl");
                                     tanggalTempo = responseJSON.getJSONObject("so_header").getString("tgltempo");
                                     tempo = responseJSON.getJSONObject("so_header").getString("tempo");
+                                    idTempo = responseJSON.getJSONObject("so_header").getString("id_tempo");
                                     tvTotalSO.setText(iv.ChangeToRupiahFormat(Float.parseFloat(responseJSON.getJSONObject("so_header").getString("total"))));
                                 }catch (Exception e){
                                     e.printStackTrace();
@@ -288,7 +289,9 @@ public class DetailSalesOrder extends AppCompatActivity {
             stringList.put("noSalesOrder", noSalesOrder);
             stringList.put("namaPelanggan", customerName);
             stringList.put("kdCus", kdCustomer);
-            stringList.put("tempo", tanggalTempo);
+            stringList.put("tanggaltempo", tanggalTempo);
+            stringList.put("tempo", tempo);
+            stringList.put("idTempo", idTempo);
 
             arrayAdapterString = new ListBarangDetailSOAdapter(DetailSalesOrder.this, listItems, stringList, statusSO);
 
@@ -413,6 +416,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                             intent.putExtra("kdCus",kdCustomer);
                             intent.putExtra("namaPelanggan",customerName);
                             intent.putExtra("tempo",tempo);
+                            intent.putExtra("idTempo",idTempo);
                             startActivity(intent);
                         }else if(which == 1){
 
@@ -421,6 +425,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                             intent.putExtra("kdcus",kdCustomer);
                             intent.putExtra("nama",customerName);
                             intent.putExtra("tempo",tempo);
+                            intent.putExtra("idTempo",idTempo);
                             startActivity(intent);
                         }
                     }

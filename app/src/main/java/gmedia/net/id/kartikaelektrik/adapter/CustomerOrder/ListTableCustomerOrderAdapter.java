@@ -49,7 +49,7 @@ public class ListTableCustomerOrderAdapter extends ArrayAdapter {
     private View viewInflater;
     private List<OptionItem> listTempo = new ArrayList<>();
     private ArrayAdapter adapterTempo;
-    private String selectedTempo = "";
+    private String selectedTempo = "", selectedIdTempo = "";
 
     public ListTableCustomerOrderAdapter(Activity context, int resource, List<Customer> customerList) {
         super(context, resource, customerList);
@@ -157,6 +157,7 @@ public class ListTableCustomerOrderAdapter extends ArrayAdapter {
                                             new OptionItem(
                                                     jo.getString("tempo")
                                                     ,jo.getString("nama") + " (" +jo.getString("tempo") + ")"
+                                                    ,jo.getString("id")
                                             )
                                     );
                                 }
@@ -202,6 +203,7 @@ public class ListTableCustomerOrderAdapter extends ArrayAdapter {
 
                 OptionItem item = listTempo.get(position);
                 selectedTempo = item.getValue();
+                selectedIdTempo = item.getAtt1();
             }
 
             @Override
@@ -253,6 +255,7 @@ public class ListTableCustomerOrderAdapter extends ArrayAdapter {
                 intent.putExtra("kdCus", kdcus);
                 intent.putExtra("namaPelanggan", customer);
                 intent.putExtra("tempo", selectedTempo);
+                intent.putExtra("idTempo", selectedIdTempo);
                 context.startActivity(intent);
             }
         });

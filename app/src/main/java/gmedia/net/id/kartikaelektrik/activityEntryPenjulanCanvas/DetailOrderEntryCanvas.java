@@ -80,7 +80,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
     private String currentString = "", currentString1 = "";
     private String limitOrder = "";
     private TextView tvTempo;
-    private String tempo = "";
+    private String tempo = "", idTempo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             jumlah = extras.getString("jumlah");
             stok = extras.getString("stok");
             tempo = extras.getString("tempo", "30");
+            idTempo = extras.getString("idTempo", "");
 
             selectedSatuan = extras.getString("satuan");
             satuanAsli = extras.getString("satuan");
@@ -1031,6 +1032,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             intent.putExtra("tanggal", tanggal);
             intent.putExtra("tanggaltempo", tanggalTempo);
             intent.putExtra("tempo", tempo);
+            intent.putExtra("idTempo", idTempo);
             startActivity(intent);
             Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
             finish();
@@ -1060,6 +1062,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("tanggaltempo", tanggalTempo);
                 intent.putExtra("tempo", tempo);
+                intent.putExtra("idTempo", idTempo);
                 startActivity(intent);
                 Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
                 finish();
@@ -1087,6 +1090,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
                                 intent.putExtra("tanggal", tanggal);
                                 intent.putExtra("tanggaltempo", tanggalTempo);
                                 intent.putExtra("tempo", tempo);
+                                intent.putExtra("idTempo", idTempo);
                                 startActivity(intent);
                                 Toast.makeText(DetailOrderEntryCanvas.this, "Data berhasil ditambahkan", Toast.LENGTH_LONG).show();
                                 finish();
