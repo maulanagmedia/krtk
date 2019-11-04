@@ -43,6 +43,7 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
     private boolean isConfirm = true;
     private List<CustomListItem> listSetoran;
     private ItemValidation iv = new ItemValidation();
+    private boolean isKhusus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
 
             kdcus = bundle.getString("kdcus", "");
             namaCus = bundle.getString("namacus", "");
+            isKhusus = bundle.getBoolean("khusus", false);
         }
 
         initEvent();
@@ -192,6 +194,11 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
                 jData.put("totaldiskon", jo.getString("totaldiskon"));
                 jData.put("jumlah", jo.getString("jumlah"));
 
+                if(isKhusus){
+
+                    jData.put("file", jo.getString("file"));
+                }
+
                 jSetoran.put(jData);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -206,7 +213,7 @@ public class DetailCheckoutSetoran extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jBody, "POST", ServerURL.saveSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jBody, "POST", isKhusus ? ServerURL.saveSetoranKhusus : ServerURL.saveSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

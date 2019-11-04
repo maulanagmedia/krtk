@@ -508,7 +508,14 @@ public class DetailFormSetoran extends AppCompatActivity {
 
                 String baset64Image = ImageUtils.convert(bm2);
                 //Log.d(TAG, "copyFileFromUri: "+ baset64Image);
-                listPhoto.add(new PhotoModel(filePathURI, "", baset64Image));
+                if(listPhoto.size() > 0){
+
+                    listPhoto.add(0,new PhotoModel(filePathURI, "", baset64Image));
+                }else{
+
+                    listPhoto.add(new PhotoModel(filePathURI, "", baset64Image));
+                }
+
                 adapterPhoto.notifyDataSetChanged();
             }
 
@@ -1177,6 +1184,15 @@ public class DetailFormSetoran extends AppCompatActivity {
                         jOrder.put("dari_rekening", edtDariNorek.getText().toString());
                         jOrder.put("norekening", edtDariNorek.getText().toString());
                         jOrder.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
+                        if(isKhusus){
+
+                            if(listPhoto.size() > 0){
+
+                                jOrder.put("file", listPhoto.get(0).getKeterangan());
+                            }else{
+                                jOrder.put("file", "");
+                            }
+                        }
                         ListNotaPiutang.jaSetoran.put(jOrder);
                     } catch (JSONException e) {
                         e.printStackTrace();

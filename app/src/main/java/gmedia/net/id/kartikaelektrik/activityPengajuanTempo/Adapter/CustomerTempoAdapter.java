@@ -107,7 +107,7 @@ public class CustomerTempoAdapter extends ArrayAdapter {
         // Get All Barang by Kategori
         JSONObject jBody = new JSONObject();
 
-        ApiVolley restService = new ApiVolley(context, jBody, "GET", ServerURL.getMasterTempo, "", "", 0,
+        ApiVolley restService = new ApiVolley(context, jBody, "GET", ServerURL.getTempoRumus, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
@@ -126,7 +126,8 @@ public class CustomerTempoAdapter extends ArrayAdapter {
                                     listTempo.add(
                                             new OptionItem(
                                                     jo.getString("tempo")
-                                                    ,jo.getString("nama") + " (" +jo.getString("tempo") + ")"
+                                                    ,jo.getString("nama")
+                                                    ,jo.getString("id")
                                             )
                                     );
                                 }

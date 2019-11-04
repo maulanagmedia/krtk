@@ -360,7 +360,7 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
             header0.put("status", "3");
             header0.put("kdgudang", "13");
             header0.put("tempo", tempo);
-            header0.put("idTempo", idTempo);
+            header0.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
         }

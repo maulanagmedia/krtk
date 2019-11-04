@@ -13,6 +13,7 @@ public class ServerURL {
     public static final String getDetailRekapSetoran = baseURL + "setoran/view_setoran_details/";
     public static final String getDetailSetoran = baseURL + "Setoran/detail_setoran/";
     public static final String saveSetoran = baseURL + "Setoran/process/";
+    public static final String saveSetoranKhusus = baseURL + "Setoran/add_setoran_khusus/";
     public static final String deleteSetoran = baseURL + "Setoran/hapus/";
     public static final String getPiutangSales = baseURL + "Setoran/view_piutang/";
     public static final String getMutasiSetoran = baseURL + "Setoran/view_setoran_mutasi/";
@@ -61,6 +62,7 @@ public class ServerURL {
     public static final String deletePengeluaran = baseURL + "pengeluaran/delete_pengeluaran/";
     public static final String getTanggalTempo = baseURL + "Barang/get_tanggal_tempo/";
     public static final String getMasterTempo = baseURL + "Barang/master_tempo/";
+    public static final String getTempoRumus = baseURL + "Tempo/rumus/";
     public static final String getPengajuanTempo = baseURL + "Tempo/view_pengajuan/";
     public static final String getCustomer = baseURL + "barang/customer/";
     public static final String savePengajuanTempo = baseURL + "Tempo/pengajuan/";
