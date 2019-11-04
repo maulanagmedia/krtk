@@ -53,6 +53,7 @@ public class TambahSetoran extends AppCompatActivity {
     private static List<CustomListItem> listSetoran;
     private static TextView tvTotal;
     private static AutoCompleteTextView actvKeyword;
+    private static boolean isKhusus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,12 @@ public class TambahSetoran extends AppCompatActivity {
 
         setTitle("Tambah Setoran");
         context = this;
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+
+            isKhusus = bundle.getBoolean("khusus", false);
+        }
 
         initUI();
     }
@@ -136,6 +143,7 @@ public class TambahSetoran extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, CustomerSetoran.class);
+                intent.putExtra("khusus", isKhusus);
                 startActivity(intent);
             }
         });
@@ -233,6 +241,7 @@ public class TambahSetoran extends AppCompatActivity {
                     Intent intent = new Intent(context, DetailSetoranPerNota.class);
                     intent.putExtra("nobukti", item.getListItem1());
                     intent.putExtra("namacus", item.getListItem2());
+                    intent.putExtra("khusus", isKhusus);
                     ((Activity) context).startActivity(intent);
 
                 }

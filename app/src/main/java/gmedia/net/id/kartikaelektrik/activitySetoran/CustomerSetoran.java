@@ -48,6 +48,7 @@ public class CustomerSetoran extends AppCompatActivity {
     private boolean firstLoad = true;
     private TextView tvTotal;
     public static boolean isSaved = false;
+    private boolean isKhusus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,11 @@ public class CustomerSetoran extends AppCompatActivity {
         );
 
         context = this;
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+
+            isKhusus = bundle.getBoolean("khusus", false);
+        }
 
         setTitle("Setoran Pelanggan");
 
@@ -276,6 +282,7 @@ public class CustomerSetoran extends AppCompatActivity {
                     Intent intent = new Intent(context, ListNotaPiutang.class);
                     intent.putExtra("kdcus", item.getKodeCustomer());
                     intent.putExtra("namacus", item.getNamaCustomer());
+                    intent.putExtra("khusus", isKhusus);
                     startActivity(intent);
                     //finish();
                 }

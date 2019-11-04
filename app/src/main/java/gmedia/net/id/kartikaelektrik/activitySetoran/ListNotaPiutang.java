@@ -52,6 +52,7 @@ public class ListNotaPiutang extends AppCompatActivity {
     public static ListNotaPiutangAdapter adapterPiutangSales;
     public static List<CustomListItem> itemSetoran;
     public static JSONArray jaSetoran;
+    private boolean isKhusus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class ListNotaPiutang extends AppCompatActivity {
 
             kdcus = bundle.getString("kdcus", "");
             namaCus = bundle.getString("namacus", "");
+            isKhusus = bundle.getBoolean("khusus", false);
             edtCustomer.setText(namaCus);
         }
 
@@ -139,6 +141,7 @@ public class ListNotaPiutang extends AppCompatActivity {
                 Intent intent = new Intent(context, DetailFormSetoran.class);
                 intent.putExtra("kdcus", kdcus);
                 intent.putExtra("namacus", namaCus);
+                intent.putExtra("khusus", isKhusus);
                 startActivity(intent);
                 finish();
             }

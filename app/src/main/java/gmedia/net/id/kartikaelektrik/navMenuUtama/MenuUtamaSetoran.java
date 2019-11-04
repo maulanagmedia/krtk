@@ -49,6 +49,7 @@ public class MenuUtamaSetoran extends Fragment {
 
     private View layout;
     private static Context context;
+    private LinearLayout llSetoranKhusus;
     private SessionManager session;
     private LinearLayout llTambahSetoran, llMutasiSetoran, llRekapSetoran;
     private CardView cvTambahSetoran, cvMutasiSetoran;
@@ -78,6 +79,7 @@ public class MenuUtamaSetoran extends Fragment {
 
         session = new SessionManager(context);
         llTambahSetoran = (LinearLayout) layout.findViewById(R.id.ll_tambah_setoran);
+        llSetoranKhusus = (LinearLayout) layout.findViewById(R.id.ll_setoran_khusus);
         llMutasiSetoran = (LinearLayout) layout.findViewById(R.id.ll_mutasi_setoran);
         llRekapSetoran = (LinearLayout) layout.findViewById(R.id.ll_rekap_setoran);
 
@@ -101,6 +103,16 @@ public class MenuUtamaSetoran extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, TambahSetoran.class);
+                ((Activity)context).startActivity(intent);
+            }
+        });
+
+        llSetoranKhusus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, TambahSetoran.class);
+                intent.putExtra("khusus", true);
                 ((Activity)context).startActivity(intent);
             }
         });

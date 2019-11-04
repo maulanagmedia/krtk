@@ -696,6 +696,65 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_upload"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gambar (bisa lebih dari satu)"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/black"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="@dimen/default_small_padding"
+                        android:id="@+id/rv_photo"></android.support.v7.widget.RecyclerView>
+
+                    <cz.intik.overflowindicator.OverflowPagerIndicator
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center"
+                        android:id="@+id/opi_photo"
+                        android:layout_marginTop="140dp"></cz.intik.overflowindicator.OverflowPagerIndicator>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="140dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/default_small_padding1">
+
+                        <ImageButton
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:src="@mipmap/ic_photo"
+                            android:scaleType="centerInside"
+                            android:id="@+id/ib_photo"
+                            android:background="?attr/selectableItemBackground"
+                            android:padding="@dimen/default_small_padding1"
+                            />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rv_photo"
+                        android:text="Geser untuk melihat gambar lainnya"
+                        android:layout_marginTop="@dimen/default_small_padding"
+                        android:textColor="@color/black"/>
+                </RelativeLayout>
+            </LinearLayout>
+
             <include
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
