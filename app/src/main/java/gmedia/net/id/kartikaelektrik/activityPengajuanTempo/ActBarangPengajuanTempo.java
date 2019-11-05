@@ -47,7 +47,7 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
     private String TAG = "BarangOrder";
     private ListView lvListBarang;
     private ItemValidation iv = new ItemValidation();
-    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "";
+    private String kdCus = "", namaPelanggan = "", kodeKategoriBarang = "", namaKategoriBarang = "", kodeBarang = "", namaBarang = "", noSalesOrder, tempo = "", idTempo = "";
 
     //Fragment Detail Barang
     private List<Barang> listMasterBarang, moreList;
@@ -94,7 +94,8 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
             kodeKategoriBarang = ""; // ALL Kategory
             kdCus = extras.getString("kdCus");
             namaPelanggan = extras.getString("namaPelanggan");
-            tempo = extras.getString("tempo");
+            tempo = extras.getString("tempo", "");
+            idTempo = extras.getString("idTempo", "");
         }
 
         getDetailBarangAutocomplete();
@@ -372,7 +373,7 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
             jsonBody.put("kdmerk", barang.getKdMerk());
             jsonBody.put("kdjenis", barang.getKdJenis());
             jsonBody.put("kdcus", kdCus);
-            jsonBody.put("tempo", tempo);
+            jsonBody.put("tempo", idTempo);
             jsonBody.put("toleransi", "4");
 
         } catch (JSONException e) {

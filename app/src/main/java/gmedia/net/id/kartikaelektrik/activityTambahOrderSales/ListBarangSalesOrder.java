@@ -115,7 +115,8 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
-            jBody.put("tempo", tempo);
+            jBody.put("tempo", "");
+            jBody.put("kdcus", kdCus);
             jBody.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -293,7 +294,8 @@ public class ListBarangSalesOrder extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("id", kodeKategoriBarang);
-            jBody.put("tempo", tempo);
+            jBody.put("tempo", "");
+            jBody.put("kdcus", kdCus);
             jBody.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();

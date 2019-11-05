@@ -147,7 +147,8 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
             jsonBody.put("startindex", filterIndex);
             jsonBody.put("filterquantity", filterQuantity);
             jsonBody.put("keyword", keyword);
-            jsonBody.put("tempo", tempo);
+            jsonBody.put("tempo", "");
+            jsonBody.put("kdcus", kdCus);
             jsonBody.put("id_tempo", idTempo);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -445,7 +446,8 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
                 jsonBody.put("startindex", filterIndex);
                 jsonBody.put("filterquantity", filterQuantity);
                 jsonBody.put("keyword", keyword);
-                jsonBody.put("tempo", tempo);
+                jsonBody.put("tempo", "");
+                jsonBody.put("kdcus", kdCus);
                 jsonBody.put("id_tempo", idTempo);
             } catch (JSONException e) {
                 e.printStackTrace();

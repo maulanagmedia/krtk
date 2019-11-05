@@ -38,7 +38,7 @@ public class CustomerTempoAdapter extends ArrayAdapter {
     private ItemValidation iv = new ItemValidation();
     private List<OptionItem> listTempo = new ArrayList<>();
     private ArrayAdapter adapterTempo;
-    private String selectedTempo = "";
+    private String selectedTempo = "", selectedIdTempo = "";
 
     public CustomerTempoAdapter(Activity context, List<CustomListItem> items) {
         super(context, R.layout.adapter_double_menu, items);
@@ -173,6 +173,7 @@ public class CustomerTempoAdapter extends ArrayAdapter {
 
                 OptionItem item = listTempo.get(position);
                 selectedTempo = item.getValue();
+                selectedIdTempo = item.getAtt1();
             }
 
             @Override
@@ -224,6 +225,7 @@ public class CustomerTempoAdapter extends ArrayAdapter {
                 intent.putExtra("kdCus", kdcus);
                 intent.putExtra("namaPelanggan", customer);
                 intent.putExtra("tempo", selectedTempo);
+                intent.putExtra("idTempo", selectedIdTempo);
                 context.startActivity(intent);
             }
         });
