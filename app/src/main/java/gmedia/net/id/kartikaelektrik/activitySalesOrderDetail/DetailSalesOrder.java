@@ -31,6 +31,7 @@ import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.dialogFragment.UpdateSalesOrderDF;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -77,9 +78,9 @@ public class DetailSalesOrder extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         // API List
-        urlGetSODetail = getResources().getString(R.string.url_get_so_detail_by_id);
-        urlDeleteSO = getResources().getString(R.string.url_delete_so_by_id);
-        urlGetCustomer = getResources().getString(R.string.url_get_customer_by_id);
+        urlGetSODetail = ServerURL.getBarangDetail;
+        urlDeleteSO = ServerURL.deleteSOById;
+        urlGetCustomer = ServerURL.getCustomer;
 
         tvTotalSO = (TextView) findViewById(R.id.tv_total_so);
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_list_nama_barang);

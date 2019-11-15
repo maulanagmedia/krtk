@@ -7,7 +7,11 @@ package gmedia.net.id.kartikaelektrik.util;
 public class ServerURL {
 
     private static final String baseURL = "http://api.kartikaelectric.com/";
+    //private static final String baseURL = "http://192.168.20.33/kartika/api/";
+    public static final String getSO = "http://api.kartikaelectric.com/";
 
+    public static final String doLogin = baseURL + "auth/login/";
+    public static final String savePassword = baseURL + "auth/change_password/";
     public static final String getSetoranHeader = baseURL + "Setoran/view_header_setoran/";
     public static final String getSetoranDetail = baseURL + "Setoran/view_detail_setoran/";
     public static final String getDetailRekapSetoran = baseURL + "setoran/view_setoran_details/";
@@ -37,7 +41,7 @@ public class ServerURL {
     public static final String getGiroJatuhTempo = baseURL + "Giro/jatuh_tempo/";
     public static final String getLabaRugiOmsetJual = baseURL + "LabaRugi/penjualan_barang/";
     public static final String getLabaRugiOmsetSetoran = baseURL + "LabaRugi/pelunasan_piutang/";
-    public static final String kunciSetoran = baseURL + "Setoran/kunci_setoran/";
+    public static final String kunciSetoran = baseURL + "Setoran/kunci_setoran_v2/";
     public static final String loginByNik = baseURL + "Auth/login_nik/";
     public static final String getHistoryBarangCanvas = baseURL + "Barang/history_canvas/";
     public static final String getStatus = baseURL + "Barang/master_status/";
@@ -70,4 +74,14 @@ public class ServerURL {
     public static final String getJenisBarangTempo = baseURL + "Tempo/view_jenis//";
     public static final String getPotensiDenda = baseURL + "Denda/view_potensi_denda/";
     public static final String getPotensiDendaKomisi = baseURL + "Denda/view_potensi_denda_komisi/";
+    public static final String getBarangDetail = baseURL + "barang/detail/";
+    public static final String saveSO = baseURL + "barang/create_v2/";
+    public static final String updateSO = baseURL + "barang/update/";
+    public static final String updateDetailSO = baseURL + "barang/update_detail/";
+    public static final String getHargaSODetail = baseURL + "barang/get_harga/";
+    public static final String deleteSOById = baseURL + "barang/delete/";
+    public static final String deleteSODetailById = baseURL + "barang/delete_detail/";
+    public static final String getGudangSODetailByID = baseURL + "barang/kode_gudang/";
+    public static final String getListBarangById = baseURL + "barang/all_barang/id_barang/";
+    public static final String saveCanvas = baseURL + "canvas/insert_canvas_v2/";
 }

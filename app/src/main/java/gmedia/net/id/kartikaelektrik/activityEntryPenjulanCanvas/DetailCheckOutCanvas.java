@@ -42,6 +42,7 @@ import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 public class DetailCheckOutCanvas extends AppCompatActivity {
 
@@ -90,10 +91,10 @@ public class DetailCheckOutCanvas extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         // API List
-        urlGetCODetail = getResources().getString(R.string.url_get_so_detail_by_id);
-        urlDeleteCO = getResources().getString(R.string.url_delete_so_by_id);
-        urlGetCustomer = getResources().getString(R.string.url_get_customer_by_id);
-        urlSaveCO = getResources().getString(R.string.url_insert_canvas_order);
+        urlGetCODetail = ServerURL.getBarangDetail;
+        urlDeleteCO = ServerURL.deleteSOById;
+        urlGetCustomer = ServerURL.getCustomer;
+        urlSaveCO = ServerURL.saveCanvas;
 
         tvTotal = (TextView) findViewById(R.id.tv_total);
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);

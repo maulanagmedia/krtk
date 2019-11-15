@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 import org.json.JSONException;
@@ -57,7 +58,7 @@ public class ChangePassword extends AppCompatActivity {
         llSaveButton = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.ll_save_container);
         setTitle("Ubah Password");
 
-        urlChangePassword = getResources().getString(gmedia.net.id.kartikaelektrik.R.string.url_change_password);
+        urlChangePassword = ServerURL.savePassword;
         session = new SessionManager(ChangePassword.this);
 
         tvSaveButton.setText("Ubah Password");

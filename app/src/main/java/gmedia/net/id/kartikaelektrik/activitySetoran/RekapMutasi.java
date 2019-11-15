@@ -268,7 +268,7 @@ public class RekapMutasi extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                String url = getResources().getString(R.string.url_login);
+                String url = ServerURL.doLogin;
 
                 ApiVolley request = new ApiVolley(context, jBody, "POST", url, "", "", 0, new ApiVolley.VolleyCallback() {
                     @Override
@@ -291,6 +291,7 @@ public class RekapMutasi extends AppCompatActivity {
                             String status = response.getJSONObject("metadata").getString("status");
                             String message = response.getJSONObject("metadata").getString("message");
 
+                            message = "Authentikasi berhasil";
                             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                             if(status.equals("200")){
 
@@ -348,6 +349,7 @@ public class RekapMutasi extends AppCompatActivity {
         try {
             jBody.put("tgl_awal", tanggalAwal);
             jBody.put("tgl_akhir", tanggalAkhir);
+            jBody.put("khusus", "0");
         } catch (JSONException e) {
             e.printStackTrace();
         }

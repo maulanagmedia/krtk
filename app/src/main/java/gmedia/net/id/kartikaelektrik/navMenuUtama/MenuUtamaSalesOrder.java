@@ -212,7 +212,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
 
     public void getListAutocomplete(){
         // Get All No bukti
-        String baseURL = context.getResources().getString(R.string.url_get_so);
+        String baseURL = ServerURL.getSO;
         iv.ProgressbarEvent(llLoadSO, pbLoadSO,btnRefresh,"SHOW");
 
         actSalesOrder.setAdapter(null);

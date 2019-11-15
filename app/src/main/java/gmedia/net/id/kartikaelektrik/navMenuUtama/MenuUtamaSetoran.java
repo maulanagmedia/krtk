@@ -103,6 +103,7 @@ public class MenuUtamaSetoran extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, TambahSetoran.class);
+                intent.putExtra("khusus", false);
                 ((Activity)context).startActivity(intent);
             }
         });

@@ -69,7 +69,7 @@ public class CustomerDetail extends AppCompatActivity {
 
     private void initUI() {
 
-        urlGetCustomer = getResources().getString(R.string.url_get_customer_by_id);
+        urlGetCustomer = ServerURL.getCustomer;
 
         setTitle("Detail Pelanggan");
         llKodePelanggan = (LinearLayout) findViewById(R.id.ll_kode_pelanggan_container);

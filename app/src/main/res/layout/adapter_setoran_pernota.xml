@@ -80,7 +80,6 @@
                 android:layout_height="@dimen/default_line"
                 android:background="@color/white"/>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,6 +143,46 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_file"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:background="@color/white"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/default_small_padding2"
+                    android:paddingBottom="@dimen/default_small_padding"
+                    android:paddingLeft="@dimen/default_small_padding"
+                    android:paddingRight="@dimen/default_small_padding"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/default_text_title_size_small"
+                        android:textColor="@color/white"
+                        android:text="File"/>
+
+                    <TextView
+                        android:textSize="@dimen/default_text_title_size"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:text="Bukti Transfer"
+                        android:id="@+id/tv_file"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:background="@drawable/ripple_white_transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <TextView

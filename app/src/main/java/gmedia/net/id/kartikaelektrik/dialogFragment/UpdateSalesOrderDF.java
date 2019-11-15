@@ -18,6 +18,7 @@ import android.widget.Toast;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,7 +83,7 @@ public class UpdateSalesOrderDF extends DialogFragment {
 
     private void initUI(View layoutView) {
 
-        urlUpdateSOHeader = layoutView.getResources().getString(R.string.url_update_so_header);
+        urlUpdateSOHeader = ServerURL.updateSO;
 
         edNoSalesOrder = (EditText) layoutView.findViewById(R.id.edt_no_sales_order);
         edNamaPelanggan = (EditText) layoutView.findViewById(R.id.edt_nama_pelanggan);

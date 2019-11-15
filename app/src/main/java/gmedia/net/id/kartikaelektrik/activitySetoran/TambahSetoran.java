@@ -1,23 +1,31 @@
 package gmedia.net.id.kartikaelektrik.activitySetoran;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +38,11 @@ import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.SetoranPernobuktiAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
+import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
+import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 public class TambahSetoran extends AppCompatActivity {
 
@@ -54,6 +64,8 @@ public class TambahSetoran extends AppCompatActivity {
     private static TextView tvTotal;
     private static AutoCompleteTextView actvKeyword;
     private static boolean isKhusus = false;
+    private LinearLayout llKunci;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +79,7 @@ public class TambahSetoran extends AppCompatActivity {
 
         setTitle("Tambah Setoran");
         context = this;
+        session = new SessionManager(context);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -95,9 +108,23 @@ public class TambahSetoran extends AppCompatActivity {
         lvSetoran = (ListView) findViewById(R.id.lv_setoran);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
-        llSave = (LinearLayout) findViewById(R.id.ll_save_container);
-        tvSave = (TextView) findViewById(R.id.tv_save);
+        llSave = (LinearLayout) findViewById(R.id.ll_show);
         tvTotal = (TextView) findViewById(R.id.tv_total);
+
+        llKunci = (LinearLayout) findViewById(R.id.ll_save_container);
+        tvSave = (TextView) findViewById(R.id.tv_save);
+        tvSave.setText("Kunci Setoran");
+
+        if(session.getLevelJabatan().equals("1") || session.getLevelJabatan().equals("5")){ // hanya owner / finance yang bisa
+            llKunci.setVisibility(View.VISIBLE);
+        }else{
+            llKunci.setVisibility(View.GONE);
+        }
+
+        if(!isKhusus){
+
+            llKunci.setVisibility(View.GONE);
+        }
 
         initValidation();
 
@@ -129,6 +156,58 @@ public class TambahSetoran extends AppCompatActivity {
 
 
                 getDataSetoran();
+            }
+        });
+
+        llKunci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(session.getLevelJabatan().equals("1") // Owner
+                        || session.getLevelJabatan().equals("5")) { // Finance
+
+
+                }else{
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Peringatan")
+                            .setMessage("Maaf anda tidak dapat mengubah data ini.")
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            })
+                            .show();
+
+                    return;
+                }
+
+                if(listSetoran != null && listSetoran.size() > 0){
+
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("Konfirmasi")
+                            .setIcon(R.mipmap.logo_kartika)
+                            .setMessage("Apakah anda yakin ingin mengunci setoran pada periode ini?")
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    //saveKunci();
+                                    checkLogin();
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
+                }else{
+                    Toast.makeText(context, "List Masih Kosong", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -189,15 +268,39 @@ public class TambahSetoran extends AppCompatActivity {
                         for(int i = 0; i < jsonArray.length(); i++){
 
                             JSONObject jo = jsonArray.getJSONObject(i);
-                            listSetoran.add(new CustomListItem(
-                                    jo.getString("nobukti"),
-                                    jo.getString("nama"),
-                                    jo.getString("tgl_input"),
-                                    jo.getString("total")));
 
-                            total += iv.parseNullDouble(jo.getString("total"));
+                            if(isKhusus){
+
+                                if(jo.getString("khusus").equals("1")){
+
+                                    listSetoran.add(new CustomListItem(
+                                            jo.getString("nobukti")
+                                            ,jo.getString("nama")
+                                            ,jo.getString("tgl_input")
+                                            ,jo.getString("total")
+                                            ,jo.getString("file")
+                                            ,jo.getString("khusus")
+                                    ));
+
+                                    total += iv.parseNullDouble(jo.getString("total"));
+                                }
+                            }else{
+
+                                if(jo.getString("khusus").equals("0")){
+
+                                    listSetoran.add(new CustomListItem(
+                                            jo.getString("nobukti")
+                                            ,jo.getString("nama")
+                                            ,jo.getString("tgl_input")
+                                            ,jo.getString("total")
+                                            ,jo.getString("file")
+                                            ,jo.getString("khusus")
+                                    ));
+
+                                    total += iv.parseNullDouble(jo.getString("total"));
+                                }
+                            }
                         }
-
                     }
 
                     tvTotal.setText(iv.ChangeToRupiahFormat(total));
@@ -271,5 +374,186 @@ public class TambahSetoran extends AppCompatActivity {
 
         super.onBackPressed();
         overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+    }
+
+    private void checkLogin() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_login, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+        final EditText edtUsername = (EditText) viewDialog.findViewById(R.id.edt_username);
+        final EditText edtPassword = (EditText) viewDialog.findViewById(R.id.edt_password);
+        final Button btnLogin = (Button) viewDialog.findViewById(R.id.btn_login);
+
+        final AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                String refreshToken = "";
+                InitFirebaseSetting.getFirebaseSetting(TambahSetoran.this);
+                refreshToken = FirebaseInstanceId.getInstance().getToken();
+
+                if(edtUsername.getText().toString().isEmpty()){
+
+                    edtUsername.setError("Harap diisi");
+                    edtUsername.requestFocus();
+                    return;
+                }else{
+
+                    edtUsername.setError(null);
+                }
+
+                if(edtPassword.getText().toString().isEmpty()){
+
+                    edtPassword.setError("Harap diisi");
+                    edtPassword.requestFocus();
+                    return;
+                }else{
+
+                    edtPassword.setError(null);
+                }
+
+                final ProgressDialog progressDialog = new ProgressDialog(context,
+                        gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Menproses...");
+                progressDialog.show();
+
+                JSONObject jBody = new JSONObject();
+                try {
+                    jBody.put("username", edtUsername.getText());
+                    jBody.put("password", edtPassword.getText());
+                    jBody.put("fcm_id", refreshToken);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String url = ServerURL.doLogin;
+
+                ApiVolley request = new ApiVolley(context, jBody, "POST", url, "", "", 0, new ApiVolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+
+                        if(alert != null) {
+
+                            try {
+                                alert.dismiss();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+
+                        progressDialog.dismiss();
+
+                        try {
+
+                            JSONObject response = new JSONObject(result);
+                            String status = response.getJSONObject("metadata").getString("status");
+                            String message = response.getJSONObject("metadata").getString("message");
+
+                            message = "Authentikasi berhasil";
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            if(status.equals("200")){
+
+                                String laba = response.getJSONObject("response").getString("laba");
+                                if(laba.equals("1")){
+                                    saveKunci();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                            setAdapter(null);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String result) {
+
+                        progressDialog.dismiss();
+                        Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                        setAdapter(null);
+                    }
+                });
+
+                /*if(alert != null) {
+
+                    try {
+                        alert.dismiss();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }*/
+            }
+        });
+
+        try {
+            alert.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void saveKunci() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context,
+                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.show();
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("tgl_awal", tanggalAwal);
+            jBody.put("tgl_akhir", tanggalAkhir);
+            jBody.put("khusus", "1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.kunciSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                progressDialog.dismiss();
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    String message = response.getJSONObject("metadata").getString("message");
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    if(status.equals("200")){
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                    setAdapter(null);
+
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                progressDialog.dismiss();
+                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi", Toast.LENGTH_LONG).show();
+                setAdapter(null);
+            }
+        });
     }
 }

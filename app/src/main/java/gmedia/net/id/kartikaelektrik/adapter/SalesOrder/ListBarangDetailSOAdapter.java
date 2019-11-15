@@ -19,6 +19,7 @@ import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.OrderDetail;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONObject;
 
@@ -44,7 +45,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
         this.context = context;
         this.items = items;
         this.stringList = stringList;
-        urlDeleteDetailSO = context.getResources().getString(R.string.url_delete_so_detail_by_id);
+        urlDeleteDetailSO = ServerURL.deleteSODetailById;
         this.status = status;
     }
 
@@ -182,7 +183,7 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
         if(statusPaket){
             urlDeleteDetailSO = context.getResources().getString(R.string.url_delete_so_paket_by_id);
         }else{
-            urlDeleteDetailSO = context.getResources().getString(R.string.url_delete_so_detail_by_id);
+            urlDeleteDetailSO = ServerURL.deleteSODetailById;
         }
 
         JSONObject jsonBody = new JSONObject();

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,6 +33,7 @@ import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 import org.json.JSONException;
@@ -90,7 +92,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
         //String refreshToken = FirebaseInstanceId.getInstance().getToken();
         InitFirebaseSetting.getFirebaseSetting(LoginScreen.this);
         refreshToken = FirebaseInstanceId.getInstance().getToken();
-        JSON_URL = getResources().getString(R.string.url_login);
+        JSON_URL = ServerURL.doLogin;
         edtUsername = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_username);
         edtPassword = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_password);
         btnLogin = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_login);
@@ -98,12 +100,12 @@ public class LoginScreen extends RuntimePermissionsActivity {
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
-        if(session.isLoggedIn()){
+        /*if(session.isLoggedIn()){
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
-        }
+        }*/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -196,6 +198,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
                                 session.saveIdJabatan(idJabatan);
                                 session.saveJabatan(jabatan);
                                 session.saveLevelJabatan(levelJabatan);
+                                session.saveUsername(edtUsername.getText().toString());
 
                                 btnLogin.setEnabled(true);
                                 onLoginSuccess();
@@ -271,6 +274,9 @@ public class LoginScreen extends RuntimePermissionsActivity {
             };
             // MySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    40*1000, -1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ));
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(stringRequest);
 

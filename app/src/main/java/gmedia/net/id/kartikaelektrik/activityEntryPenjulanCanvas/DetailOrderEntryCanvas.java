@@ -101,10 +101,10 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
         */
 
         // API
-        urlListBarangByID = getResources().getString(R.string.url_get_list_barang_by_id);
-        urlGetHarga = getResources().getString(R.string.url_get_harga_so_detail);
-        urlGetGudang = getResources().getString(R.string.url_get_gudang_so_detail_by_id);
-        urlGenerateNobukti = getResources().getString(R.string.url_generate_no_gc);
+        urlListBarangByID = ServerURL.getListBarangById;
+        urlGetHarga = ServerURL.getHargaSODetail;
+        urlGetGudang = ServerURL.getGudangSODetailByID;
+        urlGenerateNobukti = getResources().getString(R.string.url_generate_no_gc_v2);
         formatDate = getResources().getString(R.string.format_date);
         formatDateDisplay = getResources().getString(R.string.format_date_display);
 
@@ -161,7 +161,7 @@ public class DetailOrderEntryCanvas extends AppCompatActivity {
             tanggalTempo = iv.sumDate(iv.getToday(formatDate),iv.parseNullInteger(tempo),formatDate);
             edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo, formatDate, formatDateDisplay));
             edTanggalTempo.setKeyListener(null);
-            iv.datePickerEventMax(DetailOrderEntryCanvas.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+            //iv.datePickerEventMax(DetailOrderEntryCanvas.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
 
             tvTempo.setText(tempo + " Hari");
 

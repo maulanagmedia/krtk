@@ -54,20 +54,8 @@
     <string name="customer_detail_title"><u>Customer Detail</u></string>
 
     <!--API List-->
-    <string name="url_login">http://api.kartikaelectric.com/auth/login/</string>
-    <string name="url_change_password">http://api.kartikaelectric.com/auth/change_password/</string>
 
-    <string name="url_get_so">http://api.kartikaelectric.com/</string>
-    <string name="url_get_so_detail_by_id">http://api.kartikaelectric.com/barang/detail/</string>
-    <string name="url_insert_so">http://api.kartikaelectric.com/barang/create/</string>
-    <string name="url_insert_so_detail">http://api.kartikaelectric.com/barang/create/</string>
-    <string name="url_update_so_header">http://api.kartikaelectric.com/barang/update/</string>
-    <string name="url_update_so_detail">http://api.kartikaelectric.com/barang/update_detail/</string>
-    <string name="url_get_harga_so_detail">http://api.kartikaelectric.com/barang/get_harga/</string>
-    <string name="url_delete_so_by_id">http://api.kartikaelectric.com/barang/delete/</string>
-    <string name="url_delete_so_detail_by_id">http://api.kartikaelectric.com/barang/delete_detail/</string>
     <string name="url_delete_so_paket_by_id">http://api.kartikaelectric.com/paket/delete_detail/</string>
-    <string name="url_get_gudang_so_detail_by_id">http://api.kartikaelectric.com/barang/kode_gudang/</string>
     <string name="url_get_so_permintaan_harga">http://api.kartikaelectric.com/barang/so_approve/</string>
     <string name="url_update_status_so">http://api.kartikaelectric.com/barang/update_status/</string>
 
@@ -79,14 +67,12 @@
     <string name="url_get_filter_canvas">http://api.kartikaelectric.com/barang/stok_canvas/</string>
 
     <string name="url_get_all_customer">http://api.kartikaelectric.com/barang/customer/</string>
-    <string name="url_get_customer_by_id">http://gmedia.bz/kartika/api/barang/customer/</string>
     <string name="url_insert_customer">http://api.kartikaelectric.com/barang/create_customer/</string>
     <string name="url_update_customer">http://api.kartikaelectric.com/barang/update_customer/</string>
     <string name="url_delete_customer_by_id">http://api.kartikaelectric.com/barang/delete_customer/</string>
 
 
     <string name="url_get_all_rayon">http://api.kartikaelectric.com/barang/kode_rayon/</string>
-    <string name="url_get_list_barang_by_id">http://api.kartikaelectric.com/barang/all_barang/id_barang/</string>
 
     <string name="url_get_piutang_by_range">http://api.kartikaelectric.com/piutang/data_piutang/</string>
     <string name="url_get_detail_piutang_by_id">http://api.kartikaelectric.com/piutang/piutang_detail/</string>
@@ -106,10 +92,10 @@
     <string name="url_get_omset">http://api.kartikaelectric.com/komisi/omset_customer/</string>
 
     <!--Entry Penjualan Canvas-->
-    <string name="url_insert_canvas_order">http://api.kartikaelectric.com/canvas/insert_canvas/</string>
     <string name="url_get_canvas_header">http://api.kartikaelectric.com/canvas/get_header/</string>
     <string name="url_get_canvas_detail">http://api.kartikaelectric.com/canvas/get_detail/</string>
     <string name="url_generate_no_gc">http://api.kartikaelectric.com/canvas/generate_no_gc/</string>
+    <string name="url_generate_no_gc_v2">http://api.kartikaelectric.com/canvas/generate_no_gc_v2/</string>
 
     <!--Entry Paket-->
     <string name="url_get_paket">http://api.kartikaelectric.com/paket/get_paket/</string>

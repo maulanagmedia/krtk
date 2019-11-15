@@ -34,7 +34,7 @@ public class ApiVolley {
     private String id = "";
     private String level = "";
     private String laba = "";
-    private String nikAsli = "";
+    private String nikAsli = "", username = "";
     private ItemValidation iv = new ItemValidation();
 
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, final String REST_URL, final String successDialog, final String failDialog, final int showDialogFlag, final VolleyCallback callback){
@@ -58,6 +58,7 @@ public class ApiVolley {
         level = user.get(SessionManager.TAG_LEVEL);
         laba = user.get(SessionManager.TAG_LABA);
         nikAsli = user.get(SessionManager.TAG_NIK_ASLI);
+        username = user.get(SessionManager.TAG_USERNAME);
 
         final String requestBody = jsonBody.toString();
 
@@ -175,6 +176,7 @@ public class ApiVolley {
                 params.put("level", level);
                 params.put("laba", laba);
                 params.put("Nik-Asli", nikAsli);
+                params.put("username", username);
                 return params;
             }
 
@@ -200,7 +202,7 @@ public class ApiVolley {
 
         // retry when timeout
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                20*1000, -1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                40*1000, -1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
 
         stringRequest.setShouldCache(false);

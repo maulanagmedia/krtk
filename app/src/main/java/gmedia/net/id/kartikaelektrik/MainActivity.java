@@ -164,7 +164,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
     private void initUI() {
 
-        urlGetSO = getResources().getString(gmedia.net.id.kartikaelektrik.R.string.url_get_so);
+        urlGetSO = ServerURL.getSO;
         llLogo = (LinearLayout) findViewById(R.id.v_logo);
         llTambahPelanggan = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tambah_pelanggan);
         llPermintaanHarga = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_permintaan_harga_order);
@@ -559,7 +559,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
-        getDashboard();
+        //getDashboard();
     }
 
     private void getDashboard() {

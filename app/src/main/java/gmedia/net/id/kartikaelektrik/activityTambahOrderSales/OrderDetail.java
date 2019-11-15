@@ -99,11 +99,11 @@ public class OrderDetail extends AppCompatActivity {
         */
 
         // API
-        urlGetSOByID = getResources().getString(R.string.url_get_so_detail_by_id);
-        urlListBarangByID = getResources().getString(R.string.url_get_list_barang_by_id);
-        urlSaveSO = getResources().getString(R.string.url_insert_so);
-        urlGetHarga = getResources().getString(R.string.url_get_harga_so_detail);
-        urlGetGudang = getResources().getString(R.string.url_get_gudang_so_detail_by_id);
+        urlGetSOByID = ServerURL.getBarangDetail;
+        urlListBarangByID = ServerURL.getListBarangById;
+        urlSaveSO = ServerURL.saveSO;
+        urlGetHarga = ServerURL.getHargaSODetail;
+        urlGetGudang = ServerURL.getGudangSODetailByID;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -230,7 +230,7 @@ public class OrderDetail extends AppCompatActivity {
         edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
         edTanggalTempo.setKeyListener(null);
 
-        iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+        //iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
 
         //endregion
 
@@ -268,7 +268,7 @@ public class OrderDetail extends AppCompatActivity {
 
                                     edTanggal.setText(iv.ChangeFormatDateString(tanggal, formateDate, formateDateDisplay));
                                     edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo, formateDate, formateDateDisplay));
-                                    iv.datePickerEvent(OrderDetail.this,edTanggalTempo,"RIGHT",formateDateDisplay, iv.ChangeFormatDateString(tanggalTempo, formateDate, formateDateDisplay));
+                                    //iv.datePickerEvent(OrderDetail.this,edTanggalTempo,"RIGHT",formateDateDisplay, iv.ChangeFormatDateString(tanggalTempo, formateDate, formateDateDisplay));
 
                                     edtKetarangan.setText(responseJSON.getJSONObject("so_header").getString("keterangan"));
                                     String ppn = responseJSON.getJSONObject("so_header").getString("nota_ppn");
@@ -1092,7 +1092,7 @@ public class OrderDetail extends AppCompatActivity {
                         edTanggalTempo.setText(iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
                         edTanggalTempo.setKeyListener(null);
 
-                        iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
+                        //iv.datePickerEventMax(OrderDetail.this,edTanggalTempo,"RIGHT",formatDateDisplay, iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay), iv.ChangeFormatDateString(tanggalTempo,formatDate, formatDateDisplay));
 
                     }else{
                         
@@ -1130,7 +1130,7 @@ public class OrderDetail extends AppCompatActivity {
         if(updateOrderFlag){ // update Order
 
             method = "PUT";
-            urlSaveSO = getResources().getString(R.string.url_update_so_detail)+idOrderDetail;
+            urlSaveSO = ServerURL.updateDetailSO;
             jsonBody.put("jumlah", jumlah);
             jsonBody.put("satuan", selectedSatuan);
             jsonBody.put("gudang", selectedGudang);

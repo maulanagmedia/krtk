@@ -24,6 +24,7 @@ import gmedia.net.id.kartikaelektrik.util.Global;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.activitySalesOrderDetail.DetailSalesOrder;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 import org.json.JSONObject;
 
@@ -182,7 +183,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
 
     private void deleteData(String noBuktiSalesOrder){
 
-        String baseURL = context.getResources().getString(R.string.url_delete_so_by_id) + noBuktiSalesOrder;
+        String baseURL = ServerURL.deleteSOById + noBuktiSalesOrder;
 
         JSONObject jsonBody = new JSONObject();
         ApiVolley restService = new ApiVolley(context, jsonBody, "DELETE", baseURL, "", "", 0,

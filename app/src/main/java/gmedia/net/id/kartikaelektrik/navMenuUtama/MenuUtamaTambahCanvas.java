@@ -395,8 +395,8 @@ public class MenuUtamaTambahCanvas extends Fragment {
                 }
 
                 Intent intent = new Intent(context, DetailEntryBarangCanvas.class);
-                intent.putExtra("kdcus", customer);
-                intent.putExtra("nama", kdcus);
+                intent.putExtra("kdcus", kdcus);
+                intent.putExtra("nama", customer);
                 intent.putExtra("tempo", selectedTempo);
                 intent.putExtra("idTempo", selectedIdTempo);
                 context.startActivity(intent);

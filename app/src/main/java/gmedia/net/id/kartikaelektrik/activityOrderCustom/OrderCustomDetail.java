@@ -38,6 +38,7 @@ import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdateHandler;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
 public class OrderCustomDetail extends AppCompatActivity {
 
@@ -86,7 +87,7 @@ public class OrderCustomDetail extends AppCompatActivity {
 
         urlSaveOC = getResources().getString(R.string.url_save_custom_order);
         urlSaveOCDeteil = getResources().getString(R.string.url_save_custom_detail);
-        urlGetHarga = getResources().getString(R.string.url_get_harga_so_detail);
+        urlGetHarga = ServerURL.getHargaSODetail;
 
         llNoSO = (LinearLayout) findViewById(R.id.ll_no_so_container);
         tilNoSO = (TextInputLayout) findViewById(R.id.til_no_so);
