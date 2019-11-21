@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_no_nota">
@@ -29,9 +29,9 @@
                         android:hint="No Nota"
                         android:id="@+id/edt_no_nota"
                         style="@style/DisableEditText"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_no_nama_pelanggan">
@@ -42,9 +42,9 @@
                         android:hint="Nama Pelanggan"
                         android:id="@+id/edt_nama_pelanggan"
                         style="@style/DisableEditText"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_tanggal">
@@ -55,9 +55,9 @@
                         android:hint="Tanggal"
                         android:id="@+id/edt_tanggal"
                         style="@style/DisableEditText"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_tanggal_tempo">
@@ -68,9 +68,9 @@
                         android:hint="Tanggal Tempo"
                         android:id="@+id/edt_tanggal_tempo"
                         style="@style/DisableEditText"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_jml_piutang">
@@ -81,7 +81,7 @@
                         android:hint="Jumlah Piutang"
                         android:id="@+id/edt_jml_piutang"
                         style="@style/DisableEditText"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </ScrollView>

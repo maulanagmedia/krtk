@@ -68,5 +68,7 @@
     <dimen name="padding_dex">10dp</dimen>
     <dimen name="padding_big">16dp</dimen>
     <dimen name="padding_default">8dp</dimen>
+    <dimen name="radius_super_extra">8dp</dimen>
+    <dimen name="modul_dialog_size">12sp</dimen>
 
 </resources>

@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,11 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.ActivityHapusDenda.Adapter.ListPiutangDendadapter;
-import gmedia.net.id.kartikaelektrik.Dashboard;
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.OptionItem;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -49,6 +48,7 @@ public class DetailDendaCustomerActivity extends AppCompatActivity {
     private TextView tvSave;
     double totalNota = 0, totalDenda = 0;
     private ProgressBar pbLoading;
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,11 +135,8 @@ public class DetailDendaCustomerActivity extends AppCompatActivity {
 
     public void saveData() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(DetailDendaCustomerActivity.this);
+        dialogBox.showDialog(false);
 
         llSaveContainer.setEnabled(false);
 
@@ -165,7 +162,7 @@ public class DetailDendaCustomerActivity extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -190,7 +187,7 @@ public class DetailDendaCustomerActivity extends AppCompatActivity {
             public void onError(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

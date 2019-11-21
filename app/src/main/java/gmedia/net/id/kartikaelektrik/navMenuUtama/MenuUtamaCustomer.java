@@ -9,7 +9,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityCustomer.CustomerDetail;
-import gmedia.net.id.kartikaelektrik.adapter.CustomerAdapter;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.adapter.Customer.ListCustomerTableAdapter;

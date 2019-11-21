@@ -1,10 +1,9 @@
 package gmedia.net.id.kartikaelektrik.activityCustomerLimit;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+
+import androidx.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityCustomer.CustomerDetail;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 

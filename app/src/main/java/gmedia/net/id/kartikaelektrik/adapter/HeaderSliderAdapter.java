@@ -10,8 +10,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.PagerAdapter;
+import androidx.core.content.FileProvider;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +30,7 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ImageUtils;
 
 
@@ -38,7 +39,7 @@ public class HeaderSliderAdapter extends PagerAdapter {
     private Context context;
     private List<CustomListItem> resource;
     private int maxSlide;
-    private ProgressDialog progressDialog;
+    private DialogBox dialogBox;
 
     public HeaderSliderAdapter(Context context, List<CustomListItem> resource) {
         this.context = context;
@@ -169,7 +170,7 @@ public class HeaderSliderAdapter extends PagerAdapter {
          * */
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
-            progressDialog.setProgress(Integer.parseInt(progress[0]));
+            //progressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
         /**
@@ -194,17 +195,13 @@ public class HeaderSliderAdapter extends PagerAdapter {
             }
         }
         private void showDialog(){
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Downloading file. Please wait...");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setMax(100);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
+
+            dialogBox = new DialogBox(context);
+            dialogBox.showDialog(false);
         }
 
         private void dismissDialog(){
-            progressDialog.dismiss();
+            dialogBox.dismissDialog();
         }
     }
 }

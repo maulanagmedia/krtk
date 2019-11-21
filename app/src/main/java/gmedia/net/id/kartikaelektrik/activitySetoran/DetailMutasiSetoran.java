@@ -1,10 +1,11 @@
 package gmedia.net.id.kartikaelektrik.activitySetoran;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,10 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +30,7 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.OptionItem;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -54,6 +53,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
     private String currentString = "";
     private String idSetoran = "";
     private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek;
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -357,11 +357,8 @@ public class DetailMutasiSetoran extends AppCompatActivity {
 
         llSaveContainer.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(DetailMutasiSetoran.this);
+        dialogBox.showDialog(false);
 
         String namaBankSumber = ((OptionItem) spBankSumber.getSelectedItem()).getText();
         String kodeBankSumber = ((OptionItem) spBankSumber.getSelectedItem()).getValue();
@@ -388,7 +385,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -413,7 +410,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
             public void onError(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

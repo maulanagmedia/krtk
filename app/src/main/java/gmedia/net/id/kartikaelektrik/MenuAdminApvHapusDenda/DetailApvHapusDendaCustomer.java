@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +26,7 @@ import java.util.List;
 import gmedia.net.id.kartikaelektrik.MenuAdminApvHapusDenda.Adapter.ListPiutangDendaCustomerdapter;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.OptionItem;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -44,6 +45,7 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
     private LinearLayout llTerima, llTolak;
     double totalNota = 0, totalDenda = 0;
     private ProgressBar pbLoading;
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,11 +214,8 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
 
     public void saveData(String flag) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(DetailApvHapusDendaCustomer.this);
+        dialogBox.showDialog(false);
 
         JSONArray jArray = new JSONArray();
 
@@ -240,7 +239,7 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -264,7 +263,7 @@ public class DetailApvHapusDendaCustomer extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

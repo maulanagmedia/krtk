@@ -6,12 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,12 +34,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import gmedia.net.id.kartikaelektrik.LoginScreen;
 import gmedia.net.id.kartikaelektrik.MainActivity;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.Adapter.ListSalesAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
@@ -66,6 +64,7 @@ public class ListSalesActivity extends AppCompatActivity {
     private String kode = "", flag = "";
     private String tglAwal = "", tglAkhir = "";
     private String uid = "", token = "", exp = "", level = "", laba = "", fullName = "", username = "",password = "";
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -364,11 +363,8 @@ public class ListSalesActivity extends AppCompatActivity {
 
     private void masukSales(final String nik) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
+        dialogBox = new DialogBox(ListSalesActivity.this);
+        dialogBox.showDialog(false);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -383,7 +379,7 @@ public class ListSalesActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(String result){
 
-                        progressDialog.dismiss();
+                        dialogBox.dismissDialog();
 
                         try {
                             JSONObject obj = new JSONObject(result);
@@ -404,19 +400,17 @@ public class ListSalesActivity extends AppCompatActivity {
                                 if (token.isEmpty()) {
 
                                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
                                     return;
                                 } else {
 
                                     session.createLoginSession(uid, nik, username, password, token, exp, level, "1", fullName);
                                     Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                                     onLoginSuccess();
-                                    progressDialog.dismiss();
                                 }
                             }else{
-                                progressDialog.dismiss();
+
                                 View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-                                Snackbar.make(rootView, message, BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
+                                Snackbar.make(rootView, message, Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
 
@@ -434,7 +428,8 @@ public class ListSalesActivity extends AppCompatActivity {
                     public void onError(String result) {
 
                         Log.d("Error", "onError: "+result);
-                        progressDialog.dismiss();
+                        dialogBox.dismissDialog();
+
                     }
                 });
     }

@@ -30,7 +30,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_pin"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -42,7 +42,7 @@
                         android:id="@+id/edt_no_nota"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -81,7 +81,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_customer"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -93,7 +93,7 @@
                         android:id="@+id/edt_nama_pelanggan"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -110,7 +110,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_calendar"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -122,7 +122,7 @@
                         android:id="@+id/edt_tanggal"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -139,7 +139,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_money"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -151,7 +151,7 @@
                         android:id="@+id/edt_piutang"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -168,7 +168,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_dev"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -180,7 +180,7 @@
                         android:id="@+id/edt_potongan"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -197,7 +197,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_money"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -209,7 +209,7 @@
                         android:id="@+id/edt_jumlah"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -226,7 +226,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_calendar"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -238,7 +238,7 @@
                         android:id="@+id/edt_tanggal_bayar"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -255,7 +255,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_booklet"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -267,7 +267,7 @@
                         android:id="@+id/edt_bayar"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -284,7 +284,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_clock"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -296,7 +296,7 @@
                         android:id="@+id/edt_selisih_hari"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -314,7 +314,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_calculator"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_persen_komisi"
@@ -326,7 +326,7 @@
                         android:id="@+id/edt_persen_komisi"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -343,7 +343,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_money"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_komisi"
@@ -355,7 +355,7 @@
                         android:id="@+id/edt_komisi"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -372,7 +372,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_doc"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -384,7 +384,7 @@
                         android:id="@+id/edt_jenis_pembayaran"
                         style="@style/DisableEditText" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -1,7 +1,7 @@
 package gmedia.net.id.kartikaelektrik.activityEntryPenjulanCanvas;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.adapter.CustomerAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.EntryPenjualanCanvas.ListCanvasCustomerTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;

@@ -19,6 +19,7 @@ import java.util.List;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -27,6 +28,7 @@ public class ListPengeluaranAdapter extends ArrayAdapter {
     private Activity context;
     private List<CustomListItem> items;
     private ItemValidation iv = new ItemValidation();
+    private DialogBox dialogBox;
 
     public ListPengeluaranAdapter(Activity context, List<CustomListItem> items) {
         super(context, R.layout.adapter_pengeluaran, items);
@@ -80,18 +82,15 @@ public class ListPengeluaranAdapter extends ArrayAdapter {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                                final ProgressDialog progressDialog = new ProgressDialog(context,
-                                        gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.setMessage("Authenticating...");
-                                progressDialog.show();
+                                dialogBox = new DialogBox(context);
+                                dialogBox.showDialog(false);
 
                                 ApiVolley restService = new ApiVolley(context, new JSONObject(), "GET", ServerURL.deletePengeluaran + itemSelected.getListItem1(), "", "", 0,
                                         new ApiVolley.VolleyCallback(){
                                             @Override
                                             public void onSuccess(String result){
 
-                                                progressDialog.dismiss();
+                                                dialogBox.dismissDialog();
                                                 JSONObject responseAPI = new JSONObject();
                                                 try {
                                                     responseAPI = new JSONObject(result);
@@ -113,7 +112,7 @@ public class ListPengeluaranAdapter extends ArrayAdapter {
                                             @Override
                                             public void onError(String result) {
 
-                                                progressDialog.dismiss();
+                                                dialogBox.dismissDialog();
                                                 Toast.makeText(context, result,Toast.LENGTH_LONG).show();
                                             }
                                         });

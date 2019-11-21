@@ -3,9 +3,9 @@ package gmedia.net.id.kartikaelektrik.activityCustomer;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,7 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.model.Rayon;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
@@ -53,6 +55,7 @@ public class CustomerDetail extends AppCompatActivity {
     private LinearLayout llLimit;
     private EditText edtLimit;
     private String currentString = "";
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,11 +350,8 @@ public class CustomerDetail extends AppCompatActivity {
 
     public void saveApprove(String kdcus, String jumlah) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(CustomerDetail.this);
+        dialogBox.showDialog(false);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -368,7 +368,7 @@ public class CustomerDetail extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 try {
 
                     JSONObject responseAPI = new JSONObject(result);
@@ -391,7 +391,7 @@ public class CustomerDetail extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

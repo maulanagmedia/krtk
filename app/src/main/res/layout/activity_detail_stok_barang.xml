@@ -31,7 +31,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_stock"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -44,7 +44,7 @@
                         android:hint="Nama Barang"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -62,7 +62,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_dolly"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -75,7 +75,7 @@
                         android:hint="Gudang Besar"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -93,7 +93,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_retur"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -106,7 +106,7 @@
                         android:hint="Gudang Kecil"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -124,7 +124,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_bag"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -137,7 +137,7 @@
                         android:hint="Gudang Canvas"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -155,7 +155,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_recycle"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -168,7 +168,7 @@
                         android:hint="Retur"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

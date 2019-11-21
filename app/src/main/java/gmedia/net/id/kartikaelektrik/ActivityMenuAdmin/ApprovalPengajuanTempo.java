@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +34,7 @@ import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter.ApvPengajuanTempo
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
@@ -53,6 +53,7 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
     private int start = 0, count = 10;
     private String keyword = "";
     private String formatTimestamp = "", formatDisplay = "";
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,11 +268,8 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
 
     public void saveApprove(String id, String appStatus) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(ApprovalPengajuanTempo.this);
+        dialogBox.showDialog(false);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -285,7 +283,7 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 try {
 
                     JSONObject responseAPI = new JSONObject(result);
@@ -309,7 +307,7 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

@@ -30,11 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginTop="@dimen/default_small_padding"
-                android:id="@+id/rv_photo"></android.support.v7.widget.RecyclerView>
+                android:id="@+id/rv_photo"></androidx.recyclerview.widget.RecyclerView>
 
             <cz.intik.overflowindicator.OverflowPagerIndicator
                 android:layout_width="match_parent"

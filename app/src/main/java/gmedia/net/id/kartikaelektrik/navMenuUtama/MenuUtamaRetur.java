@@ -4,22 +4,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturCustomer;
 import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturSelisihNota;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturTelahDiproses;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityBonus.Bonus;
-import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 
 /**
  * Created by Shin on 2/1/2017.

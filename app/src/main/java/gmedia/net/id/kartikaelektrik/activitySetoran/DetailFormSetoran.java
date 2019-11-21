@@ -17,13 +17,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -66,9 +66,9 @@ import cz.intik.overflowindicator.SimpleSnapHelper;
 import gmedia.net.id.kartikaelektrik.MenuAdminPengaturanHeader.Adapter.PhotosKeteranganAdapter;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.ListDetailNotaAdapter;
-import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.model.PhotoModel;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ImageUtils;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.OptionItem;
@@ -131,6 +131,7 @@ public class DetailFormSetoran extends AppCompatActivity {
     private OverflowPagerIndicator opiPhoto;
     private boolean isKhusus = false;
     private LinearLayout llUpload;
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1097,18 +1098,15 @@ public class DetailFormSetoran extends AppCompatActivity {
 
         llSaveContainer.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(DetailFormSetoran.this);
+        dialogBox.showDialog(false);
 
         ApiVolley apiVolley = new ApiVolley(getApplicationContext(), new JSONObject(), "GET", ServerURL.deleteSetoran+idSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -1133,21 +1131,13 @@ public class DetailFormSetoran extends AppCompatActivity {
             public void onError(String result) {
 
                 llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void saveData() {
-
-        /*llSaveContainer.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();*/
 
         String namaBank = ((OptionItem) spBank.getSelectedItem()).getText();
         String kodeBank = ((OptionItem) spBank.getSelectedItem()).getValue();
@@ -1231,41 +1221,6 @@ public class DetailFormSetoran extends AppCompatActivity {
         intent.putExtra("khusus", isKhusus);
         startActivity(intent);
         finish();
-
-        /*ApiVolley apiVolley = new ApiVolley(getApplicationContext(), jsonBody, "POST", ServerURL.saveSetoran, "", "", 0, new ApiVolley.VolleyCallback() {
-            @Override
-            public void onSuccess(String result) {
-
-                llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
-                JSONObject responseAPI = new JSONObject();
-                try {
-
-                    responseAPI = new JSONObject(result);
-                    String status = responseAPI.getJSONObject("metadata").getString("status");
-                    String message = responseAPI.getJSONObject("metadata").getString("message");
-
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-
-                    if(Integer.parseInt(status) == 200){
-
-                        onBackPressed();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onError(String result) {
-
-                llSaveContainer.setEnabled(true);
-                progressDialog.dismiss();
-                Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
-            }
-        });*/
     }
 
     private void setBankAdapter(List<OptionItem> listItem) {

@@ -5,40 +5,18 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.CardView;
+
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityBonus.Bonus;
-import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.HeaderSetoranAdapter;
-import gmedia.net.id.kartikaelektrik.activitySetoran.CustomerSetoran;
-import gmedia.net.id.kartikaelektrik.activitySetoran.DetailFormSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.MutasiSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.RekapMutasi;
-import gmedia.net.id.kartikaelektrik.activitySetoran.RincianSetoran;
 import gmedia.net.id.kartikaelektrik.activitySetoran.TambahSetoran;
-import gmedia.net.id.kartikaelektrik.model.CustomListItem;
-import gmedia.net.id.kartikaelektrik.util.ApiVolley;
-import gmedia.net.id.kartikaelektrik.util.ItemValidation;
-import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 
 /**

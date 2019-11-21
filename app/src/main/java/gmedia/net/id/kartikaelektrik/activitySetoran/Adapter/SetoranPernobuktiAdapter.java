@@ -5,13 +5,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.FileProvider;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +36,7 @@ import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.TambahSetoran;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -51,7 +50,7 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
     private List<CustomListItem> items;
     private View listViewItem;
     private int rowPerTableItem;
-    private ProgressDialog progressDialog;
+    private DialogBox dialogBox;
 
     private ItemValidation iv = new ItemValidation();
 
@@ -154,17 +153,14 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
 
     public void deleteData(String nobukti) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menghapus...");
-        progressDialog.show();
+        dialogBox = new DialogBox(context);
+        dialogBox.showDialog(false);
 
         ApiVolley apiVolley = new ApiVolley(context, new JSONObject(), "GET", ServerURL.deleteSetoran+nobukti, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -188,7 +184,7 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });
@@ -267,7 +263,7 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
          * */
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
-            progressDialog.setProgress(Integer.parseInt(progress[0]));
+            //progressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
         /**
@@ -292,17 +288,12 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
             }
         }
         private void showDialog(){
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Downloading file. Please wait...");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setMax(100);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
+
+            dialogBox.showDialog(false);
         }
 
         private void dismissDialog(){
-            progressDialog.dismiss();
+            dialogBox.dismissDialog();
         }
     }
 }

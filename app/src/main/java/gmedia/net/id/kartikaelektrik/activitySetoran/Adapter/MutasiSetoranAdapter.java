@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activitySetoran.MutasiSetoran;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -36,6 +37,7 @@ public class MutasiSetoranAdapter extends ArrayAdapter {
     private List<CustomListItem> items;
     private View listViewItem;
     private int rowPerTableItem;
+    private DialogBox dialogBox;
 
     private ItemValidation iv = new ItemValidation();
 
@@ -118,17 +120,14 @@ public class MutasiSetoranAdapter extends ArrayAdapter {
 
     private void hapusMutasi(String id) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menghapus...");
-        progressDialog.show();
+        dialogBox = new DialogBox(context);
+        dialogBox.showDialog(false);
 
         ApiVolley apiVolley = new ApiVolley(context, new JSONObject(), "GET", ServerURL.deleteMutasiSetoran+id, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 JSONObject responseAPI = new JSONObject();
                 try {
 
@@ -152,7 +151,7 @@ public class MutasiSetoranAdapter extends ArrayAdapter {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

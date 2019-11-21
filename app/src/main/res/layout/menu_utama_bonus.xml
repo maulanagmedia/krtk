@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/til_tanggal_awal">
@@ -26,9 +26,9 @@
                 android:inputType="none"
                 android:id="@+id/edt_tanggal_awal"
                 style="@style/CustomDate"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/til_tanggal_akhir">
@@ -42,7 +42,7 @@
                 android:id="@+id/edt_tanggal_akhir"
                 style="@style/CustomDate"/>
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <include
             layout="@layout/btn_save"

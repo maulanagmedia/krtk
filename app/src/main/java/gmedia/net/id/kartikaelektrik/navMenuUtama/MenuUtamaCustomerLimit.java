@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -35,9 +35,9 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityCustomerLimit.ListCustomerLimitAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.Customer.ListCustomerTableAdapter;
 import gmedia.net.id.kartikaelektrik.model.Customer;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -61,6 +61,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
     private List<Customer> masterListCustomer , listCustomerAutocomplete, listCustomerTable;
     private boolean firstLoad = true;
     private String currentString = "";
+    private DialogBox dialogBox;
 
     public MenuUtamaCustomerLimit(){}
 
@@ -373,11 +374,8 @@ public class MenuUtamaCustomerLimit extends Fragment {
 
     public void saveApprove(String kdcus, String jumlah) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(context);
+        dialogBox.showDialog(false);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -391,7 +389,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 try {
 
                     JSONObject responseAPI = new JSONObject(result);
@@ -414,7 +412,7 @@ public class MenuUtamaCustomerLimit extends Fragment {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

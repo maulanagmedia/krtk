@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +38,7 @@ import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityPengajuanTempo.Adapter.BarangTempoAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 
@@ -61,6 +62,7 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
     private boolean isLoading = false;
     private BarangTempoAdapter arrayAdapterString;
     private Context context;
+    private DialogBox dialogBox;
 
     //remember, this page using "not best practice" process
 
@@ -361,11 +363,8 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
 
     private void saveData(Barang barang) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(ActBarangPengajuanTempo.this);
+        dialogBox.showDialog(false);
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -385,7 +384,7 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
                     @Override
                     public void onSuccess(String result){
 
-                        progressDialog.dismiss();
+                        dialogBox.dismissDialog();
                         JSONObject responseAPI = new JSONObject();
                         try {
                             responseAPI = new JSONObject(result);
@@ -410,7 +409,7 @@ public class ActBarangPengajuanTempo extends AppCompatActivity {
                     @Override
                     public void onError(String result) {
 
-                        progressDialog.dismiss();
+                        dialogBox.dismissDialog();
                         Toast.makeText(context, result,Toast.LENGTH_LONG).show();
                     }
                 });

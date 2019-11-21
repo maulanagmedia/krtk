@@ -6,7 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.media.ExifInterface;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;

@@ -1,13 +1,12 @@
 package gmedia.net.id.kartikaelektrik;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuHistoryPenjualanBarang;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaAdmin;
-import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBarangTakLaku;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBonus;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomer;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerLimit;

@@ -17,13 +17,12 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -58,6 +57,7 @@ import gmedia.net.id.kartikaelektrik.MenuAdminPengaturanHeader.Adapter.PhotosKet
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.PhotoModel;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ImageUtils;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.PermissionUtils;
@@ -87,6 +87,7 @@ public class DetailPengaturanHeader extends AppCompatActivity {
     private OverflowPagerIndicator opiPhoto;
     private LinearLayout llSaveContainer;
     private ProgressBar pbLoading;
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,11 +202,8 @@ public class DetailPengaturanHeader extends AppCompatActivity {
 
     private void saveData() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(DetailPengaturanHeader.this);
+        dialogBox.showDialog(false);
 
         JSONArray jFoto = new JSONArray();
         for(PhotoModel photo : listPhoto){
@@ -231,7 +229,7 @@ public class DetailPengaturanHeader extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 try {
 
                     JSONObject responseAPI = new JSONObject(result);
@@ -278,7 +276,7 @@ public class DetailPengaturanHeader extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

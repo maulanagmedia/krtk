@@ -37,7 +37,7 @@
                 android:id="@+id/sp_bulan"></Spinner>
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_weight="0.3"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:inputType="number"
                 android:id="@+id/edt_tahun"/>
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="0dp"

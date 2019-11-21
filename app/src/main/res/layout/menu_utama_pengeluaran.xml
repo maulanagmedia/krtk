@@ -53,7 +53,7 @@
                 android:layout_marginTop="@dimen/default_small_padding1"
                 android:weightSum="2">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_weight="0.95"
                     android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <View
                     android:layout_width="10dp"
@@ -81,7 +81,7 @@
                     android:paddingRight="@dimen/default_small_padding1"
                     android:paddingLeft="@dimen/default_small_padding1"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_weight="0.95"
                     android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                         style="@style/CustomDateWhite"
                         android:textSize="14sp"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout

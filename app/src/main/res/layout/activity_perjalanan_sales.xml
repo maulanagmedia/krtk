@@ -40,7 +40,7 @@
 
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/til_tanggal"
@@ -62,7 +62,7 @@
                 style="@style/CustomDate"
                 android:drawableRight="@mipmap/ic_date_white"
                 android:textSize="@dimen/text_date_small"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

@@ -2,7 +2,7 @@ package gmedia.net.id.kartikaelektrik.ActivityMenuAdmin;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter.ListCustomerHistoryLimitAdapter;
 import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter.ListCustomerHistoryLimitDetailAdapter;
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;

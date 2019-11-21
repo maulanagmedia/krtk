@@ -1,8 +1,8 @@
 package gmedia.net.id.kartikaelektrik.ActivityRetur;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.adapter.CustomListItemAutocompleteAdapter;
-import gmedia.net.id.kartikaelektrik.adapter.Retur.ReturCustomerTableAdapter;
 import gmedia.net.id.kartikaelektrik.adapter.Retur.ReturSelisihNotaAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;

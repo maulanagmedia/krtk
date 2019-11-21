@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,6 +39,7 @@ import gmedia.net.id.kartikaelektrik.ActivityMenuAdmin.Adapter.ListCustomerLimit
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
@@ -61,6 +62,7 @@ public class VerifikasiLimitCustomer extends AppCompatActivity {
     private boolean firstLoad = true;
     private ListCustomerLimitAppAdapter adapter;
     private String currentString = "";
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -393,11 +395,8 @@ public class VerifikasiLimitCustomer extends AppCompatActivity {
 
     public void saveApprove(String id, String appStatus) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Menyimpan...");
-        progressDialog.show();
+        dialogBox = new DialogBox(VerifikasiLimitCustomer.this);
+        dialogBox.showDialog(false);
 
         JSONObject jBody = new JSONObject();
         try {
@@ -411,7 +410,7 @@ public class VerifikasiLimitCustomer extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 try {
 
                     JSONObject responseAPI = new JSONObject(result);
@@ -434,7 +433,7 @@ public class VerifikasiLimitCustomer extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                progressDialog.dismiss();
+                dialogBox.dismissDialog();
                 Toast.makeText(context, "Terjadi kesalahan saat mengakses data, harap ulangi kembali", Toast.LENGTH_LONG).show();
             }
         });

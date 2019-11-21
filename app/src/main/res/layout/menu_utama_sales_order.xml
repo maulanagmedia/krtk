@@ -94,7 +94,7 @@
         android:id="@+id/ll_tanggal"
         android:weightSum="1">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"
@@ -109,9 +109,9 @@
                 android:id="@+id/edt_awal"
                 style="@style/CustomDate"
                 android:textSize="@dimen/text_date_small"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 style="@style/CustomDate"
                 android:textSize="@dimen/text_date_small"/>
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="0dp"

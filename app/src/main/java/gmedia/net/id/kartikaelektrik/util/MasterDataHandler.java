@@ -32,6 +32,7 @@ public class MasterDataHandler {
     private SharedPreferenceHandler sph = new SharedPreferenceHandler();
     private String urlGetAllBarang, urlGetAllKategori, urlgetAllBarangByKategori;
     List<Barang> barangList;
+    private DialogBox dialogBox;
 
     public MasterDataHandler(Context context){
         this.context = context;
@@ -81,17 +82,16 @@ public class MasterDataHandler {
 
         // Get All Barang
         JSONObject jsonBody = new JSONObject();
-        final ProgressDialog progressDialog = new ProgressDialog(context,
-                R.style.AppTheme_Retro_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Updating master data...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+        dialogBox = new DialogBox(context);
+        dialogBox.showDialog(false);
 
         ApiVolley restService = new ApiVolley(context, jsonBody, "GET", urlGetAllBarang , "Master data has been updated", "Failed to Download Master Data", 1,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
+
+                        dialogBox.dismissDialog();
                         JSONObject responseAPI = new JSONObject();
 
                         try {
@@ -115,12 +115,13 @@ public class MasterDataHandler {
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+
                     }
 
                     @Override
                     public void onError(String result) {
-                        progressDialog.dismiss();
+
+                        dialogBox.dismissDialog();
                     }
                 });
     }

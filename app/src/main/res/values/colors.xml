@@ -77,6 +77,9 @@
     <color name="color_sub_menu">#7be93434</color>
     <color name="color_sub_menu_active">#b3e93434</color>
 
+    <color name="color_green">#9DDB54</color>
+    <color name="color_orange">#FF9800</color>
+    <color name="color_yellow">#FFEB3B</color>
     <color name="color_grey">#9b9b9b</color>
     <color name="color_grey1">#bebcbc</color>
     <color name="color_grey2">#dcdcdc</color>

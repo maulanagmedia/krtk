@@ -32,7 +32,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/icon_user"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -44,7 +44,7 @@
                         android:hint="Sales"
                         android:inputType="none"
                         android:editable="false"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -62,7 +62,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_pin"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -77,7 +77,7 @@
                         android:inputType="none"
                         android:editable="false"
                         android:drawableEnd="@mipmap/ic_insert_date" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -95,7 +95,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_money"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/til_max_piutang"
@@ -107,7 +107,7 @@
                         android:id="@+id/edt_max_piutang"
                         android:hint="Maksimal Piutang"
                         android:inputType="numberDecimal" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_bag"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -168,7 +168,7 @@
                         android:id="@+id/edt_dari_bank"
                         android:hint="Pembayaran"
                         android:inputType="textPersonName"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -187,7 +187,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_contact"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -198,7 +198,7 @@
                         android:id="@+id/edt_dari_norek"
                         android:hint="Nomor Rekening Sumber"
                         android:inputType="textPersonName"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -248,7 +248,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_bag"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -259,7 +259,7 @@
                         android:id="@+id/edt_ke_bank"
                         android:hint="Nama Bank Tujuan"
                         android:inputType="textPersonName"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -277,7 +277,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_pin"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text"
@@ -292,7 +292,7 @@
                         android:inputType="none"
                         android:editable="false"
                         android:drawableEnd="@mipmap/ic_insert_date" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -310,7 +310,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_contact"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -321,7 +321,7 @@
                         android:id="@+id/edt_ke_norek"
                         android:hint="Nomor Rekening Tujuan"
                         android:inputType="textPersonName"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -339,7 +339,7 @@
                     android:layout_margin="@dimen/icon_size"
                     android:src="@mipmap/ic_money"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right_text">
@@ -351,7 +351,7 @@
                         android:hint="Total"
                         android:inputType="number"
                         android:imeOptions="actionDone"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

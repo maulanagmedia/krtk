@@ -308,7 +308,7 @@
                     android:layout_marginLeft="@dimen/margin_default"
                     android:layout_marginRight="@dimen/margin_default"/>
 
-                <android.support.v7.widget.GridLayout
+                <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:columnCount="3">
@@ -351,7 +351,7 @@
                             android:gravity="center" />
                     </LinearLayout>
 
-                </android.support.v7.widget.GridLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
             </LinearLayout>
 
@@ -380,7 +380,7 @@
                     android:layout_marginLeft="@dimen/margin_default"
                     android:layout_marginRight="@dimen/margin_default"/>
 
-                <android.support.v7.widget.GridLayout
+                <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:columnCount="3"
@@ -1128,7 +1128,7 @@
                             android:gravity="center" />
                     </LinearLayout>
 
-                </android.support.v7.widget.GridLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
             </LinearLayout>
 

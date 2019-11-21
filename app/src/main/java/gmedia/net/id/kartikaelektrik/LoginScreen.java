@@ -1,17 +1,16 @@
 package gmedia.net.id.kartikaelektrik;
 
-import android.*;
 import android.Manifest;
-import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,6 +29,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import gmedia.net.id.kartikaelektrik.notificationService.InitFirebaseSetting;
+import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.DialogBox;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.LocationUpdater;
 import gmedia.net.id.kartikaelektrik.util.RuntimePermissionsActivity;
@@ -57,6 +58,7 @@ public class LoginScreen extends RuntimePermissionsActivity {
     private boolean doubleBackToExitPressedOnce = false;
     private ItemValidation iv = new ItemValidation();
     private String refreshToken = "";
+    private DialogBox dialogBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +98,13 @@ public class LoginScreen extends RuntimePermissionsActivity {
         edtUsername = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_username);
         edtPassword = (EditText) findViewById(gmedia.net.id.kartikaelektrik.R.id.edt_password);
         btnLogin = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_login);
+        dialogBox = new DialogBox(LoginScreen.this);
 
         session = new SessionManager(getApplicationContext());
 
         //TODO: disable before release
         /*if(session.isLoggedIn()){
+
             HashMap<String, String> user = session.getUserDetails();
             edtUsername.setText(user.get(session.TAG_NAMA));
             edtPassword.setText(user.get(session.TAG_PASSWORD));
@@ -128,165 +132,116 @@ public class LoginScreen extends RuntimePermissionsActivity {
             return;
         }
 
+        dialogBox.showDialog(false);
+
         btnLogin.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginScreen.this,
-                gmedia.net.id.kartikaelektrik.R.style.AppTheme_Login_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
+        JSONObject jsonBody = new JSONObject();
 
         try {
-            JSONObject jsonBody = new JSONObject();
-
             jsonBody.put("username", edtUsername.getText());
             jsonBody.put("password", edtPassword.getText());
             jsonBody.put("fcm_id", refreshToken);
-
-            final String username = edtUsername.getText().toString();
-            final String password = edtPassword.getText().toString();
-
-
-            final String requestBody = jsonBody.toString();
-
-            StringRequest stringRequest = new StringRequest(1, JSON_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    // sukseslogin(response);
-
-                    try {
-                        JSONObject obj = new JSONObject(response);
-                        String status = obj.getJSONObject("metadata").getString("status");
-                        String message = obj.getJSONObject("metadata").getString("message");
-
-                        if(iv.parseNullInteger(status) == 200){
-
-                            uid = obj.getJSONObject("response").getString("id");
-                            token = obj.getJSONObject("response").getString("token");
-                            exp = obj.getJSONObject("response").getString("expired_at");
-                            level = obj.getJSONObject("response").getString("level");
-                            laba = obj.getJSONObject("response").getString("laba");
-                            fullName = obj.getJSONObject("response").getString("nama");
-
-                            //TODO: About privilege user
-                            // Diambil dari privilege - Level
-                            // Level 1: Menu admin all write and read
-                            // Level 2: Menu admin view only
-                            // Level 3: Menu admin only available for masuk sebagai sales
-                            // Level 4 : Sales, tidak ada akses admin
-
-                            idJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("id_jab");
-                            jabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("jabatan");
-                            levelJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("level");
-                            Log.d(TAG, "jabatan: " + levelJabatan);
-                            // nik = obj.getJSONObject("response").getString("nik");
-                            nama = username;// obj.getJSONObject("response").getString("nama");
-                            nik= uid;
-
-                            if (token.isEmpty()) {
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                                onLoginFailed();
-                                progressDialog.dismiss();
-
-                                return;
-                            } else {
-
-                                session.createLoginSession(uid, nik, nama, password, token, exp, level, laba, fullName);
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                                session.saveNikAsli(nik);
-                                session.saveNamaAsli(fullName);
-                                session.saveIdJabatan(idJabatan);
-                                session.saveJabatan(jabatan);
-                                session.saveLevelJabatan(levelJabatan);
-                                session.saveUsername(edtUsername.getText().toString());
-
-                                btnLogin.setEnabled(true);
-                                onLoginSuccess();
-
-                                edtUsername.setText("");
-                                edtPassword.setText("");
-                                progressDialog.dismiss();
-                            }
-                        }else{
-                            progressDialog.dismiss();
-                            btnLogin.setEnabled(true);
-                            Snackbar.make(findViewById(R.id.activity_login_screen), message, BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                }
-                            }).show();
-                        }
-                    } catch (JSONException e) {
-
-                        e.printStackTrace();
-                        onLoginFailed();
-                        progressDialog.dismiss();
-
-                        return;
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-
-                public void onErrorResponse(VolleyError error) {
-                    onLoginFailed();
-                    String message = "Login gagal, silahkan coba beberapa saat lagi";
-                    if(error.toString().toLowerCase().contains("com.android.volley.noconnectionerror")){
-                        message = "Tidak ada koneksi internet";
-                    }else if(error.toString().toLowerCase().contains("com.android.volley.servererror")){
-                        message = "Username atau password anda salah";
-                    }
-//                    Toast.makeText(getApplicationContext(), "Username atau password anda salah", Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-
-                    return;
-                }
-            }) {
-
-
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("Content-Type", "application/json");
-                    params.put("Client-Service", "frontend-client");
-                    params.put("Auth-Key", "gmedia_kartika");
-                    return params;
-                }
-
-                @Override
-                public String getBodyContentType() {
-                    return String.format("application/json; charset=utf-8");
-                }
-
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                                requestBody, "utf-8");
-                        return null;
-                    }
-                }
-            };
-            // MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-
-            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                    40*1000, -1,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-            ));
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
-
         } catch (JSONException e) {
-            onLoginFailed();
             e.printStackTrace();
-            progressDialog.dismiss();
-
-            return;
         }
+
+        final String username = edtUsername.getText().toString();
+        final String password = edtPassword.getText().toString();
+
+        new ApiVolley(LoginScreen.this, jsonBody, "POST", JSON_URL, "", "", 0, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+
+                    dialogBox.dismissDialog();
+                    JSONObject obj = new JSONObject(result);
+                    String status = obj.getJSONObject("metadata").getString("status");
+                    String message = obj.getJSONObject("metadata").getString("message");
+
+                    if(iv.parseNullInteger(status) == 200){
+
+                        uid = obj.getJSONObject("response").getString("id");
+                        token = obj.getJSONObject("response").getString("token");
+                        exp = obj.getJSONObject("response").getString("expired_at");
+                        level = obj.getJSONObject("response").getString("level");
+                        laba = obj.getJSONObject("response").getString("laba");
+                        fullName = obj.getJSONObject("response").getString("nama");
+
+                        //TODO: About privilege user
+                        // Diambil dari privilege - Level
+                        // Level 1: Menu admin all write and read
+                        // Level 2: Menu admin view only
+                        // Level 3: Menu admin only available for masuk sebagai sales
+                        // Level 4 : Sales, tidak ada akses admin
+
+                        idJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("id_jab");
+                        jabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("jabatan");
+                        levelJabatan = obj.getJSONObject("response").getJSONObject("privilege").getString("level");
+                        Log.d(TAG, "jabatan: " + levelJabatan);
+                        // nik = obj.getJSONObject("response").getString("nik");
+                        nama = username;// obj.getJSONObject("response").getString("nama");
+                        nik= uid;
+
+                        if (token.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                            onLoginFailed();
+
+                        } else {
+
+                            session.createLoginSession(uid, nik, nama, password, token, exp, level, laba, fullName);
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                            session.saveNikAsli(nik);
+                            session.saveNamaAsli(fullName);
+                            session.saveIdJabatan(idJabatan);
+                            session.saveJabatan(jabatan);
+                            session.saveLevelJabatan(levelJabatan);
+                            session.saveUsername(edtUsername.getText().toString());
+
+                            btnLogin.setEnabled(true);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    edtUsername.setText("");
+                                    edtPassword.setText("");
+                                    onLoginSuccess();
+                                }
+                            });
+                        }
+                    }else{
+
+                        btnLogin.setEnabled(true);
+                        Snackbar.make(findViewById(R.id.activity_login_screen), message, Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                    onLoginFailed();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                onLoginFailed();
+                String message = "Login gagal, silahkan coba beberapa saat lagi";
+                if(result.toLowerCase().contains("com.android.volley.noconnectionerror")){
+                    message = "Tidak ada koneksi internet";
+                }else if(result.toLowerCase().contains("com.android.volley.servererror")){
+                    message = "Username atau password anda salah";
+                }
+//                    Toast.makeText(getApplicationContext(), "Username atau password anda salah", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void onLoginSuccess() {
@@ -295,8 +250,8 @@ public class LoginScreen extends RuntimePermissionsActivity {
         mdh.checkWeeklyUpdate();*/
         //Intent intent = new Intent(this, Dashboard.class);
         Intent intent = new Intent(this, MainActivity.class);
-        finish();
         startActivity(intent);
+        finish();
     }
 
     public void onLoginFailed() {

@@ -1,8 +1,8 @@
 package gmedia.net.id.kartikaelektrik.activityOmsetPenjualan;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,12 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturCustomer;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturDatePicker;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturSelisihNota;
-import gmedia.net.id.kartikaelektrik.ActivityRetur.ReturTelahDiproses;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaRetur;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
 import gmedia.net.id.kartikaelektrik.util.SessionManager;
 

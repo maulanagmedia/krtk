@@ -3,7 +3,7 @@ package gmedia.net.id.kartikaelektrik.activitySetoran;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +25,6 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.R;
 import gmedia.net.id.kartikaelektrik.activityOmsetPenjualan.DetailOmsetPerNota;
-import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranAdapter;
 import gmedia.net.id.kartikaelektrik.activitySetoran.Adapter.DetailSetoranNotaAdapter;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
