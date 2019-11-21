@@ -8,7 +8,7 @@ android {
         applicationId 'gmedia.net.id.kartikaelektrik'
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 34
+        versionCode 36
         versionName '13.0.1'
     }
     buildTypes {

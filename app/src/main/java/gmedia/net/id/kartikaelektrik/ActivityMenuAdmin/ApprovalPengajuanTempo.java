@@ -170,7 +170,7 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
         tvMerk.setText(item.getListItem3());
         tvCustomer.setText(item.getListItem4());
         tvPengaju.setText(item.getListItem6());
-        tvTempo.setText(item.getListItem5());
+        tvTempo.setText(item.getListItem7());
 
         llTolak.setVisibility(View.VISIBLE);
         tvProses.setText("Setujui");
@@ -361,6 +361,7 @@ public class ApprovalPengajuanTempo extends AppCompatActivity {
                                             ,jo.getString("customer")
                                             ,jo.getString("tempo")
                                             ,jo.getString("pengaju")
+                                            ,jo.getString("nama_tempo")
                                     ));
                                 }
                             }

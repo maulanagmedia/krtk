@@ -16,16 +16,36 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tanggal"
-                android:padding="@dimen/default_small_padding1"
-                android:id="@+id/tv_item0"
-                android:gravity="right"
                 android:background="@color/color_red_bg"
-                android:textColor="@color/white"
-                android:textSize="@dimen/default_text_title_size_small"/>
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal"
+                    android:padding="@dimen/default_small_padding1"
+                    android:id="@+id/tv_item0"
+                    android:gravity="right"
+                    android:layout_marginLeft="@dimen/padding_default"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_title_size_small"/>
+
+                <TextView
+                    android:id="@+id/tv_item3"
+                    android:textSize="14sp"
+                    android:text=""
+                    android:paddingLeft="@dimen/margin_small"
+                    android:layout_toLeftOf="@id/tv_item0"
+                    android:paddingTop="@dimen/default_small_padding2"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -89,7 +109,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_small_padding1"
                     android:orientation="vertical">
@@ -105,36 +125,6 @@
                         android:id="@+id/tv_item4"
                         android:textSize="14sp"
                         android:text=""
-                        android:paddingTop="@dimen/default_small_padding2"
-                        android:textColor="@color/white"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="@dimen/default_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/default_small_padding1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Tempo"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/default_text_title_size_small"/>
-
-                    <TextView
-                        android:id="@+id/tv_item3"
-                        android:textSize="14sp"
-                        android:text=""
-                        android:gravity="right"
                         android:paddingTop="@dimen/default_small_padding2"
                         android:textColor="@color/white"
                         android:layout_width="match_parent"

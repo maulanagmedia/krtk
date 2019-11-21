@@ -1048,6 +1048,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         intent.putExtra("kodemenu","menupengeluaran");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_pengajuan_tempo){
+                        intent.putExtra("kodemenu","menupengajuantempo");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_potensi_denda){
                         intent.putExtra("kodemenu","menupotensidenda");
                         startActivity(intent);

@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,6 +39,7 @@ public class ActCustomerPengajuanTempo extends AppCompatActivity {
     private List<CustomListItem> listData;
     private String TAG = "Test.Customer";
     private CustomerTempoAdapter adapter;
+    private String keyword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,37 @@ public class ActCustomerPengajuanTempo extends AppCompatActivity {
         listData = new ArrayList<>();
         adapter = new CustomerTempoAdapter((Activity) context, listData);
         lvCustomer.setAdapter(adapter);
+
+        actvPelanggan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                    keyword = actvPelanggan.getText().toString();
+                    //start = 0;
+                    //initData();
+
+                    List<CustomListItem> listSearch = new ArrayList<>();
+                    for(CustomListItem item: listData){
+
+                        if(item.getListItem2().toLowerCase().contains(keyword.toLowerCase())){
+                            listSearch.add(item);
+                        }
+                    }
+
+                    if(listSearch.size() > 0){
+
+                        adapter = new CustomerTempoAdapter((Activity)context, listSearch);
+                        lvCustomer.setAdapter(adapter);
+                    }
+
+                    iv.hideSoftKey(context);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         initData();
     }

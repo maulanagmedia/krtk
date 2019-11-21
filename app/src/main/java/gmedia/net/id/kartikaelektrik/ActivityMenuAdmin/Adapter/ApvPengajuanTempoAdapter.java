@@ -60,7 +60,7 @@ public class ApvPengajuanTempoAdapter extends ArrayAdapter {
         holder.tvItem0.setText(iv.ChangeFormatDateString(itemSelected.getListItem2(), formatTimestamp, formatDateDisplay));
         holder.tvItem1.setText(itemSelected.getListItem3());
         holder.tvItem2.setText(itemSelected.getListItem4());
-        holder.tvItem3.setText(iv.ChangeToCurrencyFormat(itemSelected.getListItem5()));
+        holder.tvItem3.setText(itemSelected.getListItem7());
         holder.tvItem4.setText(itemSelected.getListItem6());
 
         return convertView;
