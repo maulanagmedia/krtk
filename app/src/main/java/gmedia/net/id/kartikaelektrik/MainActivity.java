@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.gridlayout.widget.GridLayout;
+
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -553,7 +555,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
-        //getDashboard();
+        getDashboard();
     }
 
     private void getDashboard() {
@@ -603,6 +605,8 @@ public class MainActivity extends RuntimePermissionsActivity {
 
                     @Override
                     public void onError(String result) {
+
+                        Log.d(TAG, "onError: "+ result);
                     }
                 });
     }

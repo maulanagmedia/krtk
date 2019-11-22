@@ -5,10 +5,10 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId 'gmedia.net.id.kartikaelektrik'
-        minSdkVersion 28
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 36
-        versionName '14.0.1'
+        versionCode 38
+        versionName '14.0.2'
     }
     buildTypes {
         release {
