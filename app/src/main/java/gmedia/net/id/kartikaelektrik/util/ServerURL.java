@@ -13,6 +13,7 @@ public class ServerURL {
     public static final String doLogin = baseURL + "auth/login/";
     public static final String savePassword = baseURL + "auth/change_password/";
     public static final String getSetoranHeader = baseURL + "Setoran/view_header_setoran/";
+    public static final String getSetoranHeaderV2 = baseURL + "Setoran/view_header_setoran_v2/";
     public static final String getSetoranDetail = baseURL + "Setoran/view_detail_setoran/";
     public static final String getDetailRekapSetoran = baseURL + "setoran/view_setoran_details/";
     public static final String getDetailSetoran = baseURL + "Setoran/detail_setoran/";
@@ -84,4 +85,5 @@ public class ServerURL {
     public static final String getGudangSODetailByID = baseURL + "barang/kode_gudang/";
     public static final String getListBarangById = baseURL + "barang/all_barang/id_barang/";
     public static final String saveCanvas = baseURL + "canvas/insert_canvas_v2/";
+    public static final String getStokCanvas = baseURL + "barang/stok_canvas/";
 }

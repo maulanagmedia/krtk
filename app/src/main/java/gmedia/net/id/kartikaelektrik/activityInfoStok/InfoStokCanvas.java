@@ -35,6 +35,7 @@ import gmedia.net.id.kartikaelektrik.adapter.InfoStokAdapter;
 import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class InfoStokCanvas extends AppCompatActivity {
@@ -75,7 +76,7 @@ public class InfoStokCanvas extends AppCompatActivity {
     private void initUI() {
 
         keyword = "";
-        urlInfoStok = getResources().getString(R.string.url_get_filter_canvas);
+        urlInfoStok = ServerURL.getStokCanvas;
 
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);
         lvListStok = (ListView) findViewById(R.id.lv_list_info_stok);

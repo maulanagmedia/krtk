@@ -69,7 +69,6 @@ public class LoginScreen extends RuntimePermissionsActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-
         // for android > M
         if (ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(LoginScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -110,6 +109,9 @@ public class LoginScreen extends RuntimePermissionsActivity {
             edtPassword.setText(user.get(session.TAG_PASSWORD));
             login();
         }*/
+
+        //TODO: enable before release
+        session.logout();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 

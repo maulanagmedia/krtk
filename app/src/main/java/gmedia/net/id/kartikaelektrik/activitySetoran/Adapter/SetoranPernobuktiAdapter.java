@@ -289,6 +289,7 @@ public class SetoranPernobuktiAdapter extends ArrayAdapter {
         }
         private void showDialog(){
 
+            dialogBox = new DialogBox(context);
             dialogBox.showDialog(false);
         }
 

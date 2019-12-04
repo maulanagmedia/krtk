@@ -1130,7 +1130,7 @@ public class OrderDetail extends AppCompatActivity {
         if(updateOrderFlag){ // update Order
 
             method = "PUT";
-            urlSaveSO = ServerURL.updateDetailSO;
+            urlSaveSO = ServerURL.updateDetailSO + idOrderDetail;
             jsonBody.put("jumlah", jumlah);
             jsonBody.put("satuan", selectedSatuan);
             jsonBody.put("gudang", selectedGudang);

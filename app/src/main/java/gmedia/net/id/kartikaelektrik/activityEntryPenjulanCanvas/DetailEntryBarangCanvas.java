@@ -40,6 +40,7 @@ import gmedia.net.id.kartikaelektrik.model.Barang;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
 import gmedia.net.id.kartikaelektrik.util.SharedPreferenceHandler;
 
 public class DetailEntryBarangCanvas extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class DetailEntryBarangCanvas extends AppCompatActivity {
     private void initUI() {
 
         keyword = "";
-        urlInfoStok = getResources().getString(R.string.url_get_filter_canvas);
+        urlInfoStok = ServerURL.getStokCanvas;
         actvNamaBarang = (AutoCompleteTextView) findViewById(R.id.actv_nama_barang);
         lvListBarangCanvas = (ListView) findViewById(R.id.lv_list_barang);
         pbLoadBarang = (ProgressBar) findViewById(R.id.pb_load_barang);

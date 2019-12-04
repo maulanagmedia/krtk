@@ -240,6 +240,17 @@ public class SessionManager {
 		activity.startActivity(intent);
 		activity.finish();
 	}
+
+	public void logout(){
+		// Clearing all data from Shared Preferences
+
+		try {
+			editor.clear();
+			editor.commit();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Quick check for login

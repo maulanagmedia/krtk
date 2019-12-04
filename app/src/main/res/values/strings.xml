@@ -64,7 +64,6 @@
     <string name="url_get_barang_by_id">http://api.kartikaelectric.com/barang/get_barang/</string>
     <string name="url_get_all_barang_by_kategori">http://api.kartikaelectric.com/barang/all_barang/kategori/</string>
     <string name="url_get_filter_barang">http://api.kartikaelectric.com/barang/filter_barang/</string>
-    <string name="url_get_filter_canvas">http://api.kartikaelectric.com/barang/stok_canvas/</string>
 
     <string name="url_get_all_customer">http://api.kartikaelectric.com/barang/customer/</string>
     <string name="url_insert_customer">http://api.kartikaelectric.com/barang/create_customer/</string>

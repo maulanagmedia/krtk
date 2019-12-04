@@ -405,7 +405,7 @@ public class RekapMutasi extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranHeader, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getSetoranHeaderV2, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -435,9 +435,11 @@ public class RekapMutasi extends AppCompatActivity {
                                     ,jo.getString("saldo")
                                     ,jo.getString("pengeluaran")
                                     ,jo.getString("sisa")
+                                    ,jo.getString("khusus")
                                     ));
 
-                            total += (iv.parseNullDouble(jo.getString("total")) + iv.parseNullDouble(jo.getString("sisa")));
+                            //total += (iv.parseNullDouble(jo.getString("total")) + iv.parseNullDouble(jo.getString("sisa")));
+                            total += iv.parseNullDouble(jo.getString("total"));
                         }
 
                         JSONObject jumlahRes = response.getJSONObject("response").getJSONObject("jumlah");

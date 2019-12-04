@@ -54,6 +54,7 @@ public class RincianSetoran extends AppCompatActivity {
     private LinearLayout llTotal, llTotalPengeluaran;
     private LinearLayout llFooter;
     private double totalPengeluaran = 0;
+    private String khusus = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class RincianSetoran extends AppCompatActivity {
             kodeBank = bundle.getString("kode_bank", "");
             tanggalAwal = bundle.getString("tgl_awal", "");
             tanggalAkhir = bundle.getString("tgl_akhir", "");
+            khusus = bundle.getString("khusus", "");
 
             if(!kodeBank.equals("1009")){
 
@@ -181,6 +183,7 @@ public class RincianSetoran extends AppCompatActivity {
             jBody.put("kode_bank", kodeBank);
             jBody.put("tgl_awal", tanggalAwal);
             jBody.put("tgl_akhir", tanggalAkhir);
+            jBody.put("khusus", khusus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -302,8 +305,6 @@ public class RincianSetoran extends AppCompatActivity {
 
                         listSetoran.addAll(moreList);
 
-                    }else{
-                        onBackPressed();
                     }
 
                     //tvTotal.setText(iv.ChangeToRupiahFormat(total));

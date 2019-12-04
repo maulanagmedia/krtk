@@ -49,11 +49,13 @@ public class DetailMutasiSetoran extends AppCompatActivity {
     private String kdcus = "", namaCus = "";
     private String crBayar = "";
     private ProgressBar pbLoading;
-    private List<OptionItem> listBankSumber, listBankTujuan;
+    private List<OptionItem> listBankSumber, listBankTujuan, listJenisSetoran = new ArrayList<>();
     private String currentString = "";
     private String idSetoran = "";
     private EditText edtDariBank, edtDariNorek, edtKeBank, edtKeNorek;
     private DialogBox dialogBox;
+    private Spinner spJenisSeotran;
+    private String selectedSetoran = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +88,35 @@ public class DetailMutasiSetoran extends AppCompatActivity {
         edtKeBank = (EditText) findViewById(R.id.edt_ke_bank);
         edtKeNorek = (EditText) findViewById(R.id.edt_ke_norek);
         edtTotal = (EditText) findViewById(R.id.edt_total);
+        spJenisSeotran = (Spinner) findViewById(R.id.sp_jenis_setoran);
         pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
         llSaveContainer = (LinearLayout) findViewById(R.id.ll_save_container);
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvSave.setText("Simpan Mutasi");
 
         edtSales.setText(session.getFullName());
+
+        listJenisSetoran.add(new OptionItem("0", "Setoran Biasa"));
+        listJenisSetoran.add(new OptionItem("1", "Setoran Khusus"));
+
+        ArrayAdapter adapterKhusus = new ArrayAdapter(context, R.layout.normal_spinner, listJenisSetoran);
+        spJenisSeotran.setAdapter(adapterKhusus);
+
+        selectedSetoran = "0";
+        spJenisSeotran.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                OptionItem item = (OptionItem) parent.getItemAtPosition(position);
+                selectedSetoran = item.getValue();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         initEvent();
     }
 
@@ -374,6 +399,7 @@ public class DetailMutasiSetoran extends AppCompatActivity {
             jsonBody.put("ke_kode_bank", kodeBankTujuan);
             jsonBody.put("ke_nama_bank", edtKeBank.getText().toString());
             jsonBody.put("ke_rekening_bank", edtKeNorek.getText().toString());
+            jsonBody.put("khusus", selectedSetoran);
             jsonBody.put("tgltransfer", iv.ChangeFormatDateString(edtTanggalTransfer.getText().toString(), formatDateDisplay, formatDate));
             jsonBody.put("total", edtTotal.getText().toString().replaceAll("[,.]", ""));
         } catch (JSONException e) {
