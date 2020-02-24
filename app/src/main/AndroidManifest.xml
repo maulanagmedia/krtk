@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="gmedia.net.id.kartikaelektrik">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -10,14 +19,26 @@
         android:icon="@mipmap/logo_kartika"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ActivityMenuAdmin.ApprovalPengajuanTempo"></activity>
-        <activity android:name=".activityPengajuanTempo.ActBarangPengajuanTempo" />
-        <activity android:name=".activityPengajuanTempo.ActCustomerPengajuanTempo" />
-        <activity android:name=".activityProfile.ProfileActivity" />
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activitySOKhusus.DetailSalesOrderKh"></activity>
+        <activity
+            android:name=".activitySOKhusus.OrderDetailKhusus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityMenuAdmin.ApprovalPengajuanTempo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPengajuanTempo.ActBarangPengajuanTempo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityPengajuanTempo.ActCustomerPengajuanTempo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activityProfile.ProfileActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activityPengeluaran.DetailPengeluaran"
             android:screenOrientation="portrait" />
@@ -149,6 +170,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activityTambahOrderSales.ListBarangSalesOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySOKhusus.ListBarangSalesOrderKh"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activityOmsetPenjualan.ListOmsetCustomer"
@@ -339,14 +363,5 @@
             android:enabled="true"
             android:exported="true" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

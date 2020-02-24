@@ -20,6 +20,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaBonus;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomer;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerLimit;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerOrder;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaCustomerOrderKh;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryCanvas;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryPaket;
@@ -282,6 +283,14 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaPotensiDenda.setView(DashboardContainer.this, childPotensiDenda);
                     toolbar.setTitle("Potensi Denda");
                     setTitle("Potensi Denda");
+                    break;
+                case "tambahsokhusus":
+                    state = 24;
+                    MenuUtamaCustomerOrderKh menuUtamaCustomerOrderKh = new MenuUtamaCustomerOrderKh();
+                    View childLayoutCustomerOrderKh = inflater.inflate(R.layout.menu_utama_customer_orderkh, flContainer);
+                    menuUtamaCustomerOrderKh.setView(DashboardContainer.this, childLayoutCustomerOrderKh);
+                    toolbar.setTitle("Pilih Nama Pelanggan");
+                    setTitle("Pilih Nama Pelanggan");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

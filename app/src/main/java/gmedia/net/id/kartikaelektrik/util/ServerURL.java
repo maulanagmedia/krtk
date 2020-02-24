@@ -77,6 +77,7 @@ public class ServerURL {
     public static final String getPotensiDendaKomisi = baseURL + "Denda/view_potensi_denda_komisi/";
     public static final String getBarangDetail = baseURL + "barang/detail/";
     public static final String saveSO = baseURL + "barang/create_v2/";
+    public static final String saveSOKhusus = baseURL + "barang/create_khusus/";
     public static final String updateSO = baseURL + "barang/update/";
     public static final String updateDetailSO = baseURL + "barang/update_detail/";
     public static final String getHargaSODetail = baseURL + "barang/get_harga/";

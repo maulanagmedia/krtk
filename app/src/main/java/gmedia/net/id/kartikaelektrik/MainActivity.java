@@ -16,8 +16,8 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import androidx.gridlayout.widget.GridLayout;
 
 import android.util.Log;
 import android.view.Display;
@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -66,8 +67,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private final String TAG = "MainAct";
     private List<CustomListItem> sliderList = new ArrayList<>();
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtTambahSOKhusus, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llTambahSOKhusus, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -165,6 +166,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llTambahPelanggan = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tambah_pelanggan);
         llPermintaanHarga = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_permintaan_harga_order);
         llTambahSO = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tambah_so);
+        llTambahSOKhusus = (LinearLayout) findViewById(R.id.v_menu_tambah_so_kh);
         llEntryPaket = (LinearLayout) findViewById(R.id.v_menu_entry_order_paket);
         llDaftarSO = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_daftar_so);
         llTagihanPiutang = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tagihan_piutang);
@@ -194,6 +196,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         ibtTambahPelanggan = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_pelanggan);
         ibtTambahSO = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_so);
+        ibtTambahSOKhusus = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_so_kh);
         ibtEntryPaket = (ImageButton) findViewById(R.id.ibt_menu_entry_order_paket);
         ibtDaftarSO = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_daftar_so);
         ibtTagihanPiutang = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tagihan_piutang);
@@ -235,6 +238,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llTagihanPiutang.setVisibility(View.GONE);
         llInfoStok.setVisibility(View.GONE);
         llTambahSO.setVisibility(View.GONE);
+        llTambahSOKhusus.setVisibility(View.GONE);
         llDaftarSO.setVisibility(View.GONE);
         llSetoran.setVisibility(View.GONE);
         llTambahCanvas.setVisibility(View.GONE);
@@ -352,6 +356,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp20.width = menuWidth;
         llPotensiDenda.setLayoutParams(lp20);
 
+        GridLayout.LayoutParams lp21 = (GridLayout.LayoutParams) llTambahSOKhusus.getLayoutParams();
+        lp21.width = menuWidth;
+        llTambahSOKhusus.setLayoutParams(lp21);
+
         if(sessionManager.getLevelJabatan().equals("6")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
@@ -363,6 +371,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             llTagihanPiutang.setVisibility(View.VISIBLE);
             llInfoStok.setVisibility(View.VISIBLE);
             llTambahSO.setVisibility(View.VISIBLE);
+            llTambahSOKhusus.setVisibility(View.VISIBLE);
             llDaftarSO.setVisibility(View.VISIBLE);
             llSetoran.setVisibility(View.VISIBLE);
             llTambahCanvas.setVisibility(View.VISIBLE);
@@ -396,6 +405,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llTambahPelanggan,ibtTambahPelanggan);
         setOnClickMenu(llPermintaanHarga,null);
         setOnClickMenu(llTambahSO, ibtTambahSO);
+        setOnClickMenu(llTambahSOKhusus, ibtTambahSOKhusus);
         setOnClickMenu(llEntryPaket, ibtEntryPaket);
         setOnClickMenu(llDaftarSO, ibtDaftarSO);
         setOnClickMenu(llTagihanPiutang, ibtTagihanPiutang);
@@ -860,6 +870,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","tambahso");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_tambah_so_kh){
+                    intent.putExtra("kodemenu","tambahsokhusus");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }else if(ll.getId() == R.id.v_menu_entry_order_paket){
                     intent.putExtra("kodemenu","entrypaket");
                     startActivity(intent);
@@ -965,6 +979,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_so){
                         intent.putExtra("kodemenu","tambahso");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_tambah_so_kh){
+                        intent.putExtra("kodemenu","tambahsokhusus");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_menu_entry_order_paket){

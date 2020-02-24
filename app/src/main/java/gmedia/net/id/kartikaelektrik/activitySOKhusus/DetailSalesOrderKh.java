@@ -1,10 +1,12 @@
-package gmedia.net.id.kartikaelektrik.activitySalesOrderDetail;
+package gmedia.net.id.kartikaelektrik.activitySOKhusus;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,17 +24,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import gmedia.net.id.kartikaelektrik.DashboardContainer;
-import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.ListBarangSalesOrder;
-import gmedia.net.id.kartikaelektrik.activityEntryPaket.DetailBarangPaket;
-import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAdapter;
-import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
-import gmedia.net.id.kartikaelektrik.util.ItemValidation;
-import gmedia.net.id.kartikaelektrik.dialogFragment.UpdateSalesOrderDF;
-import gmedia.net.id.kartikaelektrik.util.ApiVolley;
-import gmedia.net.id.kartikaelektrik.util.ServerURL;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,7 +31,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DetailSalesOrder extends AppCompatActivity {
+import gmedia.net.id.kartikaelektrik.DashboardContainer;
+import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAdapter;
+import gmedia.net.id.kartikaelektrik.dialogFragment.UpdateSalesOrderDF;
+import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
+import gmedia.net.id.kartikaelektrik.util.ApiVolley;
+import gmedia.net.id.kartikaelektrik.util.ItemValidation;
+import gmedia.net.id.kartikaelektrik.util.ServerURL;
+
+public class DetailSalesOrderKh extends AppCompatActivity {
 
     private String noSalesOrder, kdCustomer, tanggal, tanggalTempo, customerName = "";
     private LinearLayout llAddOrder, llHapusSO;
@@ -61,15 +61,19 @@ public class DetailSalesOrder extends AppCompatActivity {
     private Button btnRefresh;
     private boolean paketMode = false;
     private String tempo = "", idTempo;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_sales_order);
+        setContentView(R.layout.activity_detail_sales_order_kh);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        activity = this;
         initUI();
     }
 
@@ -117,8 +121,8 @@ public class DetailSalesOrder extends AppCompatActivity {
     private void setDetailSO() {
 
         /*
-        * Access the detail SO
-        */
+         * Access the detail SO
+         */
 
         // Get Detail Barang
         iv.ProgressbarEvent(llLoad,pbLoad,btnRefresh,"SHOW");
@@ -270,7 +274,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                     }
 
                     getListBarangTable(items);
-                    iv.hideSoftKey(DetailSalesOrder.this);
+                    iv.hideSoftKey(activity);
                     return true;
                 }
                 return false;
@@ -295,7 +299,7 @@ public class DetailSalesOrder extends AppCompatActivity {
             stringList.put("tempo", tempo);
             stringList.put("idTempo", idTempo);
 
-            arrayAdapterString = new ListBarangDetailSOAdapter(DetailSalesOrder.this, listItems, stringList, statusSO);
+            arrayAdapterString = new ListBarangDetailSOAdapter(activity, listItems, stringList, statusSO);
 
             //set adapter to autocomplete
             lvListBarangOrder.setAdapter(arrayAdapterString);
@@ -303,6 +307,7 @@ public class DetailSalesOrder extends AppCompatActivity {
             lvListBarangOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                     SalesOrderDetail salesOrderDetail = (SalesOrderDetail) adapterView.getItemAtPosition(i);
 
                 }
@@ -313,7 +318,7 @@ public class DetailSalesOrder extends AppCompatActivity {
     private void deleteData(String noBuktiSalesOrder){
 
         JSONObject jsonBody = new JSONObject();
-        ApiVolley restService = new ApiVolley(DetailSalesOrder.this, jsonBody, "DELETE", urlDeleteSO+noBuktiSalesOrder, "", "", 0,
+        ApiVolley restService = new ApiVolley(activity, jsonBody, "DELETE", urlDeleteSO+noBuktiSalesOrder, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
@@ -324,7 +329,7 @@ public class DetailSalesOrder extends AppCompatActivity {
                             String statusI = responseAPI.getJSONObject("metadata").getString("status");
                             int statusNumber = Integer.parseInt(statusI);
                             String dialog = responseAPI.getJSONObject("metadata").getString("message");
-                            Toast.makeText(DetailSalesOrder.this, dialog, Toast.LENGTH_LONG).show(); // show message response
+                            Toast.makeText(activity, dialog, Toast.LENGTH_LONG).show(); // show message response
                             if(statusNumber == 200){
                                 backToSOList();
                             }
@@ -345,7 +350,7 @@ public class DetailSalesOrder extends AppCompatActivity {
         // Get Detail Barang
         iv.ProgressbarEvent(llLoad,pbLoad,btnRefresh,"SHOW");
         JSONObject jsonBody = new JSONObject();
-        ApiVolley restService = new ApiVolley(DetailSalesOrder.this, jsonBody, "GET", urlGetCustomer + kdCustomer, "", "", 0,
+        ApiVolley restService = new ApiVolley(activity, jsonBody, "GET", urlGetCustomer + kdCustomer, "", "", 0,
                 new ApiVolley.VolleyCallback(){
                     @Override
                     public void onSuccess(String result){
@@ -398,38 +403,26 @@ public class DetailSalesOrder extends AppCompatActivity {
                             peringatan = "Tidak dapat menambah Order yang ditolak";
                             break;
                     }
-                    Toast.makeText(DetailSalesOrder.this, peringatan, Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, peringatan, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 CharSequence options[] = new CharSequence[] {"Barang Tunggal", "Paket"};
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailSalesOrder.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailSalesOrderKh.this);
                 builder.setCancelable(false);
                 builder.setTitle("Jenis Barang");
                 builder.setIcon(R.mipmap.kartika_logo);
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(which == 0){
-
-                            Intent intent = new Intent(DetailSalesOrder.this, ListBarangSalesOrder.class);
-                            intent.putExtra("noSalesOrder", noSalesOrder);
-                            intent.putExtra("kdCus",kdCustomer);
-                            intent.putExtra("namaPelanggan",customerName);
-                            intent.putExtra("tempo",tempo);
-                            intent.putExtra("idTempo",idTempo);
-                            startActivity(intent);
-                        }else if(which == 1){
-
-                            Intent intent = new Intent(DetailSalesOrder.this, DetailBarangPaket.class);
-                            intent.putExtra("nobukti", noSalesOrder);
-                            intent.putExtra("kdcus",kdCustomer);
-                            intent.putExtra("nama",customerName);
-                            intent.putExtra("tempo",tempo);
-                            intent.putExtra("idTempo",idTempo);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(activity, ListBarangSalesOrderKh.class);
+                        intent.putExtra("noSalesOrder", noSalesOrder);
+                        intent.putExtra("kdCus",kdCustomer);
+                        intent.putExtra("namaPelanggan",customerName);
+                        intent.putExtra("tempo",tempo);
+                        intent.putExtra("idTempo",idTempo);
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
@@ -493,11 +486,11 @@ public class DetailSalesOrder extends AppCompatActivity {
                             peringatan = "Tidak dapat menghapus Order yang ditolak";
                             break;
                     }
-                    Toast.makeText(DetailSalesOrder.this, peringatan, Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, peringatan, Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                new AlertDialog.Builder(DetailSalesOrder.this).setTitle("Peringatan").setMessage("Apakah anda yakin ingin menghapus " + noSalesOrder +" ?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(activity).setTitle("Peringatan").setMessage("Apakah anda yakin ingin menghapus " + noSalesOrder +" ?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteData(noSalesOrder);
@@ -514,7 +507,6 @@ public class DetailSalesOrder extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -530,8 +522,7 @@ public class DetailSalesOrder extends AppCompatActivity {
     }
 
     private void backToSOList(){
-
-        Intent intent = new Intent(DetailSalesOrder.this, DashboardContainer.class);
+        Intent intent = new Intent(activity, DashboardContainer.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("kodemenu","daftarso");
         finish();
