@@ -212,7 +212,6 @@ public class OrderDetailKhusus extends AppCompatActivity {
                 }
             });
 
-
             spJenisTempo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1184,8 +1183,11 @@ public class OrderDetailKhusus extends AppCompatActivity {
 
                                 if(arrayJSON.length() > 0){
 
-                                    tempo = arrayJSON.getJSONObject(0).getString("tempo");
-                                    idTempo = arrayJSON.getJSONObject(0).getString("id");
+                                    if(idTempo.equals("")){
+
+                                        tempo = arrayJSON.getJSONObject(0).getString("tempo");
+                                        idTempo = arrayJSON.getJSONObject(0).getString("id");
+                                    }
 
                                     setSelectedTempo();
                                 }

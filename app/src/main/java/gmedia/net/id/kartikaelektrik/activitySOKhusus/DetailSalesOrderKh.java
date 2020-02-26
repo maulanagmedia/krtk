@@ -33,7 +33,7 @@ import java.util.List;
 
 import gmedia.net.id.kartikaelektrik.DashboardContainer;
 import gmedia.net.id.kartikaelektrik.R;
-import gmedia.net.id.kartikaelektrik.adapter.SalesOrder.ListBarangDetailSOAdapter;
+import gmedia.net.id.kartikaelektrik.activitySOKhusus.Adapter.ListOrderKhususAdapter;
 import gmedia.net.id.kartikaelektrik.dialogFragment.UpdateSalesOrderDF;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -287,7 +287,7 @@ public class DetailSalesOrderKh extends AppCompatActivity {
         lvListBarangOrder.setAdapter(null);
 
         if (listItems != null && listItems.size() > 0){
-            ListBarangDetailSOAdapter arrayAdapterString;
+            ListOrderKhususAdapter arrayAdapterString;
 
             //set adapter for autocomplete
             HashMap<String, String> stringList = new HashMap<String, String>();
@@ -299,7 +299,7 @@ public class DetailSalesOrderKh extends AppCompatActivity {
             stringList.put("tempo", tempo);
             stringList.put("idTempo", idTempo);
 
-            arrayAdapterString = new ListBarangDetailSOAdapter(activity, listItems, stringList, statusSO);
+            arrayAdapterString = new ListOrderKhususAdapter(activity, listItems, stringList, statusSO);
 
             //set adapter to autocomplete
             lvListBarangOrder.setAdapter(arrayAdapterString);
@@ -407,7 +407,7 @@ public class DetailSalesOrderKh extends AppCompatActivity {
                     return;
                 }
 
-                CharSequence options[] = new CharSequence[] {"Barang Tunggal", "Paket"};
+                CharSequence options[] = new CharSequence[] {"Barang Tunggal"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(DetailSalesOrderKh.this);
                 builder.setCancelable(false);
