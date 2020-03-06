@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activitySOKhusus.DetailSalesOrderKh;
+import gmedia.net.id.kartikaelektrik.activitySOKhusus.OrderDetailKhusus;
 import gmedia.net.id.kartikaelektrik.activityTambahOrderSales.OrderDetail;
 import gmedia.net.id.kartikaelektrik.model.SalesOrderDetail;
 import gmedia.net.id.kartikaelektrik.util.ApiVolley;
@@ -115,6 +117,9 @@ public class ListBarangDetailSOAdapter extends ArrayAdapter{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetail.class);
+                if(stringList.get("noSalesOrder").contains("SONC")){
+                    intent = new Intent(context, OrderDetailKhusus.class);
+                }
                 intent.putExtra("noSalesOrder", stringList.get("noSalesOrder"));
                 intent.putExtra("idOrderDetail", selectedSOD.getSoDetailID());
                 intent.putExtra("namaPelanggan", stringList.get("namaPelanggan"));

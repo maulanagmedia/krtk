@@ -49,7 +49,7 @@ public class OrderDetailKhusus extends AppCompatActivity {
 
     private String kdCus, namaPelanggan, tempo, idTempo, kodeBarang, namaBarang, noSalesOrder = "", hargaPcs;
     private String approveLevel = ""; // 1. Keuangan, 2. Bos
-    private String tanggal, tanggalTempo, jumlah, diskon, lastDiskon, isiSatuan1, isiSatuan2, selectedIsiSatuan, jumlahpcs;
+    private String tanggal = "", tanggalTempo = "", jumlah = "", diskon = "", lastDiskon = "", isiSatuan1 = "", isiSatuan2 = "", selectedIsiSatuan = "", jumlahpcs = "";
     private ItemValidation iv = new ItemValidation();
     private EditText edNoSO, edNamaPelanggan, edNamaBarang, edTanggal, edTanggalTempo, edJumlah, edHarga, edDiskon, edHargaWithDiskon, edHargaTotal;
     private RadioButton rbQuantity2, rbQuantity3;
@@ -118,6 +118,8 @@ public class OrderDetailKhusus extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
+            formatDate = getResources().getString(R.string.format_date);
+            formatDateDisplay = getResources().getString(R.string.format_date_display);
             idOrderDetail = extras.getString("idOrderDetail");
             noSalesOrder = extras.getString("noSalesOrder");
             kdCus = extras.getString("kdCus");
@@ -258,8 +260,6 @@ public class OrderDetailKhusus extends AppCompatActivity {
     private void initEventNewSO() {
 
         // add New Sales Order
-        formatDate = getResources().getString(R.string.format_date);
-        formatDateDisplay = getResources().getString(R.string.format_date_display);
         tanggal = iv.getCurrentDate(formatDate);
         edTanggal.setText(iv.ChangeFormatDateString(tanggal, formatDate, formatDateDisplay));
 

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import gmedia.net.id.kartikaelektrik.R;
+import gmedia.net.id.kartikaelektrik.activitySOKhusus.DetailSalesOrderKh;
 import gmedia.net.id.kartikaelektrik.model.CustomListItem;
 import gmedia.net.id.kartikaelektrik.util.Global;
 import gmedia.net.id.kartikaelektrik.util.ItemValidation;
@@ -175,6 +176,9 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
 
     private void showSalesOrderDetail(String nomorBukti, String status){
         Intent intent = new Intent(context, DetailSalesOrder.class);
+        if(nomorBukti.contains("SONC")){
+            intent = new Intent(context, DetailSalesOrderKh.class);
+        }
         intent.putExtra("nosalesorder",nomorBukti);
         intent.putExtra("status",status);
         context.startActivity(intent);
