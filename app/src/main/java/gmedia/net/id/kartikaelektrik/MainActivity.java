@@ -67,8 +67,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private final String TAG = "MainAct";
     private List<CustomListItem> sliderList = new ArrayList<>();
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtTambahSOKhusus, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llTambahSOKhusus, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran;
+    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtTambahSOKhusus, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran, ibtOmsetManager, ibtBahanMeeting;
+    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llTambahSOKhusus, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran, llOmsetManager, llBahanMeeting;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -183,6 +183,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         llOmsetPenjualan = (LinearLayout) findViewById(R.id.v_menu_omset_penjualan);
         llUpdateMaster = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_update_master);
         llMenuAdmin = (LinearLayout) findViewById(R.id.v_menu_admin);
+        llOmsetManager = (LinearLayout) findViewById(R.id.v_menu_omset_manager);
+        llBahanMeeting = (LinearLayout) findViewById(R.id.v_menu_bahan_meeting);
         llCustomerLimit = (LinearLayout) findViewById(R.id.v_menu_customer_limit);
         llHapusDenda = (LinearLayout) findViewById(R.id.v_menu_hapus_denda);
         llPengeluaran = (LinearLayout) findViewById(R.id.v_pengeluaran);
