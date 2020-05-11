@@ -220,6 +220,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         ibtPengeluaran = (ImageButton) findViewById(R.id.ibt_pengeluaran);
         ibtPengajuanTempo = (ImageButton) findViewById(R.id.ibt_pengajuan_tempo);
         ibtPotensiDenda = (ImageButton) findViewById(R.id.ibt_potensi_denda);
+        ibtOmsetManager = (ImageButton) findViewById(R.id.ibt_menu_omset_manager);
+        ibtBahanMeeting = (ImageButton) findViewById(R.id.ibt_menu_bahan_meeting);
         btnJumlahSOPermintaanHarga = (Button) findViewById(gmedia.net.id.kartikaelektrik.R.id.btn_status_permohonan);
 
         llDataPiutang = (LinearLayout) findViewById(R.id.ll_data_piutang);
@@ -362,6 +364,14 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp21.width = menuWidth;
         llTambahSOKhusus.setLayoutParams(lp21);
 
+        GridLayout.LayoutParams lp22 = (GridLayout.LayoutParams) llOmsetManager.getLayoutParams();
+        lp22.width = menuWidth;
+        llOmsetManager.setLayoutParams(lp22);
+
+        GridLayout.LayoutParams lp23 = (GridLayout.LayoutParams) llBahanMeeting.getLayoutParams();
+        lp23.width = menuWidth;
+        llBahanMeeting.setLayoutParams(lp23);
+
         if(sessionManager.getLevelJabatan().equals("6")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
@@ -429,6 +439,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         setOnClickMenu(llPengeluaran, ibtPengeluaran);
         setOnClickMenu(llPengajuanTempo, ibtPengajuanTempo);
         setOnClickMenu(llPotensiDenda, ibtPotensiDenda);
+        setOnClickMenu(llOmsetManager, ibtOmsetManager);
+        setOnClickMenu(llBahanMeeting, ibtBahanMeeting);
 
         CheckUserLevel();
 
@@ -963,6 +975,14 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","menupotensidenda");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_omset_manager){
+                    intent.putExtra("kodemenu","menuomsetmanager");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_bahan_meeting){
+                    intent.putExtra("kodemenu","menubahanmeeting");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -1072,6 +1092,14 @@ public class MainActivity extends RuntimePermissionsActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_potensi_denda){
                         intent.putExtra("kodemenu","menupotensidenda");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_omset_manager){
+                        intent.putExtra("kodemenu","menuomsetmanager");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_bahan_meeting){
+                        intent.putExtra("kodemenu","menubahanmeeting");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }

@@ -27,6 +27,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaEntryPaket;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaHapusDenda;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaInformasiStok;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaKomisi;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetManager;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetPenjualan;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetSales;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderCustom;
@@ -291,6 +292,14 @@ public class DashboardContainer extends AppCompatActivity {
                     menuUtamaCustomerOrderKh.setView(DashboardContainer.this, childLayoutCustomerOrderKh);
                     toolbar.setTitle("Pilih Nama Pelanggan");
                     setTitle("Pilih Nama Pelanggan");
+                    break;
+                case "menuomsetmanager":
+                    state = 24;
+                    MenuUtamaOmsetManager menuUtamaOmsetManager = new MenuUtamaOmsetManager();
+                    View childLayoutOmsetManager = inflater.inflate(R.layout.fragment_menu_utama_omset_manager, flContainer);
+                    menuUtamaOmsetManager.setView(DashboardContainer.this, childLayoutOmsetManager);
+                    toolbar.setTitle("Omset Manager");
+                    setTitle("Omset Manager");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();
