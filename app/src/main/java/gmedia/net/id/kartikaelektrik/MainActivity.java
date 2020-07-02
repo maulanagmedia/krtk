@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gmedia.net.id.kartikaelektrik.ChatRS.MainChatRS;
 import gmedia.net.id.kartikaelektrik.CustomView.WrapContentViewPager;
 import gmedia.net.id.kartikaelektrik.activityPiutang.DetailPiutangJatuhTempo;
 import gmedia.net.id.kartikaelektrik.activityProfile.ProfileActivity;
@@ -1182,6 +1183,11 @@ public class MainActivity extends RuntimePermissionsActivity {
 
             getMobileStatus();
             return true;
+        }else if(id == R.id.nav_cs) {
+            Intent intent = new Intent(MainActivity.this, MainChatRS.class);
+            startActivity(intent);
+            //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -1189,7 +1195,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
     public void getMobileStatus() {
 
-        String urlAPI = getResources().getString(R.string.url_get_status);
+        String urlAPI = ServerURL.getApiStatus;
 
         JSONObject jsonBody = new JSONObject();
         ApiVolley restService = new ApiVolley(MainActivity.this, jsonBody, "GET", urlAPI , "", "", 0,
@@ -1207,7 +1213,6 @@ public class MainActivity extends RuntimePermissionsActivity {
                                 String mobileStatus = responseAPI.getJSONObject("response").getString("status");
                                 DialogForm(mobileStatus);
                             }
-
 
                         }catch (Exception e){
                             e.printStackTrace();

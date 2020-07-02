@@ -114,7 +114,6 @@
     <string name="url_delete_oc_detail">http://api.kartikaelectric.com/custom/delete_detail/</string>
 
     <!--Status-->
-    <string name="url_get_status">http://api.kartikaelectric.com/auth/get_mobile_status/</string>
     <string name="url_update_status">http://api.kartikaelectric.com/auth/update_mobile_status/</string>
     <string name="title_activity_perjalanan_sales">Map</string>
 

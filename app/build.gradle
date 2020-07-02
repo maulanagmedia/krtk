@@ -7,7 +7,7 @@ android {
         applicationId 'gmedia.net.id.kartikaelektrik'
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 44
+        versionCode 45
         versionName '14.1.0'
     }
     buildTypes {
@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'cz.intik:overflow-pager-indicator:1.2.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation project(path: ':circualreveal')
 }
 
 apply plugin: 'com.google.gms.google-services'

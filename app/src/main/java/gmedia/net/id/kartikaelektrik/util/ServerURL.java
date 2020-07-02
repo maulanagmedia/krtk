@@ -87,4 +87,6 @@ public class ServerURL {
     public static final String getListBarangById = baseURL + "barang/all_barang/id_barang/";
     public static final String saveCanvas = baseURL + "canvas/insert_canvas_v2/";
     public static final String getStokCanvas = baseURL + "barang/stok_canvas/";
+    public static final String getApiStatus = baseURL + "auth/get_mobile_status/";
+    public static final String getChatRoom = baseURL + "chat/get_chat_room/";
 }

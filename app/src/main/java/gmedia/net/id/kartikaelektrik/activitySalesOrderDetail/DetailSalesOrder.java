@@ -61,6 +61,7 @@ public class DetailSalesOrder extends AppCompatActivity {
     private Button btnRefresh;
     private boolean paketMode = false;
     private String tempo = "", idTempo;
+    private boolean flagFromList = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class DetailSalesOrder extends AppCompatActivity {
 
             noSalesOrder = extras.getString("nosalesorder");
             statusSO = extras.getString("status");
+            flagFromList = extras.getBoolean("flag", false);
             /*tvTitleText.setText(String.format(getResources().getString(R.string.sales_order),noSalesOrder));
             tvTitleText.setPaintFlags(tvTitleText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);*/
             this.setTitle(String.format(getResources().getString(R.string.sales_order),noSalesOrder));
@@ -526,7 +528,14 @@ public class DetailSalesOrder extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        backToSOList();
+
+        if(flagFromList){
+
+            super.onBackPressed();
+        }else{
+
+            backToSOList();
+        }
     }
 
     private void backToSOList(){

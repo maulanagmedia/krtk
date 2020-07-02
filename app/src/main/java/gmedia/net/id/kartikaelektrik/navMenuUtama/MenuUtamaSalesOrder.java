@@ -122,6 +122,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
         });
 
         getDataStatus();
+        getListAutocomplete();
     }
 
     private void getDataStatus() {
@@ -207,7 +208,7 @@ public class MenuUtamaSalesOrder extends android.app.Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getListAutocomplete();
+        //getListAutocomplete();
     }
 
     public void getListAutocomplete(){

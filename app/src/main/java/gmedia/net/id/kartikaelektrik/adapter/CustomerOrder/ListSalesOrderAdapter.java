@@ -181,6 +181,7 @@ public class ListSalesOrderAdapter extends ArrayAdapter<String>  {
         }
         intent.putExtra("nosalesorder",nomorBukti);
         intent.putExtra("status",status);
+        intent.putExtra("flag", true);
         context.startActivity(intent);
 //        context.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }

@@ -9,6 +9,7 @@ import android.media.ExifInterface;
 import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -715,6 +719,10 @@ public class ItemValidation {
         return String.format("%.0f", number).replace(",",".");
     }
 
+    public String doubleToString(Double number, String numberOfDouble){
+        return String.format("%."+ numberOfDouble+"f", number).replace(",",".");
+    }
+
     public String doubleToStringFull(Double number){
         return String.format("%s", number).replace(",",".");
     }
@@ -923,5 +931,53 @@ public class ItemValidation {
         else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; }
         else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {  return 270; }
         return 0;
+    }
+
+    public String encodeBase64(String value){
+
+        String hasil = value;
+        try {
+            byte[] encodeValue = Base64.encode(value.getBytes(), Base64.DEFAULT);
+            hasil = new String(encodeValue);
+        }catch (Exception e){
+            e.printStackTrace();
+            hasil = "";
+        }
+        return hasil;
+    }
+
+    public String decodeBase64(String value){
+
+        String hasil = value;
+        try {
+            byte[] decodeValue = Base64.decode(value.getBytes(), Base64.DEFAULT);
+            hasil = new String(decodeValue);
+        }catch (Exception e){
+            hasil = "";
+        }
+
+        return hasil;
+    }
+
+    public String encodeMD5(String text) {
+
+        String result = "";
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(text.getBytes(), 0, text.length());
+            text = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (text.length() < 32) {
+                text = "0" + text;
+            }
+            result = text;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean isImage(String extiontion){
+        return (extiontion.equals(".jpeg") || extiontion.equals(".jpg") || extiontion.equals(".png") || extiontion.equals(".bmp"));
     }
 }

@@ -1,1 +1,2 @@
+include ':circualreveal'
 include ':app', ':notificationfirebase'

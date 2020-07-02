@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Kartika.iml" filepath="$PROJECT_DIR$/Kartika.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/notificationfirebase/notificationfirebase.iml" filepath="$PROJECT_DIR$/notificationfirebase/notificationfirebase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kartika.iml" filepath="$PROJECT_DIR$/Kartika.iml" group="Kartika" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Kartika/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circualreveal/circualreveal.iml" filepath="$PROJECT_DIR$/.idea/modules/circualreveal/circualreveal.iml" group="Kartika/circualreveal" />
+      <module fileurl="file://$PROJECT_DIR$/notificationfirebase/notificationfirebase.iml" filepath="$PROJECT_DIR$/notificationfirebase/notificationfirebase.iml" group="Kartika/notificationfirebase" />
     </modules>
   </component>
 </project>

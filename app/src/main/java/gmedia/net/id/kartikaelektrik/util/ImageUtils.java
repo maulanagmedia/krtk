@@ -93,7 +93,14 @@ public class ImageUtils {
 
     public void LoadProfileImage(Context context, String uri, final ImageView image){
 
-        Picasso.with(context).load(Uri.parse(uri)).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).transform(new CircleTransform()).error(context.getResources().getDrawable(R.mipmap.ic_thumbnail)).placeholder(context.getResources().getDrawable(R.mipmap.ic_thumbnail)).into(image);
+        Picasso
+                .with(context)
+                .load(Uri.parse(uri))
+                //.networkPolicy(NetworkPolicy.NO_CACHE)
+                //.memoryPolicy(MemoryPolicy.NO_CACHE)
+                .transform(new CircleTransform()).error(context.getResources().getDrawable(R.mipmap.ic_profile))
+                .placeholder(context.getResources().getDrawable(R.mipmap.ic_profile))
+                .into(image);
     }
 
     public void LoadSquareImageHeaderSlider(Context context, String uri, final ImageView image, int size){

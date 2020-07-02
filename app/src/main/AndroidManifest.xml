@@ -23,7 +23,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activitySOKhusus.DetailSalesOrderKh"></activity>
+        <activity android:name=".ChatRS.DetailChat"></activity>
+        <activity android:name=".ChatRS.ListCustomerChat" />
+        <activity
+            android:name=".ChatRS.MainChatRS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitySOKhusus.DetailSalesOrderKh"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitySOKhusus.OrderDetailKhusus"
             android:screenOrientation="portrait" />

@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/nav_cs"
+        android:title="Chat"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_cs"/>
+
+    <item
         android:id="@+id/empty"
         android:title="Option"
         android:orderInCategory="101"
