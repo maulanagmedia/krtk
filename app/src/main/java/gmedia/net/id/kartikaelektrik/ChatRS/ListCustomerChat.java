@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -99,6 +101,25 @@ public class ListCustomerChat extends AppCompatActivity {
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
 
+            }
+        });
+
+        lvCustomer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
+                if(item != null){
+                    /*Intent intent = new Intent(context, ActivityOrderMkios2.class);
+                    intent.putExtra("nomor", item.getItem3());
+                    startActivity(intent);*/
+                    Intent intent = new Intent(activity, DetailChat.class);
+                    intent.putExtra("nama", item.getListItem2());
+                    intent.putExtra("kdcus", item.getListItem1());
+                    startActivity(intent);
+                }else{
+                    DialogBox.showDialog(activity, 3,"Data tidak termuat dengan benar, harap ulangi proses");
+                }
             }
         });
     }

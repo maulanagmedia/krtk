@@ -121,7 +121,7 @@
         android:id="@+id/lv_chat"
         android:divider="@null"></ListView>
 
-    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+    <io.codetail.widget.RevealLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
@@ -200,7 +200,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </io.codetail.widget.RevealLinearLayout>
 
     <ProgressBar
         android:layout_width="wrap_content"

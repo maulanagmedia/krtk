@@ -118,7 +118,7 @@ public class DetailChat extends AppCompatActivity {
 
     private boolean isLoading = false;
     private boolean isFromNotif = false;
-    public static String namaRS = "", nomor = "";
+    public static String namaRS = "", kdcus = "";
     private Activity activity;
 
     @Override
@@ -167,10 +167,10 @@ public class DetailChat extends AppCompatActivity {
 
             isFromNotif = bundle.getString("notif", "").equals("1");
             namaRS = bundle.getString("nama", "");
-            nomor = bundle.getString("nomor", "");
+            kdcus = bundle.getString("kdcus", "");
 
             setTitle(namaRS);
-            getSupportActionBar().setSubtitle(nomor);
+            getSupportActionBar().setSubtitle(namaRS);
         }
 
         initEvent();
@@ -668,7 +668,7 @@ public class DetailChat extends AppCompatActivity {
 
             try {
 
-                connection = (HttpURLConnection) new URL(ServerURL.getChatRoom + nomor).openConnection();
+                connection = (HttpURLConnection) new URL(ServerURL.getChatRoom + kdcus).openConnection();
                 connection.setRequestMethod("POST");
                 String boundary = "---------------------------boundary";
                 String tail = "\r\n--" + boundary + "--\r\n";
@@ -682,7 +682,7 @@ public class DetailChat extends AppCompatActivity {
                 connection.setRequestProperty("token4", token4);
                 connection.setRequestProperty("token5", token5);
                 connection.setRequestProperty("Nik-Hr", session.getNik());
-                connection.setRequestProperty("nomor", nomor);
+                connection.setRequestProperty("nomor", kdcus);
                 connection.setDoOutput(true);
 
                 String metadataPart = "--" + boundary + "\r\n"
@@ -950,7 +950,7 @@ public class DetailChat extends AppCompatActivity {
 
         try {
             jBody.put("pesan", s);
-            jBody.put("to", nomor);
+            jBody.put("to", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1003,7 +1003,7 @@ public class DetailChat extends AppCompatActivity {
             //jBody.put("kdcus", session.getKdcus());
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
-            jBody.put("nomor", nomor);
+            jBody.put("kdcus", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1166,7 +1166,7 @@ public class DetailChat extends AppCompatActivity {
             //jBody.put("kdcus", session.getKdcus());
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
-            jBody.put("nomor", nomor);
+            jBody.put("kdcus", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
