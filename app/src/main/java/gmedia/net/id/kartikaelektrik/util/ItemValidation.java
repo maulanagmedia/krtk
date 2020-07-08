@@ -978,6 +978,6 @@ public class ItemValidation {
     }
 
     public boolean isImage(String extiontion){
-        return (extiontion.equals(".jpeg") || extiontion.equals(".jpg") || extiontion.equals(".png") || extiontion.equals(".bmp"));
+        return (extiontion.equals("jpeg") || extiontion.equals("jpg") || extiontion.equals("png") || extiontion.equals("bmp"));
     }
 }

@@ -110,9 +110,6 @@ public class ListCustomerChat extends AppCompatActivity {
 
                 CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
                 if(item != null){
-                    /*Intent intent = new Intent(context, ActivityOrderMkios2.class);
-                    intent.putExtra("nomor", item.getItem3());
-                    startActivity(intent);*/
                     Intent intent = new Intent(activity, DetailChat.class);
                     intent.putExtra("nama", item.getListItem2());
                     intent.putExtra("kdcus", item.getListItem1());
@@ -161,7 +158,7 @@ public class ListCustomerChat extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(activity, jBody, "POST", ServerURL.getChatRoom, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(activity, jBody, "POST", ServerURL.getChatToko, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -185,9 +182,8 @@ public class ListCustomerChat extends AppCompatActivity {
                             listItem.add(new CustomListItem(
                                     jo.getString("kdcus")
                                     ,jo.getString("nama")
-                                    ,jo.getString("message")
+                                    ,jo.getString("alamat")
                                     ,jo.getString("image")
-                                    ,jo.getString("timestamp")
                             ));
                         }
 

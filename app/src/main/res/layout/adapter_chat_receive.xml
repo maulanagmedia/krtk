@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/ic_send"
+                android:background="@drawable/ic_receive_message"
                 android:paddingLeft="@dimen/margin_default"
                 android:paddingRight="@dimen/margin_default"
                 android:paddingTop="10dp"
@@ -50,7 +50,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:id="@+id/iv_image"
-                        android:src="@mipmap/ic_attach"
+                        android:src="@drawable/ic_pin"
                         android:layout_marginRight="@dimen/margin_default"/>
 
                     <LinearLayout

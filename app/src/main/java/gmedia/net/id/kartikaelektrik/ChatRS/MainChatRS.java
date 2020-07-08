@@ -124,11 +124,11 @@ public class MainChatRS extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                /*CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(context, DetailChatActivity.class);
-                intent.putExtra("nama", item.getItem2());
-                intent.putExtra("nomor", item.getItem6());
-                startActivity(intent);*/
+                CustomListItem item = (CustomListItem) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(context, DetailChat.class);
+                intent.putExtra("kdcus", item.getListItem1());
+                intent.putExtra("nama", item.getListItem2());
+                startActivity(intent);
             }
         });
     }

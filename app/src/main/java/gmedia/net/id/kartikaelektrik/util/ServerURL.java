@@ -89,4 +89,8 @@ public class ServerURL {
     public static final String getStokCanvas = baseURL + "barang/stok_canvas/";
     public static final String getApiStatus = baseURL + "auth/get_mobile_status/";
     public static final String getChatRoom = baseURL + "chat/get_chat_room/";
+    public static final String getChatToko = baseURL + "chat/get_toko/";
+    public static final String getDetailChat = baseURL + "chat/get_detail_chat/";
+    public static final String sendChat = baseURL + "chat/send_text/";
+    public static final String sendFile = baseURL + "chat/send_file/";
 }

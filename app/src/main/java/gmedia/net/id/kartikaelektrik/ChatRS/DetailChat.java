@@ -660,29 +660,22 @@ public class DetailChat extends AppCompatActivity {
 
             session = new SessionManager(context);
             token0  = iv.encodeMD5(iv.encodeBase64(iv.getCurrentDate("SSSHHMMddmmyyyyss")));
-            /*token1  = session.getNikGa();
-            token2  = iv.getCurrentDate("SSSHHyyyyssMMddmm");
-            token3  = iv.sha256(token1+"&"+token2,token1+"die");
-            token4  = session.getNikMkios();
-            token5  = session.getNikGa();*/
 
             try {
 
-                connection = (HttpURLConnection) new URL(ServerURL.getChatRoom + kdcus).openConnection();
+                connection = (HttpURLConnection) new URL(ServerURL.sendFile + kdcus).openConnection();
                 connection.setRequestMethod("POST");
                 String boundary = "---------------------------boundary";
                 String tail = "\r\n--" + boundary + "--\r\n";
                 connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-                connection.setRequestProperty("Client-Service", "perkasa-sales");
-                connection.setRequestProperty("Auth-Key", "gmedia");
-                connection.setRequestProperty("token0", token0);
-                connection.setRequestProperty("token1", token1);
-                connection.setRequestProperty("token2", token2);
-                connection.setRequestProperty("token3", token3);
-                connection.setRequestProperty("token4", token4);
-                connection.setRequestProperty("token5", token5);
-                connection.setRequestProperty("Nik-Hr", session.getNik());
-                connection.setRequestProperty("nomor", kdcus);
+                connection.setRequestProperty("Client-Service", "frontend-client");
+                connection.setRequestProperty("Auth-Key", "gmedia_kartika");
+                connection.setRequestProperty("token", session.getToken());
+                connection.setRequestProperty("id", session.getUid());
+                connection.setRequestProperty("level", session.getLevel());
+                connection.setRequestProperty("laba", session.getLaba());
+                connection.setRequestProperty("Nik-Asli", session.getNikAsli());
+                connection.setRequestProperty("username", session.getUsername());
                 connection.setDoOutput(true);
 
                 String metadataPart = "--" + boundary + "\r\n"
@@ -950,12 +943,12 @@ public class DetailChat extends AppCompatActivity {
 
         try {
             jBody.put("pesan", s);
-            jBody.put("to", kdcus);
+            jBody.put("kdcus", kdcus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody , "POST", ServerURL.saveCanvas, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody , "POST", ServerURL.sendChat, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -1008,7 +1001,7 @@ public class DetailChat extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getChatRoom, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDetailChat, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -1098,7 +1091,7 @@ public class DetailChat extends AppCompatActivity {
             lvChat.setAdapter(adapter);
             lvChat.setSelection(listItem.size() - 1);
 
-            lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            /*lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -1127,7 +1120,7 @@ public class DetailChat extends AppCompatActivity {
 
                     return false;
                 }
-            });
+            });*/
 
             if(adapter.getCount() > 0) lvChat.setSelection(adapter.getCount() - 1);
             edtChat.setText("");
@@ -1171,7 +1164,7 @@ public class DetailChat extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getChatRoom, "", "", 0, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getDetailChat, "", "", 0, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

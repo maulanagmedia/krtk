@@ -222,6 +222,16 @@ public class SessionManager {
 		return pref.getString(TAG_USERNAME, "");
 	}
 
+	public String getToken(){
+
+		return pref.getString(TAG_TOKEN, "");
+	}
+
+	public String getUid(){
+
+		return pref.getString(TAG_UID, "");
+	}
+
 	/**
 	 * Clear session details
 	 * */

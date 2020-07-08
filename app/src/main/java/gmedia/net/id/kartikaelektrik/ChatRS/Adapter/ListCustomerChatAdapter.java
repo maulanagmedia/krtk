@@ -34,7 +34,7 @@ public class ListCustomerChatAdapter extends ArrayAdapter {
 
     private static class ViewHolder {
         private ImageView ivProfile;
-        private TextView tvNama, tvDeskripsi;
+        private TextView tvNama, tvDeskripsi, tvTime;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class ListCustomerChatAdapter extends ArrayAdapter {
             holder.ivProfile = convertView.findViewById(R.id.iv_profile);
             holder.tvNama = convertView.findViewById(R.id.tv_nama);
             holder.tvDeskripsi = convertView.findViewById(R.id.tv_deskripsi);
+            holder.tvTime = convertView.findViewById(R.id.tv_time);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -63,6 +64,7 @@ public class ListCustomerChatAdapter extends ArrayAdapter {
         holder.tvDeskripsi.setText(itemSelected.getListItem3());
         ImageUtils iu = new ImageUtils();
         iu.LoadProfileImage(context, itemSelected.getListItem4(), holder.ivProfile);
+        holder.tvTime.setVisibility(View.GONE);
 
         return convertView;
 

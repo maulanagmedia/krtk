@@ -177,9 +177,9 @@ public class ChatAdapter extends ArrayAdapter {
 
         String extension = "";
 
-        int i = item.getListItem1().lastIndexOf('.');
+        int i = item.getListItem11().lastIndexOf('.');
         if (i > 0) {
-            extension = item.getListItem1().substring(i+1);
+            extension = item.getListItem11().substring(i+1);
         }
 
         if(extension.length() > 0 && iv.isImage(extension)){ // image
@@ -188,7 +188,7 @@ public class ChatAdapter extends ArrayAdapter {
             holder.tvPesan.setVisibility(View.GONE);
 
             ImageUtils iu = new ImageUtils();
-            iu.LoadRealImage(context, item.getListItem1(), holder.ivImage);
+            iu.LoadRealImage(context, item.getListItem11(), holder.ivImage);
             holder.tvFileName.setText(item.getListItem10());
             holder.tvFileSize.setText(item.getListItem12());
 
