@@ -31,6 +31,7 @@ import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetManager;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetPenjualan;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOmsetSales;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderCustom;
+import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaOrderToko;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPengajuanTempo;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPengeluaran;
 import gmedia.net.id.kartikaelektrik.navMenuUtama.MenuUtamaPermintaanHargaOrder;
@@ -294,12 +295,20 @@ public class DashboardContainer extends AppCompatActivity {
                     setTitle("Pilih Nama Pelanggan");
                     break;
                 case "menuomsetmanager":
-                    state = 24;
+                    state = 25;
                     MenuUtamaOmsetManager menuUtamaOmsetManager = new MenuUtamaOmsetManager();
                     View childLayoutOmsetManager = inflater.inflate(R.layout.fragment_menu_utama_omset_manager, flContainer);
                     menuUtamaOmsetManager.setView(DashboardContainer.this, childLayoutOmsetManager);
                     toolbar.setTitle("Omset Manager");
                     setTitle("Omset Manager");
+                    break;
+                case "menuordertoko":
+                    state = 26;
+                    MenuUtamaOrderToko menuUtamaOrderToko = new MenuUtamaOrderToko();
+                    View childLayoutOrderToko = inflater.inflate(R.layout.fragment_menu_utama_order_toko, flContainer);
+                    menuUtamaOrderToko.setView(DashboardContainer.this, childLayoutOrderToko);
+                    toolbar.setTitle("Order dari Toko");
+                    setTitle("Order dari Toko");
                     break;
                 default:
                     fragment = new MenuUtamaCustomer();

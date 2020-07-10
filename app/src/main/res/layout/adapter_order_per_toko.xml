@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_default">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rounded_corner_top_only"
+            android:padding="@dimen/margin_default">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nonota"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_nonota"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jenis Tempo"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_tempo"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jumlah Item"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_item"
+                        android:gravity="right"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal Order"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_tgl"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Promo"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_promo"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_small"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/tv_total"
+                        android:gravity="right"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_medium"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@drawable/background_custom_button1"></RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

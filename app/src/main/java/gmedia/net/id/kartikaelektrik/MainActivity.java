@@ -68,8 +68,8 @@ public class MainActivity extends RuntimePermissionsActivity {
     private final String TAG = "MainAct";
     private List<CustomListItem> sliderList = new ArrayList<>();
     private Animation menuAnimation;
-    private ImageButton ibtTambahPelanggan, ibtTambahSO, ibtTambahSOKhusus, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran, ibtOmsetManager, ibtBahanMeeting;
-    private LinearLayout llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llTambahSOKhusus, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran, llOmsetManager, llBahanMeeting;
+    private ImageButton ibtMenuOrderToko, ibtTambahPelanggan, ibtTambahSO, ibtTambahSOKhusus, ibtDaftarSO, ibtTagihanPiutang, ibtInfoStok, ibtKomisi, ibtDenda, ibtBonus, ibtUpdateMaster, ibtMenuAdmin, ibtCustomerLimit, ibtHapusDenda, ibtPengeluaran, ibtOmsetManager, ibtBahanMeeting;
+    private LinearLayout llOrderToko, llLogo, llTambahPelanggan, llPermintaanHarga, llTambahSO, llTambahSOKhusus, llDaftarSO, llTagihanPiutang, llInfoStok, llKomisi, llDenda, llBonus, llUpdateMaster, llMenuAdmin, llCustomerLimit, llHapusDenda, llPengeluaran, llOmsetManager, llBahanMeeting;
     private Intent intent;
     private boolean doubleBackToExitPressedOnce = false;
     private String urlGetSO = "", urlGetLatestVersion = "";
@@ -164,6 +164,7 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         urlGetSO = ServerURL.getSO;
         llLogo = (LinearLayout) findViewById(R.id.v_logo);
+        llOrderToko = (LinearLayout) findViewById(R.id.v_menu_order_toko);
         llTambahPelanggan = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tambah_pelanggan);
         llPermintaanHarga = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_permintaan_harga_order);
         llTambahSO = (LinearLayout) findViewById(gmedia.net.id.kartikaelektrik.R.id.v_menu_tambah_so);
@@ -197,8 +198,9 @@ public class MainActivity extends RuntimePermissionsActivity {
 
         levelUser = iv.parseNullInteger(user.get(sessionManager.TAG_LEVEL));
 
-        ibtTambahPelanggan = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_pelanggan);
-        ibtTambahSO = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_so);
+        ibtMenuOrderToko = (ImageButton) findViewById(R.id.ibt_menu_order_toko);
+        ibtTambahPelanggan = (ImageButton) findViewById(R.id.ibt_menu_tambah_pelanggan);
+        ibtTambahSO = (ImageButton) findViewById(R.id.ibt_menu_tambah_so);
         ibtTambahSOKhusus = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_tambah_so_kh);
         ibtEntryPaket = (ImageButton) findViewById(R.id.ibt_menu_entry_order_paket);
         ibtDaftarSO = (ImageButton) findViewById(gmedia.net.id.kartikaelektrik.R.id.ibt_menu_daftar_so);
@@ -239,6 +241,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         vpHeaderSlider.setScrollDurationFactor(4);
 
         //Akses menu
+        llOrderToko.setVisibility(View.GONE);
         llTambahPelanggan.setVisibility(View.GONE);
         llTagihanPiutang.setVisibility(View.GONE);
         llInfoStok.setVisibility(View.GONE);
@@ -373,6 +376,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         lp23.width = menuWidth;
         llBahanMeeting.setLayoutParams(lp23);
 
+        GridLayout.LayoutParams lp24 = (GridLayout.LayoutParams) llOrderToko.getLayoutParams();
+        lp24.width = menuWidth;
+        llOrderToko.setLayoutParams(lp24);
+
         if(sessionManager.getLevelJabatan().equals("6")){ // Supir
 
             llSetoran.setVisibility(View.VISIBLE);
@@ -380,6 +387,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             llDashboard.setVisibility(View.GONE);
         }else{
 
+            llOrderToko.setVisibility(View.VISIBLE);
             llTambahPelanggan.setVisibility(View.VISIBLE);
             llTagihanPiutang.setVisibility(View.VISIBLE);
             llInfoStok.setVisibility(View.VISIBLE);
@@ -415,6 +423,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         llLine6.setLayoutParams(lp);
         llLine7.setLayoutParams(lp);*/
 
+        setOnClickMenu(llOrderToko, ibtMenuOrderToko);
         setOnClickMenu(llTambahPelanggan,ibtTambahPelanggan);
         setOnClickMenu(llPermintaanHarga,null);
         setOnClickMenu(llTambahSO, ibtTambahSO);
@@ -984,6 +993,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                     intent.putExtra("kodemenu","menubahanmeeting");
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if(ll.getId() == R.id.v_menu_order_toko){
+                    intent.putExtra("kodemenu","menuordertoko");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
@@ -1101,6 +1114,10 @@ public class MainActivity extends RuntimePermissionsActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }else if(ib.getId() == R.id.ibt_menu_bahan_meeting){
                         intent.putExtra("kodemenu","menubahanmeeting");
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else if(ib.getId() == R.id.ibt_menu_order_toko){
+                        intent.putExtra("kodemenu","menuordertoko");
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }

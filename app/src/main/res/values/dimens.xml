@@ -55,6 +55,7 @@
     <dimen name="text_dashboard">16sp</dimen>
     <dimen name="text_menu">12sp</dimen>
     <dimen name="text_small">11sp</dimen>
+    <dimen name="text_medium">13sp</dimen>
 
     <dimen name="default_menu_hight">64dp</dimen>
     <dimen name="default_menu_text">18sp</dimen>

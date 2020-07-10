@@ -48,6 +48,7 @@ public class ServerURL {
     public static final String getStatus = baseURL + "Barang/master_status/";
     public static final String getCustomerHistoryLimit = baseURL + "customer/header_limit/";
     public static final String getCustomerHistoryLimitDetail = baseURL + "customer/detail_limit/";
+    public static final String getCustomer = baseURL + "barang/customer/";
     public static final String getHeaderImages = baseURL + "promo/view_promo/";
     public static final String saveHeaderImages = baseURL + "promo/index/";
     public static final String getSalesLocation = baseURL + "sales/log/";
@@ -69,7 +70,6 @@ public class ServerURL {
     public static final String getMasterTempo = baseURL + "Barang/master_tempo/";
     public static final String getTempoRumus = baseURL + "Tempo/rumus/";
     public static final String getPengajuanTempo = baseURL + "Tempo/view_pengajuan/";
-    public static final String getCustomer = baseURL + "barang/customer/";
     public static final String savePengajuanTempo = baseURL + "Tempo/pengajuan/";
     public static final String apvPengajuanTempo = baseURL + "Tempo/approval/";
     public static final String getJenisBarangTempo = baseURL + "Tempo/view_jenis//";
@@ -93,4 +93,5 @@ public class ServerURL {
     public static final String getDetailChat = baseURL + "chat/get_detail_chat/";
     public static final String sendChat = baseURL + "chat/send_text/";
     public static final String sendFile = baseURL + "chat/send_file/";
+    public static final String getListOrderToko = baseURL + "toko/order_toko/";
 }

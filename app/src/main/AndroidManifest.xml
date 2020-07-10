@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatRS.DetailChat"></activity>
+        <activity android:name=".ActivityOrderToko.OrderTokoPerNota"></activity>
+        <activity android:name=".ActivityOrderToko.OrderPerToko" />
+        <activity android:name=".ChatRS.DetailChat" />
         <activity android:name=".ChatRS.ListCustomerChat" />
         <activity
             android:name=".ChatRS.MainChatRS"
